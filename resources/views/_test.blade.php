@@ -1,104 +1,117 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-<head> 
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Pengumuman - Anjungan Desa Mandiri Desa Rawapanjang</title>
-    <link rel="icon" href="https://rawapanjang-desa.id/desa/logo/1679693855_logo-pemkab-bogor.png" type="image/png">
-    <style> 
-        body { 
-            margin: 0; 
-            background: linear-gradient(to top, #ff9472, #f2709c);
-            font-family: sans-serif; 
-            overflow-x: hidden; 
-            bottom: 0;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Anjungan Desa Mandiri</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #4caf50, #81c784);
+            color: #333;
         }
-        .header {
-            color: white;
+        .login-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
             text-align: center;
         }
-        .video-container {
-            height: 60vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 2px solid #ffffff;
-            color: white;
-            width: 100%;
+        .login-container h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #4caf50;
         }
-        .button-container {
-            display: flex;
-            overflow-x: auto;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            padding-top: 0px;
-            gap: 20px;
-            scrollbar-width: none; Sembunyikan scrollbar di Edge, Chrome
+        .login-container p {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+        .form-group input:focus {
+            border-color: #4caf50;
+            outline: none;
         }
         .button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #ff9900;
+            display: block;
+            width: 100%;
+            background: #4caf50;
             color: white;
-            padding: 10px 20px;
-            border: 1px solid #ffffff;
+            border: none;
+            padding: 10px;
             border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: bold; 
-            flex-shrink: 0;
             font-size: 16px;
-            line-height: 1.3;
-            letter-spacing: 0.5px;
-            height: 50px;
-            max-width: 120px;
+            cursor: pointer;
+            transition: background 0.3s;
         }
         .button:hover {
-            background-color: #e68a00;
+            background: #388e3c;
         }
         .footer {
-            /* position: fixed;
-            bottom: 0; */
-            width: 100%;
-            color: white;
-            text-align: center;
-        }
-        .credit {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 30px;
+            margin-top: 20px;
             font-size: 12px;
-            background-color: #ff9900;
-            color: white;
+            color: #888;
+        }
+        .footer a {
+            color: #4caf50;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
         }
     </style>
-</head> 
-<body> 
-    <div class="header"> 
-        <h3>Selamat Datang di Anjungan Desa Mandiri</h3> 
-        <h3>Desa Rawapanjang Kabupaten Bogor</h3> 
-    </div> 
-    <div class="video-container"> 
-        <p>Video Profil Desa</p>
-        <!-- <video controls> <source src="video-profil-desa.mp4" type="video/mp4"> Replace with your video source Your browser does not support the video tag. </video>  -->
-    </div> 
-    <div class="footer">
-        <div class="button-container"> 
-            <button class="button" onclick="window.history.back();">Kembali</button>
-        </div> 
-        <div class="credit">
-            <p>&copy;</p>
+</head>
+<body>
+
+<div class="login-container">
+    <h1>Login</h1>
+    <p>Selamat datang di Anjungan Desa Mandiri. Silakan login untuk melanjutkan.</p>
+
+    <form action="{{ url('/login') }}" method="POST">
+        {{ csrf_field() }}
+
+        <div class="form-group">
+            <label for="nik">NIK:</label>
+            <input type="text" id="nik" name="nik" placeholder="Masukkan NIK Anda" required>
         </div>
+
+        <div class="form-group">
+            <label for="pin">PIN:</label>
+            <input type="password" id="pin" name="pin" placeholder="Masukkan PIN Anda" required>
+        </div>
+
+        <button type="submit" class="button">Masuk</button>
+    </form>
+
+    <div class="footer">
+        <p>Belum punya PIN? Hubungi pengurus desa untuk mendaftar.</p>
+        <p><a href="/">Kembali ke Halaman Utama</a></p>
     </div>
-    <!-- <script> // Optional: Add any additional JavaScript functionality here 
-        document.querySelectorAll('.button').forEach(button => { 
-            button.addEventListener('click', function() { 
-                alert('Tombol ' + this.textContent + ' diklik!'); 
-            }); 
-        }); 
-    </script>  -->
-</body> 
+</div>
+
+</body>
 </html>

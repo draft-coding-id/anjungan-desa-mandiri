@@ -65,6 +65,6 @@ class LoginController extends Controller
 
         // Jika PIN benar, reset counter percobaan dan arahkan ke Halaman Utama
         Session::forget('login_attempts');
-        return redirect()->route('halaman_utama')->with('success', 'Login berhasil!');
+        return redirect()->route('pilih-surat')->with('success', 'Login berhasil!');
     }
 }

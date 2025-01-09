@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('warga', function (Blueprint $table) {
+        Schema::create('wargas', function (Blueprint $table) {
             $table->id(); // Primary key
             $table->string('nik', 16)->unique(); // NIK sebagai unique identifier
             $table->string('pin'); // PIN untuk login
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('warga');
+        Schema::dropIfExists('wargas');
     }
 };

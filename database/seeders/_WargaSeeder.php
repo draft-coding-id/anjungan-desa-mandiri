@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Warga;
 
 class WargaSeeder extends Seeder
 {
@@ -13,7 +12,7 @@ class WargaSeeder extends Seeder
      */
     public function run(): void
     {
-        $data = [
+        Warga::create([
             [
                 'nik' => '1234567890123456',
                 'pin' => bcrypt('123456'), // Enkripsi PIN untuk keamanan
@@ -44,7 +43,6 @@ class WargaSeeder extends Seeder
                 'rt' => '001',
                 'rw' => '002'
             ],
-        ];
-        DB::table('wargas')->insert($data);
+        ]);
     }
 }
