@@ -122,9 +122,20 @@
         <div class="login-container">
             <p>Silahkan masukkan PIN keamanan Anda.</p>
 
-            <form method="POST" action="/login/check-pin">
+            <!-- @if ($errors->any())
+                <div>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif -->
+
+            <form method="POST" action="{{ route('login.checkPin') }}">
                 @csrf
                 <div class="form-group">
+                    <input type="hidden" name="nik" value="{{ $nik }}">
                     <label for="pin">PIN:</label>
                     <input type="password" id="pin" name="pin" placeholder="Masukkan PIN Anda" required>
                 </div>

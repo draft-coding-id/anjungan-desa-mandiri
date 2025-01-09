@@ -31,14 +31,13 @@ Route::view('/test', '_test');
 
         // Masuk Menu Layanan Mandiri
 
-        // Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-        // Route::post('/login/nik', [AuthController::class, 'validateNIK']);
-        // Route::post('/login/pin', [AuthController::class, 'validatePIN']);
-        // Route::get('/menu', [AuthController::class, 'showMenu'])->name('menu');
-
-        Route::view('/login-nik', 'warga.layanan-mandiri.login.nik');
-        Route::view('/login-pin', 'warga.layanan-mandiri.login.pin');
-        Route::view('/pilih-surat', 'warga.layanan-mandiri.pilih-surat')->name('pilih-surat');
+        Route::get('/login', [LoginController::class, 'showNikForm'])->name('login');
+        // Route::get('/login', [LoginController::class, 'showNikForm'])->name('login.showNikForm');
+        Route::post('/login/check-nik', [LoginController::class, 'checkNik'])->name('login.checkNik');
+        Route::get('/login/pin/{nik}', [LoginController::class, 'showPinForm'])->name('login.showPinForm');
+        Route::post('/login/check-pin', [LoginController::class, 'checkPin'])->name('login.checkPin');
+        // Route::view('/pilih-surat', 'warga.layanan-mandiri.pilih-surat')->name('pilih-surat');
+        Route::get('/pilih-surat', [LoginController::class, 'showMenu'])->name('pilih-surat');
 
         // Layanan Mandiri - Input Form Surat
         Route::view('/surat-keterangan-domisili', 'warga.layanan-mandiri.form-surat.surat-keterangan-domisili');
@@ -85,10 +84,11 @@ Route::view('/test', '_test');
 
 
 // Menu Login
-Route::get('/login', [LoginController::class, 'showNikForm'])->name('login.showNikForm');
-Route::post('/login/check-nik', [LoginController::class, 'checkNik'])->name('login.checkNik');
-Route::get('/login/pin/{nik}', [LoginController::class, 'showPinForm'])->name('login.showPinForm');
-Route::post('/login/check-pin', [LoginController::class, 'checkPin'])->name('login.checkPin');
+        // Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+        // Route::post('/login/nik', [AuthController::class, 'validateNIK']);
+        // Route::post('/login/pin', [AuthController::class, 'validatePIN']);
+        // Route::get('/menu', [AuthController::class, 'showMenu'])->name('menu');
+
 
 // Fitur utama
 // -- Route::view('/', 'halaman_utama')->name('halaman_utama');

@@ -11,7 +11,7 @@ class LoginController extends Controller
     // Menampilkan form NIK (Langkah 1)
     public function showNikForm()
     {
-        return view('login.nik');
+        return view('warga.layanan-mandiri.login.nik');
     }
 
     // Mengecek NIK (Langkah 1)
@@ -31,7 +31,7 @@ class LoginController extends Controller
     // Menampilkan form PIN (Langkah 2)
     public function showPinForm($nik)
     {
-        return view('login.pin', ['nik' => $nik]);
+        return view('warga.layanan-mandiri.login.pin', ['nik' => $nik]);
     }
 
     // Mengecek PIN (Langkah 2)
@@ -65,6 +65,19 @@ class LoginController extends Controller
 
         // Jika PIN benar, reset counter percobaan dan arahkan ke Halaman Utama
         Session::forget('login_attempts');
+        session(['warga' => $warga]); // Simpan data warga ke session
         return redirect()->route('pilih-surat')->with('success', 'Login berhasil!');
+    }
+        
+    // Halaman Menu
+    public function showMenu()
+    {
+        $warga = session('warga'); // Ambil data warga dari session
+
+        if (!$warga) {
+            return redirect()->route('login'); // Jika session tidak ada, redirect ke login
+        }
+
+        return view('warga.layanan-mandiri.pilih-surat', ['warga' => $warga]);
     }
 }

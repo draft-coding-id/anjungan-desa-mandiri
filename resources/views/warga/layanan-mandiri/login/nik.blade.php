@@ -112,6 +112,16 @@
         <div class="login-container">
             <p>Silakan login terlebih dahulu untuk melanjutkan.</p>
 
+            <!-- @if ($errors->any())
+                <div>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif -->
+    
             <form method="POST" action="/login/check-nik">
                 @csrf
                 <div class="form-group">
