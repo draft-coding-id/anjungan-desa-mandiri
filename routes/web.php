@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SuratController;
 // use App\Http\Controllers\AuthController;
 // use App\Http\Controllers\WargaController;
-use App\Http\Controllers\LoginController;
 // use App\Http\Controllers\Surat_Digital\skDomisiliController;
-// use App\Http\Controllers\SuratController;
 // use App\Http\Controllers\SKDController;
 
 // Code Testing
@@ -32,15 +32,16 @@ Route::view('/test', '_test');
         // Masuk Menu Layanan Mandiri
 
         Route::get('/login', [LoginController::class, 'showNikForm'])->name('login');
-        // Route::get('/login', [LoginController::class, 'showNikForm'])->name('login.showNikForm');
         Route::post('/login/check-nik', [LoginController::class, 'checkNik'])->name('login.checkNik');
         Route::get('/login/pin/{nik}', [LoginController::class, 'showPinForm'])->name('login.showPinForm');
         Route::post('/login/check-pin', [LoginController::class, 'checkPin'])->name('login.checkPin');
-        // Route::view('/pilih-surat', 'warga.layanan-mandiri.pilih-surat')->name('pilih-surat');
         Route::get('/pilih-surat', [LoginController::class, 'showMenu'])->name('pilih-surat');
 
         // Layanan Mandiri - Input Form Surat
-        Route::view('/surat-keterangan-domisili', 'warga.layanan-mandiri.form-surat.surat-keterangan-domisili');
+        Route::get('/surat-keterangan-domisili', [SuratController::class, 'form_Surat_Keterangan_Domisili']);
+        Route::post('/submitForm', [SuratController::class, 'submitForm']);
+        Route::get('/verifikasi', [SuratController::class, 'verifikasi']);
+        // Route::view('/surat-keterangan-domisili', 'warga.layanan-mandiri.form-surat.surat-keterangan-domisili');
 
         // Layanan Mandiri - Preview Surat
         Route::view('/skd', 'warga.layanan-mandiri.preview-surat.surat_ket_domisili');
@@ -48,7 +49,7 @@ Route::view('/test', '_test');
         Route::view('/sk', 'warga.layanan-mandiri.preview-surat.surat_kuasa');
 
         // Layanan Mandiri - Verifikasi Surat
-        Route::view('/verifikasi', 'warga.layanan-mandiri.verif_surat');
+        // Route::view('/verifikasi', 'warga.layanan-mandiri.verif_surat');
         Route::view('/berhasil', 'warga.layanan-mandiri.berhasil');
 
     // ----- Ends of Views Warga ----- //
@@ -83,12 +84,53 @@ Route::view('/test', '_test');
 // ====================================================================== //
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Menu Login
         // Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
         // Route::post('/login/nik', [AuthController::class, 'validateNIK']);
         // Route::post('/login/pin', [AuthController::class, 'validatePIN']);
         // Route::get('/menu', [AuthController::class, 'showMenu'])->name('menu');
-
+        // Route::get('/login', [LoginController::class, 'showNikForm'])->name('login.showNikForm');
 
 // Fitur utama
 // -- Route::view('/', 'halaman_utama')->name('halaman_utama');
@@ -109,8 +151,8 @@ Route::view('/test', '_test');
 // -- Route::get('/surat_keterangan_domisili', [skDomisiliController::class, 'showForm']);
 // Route::post('/sk-domisili/submit', [skDomisiliController::class, 'submitForm']);
 
-// Route::get('/surat-domisili', [SuratController::class, 'showForm'])->name('surat.showForm');
-// Route::post('/sk-domisili/submit', [SuratController::class, 'submitForm'])->name('surat.submitForm');
+// -- Route::get('/surat-domisili', [SuratController::class, 'showForm'])->name('surat.showForm');
+// -- Route::post('/sk-domisili/submit', [SuratController::class, 'submitForm'])->name('surat.submitForm');
 
 // Route::get('/surat_keterangan_domisili', function () {
 //     return view('surat_digital.skd');

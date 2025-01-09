@@ -17,7 +17,7 @@ class WargaSeeder extends Seeder
             [
                 'nik' => '1234567890123456',
                 'pin' => bcrypt('123456'), // Enkripsi PIN untuk keamanan
-                'nama_lengkap' => 'John Doe',
+                'nama_lengkap' => 'Jaka Tarub',
                 'tempat_lahir' => 'Jakarta',
                 'tanggal_lahir' => '1990-01-01',
                 'alamat' => 'Jl. Kebun Raya No. 1',
@@ -27,7 +27,7 @@ class WargaSeeder extends Seeder
             [
                 'nik' => '1234123412341234',
                 'pin' => bcrypt('123123'), // Enkripsi PIN untuk keamanan
-                'nama_lengkap' => 'Jane Smith',
+                'nama_lengkap' => 'Sri Asih',
                 'tempat_lahir' => 'Bogor',
                 'tanggal_lahir' => '1992-02-02',
                 'alamat' => 'Jl. Merdeka No. 2',
@@ -37,7 +37,7 @@ class WargaSeeder extends Seeder
             [
                 'nik' => '1234567812345678',
                 'pin' => bcrypt('121212'), // Enkripsi PIN untuk keamanan
-                'nama_lengkap' => 'Syarifuddin',
+                'nama_lengkap' => 'Gatot Kaca',
                 'tempat_lahir' => 'Tangerang',
                 'tanggal_lahir' => '1989-08-05',
                 'alamat' => 'Jl. Rajawali No. 3',
@@ -45,6 +45,6 @@ class WargaSeeder extends Seeder
                 'rw' => '002'
             ],
         ];
-        DB::table('wargas')->insert($data);
+        DB::table('warga')->insert($data);
     }
 }

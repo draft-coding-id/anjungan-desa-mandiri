@@ -84,7 +84,7 @@
 <body>
   <div class="container">
     <div class="header">
-      <h2>Judul Surat</h2>
+      <h2>{{ $proses_surat->surat }}</h2>
       <h3>Apakah data yang Anda masukkan sudah sesuai?</h3>
     </div>
     <div class="preview-container">
