@@ -62,21 +62,21 @@
                     <tr>
                         <td>NIK / No KTP</td>
                         <td style="padding-left: 10px;">: </td>
-                        <td>[nik]</td>
+                        <td>{{ $proses_surat[0]->nik }}</td>
                     </tr>
                     <tr>
                         <td>Nama Lengkap</td>
                         <td style="padding-left: 10px;">: </td>
-                        <td>[nama_lengkap]</td>
+                        <td>{{ $proses_surat[0]->nama_lengkap }}</td>
                     </tr>
                     <tr>
                         <td>Tempat/Tanggal Lahir</td>
                         <td style="padding-left: 10px;">: </td>
-                        <td>[tempat_lahir], [tanggal_lahir]</td>
+                        <td>{{ $proses_surat[0]->tempat_lahir }}, {{ $proses_surat[0]->tanggal_lahir }}</td>
                     </tr>
                 </table>
-                <p>Orang tersebut di atas adalah benar-benar warga kami yang bertempat tinggal di [alamat_jalan] RT [rt] RW [rw] Desa Rawapanjang, Kecamatan Bojonggede, Kabupaten Bogor.</p>
-                <p>Surat Keterangan ini dibuat untuk keperluan: [keperluan]</p>
+                <p>Orang tersebut di atas adalah benar-benar warga kami yang bertempat tinggal di {{ $proses_surat[0]->alamat }} RT {{ $proses_surat[0]->rt }} RW {{ $proses_surat[0]->rw }} Desa Rawapanjang, Kecamatan Bojonggede, Kabupaten Bogor.</p>
+                <p>Surat Keterangan ini dibuat untuk keperluan: {{ $proses_surat[0]->keperluan }}</p>
                 <p>Demikian surat keterangan ini dibuat dengan sebenarnya.</p>
             </div>
             

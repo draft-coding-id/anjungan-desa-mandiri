@@ -11,11 +11,21 @@
             background-repeat: no-repeat;
             background-position: center;
       margin: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .container {
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 80%;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 30px;
+      margin-top: 50px;
+      border: 3px solid #000000;
+      border-radius: 60px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
     .header {
       padding: 10px;
@@ -84,14 +94,14 @@
 <body>
   <div class="container">
     <div class="header">
-      <h2>{{ $proses_surat->surat }}</h2>
+      <h2>{{ $proses_surat[0]->surat }}</h2>
       <h3>Apakah data yang Anda masukkan sudah sesuai?</h3>
     </div>
     <div class="preview-container">
       <iframe src="/skd" width="100%" height="100%"></iframe>
     </div>
     <div class="form">
-      <label style="margin-bottom: 10px;">Nomor Ponsel :</label>
+      <label style="margin-bottom: 10px; font-weight: bold;">Nomor Ponsel :</label>
       <input type="string" placeholder="Masukkan Nomor HP" required>
     </div>
     <p>(Bila surat sudah selesai diproses akan kami hubungi ke nomor yang Anda masukkan)</p>

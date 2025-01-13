@@ -3,10 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SuratController;
+use App\Http\Controllers\PreviewSuratController;
 // use App\Http\Controllers\AuthController;
 // use App\Http\Controllers\WargaController;
 // use App\Http\Controllers\Surat_Digital\skDomisiliController;
-// use App\Http\Controllers\SKDController;
 
 // Code Testing
 Route::view('/test', '_test');
@@ -44,7 +44,8 @@ Route::view('/test', '_test');
         // Route::view('/surat-keterangan-domisili', 'warga.layanan-mandiri.form-surat.surat-keterangan-domisili');
 
         // Layanan Mandiri - Preview Surat
-        Route::view('/skd', 'warga.layanan-mandiri.preview-surat.surat_ket_domisili');
+        Route::get('/skd', [PreviewSuratController::class, 'skd']);
+        // Route::view('/skd', 'warga.layanan-mandiri.preview-surat.surat_ket_domisili', ['proses_surat' => $proses_surat]);
         Route::view('/skp', 'warga.layanan-mandiri.preview-surat.surat_ket_pengantar');
         Route::view('/sk', 'warga.layanan-mandiri.preview-surat.surat_kuasa');
 

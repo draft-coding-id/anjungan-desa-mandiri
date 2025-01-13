@@ -35,6 +35,7 @@
             border-radius: 10px;
             cursor: pointer;
             width: 220px;
+            height: 50px;
             line-height: 1.3;
             letter-spacing: 0.5px;
             transition: background 0.3s;
@@ -90,17 +91,25 @@
             <a href="#" class="button">Surat Keterangan Pengantar</a>
         </div>
         <div class="button-container">
-            <a href="#" class="button">Surat Izin Keramaian</a>
+            <a href="#" class="button">Surat 4</a>
+            <a href="#" class="button">Surat 5</a>
+            <a href="#" class="button">Surat 6</a>
+            <!-- <a href="#" class="button">Surat Izin Keramaian</a>
             <a href="#" class="button">Surat Keterangan Tidak Mampu</a>
-            <a href="#" class="button">Surat Keterangan Kematian</a>
+            <a href="#" class="button">Surat Keterangan Kematian</a> -->
         </div>
         <div class="button-container">
-            <a href="#" class="button">Surat Permohonan Perubahan</a>
+            <a href="#" class="button">Surat 7</a>
+            <a href="#" class="button">Surat 8</a>
+            <a href="#" class="button">Surat 9</a>
+            <!-- <a href="#" class="button">Surat Permohonan Perubahan</a>
             <a href="#" class="button">Surat Keterangan Domisili Usaha</a>
-            <a href="#" class="button">Surat Keterangan Usaha</a>
+            <a href="#" class="button">Surat Keterangan Usaha</a> -->
         </div>
         <div class="button-container">
-            <a href="#" class="button">Surat Keterangan Wali Hakim</a>
+            <a href="#" class="button">Surat 10</a>
+            <a href="#" class="button">Surat 11</a>
+            <!-- <a href="#" class="button">Surat Keterangan Wali Hakim</a> -->
         </div>
     </div> 
     <div class="footer">
