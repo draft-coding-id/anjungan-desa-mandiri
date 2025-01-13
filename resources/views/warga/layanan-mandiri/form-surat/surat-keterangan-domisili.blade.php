@@ -16,7 +16,7 @@
             justify-content: center;
         }
         .form-container {
-            width: 80%;
+            width: 70%;
             background-color: rgba(255, 255, 255, 0.8);
             padding: 30px;
             margin-top: 50px;
