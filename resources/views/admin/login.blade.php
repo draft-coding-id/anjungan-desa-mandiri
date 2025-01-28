@@ -121,7 +121,7 @@
                     <input type="text" id="password" name="password" placeholder="Kata Sandi" required>
                 </div>
                 <div class="button-container" style="padding: 0;"> 
-                    <button type="submit" class="button" onclick="window.location.href='/beranda';">Masuk</button>
+                    <button type="submit" class="button" onclick="window.location.href='/layanan-surat';">Masuk</button>
                 </div> 
             </form>
         </div>

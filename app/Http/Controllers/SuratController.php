@@ -17,7 +17,8 @@ class SuratController extends Controller
             return redirect()->route('login');
         }
 
-        return view('warga.layanan-mandiri.form-surat.surat-keterangan-domisili', ['warga' => $warga]);
+        ProsesSurat::truncate();
+        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-domisili', ['warga' => $warga]);
     }
 
     // Proses pengiriman data
@@ -38,15 +39,26 @@ class SuratController extends Controller
         // Simpan ke database
         ProsesSurat::create($validatedData);
 
-        return redirect('/verifikasi')->with('success', 'Data berhasil disimpan dan akan diverifikasi.');
+        return redirect('/konfirmasi')->with('success', 'Data berhasil disimpan dan akan diverifikasi.');
     }
 
     // Verifikasi Surat
-    public function verifikasi(Request $request)
+    public function konfirmasi(Request $request)
     {
         $proses_surat = ProsesSurat::all(); // Ambil semua data dari tabel proses_surats
 
         return view('warga.layanan-mandiri.verif_surat', ['proses_surat' => $proses_surat]);
+    }
+
+    // public function submitSurat(Request $request)
+    // {
+        
+    // }
+
+    public function berhasil(Request $request)
+    {
+        ProsesSurat::truncate();
+        return view('warga.layanan-mandiri.berhasil');
     }
 }
 

@@ -40,10 +40,13 @@
     }
     .form {
       margin-top: 30px;
+      display: flex;
       align-items: center;
+      justify-content: center;
     }
     .form input[type="string"] {
       padding: 10px;
+      margin-left: 10px;
       border: 1px solid #000000;
       width: 300px;
       border-radius: 8px;
@@ -100,15 +103,18 @@
     <div class="preview-container">
       <iframe src="/skd" width="100%" height="100%"></iframe>
     </div>
-    <div class="form">
-      <label style="margin-bottom: 10px; font-weight: bold;">Nomor Ponsel :</label>
-      <input type="string" placeholder="Masukkan Nomor HP" required>
-    </div>
-    <p>(Bila surat sudah selesai diproses akan kami hubungi ke nomor yang Anda masukkan)</p>
-    <div class="button-container">
-      <button class="button" onclick="window.history.back();">Kembali</button>
-      <button type="submit" class="button" id="openLightbox">Lanjutkan</button>
-    </div>
+    <form action="{{ url('/berhasil') }}" method="POST">
+      @csrf
+      <div class="form">
+        <label style="font-weight: bold;">Nomor Ponsel :</label>
+        <input type="string" placeholder="Masukkan Nomor HP" required>
+      </div>
+      <p>(Bila surat sudah selesai diproses akan kami hubungi ke nomor yang Anda masukkan)</p>
+      <div class="button-container">
+        <button class="button" onclick="window.location.href='/pilih-surat';">Kembali</button>
+        <button type="submit" class="button" id="openLightbox">Lanjutkan</button>
+      </div>
+    </form>
 
     <div class="lightbox_container" id="lightbox">
         <div class="lightbox_content">

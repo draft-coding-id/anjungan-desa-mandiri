@@ -21,6 +21,7 @@ class ProsesSurat extends Model
         'alamat',
         'rt',
         'rw',
-        'keperluan'
+        'keperluan',
+        'no_hp'
     ];
 }

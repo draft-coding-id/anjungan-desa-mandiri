@@ -40,7 +40,9 @@ Route::view('/test', '_test');
         // Layanan Mandiri - Input Form Surat
         Route::get('/surat-keterangan-domisili', [SuratController::class, 'form_Surat_Keterangan_Domisili']);
         Route::post('/submitForm', [SuratController::class, 'submitForm']);
-        Route::get('/verifikasi', [SuratController::class, 'verifikasi']);
+        Route::get('/konfirmasi', [SuratController::class, 'konfirmasi']);
+        Route::post('/submitSurat', [SuratController::class, 'submitSurat']);
+        Route::get('/berhasil', [SuratController::class, 'berhasil']);
         // Route::view('/surat-keterangan-domisili', 'warga.layanan-mandiri.form-surat.surat-keterangan-domisili');
 
         // Layanan Mandiri - Preview Surat
@@ -51,7 +53,7 @@ Route::view('/test', '_test');
 
         // Layanan Mandiri - Verifikasi Surat
         // Route::view('/verifikasi', 'warga.layanan-mandiri.verif_surat');
-        Route::view('/berhasil', 'warga.layanan-mandiri.berhasil');
+        // Route::view('/berhasil', 'warga.layanan-mandiri.berhasil');
 
     // ----- Ends of Views Warga ----- //
 
