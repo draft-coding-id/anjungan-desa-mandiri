@@ -112,7 +112,7 @@
       <p>(Bila surat sudah selesai diproses akan kami hubungi ke nomor yang Anda masukkan)</p>
       <div class="button-container">
         <button class="button" onclick="window.location.href='/pilih-surat';">Kembali</button>
-        <button type="submit" class="button" id="openLightbox">Lanjutkan</button>
+        <button class="button" id="openLightbox">Lanjutkan</button>
       </div>
     </form>
 
