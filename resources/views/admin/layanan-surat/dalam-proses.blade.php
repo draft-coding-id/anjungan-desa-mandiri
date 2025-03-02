@@ -16,7 +16,6 @@
             .sidebar {
                 width: 250px;
                 background-color: #fff;
-                height: 100vh;
                 box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
             }
 
@@ -110,13 +109,13 @@
             }
 
             .content {
-                padding: 0px 30px;
+                padding: 15px 30px;
             }
 
             .table {
                 width: 100%;
                 border-collapse: collapse;
-                margin-top: 20px;
+                margin: 20px 0 50px 20px;
             }
 
             .table th, .table td {
@@ -126,7 +125,7 @@
             }
 
             .table th {
-                background-color: #f2f2f2;
+                text-align: center;
             }
 
             button {
@@ -136,6 +135,9 @@
                 cursor: pointer;
                 background-color: #FFA500;
                 color: white;
+                font-weight: bold;
+                width: 150px;
+                height: 40px;
             }
 
             button:hover {
@@ -152,15 +154,15 @@
                 <p>Desa Rawapanjang <br> Kabupaten Bogor</p>
             </div>
             <div class="sidebar-nav">
-                <a href=/beranda class="nav-link">Beranda</a>
+                <!-- <a href=/beranda class="nav-link">Beranda</a>
                 <a href=/info-desa class="nav-link">Informasi Desa</a>
                 <a href=/data-warga class="nav-link">Data Warga</a>
-                <a href=/statistik class="nav-link">Statistik Desa</a>
+                <a href=/statistik class="nav-link">Statistik Desa</a> -->
                 <a href=/layanan-surat class="nav-link active">Layanan Surat</a>
-                <a href=/pengumuman class="nav-link">Pengumuman</a>
+                <!-- <a href=/pengumuman class="nav-link">Pengumuman</a>
                 <a href=/artikel-desa class="nav-link">Artikel Desa</a>
                 <a href=/agenda class="nav-link">Agenda Desa</a>
-                <a href=/pengaturan-akun class="nav-link">Pengaturan Akun</a>
+                <a href=/pengaturan-akun class="nav-link">Pengaturan Akun</a> -->
                 <a href=/admin class="nav-link">Logout</a>
             </div>
         </div>
@@ -176,7 +178,7 @@
             </div>
 
             <div class="menu-surat">
-                <a href=/kelola-surat>Kelola Surat</a>
+                <!-- <a href=/kelola-surat>Kelola Surat</a> -->
                 <a href=/layanan-surat class="active">Dalam Proses</a>
                 <a href=/surat-ditolak>Arsip Surat Ditolak</a>
                 <a href=/riwayat-surat>Riwayat</a>
@@ -185,13 +187,13 @@
 
             <div class="content">
                 <div class="mt-4">
-                    <h3>Surat Sedang Diproses</h3>
+                    <h3>Menunggu Verifikasi Admin</h3>
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Aksi</th>
-                                <th>No. Antrean</th>
+                                <th width="150px">Aksi</th>
+                                <!-- <th>No. Antrean</th> -->
                                 <th>NIK</th>
                                 <th>Nama Penduduk</th>
                                 <th>No. HP Aktif</th>
@@ -201,29 +203,66 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
-                                <td><button onclick="window.location.href='/verif-admin';">Menunggu Verifikasi Admin</button></td>
-                                <td>12345</td>
+                                <td>1.</td>
+                                <td><button onclick="window.location.href='/verif-admin';">Verifikasi Admin</button></td>
+                                <!-- <td>12345</td> -->
                                 <td>1234567890</td>
                                 <td>Nama Warga</td>
                                 <td>08123456789</td>
                                 <td>Surat Keterangan</td>
                                 <td>01-01-2024</td>
                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4">
+                    <h3>Menunggu Tanda Tangan Kades</h3>
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td>2</td>
+                                <th>No.</th>
+                                <th width="150px">Aksi</th>
+                                <!-- <th>No. Antrean</th> -->
+                                <th>NIK</th>
+                                <th>Nama Penduduk</th>
+                                <th>No. HP Aktif</th>
+                                <th>Jenis Surat</th>
+                                <th>Tanggal Kirim</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1.</td>
                                 <td><button onclick="window.location.href='/persetujuan-kades';">Menunggu Tanda Tangan Kades</button></td>
-                                <td>12346</td>
+                                <!-- <td>12346</td> -->
                                 <td>1234567891</td>
                                 <td>Nama Warga 2</td>
                                 <td>08123456790</td>
                                 <td>Surat Keterangan Nikah</td>
                                 <td>02-01-2024</td>
                             </tr>
+                        </tbody>
+                    </table>
+                </div><div class="mt-4">
+                    <h3>Belum diserahkan ke Warga</h3>
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td>3</td>
+                                <th>No.</th>
+                                <th width="150px">Aksi</th>
+                                <!-- <th>No. Antrean</th> -->
+                                <th>NIK</th>
+                                <th>Nama Penduduk</th>
+                                <th>No. HP Aktif</th>
+                                <th>Jenis Surat</th>
+                                <th>Tanggal Kirim</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1.</td>
                                 <td><button onclick="window.location.href='/surat-selesai';">Belum diserahkan ke Warga</button></td>
-                                <td>12347</td>
+                                <!-- <td>12347</td> -->
                                 <td>1234567892</td>
                                 <td>Nama Warga 3</td>
                                 <td>08123456791</td>
@@ -232,7 +271,7 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>                
+                </div>      
             </div>
         </div>
     </body>

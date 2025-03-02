@@ -241,15 +241,15 @@
                 <p>Desa Rawapanjang <br> Kabupaten Bogor</p>
             </div>
             <div class="sidebar-nav">
-                <a href=/beranda class="nav-link">Beranda</a>
+                <!-- <a href=/beranda class="nav-link">Beranda</a>
                 <a href=/info-desa class="nav-link">Informasi Desa</a>
                 <a href=/data-warga class="nav-link">Data Warga</a>
-                <a href=/statistik class="nav-link">Statistik Desa</a>
+                <a href=/statistik class="nav-link">Statistik Desa</a> -->
                 <a href=/layanan-surat class="nav-link active">Layanan Surat</a>
-                <a href=/pengumuman class="nav-link">Pengumuman</a>
+                <!-- <a href=/pengumuman class="nav-link">Pengumuman</a>
                 <a href=/artikel-desa class="nav-link">Artikel Desa</a>
                 <a href=/agenda class="nav-link">Agenda Desa</a>
-                <a href=/pengaturan-akun class="nav-link">Pengaturan Akun</a>
+                <a href=/pengaturan-akun class="nav-link">Pengaturan Akun</a> -->
                 <a href=/admin class="nav-link">Logout</a>
             </div>
         </div>
