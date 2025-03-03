@@ -101,9 +101,9 @@
       <h3>Apakah data yang Anda masukkan sudah sesuai?</h3>
     </div>
     <div class="preview-container">
-      @if ($proses_surat = "Surat Keterangan Pengantar")
+      @if ($proses_surat = "Surat Keterangan Domisili")
         <iframe src="/skd" width="100%" height="100%"></iframe>
-      @elseif ($proses_surat = "Surat Keterangan Domisili")
+      @elseif ($proses_surat = "Surat Keterangan Pengantar")
         <iframe src="/skp" width="100%" height="100%"></iframe>
       @endif
     </div>

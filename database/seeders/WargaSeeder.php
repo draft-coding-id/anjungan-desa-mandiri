@@ -16,7 +16,7 @@ class WargaSeeder extends Seeder
         $data = [
             [
                 'nik' => '1234567890123456',
-                'pin' => bcrypt('123456'), // Enkripsi PIN untuk keamanan
+                'pin' => bcrypt('123456'),
                 'nama_lengkap' => 'Jaka Tarub',
                 'tempat_lahir' => 'Jakarta',
                 'tanggal_lahir' => '1990-01-01',
@@ -26,7 +26,7 @@ class WargaSeeder extends Seeder
             ],
             [
                 'nik' => '1234123412341234',
-                'pin' => bcrypt('123123'), // Enkripsi PIN untuk keamanan
+                'pin' => bcrypt('123123'),
                 'nama_lengkap' => 'Sri Asih',
                 'tempat_lahir' => 'Bogor',
                 'tanggal_lahir' => '1992-02-02',
@@ -36,7 +36,7 @@ class WargaSeeder extends Seeder
             ],
             [
                 'nik' => '1234567812345678',
-                'pin' => bcrypt('121212'), // Enkripsi PIN untuk keamanan
+                'pin' => bcrypt('121212'),
                 'nama_lengkap' => 'Gatot Kaca',
                 'tempat_lahir' => 'Tangerang',
                 'tanggal_lahir' => '1989-08-05',
