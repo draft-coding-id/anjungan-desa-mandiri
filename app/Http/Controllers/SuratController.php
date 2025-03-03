@@ -21,6 +21,19 @@ class SuratController extends Controller
         return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-domisili', ['warga' => $warga]);
     }
 
+    // Tampilkan formulir Surat Keterangan Pengantar
+    public function form_Surat_Keterangan_Pengantar(Request $request)
+    {
+        // Data warga diambil dari session
+        $warga = session('warga');
+        if (!$warga) {
+            return redirect()->route('login');
+        }
+
+        ProsesSurat::truncate();
+        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-pengantar', ['warga' => $warga]);
+    }
+
     // Proses pengiriman data
     public function submitForm(Request $request)
     {
@@ -49,11 +62,6 @@ class SuratController extends Controller
 
         return view('warga.layanan-mandiri.verif_surat', ['proses_surat' => $proses_surat]);
     }
-
-    // public function submitSurat(Request $request)
-    // {
-        
-    // }
 
     public function berhasil(Request $request)
     {

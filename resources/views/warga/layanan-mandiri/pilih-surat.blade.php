@@ -86,29 +86,26 @@
         <h3>Silahkan pilih surat yang ingin Anda ajukan.</h3>
         <!-- Tombol Pilihan Surat -->
         <div class="button-container">
-            <a href="#" class="button">Surat Kuasa</a>
+            <a href='/surat-keterangan-domisili' class="button">Surat Kuasa</a>
             <a href='/surat-keterangan-domisili' class="button">Surat Keterangan Domisili</a>
-            <a href="#" class="button">Surat Keterangan Pengantar</a>
+            <a href='/surat-keterangan-pengantar' class="button">Surat Keterangan Pengantar</a>
         </div>
         <div class="button-container">
-            <a href="#" class="button">Surat 4</a>
-            <a href="#" class="button">Surat 5</a>
-            <a href="#" class="button">Surat 6</a>
-            <!-- <a href="#" class="button">Surat Izin Keramaian</a>
-            <a href="#" class="button">Surat Keterangan Tidak Mampu</a>
-            <a href="#" class="button">Surat Keterangan Kematian</a> -->
+            <a href='/surat-keterangan-domisili' class="button">Surat Izin Keramaian</a>
+            <a href='/surat-keterangan-domisili' class="button">Surat Keterangan Tidak Mampu</a>
+            <a href='/surat-keterangan-domisili' class="button">Surat Keterangan Kematian</a>
         </div>
         <div class="button-container">
-            <a href="#" class="button">Surat 7</a>
-            <a href="#" class="button">Surat 8</a>
-            <a href="#" class="button">Surat 9</a>
+            <a href='/surat-keterangan-domisili' class="button">Surat 7</a>
+            <a href='/surat-keterangan-domisili' class="button">Surat 8</a>
+            <a href='/surat-keterangan-domisili' class="button">Surat 9</a>
             <!-- <a href="#" class="button">Surat Permohonan Perubahan</a>
             <a href="#" class="button">Surat Keterangan Domisili Usaha</a>
             <a href="#" class="button">Surat Keterangan Usaha</a> -->
         </div>
         <div class="button-container">
-            <a href="#" class="button">Surat 10</a>
-            <a href="#" class="button">Surat 11</a>
+            <a href='/surat-keterangan-domisili' class="button">Surat 10</a>
+            <a href='/surat-keterangan-domisili' class="button">Surat 11</a>
             <!-- <a href="#" class="button">Surat Keterangan Wali Hakim</a> -->
         </div>
     </div> 

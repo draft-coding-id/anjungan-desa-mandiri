@@ -16,4 +16,11 @@ class PreviewSuratController extends Controller
 
         return view('warga.layanan-mandiri.preview-surat.surat_ket_domisili', ['proses_surat' => $proses_surat]);
     }
+
+    public function skp()
+    {
+        $proses_surat = ProsesSurat::all();
+
+        return view('warga.layanan-mandiri.preview-surat.surat_ket_pengantar', ['proses_surat' => $proses_surat]);
+    }
 }

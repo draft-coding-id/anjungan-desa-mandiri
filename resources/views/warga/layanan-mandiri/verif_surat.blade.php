@@ -101,7 +101,11 @@
       <h3>Apakah data yang Anda masukkan sudah sesuai?</h3>
     </div>
     <div class="preview-container">
-      <iframe src="/skd" width="100%" height="100%"></iframe>
+      @if ($proses_surat = "Surat Keterangan Pengantar")
+        <iframe src="/skd" width="100%" height="100%"></iframe>
+      @elseif ($proses_surat = "Surat Keterangan Domisili")
+        <iframe src="/skp" width="100%" height="100%"></iframe>
+      @endif
     </div>
     <form action="{{ url('/berhasil') }}" method="POST">
       @csrf
