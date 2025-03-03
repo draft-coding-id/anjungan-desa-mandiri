@@ -232,6 +232,7 @@
                         </thead>
                         <tbody>
                             <tr>
+                                <!-- kasih id,  -->
                                 <td>1.</td>
                                 <td><button onclick="window.location.href='/persetujuan-kades';">Menunggu Tanda Tangan Kades</button></td>
                                 <!-- <td>12346</td> -->
