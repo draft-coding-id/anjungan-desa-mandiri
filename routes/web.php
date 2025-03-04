@@ -40,6 +40,8 @@ Route::view('/test', '_test');
         // Layanan Mandiri - Input Form Surat
         Route::get('/surat-keterangan-domisili', [SuratController::class, 'form_Surat_Keterangan_Domisili']);
         Route::get('/surat-keterangan-pengantar', [SuratController::class, 'form_Surat_Keterangan_Pengantar']);
+        
+        
         Route::post('/submitForm', [SuratController::class, 'submitForm']);
         Route::get('/konfirmasi', [SuratController::class, 'konfirmasi']);
         Route::post('/submitSurat', [SuratController::class, 'submitSurat']);

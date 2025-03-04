@@ -86,8 +86,8 @@
         <h3>Silahkan pilih surat yang ingin Anda ajukan.</h3>
         <!-- Tombol Pilihan Surat -->
         <div class="button-container">
-            <a href='/surat-keterangan-domisili' class="button">Surat Kuasa</a>
             <a href='/surat-keterangan-domisili' class="button">Surat Keterangan Domisili</a>
+            <a href='/surat-keterangan-pengantar' class="button">Surat Keterangan Pengantar</a>
             <a href='/surat-keterangan-pengantar' class="button">Surat Keterangan Pengantar</a>
         </div>
         <div class="button-container">
