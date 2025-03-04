@@ -34,6 +34,19 @@ class SuratController extends Controller
         return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-pengantar', ['warga' => $warga]);
     }
 
+    // Tampilkan formulir Surat Keterangan KTP Dalam Proses
+    public function form_Surat_Keterangan_KTP_Dalam_Proses (Request $request)
+    {
+        // Data warga diambil dari session
+        $warga = session('warga');
+        if (!$warga) {
+            return redirect()->route('login');
+        }
+
+        ProsesSurat::truncate();
+        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-ktp-dalam-proses', ['warga' => $warga]);
+    }
+
     // Proses pengiriman data
     public function submitForm(Request $request)
     {
