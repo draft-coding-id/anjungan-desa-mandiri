@@ -49,7 +49,11 @@ Route::view('/test', '_test');
         // Layanan Mandiri - Preview Surat
         Route::get('/skd', [PreviewSuratController::class, 'skd']);
         Route::get('/skp', [PreviewSuratController::class, 'skp']);
-        Route::view('/sk', 'warga.layanan-mandiri.preview-surat.surat_kuasa');
+        Route::get('/skck', [PreviewSuratController::class, 'skck']);
+        Route::get('/skktpdp', [PreviewSuratController::class, 'skktpdp']);
+        Route::get('/spkk', [PreviewSuratController::class, 'spkk']);
+        Route::get('/sppkk', [PreviewSuratController::class, 'sppkk']);
+        Route::get('/skwh', [PreviewSuratController::class, 'skwh']);
 
         // Layanan Mandiri - Verifikasi Surat
         // Route::view('/verifikasi', 'warga.layanan-mandiri.verif_surat');
