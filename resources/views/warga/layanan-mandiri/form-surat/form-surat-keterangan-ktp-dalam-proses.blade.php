@@ -115,6 +115,11 @@
             <label>RW :</label>
             <input type="number" name="rw" value="{{ $warga->rw }}" readonly>
         </div>
+        <hr>
+        <div class="form-group">
+            <label>Keperluan :</label>
+            <input type="text" name="keperluan" required>
+        </div>
         
         <div class="button-container">
             <button class="button" onclick="window.history.back();">Kembali</button>

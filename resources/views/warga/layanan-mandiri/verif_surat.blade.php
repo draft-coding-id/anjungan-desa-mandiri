@@ -105,6 +105,8 @@
         <iframe src="/skd" width="100%" height="100%"></iframe>
       @elseif ($proses_surat = "Surat Keterangan Pengantar")
         <iframe src="/skp" width="100%" height="100%"></iframe>
+      @elseif ($proses_surat = "Surat Keterangan KTP Dalam Proses")
+        <iframe src="/skktpdp" width="100%" height="100%"></iframe>
       @endif
     </div>
     <form action="{{ url('/berhasil') }}" method="POST">
