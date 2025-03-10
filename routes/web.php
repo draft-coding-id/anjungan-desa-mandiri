@@ -13,44 +13,39 @@ Route::view('/test', '_test');
 // Route::get('/warga2', [WargaController::class, 'index']);
 
 // Route Mockup Baru
-    Route::view('/', 'onboarding');
+    // Route::view('/', 'onboarding');
     Route::view('/onboarding', 'onboarding');
     Route::view('/warga', 'warga.halaman_utama')->name('halaman_utama'); //Lanjut ke views warga
-    Route::view('/admin', 'admin.login'); //Lanjut ke views admin
+    Route::view('/admin', 'admin.login')->name('login'); //Lanjut ke views admin
 
     // ====================================================================== //
 
     // ----- Views Warga ----- //
-
-        // Menu Profil Desa
-        Route::view('/pengumuman-warga', 'warga.profil_desa.pengumuman');
-        Route::view('/tentang-desa-rawapanjang', 'warga.profil_desa.tentang-desa');
-        Route::view('/agenda-rawapanjang', 'warga.profil_desa.agenda');
-        Route::view('/lapak-warga', 'warga.profil_desa.lapak');
-        Route::view('/artikel-terkini', 'warga.profil_desa.artikel-terkini');
-
-        // Masuk Menu Layanan Mandiri
-
-        Route::get('/login', [LoginController::class, 'showNikForm'])->name('login');
-        Route::post('/login/check-nik', [LoginController::class, 'checkNik'])->name('login.checkNik');
-        Route::get('/login/pin/{nik}', [LoginController::class, 'showPinForm'])->name('login.showPinForm');
-        Route::post('/login/check-pin', [LoginController::class, 'checkPin'])->name('login.checkPin');
-        Route::get('/pilih-surat', [LoginController::class, 'showMenu'])->name('pilih-surat');
-
-        // Layanan Mandiri - Input Form Surat
-        Route::get('/surat-keterangan-domisili', [SuratController::class, 'form_Surat_Keterangan_Domisili']);
-        Route::get('/surat-keterangan-pengantar', [SuratController::class, 'form_Surat_Keterangan_Pengantar']);
-        Route::get('/surat-keterangan-ktp-dalam-proses', [SuratController::class, 'form_Surat_Keterangan_KTP_Dalam_Proses']);
-        
-        
-        Route::post('/submitForm', [SuratController::class, 'submitForm']);
-        Route::get('/konfirmasi', [SuratController::class, 'konfirmasi']);
-        Route::post('/submitSurat', [SuratController::class, 'submitSurat']);
-        Route::get('/berhasil', [SuratController::class, 'berhasil']);
+            Route::get('/login', [LoginController::class, 'showNikForm'])->name('login.warga');
+            // Masuk Menu Layanan Mandiri
+            Route::post('/login/check-nik', [LoginController::class, 'checkNik'])->name('login.checkNik');
+            Route::get('/login/pin/{nik}', [LoginController::class, 'showPinForm'])->name('login.showPinForm');
+            Route::post('/login/check-pin', [LoginController::class, 'checkPin'])->name('login.checkPin');
+            Route::view('/pengumuman-warga', 'warga.profil_desa.pengumuman');
+            Route::view('/tentang-desa-rawapanjang', 'warga.profil_desa.tentang-desa');
+            Route::view('/agenda-rawapanjang', 'warga.profil_desa.agenda');
+            Route::view('/lapak-warga', 'warga.profil_desa.lapak');
+            Route::view('/artikel-terkini', 'warga.profil_desa.artikel-terkini');
+            Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+        Route::controller(SuratController::class)->group(function(){
+            Route::get('/pilih-surat', [LoginController::class, 'showMenu'])->name('pilih-surat');
+            Route::get('/surat-keterangan-domisili', [SuratController::class, 'form_Surat_Keterangan_Domisili']);
+            Route::get('/surat-keterangan-pengantar', [SuratController::class, 'form_Surat_Keterangan_Pengantar']);
+            Route::get('/surat-keterangan-ktp-dalam-proses', [SuratController::class, 'form_Surat_Keterangan_KTP_Dalam_Proses']);
+            Route::post('/submitForm', [SuratController::class, 'submitForm']);
+            Route::get('/konfirmasi', [SuratController::class, 'konfirmasi']);
+            // Route::post('/submitSurat', [SuratController::class, 'submitSurat']);
+            Route::get('/berhasil/{no_hp}', [SuratController::class, 'berhasil']);
+        });
         // Route::view('/surat-keterangan-domisili', 'warga.layanan-mandiri.form-surat.surat-keterangan-domisili');
 
         // Layanan Mandiri - Preview Surat
-        Route::get('/skd', [PreviewSuratController::class, 'skd']);
+        Route::get('/skd', [PreviewSuratController::class, 'skd'])->name('preview.skd');
         Route::get('/skp', [PreviewSuratController::class, 'skp']);
         Route::get('/skck', [PreviewSuratController::class, 'skck']);
         Route::get('/skktpdp', [PreviewSuratController::class, 'skktpdp']);
@@ -67,8 +62,9 @@ Route::view('/test', '_test');
     // ====================================================================== //
 
     // ----- Views Admin Desa ----- //
-
-        Route::view('/beranda', 'admin.beranda');
+        Route::post('/proses-login' , [LoginController::class, 'cekAdminLogin'])->name('cek-credentials');
+        Route::middleware('auth')->group(function(){
+        Route::view('/beranda', 'admin.beranda')->name('admin-beranda');
         Route::view('/info-desa', 'admin.info-desa');
         Route::view('/data-warga', 'admin.data-warga');
         Route::view('/statistik', 'admin.statistik');
@@ -89,6 +85,9 @@ Route::view('/test', '_test');
             Route::view('/surat-selesai', 'admin.layanan-surat.proses-surat.surat-selesai');
 
     // ----- Ends of Views Admin Desa ----- //
+        });
+
+
 
 
 // ====================================================================== //

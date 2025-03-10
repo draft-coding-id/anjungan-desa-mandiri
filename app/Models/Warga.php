@@ -19,6 +19,6 @@ class Warga extends Model
         'tanggal_lahir',
         'alamat',
         'rt',
-        'rw'
+        'rw',
     ];
 }

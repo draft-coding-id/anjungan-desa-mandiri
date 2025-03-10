@@ -12,8 +12,10 @@ class PreviewSuratController extends Controller
     {
         // Ambil data yang diperlukan dari database
         // Misalnya, $data = Model::find($id);
-        $proses_surat = ProsesSurat::all(); // Ambil semua data dari tabel proses_surats
-
+        // $proses_surat = ProsesSurat::all(); // Ambil semua data dari tabel proses_surats
+        $proses_surat = session('surat');
+        // dd($proses_surat);
+        // dd($proses_surat);
         return view('warga.layanan-mandiri.preview-surat.surat_ket_domisili', ['proses_surat' => $proses_surat]);
     }
 

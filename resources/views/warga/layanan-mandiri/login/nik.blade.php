@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Anjungan Desa Mandiri</title>
     <link rel="icon" href="https://rawapanjang-desa.id/desa/logo/1679693855_logo-pemkab-bogor.png" type="image/png">
     <style>
-        body { 
+        body {
             height: 100vh;
             margin: 0;
             font-family: sans-serif;
@@ -15,17 +16,20 @@
             background-repeat: no-repeat;
             background-position: center;
         }
+
         .header {
             /* color: white; */
             text-align: center;
             padding: 20px;
         }
+
         .page-content {
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
         }
+
         .login-container {
             background: #fff;
             padding: 30px;
@@ -35,12 +39,14 @@
             max-width: 400px;
             text-align: center;
         }
+
         .button-container {
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
+
         .button {
             display: flex;
             justify-content: center;
@@ -52,7 +58,7 @@
             border-radius: 5px;
             cursor: pointer;
             text-decoration: none;
-            font-weight: bold; 
+            font-weight: bold;
             flex-shrink: 0;
             font-size: 16px;
             line-height: 1.3;
@@ -61,18 +67,22 @@
             max-width: 120px;
             transition: background 0.3s;
         }
+
         .button:hover {
             background-color: #e68a00;
         }
+
         .form-group {
             margin: 30px 0;
             text-align: left;
         }
+
         .form-group label {
             display: block;
             font-weight: bold;
             margin-bottom: 10px;
         }
+
         .form-group input {
             width: 90%;
             padding: 10px;
@@ -81,10 +91,12 @@
             font-size: 14px;
             color: #333;
         }
+
         .form-group input:focus {
             border-color: #4caf50;
             outline: none;
         }
+
         .footer {
             position: fixed;
             bottom: 0;
@@ -92,6 +104,7 @@
             color: white;
             text-align: center;
         }
+
         .credit {
             display: flex;
             justify-content: center;
@@ -103,12 +116,13 @@
         }
     </style>
 </head>
+
 <body>
-    <div class="header"> 
+    <div class="header">
         <h1>Layanan Mandiri</h1>
         <h2>Anjungan Desa Mandiri Desa Rawapanjang</h2>
-    </div> 
-    <div class="page-content"> 
+    </div>
+    <div class="page-content">
         <div class="login-container">
             <p>Silakan login terlebih dahulu untuk melanjutkan.</p>
 
@@ -121,7 +135,7 @@
                     </ul>
                 </div>
             @endif -->
-    
+
             <form method="POST" action="/login/check-nik">
                 @csrf
                 <div class="form-group">
@@ -129,19 +143,20 @@
                     <input type="text" id="nik" name="nik" placeholder="Masukkan NIK Anda" required>
                 </div>
                 @error('nik') <p style="color: red;">{{ $message }}</p> @enderror
-                <div class="button-container"> 
+                <div class="button-container">
                     <button type="submit" class="button">Lanjutkan</button>
-                </div> 
+                </div>
             </form>
         </div>
-    </div> 
+    </div>
     <div class="footer">
-        <div class="button-container"> 
-            <button class="button" onclick="window.history.back();">Kembali</button>
-        </div> 
+        <div class="button-container">
+            <a href="/warga" class="button">Kembali</a>
+        </div>
         <div class="credit">
             <p>&copy;</p>
         </div>
     </div>
 </body>
+
 </html>

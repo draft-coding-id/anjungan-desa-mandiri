@@ -21,8 +21,10 @@ return new class extends Migration
             $table->string('alamat');
             $table->integer('rt');
             $table->integer('rw');
+            $table->string('no_hp');
             $table->string('desa');
             $table->string('keperluan');
+            $table->string('status')->default('Belum diverifikasi Admin');
             $table->timestamps();
         });
     }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Warga;
 use App\Models\ProsesSurat;
+use App\Models\skDomisili;
+use Exception;
 
 class SuratController extends Controller
 {
@@ -50,35 +52,74 @@ class SuratController extends Controller
     // Proses pengiriman data
     public function submitForm(Request $request)
     {
-        $validatedData = $request->validate([
+        try{
+            $validatedData = $request->validate([
             'surat' => 'required|string',
-            'nik' => 'required|string',
-            'nama_lengkap' => 'required|string',
+            'warga_id' => 'required',
+            'nik' => 'required|string|min:16|max:16',
+            'nama_lengkap' => 'required|string|min:3|max:255',
             'tempat_lahir' => 'required|string',
-            'tanggal_lahir' => 'required|date',
+            'tanggal_lahir' => 'required|date|before:today',
             'alamat' => 'required|string',
             'rt' => 'required|numeric',
             'rw' => 'required|numeric',
             'keperluan' => 'required|string',
+        ] , [
+            'surat.required' => 'Surat harus diisi',
+            'nik.required' => 'NIK harus diisi',
+            'nik.min' => 'NIK harus 16 digit',
+            'nik.max' => 'NIK harus 16 digit',
+            'nama_lengkap.required' => 'Nama Lengkap harus diisi',
+            'nama_lengkap.min' => 'Nama Lengkap minimal 3 karakter',
+            'nama_lengkap.max' => 'Nama Lengkap maksimal 255 karakter',
+            'tempat_lahir.required' => 'Tempat Lahir harus diisi',
+            'tanggal_lahir.required' => 'Tanggal Lahir harus diisi',
+            'tanggal_lahir.before' => 'Tanggal Lahir tidak valid',
+            'alamat.required' => 'Alamat harus diisi',
+            'rt.required' => 'RT harus diisi',
+            'rw.required' => 'RW harus diisi',
+            'keperluan.required' => 'Keperluan harus diisi',
         ]);
+        // ProsesSurat::create($validatedData);
+        // $sessionSurat = session('surat' , $validatedData);
+        session(['surat' => $validatedData]);
+        // return redirect()->route('preview.skd');
+        return redirect('/konfirmasi');
+        }catch(Exception $e)
+        {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
 
         // Simpan ke database
-        ProsesSurat::create($validatedData);
 
-        return redirect('/konfirmasi')->with('success', 'Data berhasil disimpan dan akan diverifikasi.');
     }
 
     // Verifikasi Surat
-    public function konfirmasi(Request $request)
+    public function konfirmasi()
     {
-        $proses_surat = ProsesSurat::all(); // Ambil semua data dari tabel proses_surats
+
+        // $proses_surat = ProsesSurat::all(); // Ambil semua data dari tabel proses_surats
+        $proses_surat = session('surat');
 
         return view('warga.layanan-mandiri.verif_surat', ['proses_surat' => $proses_surat]);
     }
 
-    public function berhasil(Request $request)
+    public function berhasil($noHp)
     {
-        ProsesSurat::truncate();
+        skDomisili::create([
+            'nama_lengkap' => session('surat')['nama_lengkap'],
+            'nik' => session('surat')['nik'],
+            'tempat_lahir' => session('surat')['tempat_lahir'],
+            'tanggal_lahir' => session('surat')['tanggal_lahir'],
+            'kewarganegaraan' => "WNI",
+            'alamat' => session('surat')['alamat'],
+            'rt' => session('surat')['rt'],
+            'rw' => session('surat')['rw'],
+            'desa' => "Rawapanjang",
+            'no_hp' => $noHp,
+            'keperluan' => session('surat')['keperluan']
+        ]);
+        session()->forget('surat');
         return view('warga.layanan-mandiri.berhasil');
     }
 }

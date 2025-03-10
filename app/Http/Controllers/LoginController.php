@@ -4,13 +4,40 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Warga;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
+    // Admin Login
+    public function cekAdminLogin(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+
+        $credentials = $request->only('username', 'password');
+        if(Auth::attempt($credentials)) {
+            return redirect()->route('admin-beranda');
+        }
+
+        session()->flash('error', 'Username atau Password salah');
+        return redirect('/admin');
+    }
+
+    public function logoutAdmin(){
+        Auth::logout();
+        return redirect()->route('admin');
+    }
+
     // Menampilkan form NIK (Langkah 1)
     public function showNikForm()
     {
+        if(session('warga')) {
+            return redirect()->route('pilih-surat');
+        }
         return view('warga.layanan-mandiri.login.nik');
     }
 
@@ -68,7 +95,7 @@ class LoginController extends Controller
         session(['warga' => $warga]); // Simpan data warga ke session
         return redirect()->route('pilih-surat')->with('success', 'Login berhasil!');
     }
-        
+
     // Halaman Menu
     public function showMenu()
     {
@@ -79,5 +106,11 @@ class LoginController extends Controller
         }
 
         return view('warga.layanan-mandiri.pilih-surat', ['warga' => $warga]);
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->forget('warga');
+        return redirect()->route('login');
     }
 }
