@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\PreviewSuratController;
+use App\Http\Controllers\admin\LayananSurat;
 // use App\Http\Controllers\AuthController;
 // use App\Http\Controllers\WargaController;
 // use App\Http\Controllers\Surat_Digital\skDomisiliController;
@@ -32,15 +33,15 @@ Route::view('/test', '_test');
             Route::view('/lapak-warga', 'warga.profil_desa.lapak');
             Route::view('/artikel-terkini', 'warga.profil_desa.artikel-terkini');
             Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+            Route::get('/pilih-surat', [LoginController::class , 'showMenu'])->name('pilih-surat');
         Route::controller(SuratController::class)->group(function(){
-            Route::get('/pilih-surat', [LoginController::class, 'showMenu'])->name('pilih-surat');
-            Route::get('/surat-keterangan-domisili', [SuratController::class, 'form_Surat_Keterangan_Domisili']);
-            Route::get('/surat-keterangan-pengantar', [SuratController::class, 'form_Surat_Keterangan_Pengantar']);
-            Route::get('/surat-keterangan-ktp-dalam-proses', [SuratController::class, 'form_Surat_Keterangan_KTP_Dalam_Proses']);
-            Route::post('/submitForm', [SuratController::class, 'submitForm']);
-            Route::get('/konfirmasi', [SuratController::class, 'konfirmasi']);
+            Route::get('/surat-keterangan-domisili', 'form_Surat_Keterangan_Domisili');
+            Route::get('/surat-keterangan-pengantar', 'form_Surat_Keterangan_Pengantar');
+            Route::get('/surat-keterangan-ktp-dalam-proses', 'form_Surat_Keterangan_KTP_Dalam_Proses');
+            Route::post('/submitForm', 'submitForm');
+            Route::get('/konfirmasi', 'konfirmasi');
             // Route::post('/submitSurat', [SuratController::class, 'submitSurat']);
-            Route::get('/berhasil/{no_hp}', [SuratController::class, 'berhasil']);
+            Route::get('/berhasil/{no_hp}', 'berhasil');
         });
         // Route::view('/surat-keterangan-domisili', 'warga.layanan-mandiri.form-surat.surat-keterangan-domisili');
 
@@ -74,7 +75,8 @@ Route::view('/test', '_test');
         Route::view('/pengaturan-akun', 'admin.pengaturan-akun');
 
         // Layanan Surat
-            Route::view('/layanan-surat', 'admin.layanan-surat.dalam-proses');
+            // Route::view('/layanan-surat', 'admin.layanan-surat.dalam-proses');
+            Route::get('/layanan-surat' , [LayananSurat::class , 'index']);
             Route::view('/surat-ditolak', 'admin.layanan-surat.surat-ditolak');
             Route::view('/riwayat-surat', 'admin.layanan-surat.riwayat-surat');
             Route::view('/kelola-surat', 'admin.layanan-surat.kelola-surat');
