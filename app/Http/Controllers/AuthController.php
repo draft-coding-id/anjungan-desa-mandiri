@@ -1,35 +1,52 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Warga;
 
+/**
+ * AuthController
+ * @link
+ */
 class AuthController extends Controller
 {
     // Tampilkan form login
+    /**
+     * ShowLoginForm
+     *
+     * @return void
+     */
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
     // Validasi NIK
+    /**
+     * ValidateNIK
+     *
+     * @param mixed $request
+     */
     public function validateNIK(Request $request)
     {
-        $request->validate([
-            'nik' => 'required|digits:16|exists:warga,nik',
-        ]);
+        $request->validate(['nik' => 'required|digits:16|exists:warga,nik',]);
 
         session(['nik' => $request->nik]); // Simpan NIK ke dalam session
         return view('auth.pin'); // Redirect ke halaman PIN
     }
 
-    // Validasi PIN
+
+    /**
+     * ValidatePIN
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function validatePIN(Request $request)
     {
-        $request->validate([
-            'pin' => 'required|digits:6',
-        ]);
+        $request->validate(['pin' => 'required|digits:6',]);
 
         $nik = session('nik');
         $warga = Warga::where('nik', $nik)->first();
@@ -42,7 +59,11 @@ class AuthController extends Controller
         return back()->withErrors(['pin' => 'PIN salah.']);
     }
 
-    // Halaman Menu
+    /**
+     * ShowMenu
+     *
+     * @return void
+     */
     public function showMenu()
     {
         $warga = session('warga'); // Ambil data warga dari session

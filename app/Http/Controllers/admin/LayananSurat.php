@@ -18,7 +18,7 @@ class LayananSurat extends Controller
         $belumDikirimKeWarga = Surat::BelumDikirimkanKeWarga()->get();
         $suratSelesai = Surat::suratSelesai()->get();
         $increment = 1;
-        return view('admin.layanan-surat.dalam-proses' , [
+        return view('admin.layanan-surat.dalam-proses', [
             // 'skDomisilis' => $skDomisilis,
             'belumDiverifikasiAdmin' => $belumDiverifikasiAdmin,
             'belumDiverifikasiKades' => $belumDiverifikasiKades,
@@ -30,7 +30,7 @@ class LayananSurat extends Controller
     public function verifikasiAdmin($id)
     {
         $surat = Surat::find($id);
-        return view('admin.layanan-surat.proses-surat.verif-admin' , [
+        return view('admin.layanan-surat.proses-surat.verif-admin', [
             'surat' => $surat,
         ]);
     }
@@ -46,9 +46,10 @@ class LayananSurat extends Controller
         return redirect()->route('layanan-surat.index');
     }
 
-    public function persetujuanKades($id){
+    public function persetujuanKades($id)
+    {
         $surat = Surat::find($id);
-        return view('admin.layanan-surat.proses-surat.persetujuan-kades' , [
+        return view('admin.layanan-surat.proses-surat.persetujuan-kades', [
             'surat' => $surat,
         ]);
     }
@@ -57,12 +58,12 @@ class LayananSurat extends Controller
     {
         $surat = Surat::find($id);
         $surat->update([
-            // 'is_tanda_tangan_kades' => true,
+            'is_tanda_tangan_kades' => true,
             'status' => 'Belum diserahkan Ke Warga',
             'updated_at' => now(),
         ]);
-        $fileName = "surat-" . $surat->jenis_surat . "-" . $surat->warga->nik;
-        MakePdf::dispatch($surat , $fileName);
+        $fileName = "surat-" . $surat->jenis_surat . $surat->id . "-" . $surat->warga->nik . "-" . date('hhmmss');
+        MakePdf::dispatch($surat, $fileName);
         return redirect()->route('layanan-surat.index');
     }
 
@@ -70,7 +71,7 @@ class LayananSurat extends Controller
     public function suratSelesai($id)
     {
         $surat = Surat::find($id);
-        return view('admin.layanan-surat.proses-surat.surat-selesai' , [
+        return view('admin.layanan-surat.proses-surat.surat-selesai', [
             'surat' => $surat,
         ]);
     }
@@ -91,7 +92,7 @@ class LayananSurat extends Controller
     {
         $increment = 1;
         $surat = Surat::Ditolak()->get();
-        return view('admin.layanan-surat.surat-ditolak' , [
+        return view('admin.layanan-surat.surat-ditolak', [
             'surat' => $surat,
             'increment' => $increment
         ]);
@@ -105,7 +106,7 @@ class LayananSurat extends Controller
             'updated_at' => now(),
             'status' => 'Surat Ditolak ' . Auth::user()->name,
         ]);
-         return redirect()->route('layanan-surat.index');
+        return redirect()->route('layanan-surat.index');
     }
 
     // Untuk mendapatkan riwayat surat
@@ -113,7 +114,7 @@ class LayananSurat extends Controller
     {
         $increment = 1;
         $surat = Surat::RiwayatSurat()->get();
-        return view('admin.layanan-surat.riwayat-surat' , [
+        return view('admin.layanan-surat.riwayat-surat', [
             'surat' => $surat,
             'increment' => $increment
         ]);

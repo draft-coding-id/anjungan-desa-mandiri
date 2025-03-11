@@ -31,9 +31,11 @@
         }
 
         .footer {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
+            text-align: right;
+        }
+
+        .page-break {
+            page-break-after: always;
         }
     </style>
 </head>
@@ -43,7 +45,10 @@
         <table width="100%">
             <tr>
                 <td width="20%">
-                    <img src="{{asset('assets/logo.png')}}" width="140px" height="auto" alt="Logo Pemkab Bogor">
+                    {{-- <img src="{{asset('assets/logo.png')}}" width="120px" height="120px" alt="Logo Pemkab Bogor">
+                    --}}
+                    <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('assets/logo.png'))) }}"
+                        width="120px" height="120px" alt="Logo Pemkab Bogor" />
                 </td>
                 <td width="60%" style="text-align: center ;">
                     <h1>PEMERINTAH KABUPATEN BOGOR
@@ -98,10 +103,12 @@
 
         <div class="footer">
             <p>Rawapanjang, {{$surat->updated_at->translatedFormat('d F Y') ?? ""}}</p>
-            <img src="{{asset('assets/ttd_kades.png')}}" height="116px" width="116px" alt="ttd_desa" />
+            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('assets/ttd_kades.png'))) }}"
+                height="116px" width="116px" alt="TTD Kades" />
             <p style="align-items: flex-start">Pejabat Desa</p>
         </div>
     </div>
+    <div class="page-break"></div>
 </body>
 
 </html>

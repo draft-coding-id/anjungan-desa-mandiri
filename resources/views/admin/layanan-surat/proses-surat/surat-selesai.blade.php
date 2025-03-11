@@ -310,7 +310,10 @@
             </div>
             <div class="content-2">
                 <div class="preview-container">
-                    <iframe src="{{route('get-detail-skd' , $surat->id)}}" width="100%" height="100%"></iframe>
+                    {{-- <iframe src="{{route('get-detail-skd' , $surat->id)}}" width="100%" height="100%"></iframe>
+                    --}}
+                    <iframe src="{{asset('surat/surat-SKD1-1234567890123456-121203030606.pdf')}}" width="100%"
+                        height="100%"></iframe>
                 </div>
 
                 <div class="button-container">
