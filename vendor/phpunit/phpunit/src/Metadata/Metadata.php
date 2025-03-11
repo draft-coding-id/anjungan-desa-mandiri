@@ -10,6 +10,7 @@
 namespace PHPUnit\Metadata;
 
 use PHPUnit\Metadata\Version\Requirement;
+use PHPUnit\Runner\Extension\Extension;
 
 /**
  * @immutable
@@ -26,17 +27,11 @@ abstract readonly class Metadata
      */
     private int $level;
 
-    /**
-     * @param non-negative-int $priority
-     */
     public static function after(int $priority): After
     {
         return new After(self::METHOD_LEVEL, $priority);
     }
 
-    /**
-     * @param non-negative-int $priority
-     */
     public static function afterClass(int $priority): AfterClass
     {
         return new AfterClass(self::METHOD_LEVEL, $priority);
@@ -62,17 +57,11 @@ abstract readonly class Metadata
         return new BackupStaticProperties(self::METHOD_LEVEL, $enabled);
     }
 
-    /**
-     * @param non-negative-int $priority
-     */
     public static function before(int $priority): Before
     {
         return new Before(self::METHOD_LEVEL, $priority);
     }
 
-    /**
-     * @param non-negative-int $priority
-     */
     public static function beforeClass(int $priority): BeforeClass
     {
         return new BeforeClass(self::METHOD_LEVEL, $priority);
@@ -262,17 +251,11 @@ abstract readonly class Metadata
         return new IgnorePhpunitDeprecations(self::METHOD_LEVEL);
     }
 
-    /**
-     * @param non-negative-int $priority
-     */
     public static function postCondition(int $priority): PostCondition
     {
         return new PostCondition(self::METHOD_LEVEL, $priority);
     }
 
-    /**
-     * @param non-negative-int $priority
-     */
     public static function preCondition(int $priority): PreCondition
     {
         return new PreCondition(self::METHOD_LEVEL, $priority);
@@ -388,6 +371,22 @@ abstract readonly class Metadata
     public static function requiresPhpunitOnMethod(Requirement $versionRequirement): RequiresPhpunit
     {
         return new RequiresPhpunit(self::METHOD_LEVEL, $versionRequirement);
+    }
+
+    /**
+     * @param class-string<Extension> $extensionClass
+     */
+    public static function requiresPhpunitExtensionOnClass(string $extensionClass): RequiresPhpunitExtension
+    {
+        return new RequiresPhpunitExtension(self::CLASS_LEVEL, $extensionClass);
+    }
+
+    /**
+     * @param class-string<Extension> $extensionClass
+     */
+    public static function requiresPhpunitExtensionOnMethod(string $extensionClass): RequiresPhpunitExtension
+    {
+        return new RequiresPhpunitExtension(self::METHOD_LEVEL, $extensionClass);
     }
 
     /**
@@ -827,6 +826,14 @@ abstract readonly class Metadata
      * @phpstan-assert-if-true RequiresPhpunit $this
      */
     public function isRequiresPhpunit(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @phpstan-assert-if-true RequiresPhpunitExtension $this
+     */
+    public function isRequiresPhpunitExtension(): bool
     {
         return false;
     }

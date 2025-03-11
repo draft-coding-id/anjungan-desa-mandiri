@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Warga;
 
 class WargaSeeder extends Seeder
 {
@@ -13,11 +12,11 @@ class WargaSeeder extends Seeder
      */
     public function run(): void
     {
-        $data = [
+        Warga::create([
             [
                 'nik' => '1234567890123456',
-                'pin' => bcrypt('123456'),
-                'nama_lengkap' => 'Jaka Tarub',
+                'pin' => bcrypt('123456'), // Enkripsi PIN untuk keamanan
+                'nama_lengkap' => 'John Doe',
                 'tempat_lahir' => 'Jakarta',
                 'tanggal_lahir' => '1990-01-01',
                 'alamat' => 'Jl. Kebun Raya No. 1',
@@ -26,8 +25,8 @@ class WargaSeeder extends Seeder
             ],
             [
                 'nik' => '1234123412341234',
-                'pin' => bcrypt('123123'),
-                'nama_lengkap' => 'Sri Asih',
+                'pin' => bcrypt('123123'), // Enkripsi PIN untuk keamanan
+                'nama_lengkap' => 'Jane Smith',
                 'tempat_lahir' => 'Bogor',
                 'tanggal_lahir' => '1992-02-02',
                 'alamat' => 'Jl. Merdeka No. 2',
@@ -36,15 +35,14 @@ class WargaSeeder extends Seeder
             ],
             [
                 'nik' => '1234567812345678',
-                'pin' => bcrypt('121212'),
-                'nama_lengkap' => 'Gatot Kaca',
+                'pin' => bcrypt('121212'), // Enkripsi PIN untuk keamanan
+                'nama_lengkap' => 'Syarifuddin',
                 'tempat_lahir' => 'Tangerang',
                 'tanggal_lahir' => '1989-08-05',
                 'alamat' => 'Jl. Rajawali No. 3',
                 'rt' => '001',
                 'rw' => '002'
             ],
-        ];
-        DB::table('warga')->insert($data);
+        ]);
     }
 }

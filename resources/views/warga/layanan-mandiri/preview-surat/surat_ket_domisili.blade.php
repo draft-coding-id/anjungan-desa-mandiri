@@ -95,7 +95,7 @@
 
         <div class="footer">
             <br><br>
-            <p>Rawapanjang, [tanggal]</p>
+            <p>Rawapanjang, {{$surat->updated_at ?? ""}}</p>
             <br><br><br>
             <p>____________________</p>
         </div>

@@ -22,5 +22,9 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin' ,
             'password' => Hash::make('123'),
         ]);
+
+        $this->call([
+            WargaSeeder::class,
+        ]);
     }
 }

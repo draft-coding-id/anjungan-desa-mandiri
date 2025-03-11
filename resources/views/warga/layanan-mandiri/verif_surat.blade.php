@@ -7,7 +7,7 @@
         body {
             font-family: sans-serif;
             /* color: white; */
-            background-image: url('{{asset('assets/Background Mockup Anjungan.png') }}');
+            background-image: url('{{asset(' assets/Background Mockup Anjungan.png') }}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -111,15 +111,15 @@
 <body>
     <div class="container">
         <div class="header">
-            <h2>{{ $proses_surat['surat'] }}</h2>
+            <h2>{{ $proses_surat['jenis_surat'] }}</h2>
             <h3>Apakah data yang Anda masukkan sudah sesuai?</h3>
         </div>
         <div class="preview-container">
-            @if ($proses_surat['surat'] = "Surat Keterangan Domisili")
+            @if ($proses_surat['jenis_surat'] = "SKD")
             <iframe src="/skd" width="100%" height="100%"></iframe>
-            @elseif ($proses_surat['surat'] = "Surat Keterangan Pengantar")
+            @elseif ($proses_surat['jenis_surat'] = "SKP")
             <iframe src="/skp" width="100%" height="100%"></iframe>
-            @elseif ($proses_surat['surat'] = "Surat Keterangan KTP Dalam Proses")
+            @elseif ($proses_surat['jenis_surat'] = "SKTM")
             <iframe src="/skktpdp" width="100%" height="100%"></iframe>
             @endif
         </div>

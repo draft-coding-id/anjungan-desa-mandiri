@@ -11,7 +11,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('{{asset('assets/Background Mockup Anjungan.png') }}');
+            background-image: url('{{asset(' assets/Background Mockup Anjungan.png') }}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -103,10 +103,10 @@
         <form action="{{ url('/submitForm') }}" method="POST">
             @csrf
             <div class="form-group">
-                <input type="hidden" name="warga_id" value="{{session('warga')['id']}}">
+                <input type="number" hidden name="warga_id" value="{{session('warga')['id']}}">
             </div>
             <div class="form-group">
-                <input type="hidden" name="surat" value="Surat Keterangan Domisili">
+                <input type="hidden" name="jenis_surat" value="SKD">
             </div>
             <div class="form-group">
                 <label>NIK / No. KTP :</label>

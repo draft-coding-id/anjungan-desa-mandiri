@@ -15,4 +15,13 @@ class skDomisili extends Model
         'nama_lengkap', 'nik', 'tempat_lahir', 'tanggal_lahir', 'kewarganegaraan',
         'alamat', 'rt', 'rw', 'no_hp' ,'desa', 'keperluan','status'
     ];
+
+    public function scopeBelumDiverifikasiAdmin($query)
+    {
+        return $query->where('status', 'Belum diverifikasi Admin');
+    }
+    public function scopeBelumDiverifikasiKades($query)
+    {
+        return $query->where('status', 'Diverifikasi');
+    }
 }

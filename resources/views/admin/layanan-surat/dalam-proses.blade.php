@@ -133,9 +133,10 @@
             text-align: center;
         }
 
-        button {
+        .button {
+            text-decoration: none;
             border: none;
-            padding: 5px 10px;
+            padding: 10px 10px;
             border-radius: 5px;
             cursor: pointer;
             background-color: #FFA500;
@@ -184,7 +185,7 @@
         </div>
 
         <div class="menu-surat">
-            <!-- <a href=/kelola-surat>Kelola Surat</a> -->
+            <a href=/kelola-surat>Kelola Surat</a>
             <a href=/layanan-surat class="active">Dalam Proses</a>
             <a href=/surat-ditolak>Arsip Surat Ditolak</a>
             <a href=/riwayat-surat>Riwayat</a>
@@ -208,16 +209,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @forelse ($belumDiverifikasiAdmin as $surat)
                         <tr>
-                            <td>1.</td>
-                            <td><button onclick="window.location.href='/verif-admin';">Verifikasi Admin</button></td>
+                            <td>{{$increment++}}</td>
+                            <td height="50px" width="250px"><a href="{{route('verifikasi.admin' , $surat->id)}}"
+                                    class="button" ;">{{$surat->status}}</a></td>
                             <!-- <td>12345</td> -->
-                            <td>1234567890</td>
-                            <td>Nama Warga</td>
-                            <td>08123456789</td>
-                            <td>Surat Keterangan</td>
-                            <td>01-01-2024</td>
+                            <td>{{$surat->isi_surat['nik']}}</td>
+                            <td>{{$surat->isi_surat['nama_lengkap']}}</td>
+                            <td>{{$surat->no_hp}}</td>
+                            <td>Surat Keterangan Domisili</td>
+                            <td>{{date($surat->created_at)}}</td>
+                            @empty
+                            <td colspan="7" style="text-align: center">Surat Sudah diverifikasi semua oleh admin</td>
                         </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -237,18 +243,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @forelse ( $belumDiverifikasiKades as $surat)
                         <tr>
-                            <!-- kasih id,  -->
-                            <td>1.</td>
-                            <td><button onclick="window.location.href='/persetujuan-kades';">Menunggu Tanda Tangan
-                                    Kades</button></td>
-                            <!-- <td>12346</td> -->
-                            <td>1234567891</td>
-                            <td>Nama Warga 2</td>
-                            <td>08123456790</td>
-                            <td>Surat Keterangan Nikah</td>
-                            <td>02-01-2024</td>
+                            <td>{{$increment++}}</td>
+                            <td width="300px" height="50px"><a href="{{route('persetujuan.kades' , $surat->id)}}"
+                                    class="button" ;">{{$surat->status}}</a></td>
+                            <!-- <td>12345</td> -->
+                            <td>{{$surat->isi_surat['nik']}}</td>
+                            <td>{{$surat->isi_surat['nama_lengkap']}}</td>
+                            <td>{{$surat->no_hp}}</td>
+                            <td>Surat Keterangan Domisili</td>
+                            <td>{{date($surat->created_at)}}</td>
+                            @empty
+                            <td colspan="7" style="text-align: center">Surat Sudah di Tanda tanga semua oleh Kades</td>
                         </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -269,15 +278,21 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1.</td>
-                            <td><button onclick="window.location.href='/surat-selesai';">Belum diserahkan ke
-                                    Warga</button></td>
-                            <!-- <td>12347</td> -->
-                            <td>1234567892</td>
-                            <td>Nama Warga 3</td>
-                            <td>08123456791</td>
-                            <td>Surat Kuasa</td>
-                            <td>03-01-2024</td>
+                            @forelse ( $belumDikirimKeWarga as $surat)
+                        <tr>
+                            <td>{{$increment++}}</td>
+                            <td width="250px" height="50px"><a href="{{route('surat.selesai' , $surat->id)}}"
+                                    class="button" ;">{{$surat->status}}</a></td>
+                            <!-- <td>12345</td> -->
+                            <td>{{$surat->nik}}</td>
+                            <td>{{$surat->nama_lengkap}}</td>
+                            <td>{{$surat->no_hp}}</td>
+                            <td>Surat Keterangan Domisili</td>
+                            <td>{{date($surat->created_at)}}</td>
+                            @empty
+                            <td colspan="7" style="text-align: center">Surat Sudah di Tanda tanga semua oleh Kades</td>
+                        </tr>
+                        @endforelse
                         </tr>
                     </tbody>
                 </table>

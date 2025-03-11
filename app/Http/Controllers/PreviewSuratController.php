@@ -5,18 +5,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProsesSurat;
+use App\Models\Surat;
 
 class PreviewSuratController extends Controller
 {
     public function skd()
     {
-        // Ambil data yang diperlukan dari database
-        // Misalnya, $data = Model::find($id);
-        // $proses_surat = ProsesSurat::all(); // Ambil semua data dari tabel proses_surats
+        // Mengambil session surat
         $proses_surat = session('surat');
-        // dd($proses_surat);
-        // dd($proses_surat);
         return view('warga.layanan-mandiri.preview-surat.surat_ket_domisili', ['proses_surat' => $proses_surat]);
+    }
+
+    public function getDetailSkd($id)
+    {
+        $surat = Surat::find($id);
+        return view('admin.preview-surat.surat_ket_domisili', ['surat' => $surat]);
     }
 
     public function skp()
