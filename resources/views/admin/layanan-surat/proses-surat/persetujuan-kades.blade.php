@@ -255,7 +255,13 @@
                 </p>
             </div>
             <div class="preview-container">
+                @if($surat->jenis_surat == 'SKD')
                 <iframe src="{{route('get-detail-skd' , $surat->id)}}" width="100%" height="100%"></iframe>
+                @elseif($surat->jenis_surat == 'SKP')
+                <iframe src="{{route('get-detail-skp' , $surat->id)}}" width="100%" height="100%"></iframe>
+                @elseif($surat->jenis_surat == 'SKTM')
+                <iframe src="{{route('get-detail-sktm' , $surat->id)}}" width="100%" height="100%"></iframe>
+                @endif
             </div>
 
             <div class="button-container">

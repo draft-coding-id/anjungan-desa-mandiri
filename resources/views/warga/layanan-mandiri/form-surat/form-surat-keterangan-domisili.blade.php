@@ -100,7 +100,7 @@
         <h1>Surat Keterangan Domisili</h1>
         <h3>Silahkan isi data yang diperlukan</h3>
 
-        <form action="{{ url('/submitForm') }}" method="POST">
+        <form action="{{ route('submitForm') }}" method="POST">
             @csrf
             <div class="form-group">
                 <input type="number" hidden name="warga_id" value="{{session('warga')['id']}}">

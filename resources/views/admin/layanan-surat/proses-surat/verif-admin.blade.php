@@ -161,6 +161,14 @@
             background-color: #e68a00;
         }
 
+        .alasan_ditolak {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
         .lightbox_container {
             display: none;
             position: fixed;
@@ -251,7 +259,13 @@
                 <p>diajukan pada {{ $surat->created_at->translatedFormat('d F Y') }}</p>
             </div>
             <div class="preview-container">
+                @if($surat->jenis_surat == 'SKD')
                 <iframe src="{{route('get-detail-skd' , $surat->id)}}" width="100%" height="100%"></iframe>
+                @elseif($surat->jenis_surat == 'SKP')
+                <iframe src="{{route('get-detail-skp' , $surat->id)}}" width="100%" height="100%"></iframe>
+                @elseif($surat->jenis_surat == 'SKTM')
+                <iframe src="{{route('get-detail-sktm' , $surat->id)}}" width="100%" height="100%"></iframe>
+                @endif
             </div>
 
             <div class="button-container">
@@ -288,7 +302,9 @@
             <div class="lightbox_container" id="deniedLightbox">
                 <div class="lightbox_content">
                     <h2>Tolak Pengajuan Surat?</h2>
-                    <p>Silahkan pilih alasan yang paling sesuai.</p>
+                    <p>Silahkan tulis detail alasan disini</p>
+                    <textarea type="text" name="alasan_ditolak" id="alasan_ditolak" class="alasan_ditolak" cols="50"
+                        rows="10"></textarea>
                     <button id="d_cancelButton">Kembali</button>
                     <button id="denyButton">Tolak</button>
                 </div>
@@ -299,9 +315,9 @@
                     <h2>Pengajuan Surat Ditolak</h2>
                     <p>Mohon hubungi warga untuk memberi kabar.</p>
                     <!-- Menangani aksi saat tombol "Verifikasi" diklik -->
-                    <form action="{{route('surat.ditolak' , $surat->id)}}" method="POST">
+                    <form action="{{route('surat.ditolak' , $surat->id)}}" method="POST" id="form_surat_ditolak">
                         @csrf
-                        <input type="hidden" name="status" value="ditolak">
+                        <input type="hidden" name="alasan_ditolak" value="">
                         <button type="submit">Pergi ke Arsip</button>
                     </form>
                     {{-- <br><a href=/layanan-surat class="btn">Atau Kembali</a> --}}
@@ -317,7 +333,6 @@
                 const doneVerifLightbox = document.getElementById('doneVerifLightbox');
                 const v_cancelButton = document.getElementById('v_cancelButton');
                 const verifButton = document.getElementById('verifButton');
-
                 // Menampilkan lightbox saat tombol "Verifikasi" diklik
                 openVerifLightboxButton.addEventListener('click', () => {
                     verifLightbox.classList.add('show');
@@ -326,6 +341,7 @@
                 // Menutup lightbox saat tombol "Kembali" diklik
                 v_cancelButton.addEventListener('click', () => {
                     verifLightbox.classList.remove('show');
+                    
                 });
 
                 // Beralih menampilkan lightbox verifikasi berhasil
@@ -346,6 +362,7 @@
                 const openDeniedLightboxButton = document.getElementById('openDeniedLightbox');
                 const deniedLightbox = document.getElementById('deniedLightbox');
                 const doneDenyLightbox = document.getElementById('doneDenyLightbox');
+                const valueAlasanDitolak = document.getElementById('alasan_ditolak');
                 const d_cancelButton = document.getElementById('d_cancelButton');
                 const denyButton = document.getElementById('denyButton');
 
@@ -360,10 +377,19 @@
                 });
 
                 // Beralih menampilkan lightbox pengajuan ditolak
-                denyButton.addEventListener('click', () => {
+                denyButton.addEventListener('click', (e) => {
+                    e.preventDefault();
                     deniedLightbox.classList.remove('show');
+                    window.alert(valueAlasanDitolak.value);
                     doneDenyLightbox.classList.add('show');
                 });
+
+                // document.getElementById('form_surat_ditolak').addEventListener('submit', (event) => {
+                //     event.preventDefault();
+                //     const alasanDitolak = document.getElementById('alasan_ditolak').value;
+                //     document.getElementById('form_surat_ditolak').elements['alasan_ditolak'].value = alasanDitolak;
+                //     document.getElementById('form_surat_ditolak').submit();
+                // });
 
                 // Menutup lightbox saat area luar lightbox-content diklik
                 deniedLightbox.addEventListener('click', (event) => {

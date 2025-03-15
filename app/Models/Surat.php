@@ -20,7 +20,11 @@ class Surat extends Model
         'is_verify_admin',
         'is_tanda_tangan_kades',
         'is_send_to_warga',
+        'is_print',
+        'is_diserahkan',
+        'is_selesai',
         'isi_surat',
+        'file_surat',
     ];
 
     protected $casts = [
@@ -45,6 +49,7 @@ class Surat extends Model
         // Tentukan kode jenis surat
         $kodeJenis = [
             'SKD' => 'SKD',
+            'SKP' => 'SKP',
             'SKN' => 'SKN',
             'SKTM' => 'SKTM',
         ][$this->jenis_surat] ?? 'UNK';
@@ -69,20 +74,20 @@ class Surat extends Model
 
     public function scopeBelumDiverifikasiAdmin($query)
     {
-        return $query->where('is_accepted' , true)->where('is_verify_admin', false);
+        return $query->where('is_accepted', true)->where('is_verify_admin', false);
     }
     public function scopeBelumDiverifikasiKades($query)
     {
-        return $query->where('is_accepted' , true)->where('is_verify_admin' , true)->where('is_tanda_tangan_kades', false);
+        return $query->where('is_accepted', true)->where('is_verify_admin', true)->where('is_tanda_tangan_kades', false);
     }
     public function scopeBelumDikirimkanKeWarga($query)
     {
-            return $query->where('is_accepted' , true)->where('is_verify_admin' , true)->where('is_tanda_tangan_kades', true)->where('is_send_to_warga', false);
+        return $query->where('is_accepted', true)->where('is_verify_admin', true)->where('is_tanda_tangan_kades', true)->where('is_diserahkan', false)->where('is_selesai' , false);
     }
 
     public function scopesuratSelesai($query)
     {
-        return $query->where('is_accepted' , true)->where('is_verify_admin' , true)->where('is_tanda_tangan_kades', true)->where('is_send_to_warga', true);
+        return $query->where('is_accepted', true)->where('is_verify_admin', true)->where('is_tanda_tangan_kades', true)->where('is_send_to_warga', true)->where('is_selesai', true);
     }
 
     public function scopeDitolak($query)
@@ -94,5 +99,4 @@ class Surat extends Model
     {
         return $query->where('is_selesai', true);
     }
-
 }

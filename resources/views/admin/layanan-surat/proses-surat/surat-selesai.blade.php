@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verifikasi Admin - Laman Admin Desa Rawapanjang</title>
+    <title>Kirim Surat - Laman Admin Desa Rawapanjang</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -141,6 +141,25 @@
             margin: 50px;
         }
 
+        .button {
+            background-color: #FFA500;
+            color: white;
+            border: 1px solid #ffffff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .button:disabled {
+            background-color: #f4f4f4;
+            color: #a7a7a7;
+            border: 1px solid #a7a7a7;
+            cursor: not-allowed;
+        }
+
         button {
             background-color: #FFA500;
             color: white;
@@ -201,11 +220,9 @@
         .template-pesan {
             border: 2px solid #000000;
             border-radius: 20px;
-            margin: 20px;
-            padding: 0px 20px 30px 20px;
+            padding: 8px;
             display: flex;
-            justify-content: top;
-            width: 80%;
+            width: 100%;
             color: #a7a7a7;
         }
 
@@ -234,6 +251,23 @@
         .footer-content button:hover {
             background-color: #e68a00;
             color: #ffffff;
+        }
+
+        .container-send-pesan {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            margin: 20px;
+        }
+
+        .container-send-pesan>span {
+            margin-right: 10px;
+        }
+
+        .container-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .credit {
@@ -300,57 +334,94 @@
                     <br>
                     <p>Bagikan info ke warga, <br> Silahkan gunakan template pesan berikut:
 
-                    <div class="template-pesan">
-                        <p>Pesan bahwa surat telah selesai diproses, surat dapat diunduh di link gdrive atau dapat
-                            diambil di kantor desa.</p>
+                    <div class="container-send-pesan">
+                        <form action="{{route('kirimSurat' , $surat->id)}}" method="POST">
+                            <textarea rows="5" cols="120" class="template-pesan" name="pesan_wa" readonly>Hai saya dari desa cineam , surat yang anda anjukan sudah selesai di tanda tangan oleh kepala desa. Anda bisa mengprint surat melalui link berikut : {{asset('surat/'. $surat->file_surat . ".pdf")}}
+                            </textarea>
+                            @csrf
+                            <span>Kirim Pesan melalui : </span>
+                            <button type="submit" style="background: transparent">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="#000">
+                                    <path
+                                        d="M24 11.7c0 6.45-5.27 11.68-11.78 11.68-2.07 0-4-.53-5.7-1.45L0 24l2.13-6.27a11.57 11.57 0 0 1-1.7-6.04C.44 5.23 5.72 0 12.23 0 18.72 0 24 5.23 24 11.7M12.22 1.85c-5.46 0-9.9 4.41-9.9 9.83 0 2.15.7 4.14 1.88 5.76L2.96 21.1l3.8-1.2a9.9 9.9 0 0 0 5.46 1.62c5.46 0 9.9-4.4 9.9-9.83a9.88 9.88 0 0 0-9.9-9.83m5.95 12.52c-.08-.12-.27-.19-.56-.33-.28-.14-1.7-.84-1.97-.93-.26-.1-.46-.15-.65.14-.2.29-.75.93-.91 1.12-.17.2-.34.22-.63.08-.29-.15-1.22-.45-2.32-1.43a8.64 8.64 0 0 1-1.6-1.98c-.18-.29-.03-.44.12-.58.13-.13.29-.34.43-.5.15-.17.2-.3.29-.48.1-.2.05-.36-.02-.5-.08-.15-.65-1.56-.9-2.13-.24-.58-.48-.48-.64-.48-.17 0-.37-.03-.56-.03-.2 0-.5.08-.77.36-.26.29-1 .98-1 2.4 0 1.4 1.03 2.76 1.17 2.96.14.19 2 3.17 4.93 4.32 2.94 1.15 2.94.77 3.47.72.53-.05 1.7-.7 1.95-1.36.24-.67.24-1.25.17-1.37" />
+                                </svg>
+                            </button>
+                        </form>
                     </div>
-                    <p>Kirim Pesan:</p>
+                    <br />
+                    @if($surat->is_send_to_warga == 0)
                     <button id="handleShowSendModal">Tandai Sudah Dikirim</button>
+                    @else
+                    <button class="button" id="handleShowSendModal">Sudah Dikirim</button>
+                    @endif
                 </div>
             </div>
             <div class="content-2">
                 <div class="preview-container">
-                    {{-- <iframe src="{{route('get-detail-skd' , $surat->id)}}" width="100%" height="100%"></iframe>
-                    --}}
-                    <iframe src="{{asset('surat/surat-SKD1-1234567890123456-121203030606.pdf')}}" width="100%"
+                    <iframe src="{{asset('surat/' . $surat->file_surat . ".pdf")}}" width="100%"
                         height="100%"></iframe>
                 </div>
 
                 <div class="button-container">
-                    <button class="button" onclick="window.history.back();">Kembali</button>
-                    <button>Cetak Surat</button>
-                    <button id="handleShowPrintModal">Tandai Sudah Dicetak</button>
+                    <a href="{{route('layanan-surat.index')}}" class="button">Kembali</a>
+                    <a href="{{asset('surat/'. $surat->file_surat . " .pdf")}}" class="button" target="_blank">Cetak
+                        Surat</a>
+                    @if($surat->is_print == 0)
+                    <button id="handleShowPrintModal">Tandai sudah di Cetak</button>
+                    @else
+                    <button class="button" id="handleShowPrintModal" disabled>Sudah Dicetak</button>
+                    @endif
                 </div>
             </div>
             <!-- Lightboxes -->
             <div class="lightbox_container" id="sendModal">
                 <div class="lightbox_content">
                     <h2>Tandai sudah dikirim?</h2>
-                    <button id="cancelSend">Kembali</button>
-                    <button id="sendButton">Lanjutkan</button>
+                    <div class="container-button">
+                        <button id="cancelSend">Kembali</button>
+                        <form action="{{route('tandaiSuratDikirim' , $surat->id)}}" method="POST">
+                            @csrf
+                            <input type="hidden" name="status" value="Selesai">
+                            <button type="submit" id="printButton">Lanjutkan</button>
+                        </form>
+                    </div>
+
                 </div>
             </div>
 
             <div class="lightbox_container" id="printModal">
                 <div class="lightbox_content">
                     <h2>Tandai Sudah Dicetak?</h2>
-                    <button id="cancelPrint">Kembali</button>
-                    <button id="printButton">Lanjutkan</button>
+                    <div class="container-button">
+                        <button id="cancelPrint">Kembali</button>
+                        <form action="{{route('tandaiSuratDicetak' , $surat->id)}}" method="POST">
+                            @csrf
+                            <input type="hidden" name="status" value="Selesai">
+                            <button type="submit" id="printButton">Lanjutkan</button>
+                        </form>
+                    </div>
                 </div>
             </div>
 
             <div class="lightbox_container" id="giveModal">
                 <div class="lightbox_content">
                     <h2>Tandai Sudah Diserahkan kepada Warga?</h2>
-                    <button id="cancelGive">Kembali</button>
-                    <button id="markSendButton">Lanjutkan</button>
+                    <div class="container-button">
+                        <button id="cancelGive">Kembali</button>
+                        <form action="{{route('tandaiSuratDiserahkan' , $surat->id)}}" method="POST">
+                            @csrf
+                            <input type="hidden" name="status" value="diserahkan">
+                            <button id="markSendButton">Lanjutkan</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="footer">
             <div class="footer-content">
                 <h3>Belum Diserahkan kepada Warga</h3>
-                <button id="handleShowGiveModal">Tandai Sudah Diserahkan</button>
+                <button type="button" id="handleShowGiveModal">Tandai Sudah Diserahkan</button>
             </div>
             <div class="credit">
                 <p>&copy;</p>
@@ -368,6 +439,11 @@
                 const cancelPrint = document.getElementById('cancelPrint');
                 const cancelGive = document.getElementById('cancelGive');
                 // Menampilkan lightbox saat tombol "Verifikasi" diklik
+                console.log(handleShowPrintModal)
+                handleShowGiveModal.addEventListener('click', () => {
+                giveModal.classList.add('show');
+                });
+
                 handleShowSendModal.addEventListener('click', () => {
                     sendModal.classList.add('show');
                 });
@@ -376,15 +452,12 @@
                     printModal.classList.add('show');
                 });
 
-                handleShowGiveModal.addEventListener('click', () => {
-                    giveModal.classList.add('show');
-                });
+
+
 
                 // Menutup lightbox saat tombol "Kembali" diklik
                 cancelSend.addEventListener('click', () => {
-                    // console.log('cancel');
                     sendModal.classList.remove('show');
-                    // giveModal.classList.remove('show');
                 });
                 cancelPrint.addEventListener('click', () => {
                     printModal.classList.remove('show');

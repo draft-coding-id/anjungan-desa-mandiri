@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('nik', 16)->unique(); // NIK sebagai unique identifier
             $table->string('pin'); // PIN untuk login
             $table->string('nama_lengkap'); // Nama lengkap warga
+            $table->string('jenis_kelamin'); // Jenis kelamin
+            $table->string('pekerjaan'); // Pekerjaan
+            $table->integer('usia'); // Usia
+            $table->string('agama'); // Agama
             $table->string('tempat_lahir'); // Tempat lahir
             $table->date('tanggal_lahir'); // Tanggal lahir
             $table->text('alamat'); // Alamat lengkap

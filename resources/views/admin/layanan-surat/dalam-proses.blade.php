@@ -284,8 +284,8 @@
                             <td width="250px" height="50px"><a href="{{route('surat.selesai' , $surat->id)}}"
                                     class="button" ;">{{$surat->status}}</a></td>
                             <!-- <td>12345</td> -->
-                            <td>{{$surat->nik}}</td>
-                            <td>{{$surat->nama_lengkap}}</td>
+                            <td>{{$surat->warga->nik}}</td>
+                            <td>{{$surat->warga->nik}}</td>
                             <td>{{$surat->no_hp}}</td>
                             <td>Surat Keterangan Domisili</td>
                             <td>{{date($surat->created_at)}}</td>

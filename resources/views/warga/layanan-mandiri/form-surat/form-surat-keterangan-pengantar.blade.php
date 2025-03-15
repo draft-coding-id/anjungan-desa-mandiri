@@ -80,11 +80,22 @@
 <div class="form-container">
     <h1>Surat Keterangan Pengantar</h1>
     <h3>Silahkan isi data yang diperlukan</h3>
-
-    <form action="{{ url('/submitForm') }}" method="POST">
+    @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
+    <form action="{{ route('submitForm')}}" method="POST">
         @csrf
         <div class="form-group">
-            <input type="hidden" name="surat" value="Surat Keterangan Pengantar">
+            <input type="hidden" name="jenis_surat" value="SKP">
+        </div>
+        <div class="form-group">
+            <input type="hidden" name="warga_id" value="{{ $warga->id }}">
+        </div>
+        <div class="form-group">
+            <label>KK</label>
+            <input type="text" name="KK" value="" required>
         </div>
         <div class="form-group">
             <label>NIK / No. KTP :</label>
@@ -94,6 +105,9 @@
             <label>Nama Lengkap :</label>
             <input type="text" name="nama_lengkap" value="{{ $warga->nama_lengkap }}" readonly>
         </div>
+        <div>
+
+        </div>
         <div class="form-group">
             <label>Tempat Lahir :</label>
             <input type="text" name="tempat_lahir" value="{{ $warga->tempat_lahir }}" readonly>
@@ -102,7 +116,44 @@
             <label>Tanggal Lahir :</label>
             <input type="date" name="tanggal_lahir" value="{{ $warga->tanggal_lahir }}" readonly>
         </div>
+        <div class="form-group">
+            <label>Jenis Kelamin</label>
+            <input type="text" name="jenis_kelamin" value="{{ $warga->jenis_kelamin == "L" ? "Laki - Laki" : "Perempuan" }}" readonly>
+        </div>
+        <div class="form-group">
+            <label>Warga Negara</label>
+            <input type="text" name="warga_negara" value="Indonesia" readonly>
+        </div>
+        <div class="form-group">
+            <label>Agama</label>
+            <input type="text" name="agama" value="{{ $warga->agama }}" readonly>
+        </div>
+        <div class="form-group">
+            <label>Usia</label>
+            <input type="number" name="usia" value="{{ $warga->usia }}" readonly>
+        </div>
+        <div class="form-group">
+            <label>Pekerjaan</label>
+            <input type="text" name="pekerjaan" value="{{ $warga->pekerjaan }}" readonly>
+        </div>
+        <div class="form-group">
+            <label>Golongan Darah</label>
+            <input type="text" name="gol_darah" value="" required>
+        </div>
+        
         <hr>
+        <div class="form-group">
+            <label>
+                Kecamatan : 
+            </label>
+            <input type="text" name="kecamatan" value="">
+        </div>
+        <div class="form-group">
+            <label>
+                Desa : 
+            </label>
+            <input type="text" name="desa" value="">
+        </div>
         <div class="form-group">
             <label>Alamat / Tempat Tinggal :</label>
             <input type="text" name="alamat" value="{{ $warga->alamat }}" readonly>

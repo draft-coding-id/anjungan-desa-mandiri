@@ -30,11 +30,11 @@
             text-align: justify;
         }
 
-        .footer {
+        /* .footer {
             display: flex;
             align-items: center;
             justify-content: space-between;
-        }
+        } */
     </style>
 </head>
 
@@ -66,79 +66,79 @@
     <div class="content">
         <div class="header">
             <h2>Surat Keterangan Pengantar</h2>
-            <p style="margin-top:-10px;">Nomor: [nomor_surat]</p>
+            <p style="margin-top:-10px;">Nomor: {{$surat->no_surat}}</p>
             <br>
         </div>
         <div>
             <p>Yang bertanda tangan di bawah ini Kepala Desa Rawapanjang, Kecamatan Bojonggede, Kabupaten Bogor,
                 Provinsi Jawa Barat menerangkan dengan sebenarnya bahwa :</p>
-            <table class="content">
+           <table class="content">
                 <tr>
                     <td>1.</td>
                     <td>NIK / No KTP</td>
                     <td style="padding-left: 10px;">: </td>
-                    <td>{{ $proses_surat['nik']}}</td>
+                    <td>{{ $surat->isi_surat['nik'] }}</td>
                 </tr>
                 <tr>
                     <td>2.</td>
                     <td>Nama Lengkap</td>
                     <td style="padding-left: 10px;">: </td>
-                    <td>{{ $proses_surat['nama_lengkap'] }}</td>
+                    <td>{{ $surat->isi_surat['nama_lengkap'] }}</td>
                 </tr>
                 <tr>
                     <td>3.</td>
                     <td>Tempat/Tanggal Lahir</td>
                     <td style="padding-left: 10px;">: </td>
-                    <td>{{ $proses_surat['tempat_lahir'] }}, {{ $proses_surat['tanggal_lahir'] }}</td>
+                    <td>{{ $surat->isi_surat['tempat_lahir'] }}, {{ $surat->isi_surat['tanggal_lahir'] }}</td>
                 </tr>
                 <tr>
                     <td>4.</td>
                     <td>Umur</td>
                     <td style="padding-left: 10px;">: </td>
-                    <td>{{ $proses_surat['usia'] }}</td>
+                    <td>{{ $surat->isi_surat['usia'] }}</td>
                 </tr>
                 <tr>
                     <td>5.</td>
                     <td>Warga Negara</td>
                     <td style="padding-left: 10px;">: </td>
-                    <td>{{ $proses_surat['warga_negara'] }}</td>
+                    <td>{{ $surat->isi_surat['warga_negara'] }}</td>
                 </tr>
                 <tr>
                     <td>6.</td>
                     <td>Agama</td>
                     <td style="padding-left: 10px;">: </td>
-                    <td>{{ $proses_surat['agama'] }}</td>
+                    <td>{{ $surat->isi_surat['agama'] }}</td>
                 </tr>
                 <tr>
                     <td>7.</td>
                     <td>Jenis Kelamin</td>
                     <td style="padding-left: 10px;">: </td>
-                    <td>{{ $proses_surat['jenis_kelamin'] }}</td>
+                    <td>{{ $surat->isi_surat['jenis_kelamin'] }}</td>
                 </tr>
                 <tr>
                     <td>8.</td>
                     <td>Pekerjaan</td>
                     <td style="padding-left: 10px;">: </td>
-                    <td>{{ $proses_surat['pekerjaan'] }}</td>
+                    <td>{{ $surat->isi_surat['pekerjaan'] }}</td>
                 </tr>
                 <tr>
                     <td>9.</td>
                     <td>Tempat Tinggal</td>
                     <td style="padding-left: 10px;">: </td>
-                    <td>{{ $proses_surat['alamat'] }} RT {{ $proses_surat['rt'] }} RW {{ $proses_surat['rw'] }} Desa
-                        {{$proses_surat['desa']}} , Kecamatan {{$proses_surat['kecamatan']}}, Kabupaten Bogor</td>
+                    <td>{{ $surat->isi_surat['alamat'] }} RT {{ $surat->isi_surat['rt'] }} RW {{ $surat->isi_surat['rw'] }} Desa
+                        {{ $surat->isi_surat['desa'] }}, Kecamatan {{ $surat->isi_surat['kecamatan'] }}, Kabupaten Bogor</td>
                 </tr>
                 <tr>
                     <td>10.</td>
                     <td>Surat bukti diri KTP</td>
                     <td style="padding-left: 10px;">: </td>
-                    <td>{{ $proses_surat['nik'] }}</td>
+                    <td>{{ $surat->isi_surat['nik'] }}</td>
                 </tr>
                 <tr>
                     <td>11.</td>
                     <td>Keperluan</td>
                     <td style="padding-left: 10px;">: </td>
-                    <td>{{ $proses_surat['keperluan'] }}</td>
+                    <td>{{ $surat->isi_surat['keperluan'] }}</td>
                 </tr>
                 <tr>
                     <td>12.</td>
@@ -150,25 +150,43 @@
                     <td>13.</td>
                     <td>Golongan Darah</td>
                     <td style="padding-left: 10px;">: </td>
-                    <td>{{ $proses_surat['gol_darah'] }}</td>
+                    <td>{{ $surat->isi_surat['gol_darah'] }}</td>
                 </tr>
             </table>
             <p>Demikian surat keterangan ini dibuat, untuk dipergunakan sebagaimana mestinya.</p>
         </div>
 
-        <div class="footer">
+        {{-- <div class="footer">
             <div>
                 <br>
                 <p>Pemegang Surat</p>
                 <br><br><br>
-                <span>{{$proses->surat['nama_lengkap']}}</span>
+                <span>{{$surat->isi_surat['nama_lengkap']}}</span>
             </div>
             <div><br><br>
-                <p>Rawapanjang, Tanggal</p>
+                <p>Rawapanjang, {{$surat->updated_at->translatedFormat('d F Y') ?? ""}}</p>
                 <br><br><br>
-                <p>Pejabata Desa</p>
-                <p>____________________</p>
+                <p style="align-items: flex-start">Pejabat Desa</p>
             </div>
+        </div> --}}
+        <div class="footer">
+            <table>
+                <tr>
+                    <td>
+                        <p>Pemegang Surat</p>
+                        <br><br><br><br><br><br><br>
+                        <span>{{$surat->isi_surat['nama_lengkap']}}</span>
+                    </td>
+                    <td >
+                        <div style="width: 400px"></div>
+                    </td>
+                    <td>
+                        <p>Rawapanjang, {{$surat->updated_at->translatedFormat('d F Y') ?? ""}}</p>
+                        <br><br><br><br><br><br><br>
+                        <p style="align-items: flex-start">Pejabat Desa</p>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </body>

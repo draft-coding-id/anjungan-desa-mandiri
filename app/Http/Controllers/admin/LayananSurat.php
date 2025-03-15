@@ -57,12 +57,14 @@ class LayananSurat extends Controller
     public function disetujuiKades($id)
     {
         $surat = Surat::find($id);
+
+        $fileName = "surat-" . $surat->jenis_surat . $surat->id . "-" . $surat->warga->nik . "-" . date('hhmmss');
         $surat->update([
             'is_tanda_tangan_kades' => true,
             'status' => 'Belum diserahkan Ke Warga',
             'updated_at' => now(),
+            'file_surat' => $fileName,
         ]);
-        $fileName = "surat-" . $surat->jenis_surat . $surat->id . "-" . $surat->warga->nik . "-" . date('hhmmss');
         MakePdf::dispatch($surat, $fileName);
         return redirect()->route('layanan-surat.index');
     }
@@ -75,13 +77,67 @@ class LayananSurat extends Controller
             'surat' => $surat,
         ]);
     }
-    public function suratDikirim($id)
+
+    /**
+     * KirimSurat
+     *
+     * @param  mixed $id
+     * @param  mixed $request
+     * @return void
+     */
+    public function kirimSurat($id, Request $request)
+    {
+        $message = urlencode($request->pesan_wa);
+        $surat = Surat::findOrFail($id);
+        $surat->update([
+            'status' => 'Surat Telah Dikirim',
+            'updated_at' => now(),
+        ]);
+        $url = "https://wa.me/" . $surat->no_hp . "?text=" . $message;
+        return redirect($url);
+    }
+    /**
+     * TAndaiDiKirim
+     * Berfungsi untuk menandai surat yang telah dikirim ke warga
+     * @param  mixed $id
+     * @return void
+     */
+    public function tandaiDikirim($id)
     {
         $surat = Surat::find($id);
         $surat->update([
-            'is_selesai' => true,
             'is_send_to_warga' => true,
-            'status' => 'Surat Selesai',
+            'is_selesai' => true,
+            'status' => 'Surat Selesai dan telah dikirimkan melalui whatsapp',
+            'updated_at' => now(),
+        ]);
+        return redirect()->route('layanan-surat.index');
+    }
+
+    /**
+     * TandaiCetak
+     * Berfungsi untuk menandai surat yang telah dicetak
+     * @param  mixed $id
+     * @return void
+     */
+    public function tandaiCetak($id)
+    {
+        $surat = Surat::find($id);
+        $surat->update([
+            'is_print' => true,
+            'status' => 'Surat Telah Dicetak',
+            'updated_at' => now(),
+        ]);
+        return redirect()->route('layanan-surat.index');
+    }
+
+    public function tandaiDiserahkan($id)
+    {
+        $surat = Surat::find($id);
+        $surat->update([
+            'is_diserahkan' => true,
+            'is_selesai' => true,
+            'status' => 'Surat Telah Diserahkan',
             'updated_at' => now(),
         ]);
         return redirect()->route('layanan-surat.index');
@@ -98,8 +154,9 @@ class LayananSurat extends Controller
         ]);
     }
     // Untuk Post Request
-    public function suratDitolak($id)
+    public function suratDitolak($id , Request $request)
     {
+        dd($request->alasan_ditolak);
         $surat = Surat::findOrfail($id);
         $surat->update([
             'is_accepted' => false,

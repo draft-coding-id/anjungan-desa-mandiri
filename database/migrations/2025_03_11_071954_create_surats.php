@@ -16,12 +16,16 @@ return new class extends Migration
             $table->foreignId('warga_id')->constrained('warga');
             $table->string('no_surat');
             $table->string('status')->default('Menunggu Verifikasi Admin');
+            $table->string('alasan_tolak')->nullable();
             $table->string('jenis_surat');
             $table->boolean('is_accepted')->default(true);
             $table->boolean('is_verify_admin')->default(false);
             $table->boolean('is_tanda_tangan_kades')->default(false);
             $table->boolean('is_send_to_warga')->default(false);
             $table->boolean('is_selesai')->default(false);
+            $table->boolean('is_print')->default(false);
+            $table->boolean('is_diserahkan')->default(false);
+            $table->string('file_surat')->nullable();
             $table->string('no_hp');
             $table->json('isi_surat');
             $table->timestamps();
