@@ -7,6 +7,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\PreviewSuratController;
 use App\Http\Controllers\admin\LayananSurat;
+use App\Http\Controllers\admin\WargaController;
+
 // use App\Http\Controllers\AuthController;
 // use App\Http\Controllers\WargaController;
 // use App\Http\Controllers\Surat_Digital\skDomisiliController;
@@ -73,7 +75,7 @@ Route::post('/proses-login', [LoginController::class, 'cekAdminLogin'])->name('c
 Route::middleware('auth')->group(function () {
     Route::view('/beranda', 'admin.beranda')->name('admin-beranda');
     Route::view('/info-desa', 'admin.info-desa')->name('info-desa');
-    Route::get('/data-warga', [AdminController::class, 'getDataWarga'])->name('data-warga');
+    Route::get('/data-warga', [WargaController::class, 'index'])->name('data-warga');
     Route::view('/statistik', 'admin.statistik')->name('statistik');
     Route::view('/pengumuman', 'admin.pengumuman')->name('pengumuman');
     Route::view('/artikel-desa', 'admin.artikel-desa')->name('artikel-desa');
