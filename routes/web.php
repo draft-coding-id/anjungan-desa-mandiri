@@ -32,12 +32,17 @@ Route::post('/login/check-nik', [LoginController::class, 'checkNik'])->name('log
 Route::get('/login/pin/{nik}', [LoginController::class, 'showPinForm'])->name('login.showPinForm');
 Route::post('/login/check-pin', [LoginController::class, 'checkPin'])->name('login.checkPin');
 Route::view('/pengumuman-warga', 'warga.profil_desa.pengumuman');
-Route::view('/tentang-desa-rawapanjang', 'warga.profil_desa.tentang-desa');
 Route::view('/agenda-rawapanjang', 'warga.profil_desa.agenda');
 Route::view('/lapak-warga', 'warga.profil_desa.lapak');
 Route::view('/artikel-terkini', 'warga.profil_desa.artikel-terkini');
+Route::view('/tentang-desa-rawapanjang', 'warga.profil_desa.tentang-desa')->name('sejarah-desa');
+Route::view('/visi-misi', 'warga.profil_desa.visi_misi')->name('visi-misi');
+Route::view('/potensi-desa', 'warga.profil_desa.potensi_desa')->name('potensi-desa');
+Route::view('/statistik-desa', 'warga.profil_desa.statistik-desa')->name('statistik-desa');
+Route::view('/kerjasama', 'warga.profil_desa.kerjasama')->name('kerjasama');
+Route::view('/kabar-pembanguan', 'warga.profil_desa.kabar_pembangunan')->name('kabar-pembangunan');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('/pilih-surat', [LoginController::class, 'showMenu'])->name('pilih-surat');
+Route::get('/pilih-surat', [LoginController::class, 'showMenu'])->name('pilih-surat')->middleware('auth');
 Route::controller(SuratController::class)->group(function () {
     Route::get('/surat-keterangan-domisili', 'form_Surat_Keterangan_Domisili');
     Route::get('/surat-keterangan-pengantar', 'form_Surat_Keterangan_Pengantar');

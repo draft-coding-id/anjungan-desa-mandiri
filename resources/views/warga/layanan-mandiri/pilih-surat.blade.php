@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,19 +10,22 @@
         body {
             margin: 0;
             font-family: sans-serif;
-            background-image: url('{{ asset('assets/Background Mockup Anjungan.png') }}');
+            background-image: url('{{ asset('assets/BackgroundMockupAnjungan.png') }}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
             /* color: white; */
         }
+
         .page-content {
             padding: 30px 50px 0 50px;
         }
+
         .button-container {
             display: flex;
             justify-content: center;
         }
+
         .button {
             display: flex;
             justify-content: center;
@@ -44,6 +48,7 @@
             font-weight: bold;
             text-align: center;
         }
+
         .button:hover {
             background-color: darkorange;
         }
@@ -69,6 +74,7 @@
             color: white;
             text-align: center;
         }
+
         .credit {
             display: flex;
             justify-content: center;
@@ -80,9 +86,10 @@
         }
     </style>
 </head>
+
 <body>
-    <div class="page-content"> 
-        <h2>Selamat Datang, {{ $warga->nama_lengkap }}</h2>
+    <div class="page-content">
+        {{-- <h2>Selamat Datang, {{auth('warga')->user()->nama_lengkap}}</h2> --}}
         <h3>Silahkan pilih surat yang ingin Anda ajukan.</h3>
         <!-- Tombol Pilihan Surat -->
         <div class="button-container">
@@ -110,15 +117,16 @@
             <a href='/surat-keterangan-domisili' class="button">Surat 11</a>
             <a href="#" class="button">Surat Keterangan Wali Hakim</a>
         </div> -->
-    </div> 
+    </div>
     <div class="footer">
         <!-- Tombol Navigasi -->
-        <div class="nav-buttons"> 
-            <a href='/warga' class="button">Halaman Utama</a> 
-        </div> 
+        <div class="nav-buttons">
+            <a href='/warga' class="button">Halaman Utama</a>
+        </div>
         <div class="credit">
             <p>&copy;</p>
         </div>
     </div>
 </body>
+
 </html>

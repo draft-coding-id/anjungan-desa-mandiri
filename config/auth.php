@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'warga' => [
+            'driver' => 'session',
+            'provider' => 'wargas',
+        ],
     ],
 
     /*
@@ -63,6 +67,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
+        ],
+        'wargas' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Warga::class,
         ],
 
         // 'users' => [

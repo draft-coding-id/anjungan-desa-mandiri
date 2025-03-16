@@ -8,47 +8,87 @@
     <link rel="icon" href="https://rawapanjang-desa.id/desa/logo/1679693855_logo-pemkab-bogor.png" type="image/png">
     <style>
         body {
-            height: 100vh;
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        main {
+            height: 100vh;
+            width: 100vw;
             font-family: sans-serif;
-            background-image: url('{{ asset('assets/Background Mockup Anjungan.png') }}');
+            background-image: url('{{ asset('assets/BackgroundMockupAnjungan.png') }}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
         }
 
-        .header {
-            /* color: white; */
-            text-align: center;
-            padding: 20px;
-        }
-
-        .page-content {
+        .container {
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 100%;
+            height: 100vh;
+            gap: 20px;
         }
 
-        .login-container {
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 400px;
+        .left-col {
+            background-color: #D9D9D9BF;
+            width: 50vw;
+            height: 100%;
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .left-col h1 {
+            font-size: 36px;
             text-align: center;
+            line-height: 20%;
+        }
+
+        .left-col img {
+            width: 200px;
+            height: 200px;
+        }
+
+        .right-col {
+            width: 50vw;
+            height: 100%;
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .right-col p {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #000000;
+            border-radius: 5px;
+            margin-top: 10px;
+            background-color: transparent;
         }
 
         .button-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: absolute;
+            left: 45%;
+            bottom: 0%;
             padding: 20px;
         }
 
         .button {
             display: flex;
+            margin-top: 10px;
             justify-content: center;
             align-items: center;
             background-color: #ff9900;
@@ -72,91 +112,53 @@
             background-color: #e68a00;
         }
 
-        .form-group {
-            margin: 30px 0;
-            text-align: left;
-        }
 
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .form-group input {
-            width: 90%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-            color: #333;
-        }
-
-        .form-group input:focus {
-            border-color: #4caf50;
-            outline: none;
-        }
-
-        .footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            color: white;
-            text-align: center;
-        }
-
-        .credit {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 30px;
-            font-size: 12px;
-            background-color: #ff9900;
-            color: white;
-        }
     </style>
 </head>
 
 <body>
-    <div class="header">
-        <h1>Layanan Mandiri</h1>
-        <h2>Anjungan Desa Mandiri Desa Rawapanjang</h2>
-    </div>
-    <div class="page-content">
-        <div class="login-container">
-            <p>Silakan login terlebih dahulu untuk melanjutkan.</p>
-
-            <!-- @if ($errors->any())
+    <main>
+        <div class="container">
+            <div class="left-col">
+                <img src="{{asset('assets/logo.png')}}" alt="Logo Desa Rawapanjang" />
+                <h1>
+                    Anjungan Desa Mandiri 
+                </h1>
+                <h1>
+                    Desa Rawapanjang 
+                </h1>
+                <h1>
+                    Kabupaten Bogor
+                </h1>
+            </div>
+            <div class="right-col" style="text-align: center">
                 <div>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+                    <h1>Selamat Datang</h1>
+                    <h2>Silahkan pindai E-KTP anda untuk masuk </h2>
                 </div>
-            @endif -->
-
-            <form method="POST" action="/login/check-nik">
-                @csrf
-                <div class="form-group">
-                    <label for="nik">NIK:</label>
-                    <input type="text" id="nik" name="nik" placeholder="Masukkan NIK Anda" required>
+                <div>
+                    <p>atau</p>
                 </div>
-                @error('nik') <p style="color: red;">{{ $message }}</p> @enderror
-                <div class="button-container">
-                    <button type="submit" class="button">Lanjutkan</button>
+                <div>
+                    <h3>Masukan Nomor KTP Anda</h3>
+                    <form action="{{route('login.checkNik')}}" method="POST">
+                        @csrf
+                        <input type="number" name="nik"/>
+                        @if(session('error'))
+                        <p style="color: red;">{{session('error')}}</p>
+                        @endif
+                        <div style="display: flex; justify-content: center; align-items: center;">
+                            <button type="submit" class="button">Cek</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
-    <div class="footer">
         <div class="button-container">
             <a href="/warga" class="button">Kembali</a>
         </div>
-        <div class="credit">
-            <p>&copy;</p>
-        </div>
-    </div>
+    </main>
+
 </body>
 
 </html>

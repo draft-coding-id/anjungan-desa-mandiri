@@ -71,7 +71,8 @@ class EloquentUserProvider implements UserProvider
         $model = $this->createModel();
 
         $retrievedModel = $this->newModelQuery($model)->where(
-            $model->getAuthIdentifierName(), $identifier
+            $model->getAuthIdentifierName(),
+            $identifier
         )->first();
 
         if (! $retrievedModel) {
@@ -113,7 +114,7 @@ class EloquentUserProvider implements UserProvider
     {
         $credentials = array_filter(
             $credentials,
-            fn ($key) => ! str_contains($key, 'password'),
+            fn($key) => ! str_contains($key, 'password'),
             ARRAY_FILTER_USE_KEY
         );
 
@@ -189,8 +190,8 @@ class EloquentUserProvider implements UserProvider
     protected function newModelQuery($model = null)
     {
         $query = is_null($model)
-                ? $this->createModel()->newQuery()
-                : $model->newQuery();
+            ? $this->createModel()->newQuery()
+            : $model->newQuery();
 
         with($query, $this->queryCallback);
 
@@ -204,7 +205,7 @@ class EloquentUserProvider implements UserProvider
      */
     public function createModel()
     {
-        $class = '\\'.ltrim($this->model, '\\');
+        $class = '\\' . ltrim($this->model, '\\');
 
         return new $class;
     }

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('alamat'); // Alamat lengkap
             $table->string('rt', 3); // RT
             $table->string('rw', 3); // RW
+            $table->rememberToken(); // Remember token
             $table->timestamps(); // Created at dan updated at
         });
     }

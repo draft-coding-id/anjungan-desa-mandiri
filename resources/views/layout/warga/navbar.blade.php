@@ -1,5 +1,6 @@
 <div class="footer">
-    <p>Silahkan pilih menu yang Anda perlukan hari ini.</p>
+    <h3>Silahkan pilih menu yang Anda perlukan hari ini.</h3>
+    {{-- <h2>{{auth('warga')->user()->nama_lengkap}}</h2> --}}
     <div class="button-container">
         <!-- <button class="button" onclick="window.location.href='/layanan_digital';">Layanan Digital</button> -->
         <a href='/login' class="button">Layanan <br>Mandiri</a>
@@ -8,9 +9,9 @@
         <a href='/agenda-rawapanjang' class="button">Agenda <br>Rawapanjang</a>
         <a href='/lapak-warga' class="button">Lapak</a>
         <a href='/artikel-terkini' class="button">Artikel <br>Terkini</a>
-        @if(session('warga'))
+        @auth('warga')
         <a href='/logout' class="button">Logout</a>
-        @endif
+        @endauth
     </div>
     <div class="credit">
         <p>&copy;</p>

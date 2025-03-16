@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Warga;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
@@ -19,7 +20,7 @@ class LoginController extends Controller
         ]);
 
         $credentials = $request->only('username', 'password');
-        if(Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) {
             return redirect()->route('admin-beranda');
         }
 
@@ -27,7 +28,8 @@ class LoginController extends Controller
         return redirect('/admin');
     }
 
-    public function logoutAdmin(){
+    public function logoutAdmin()
+    {
         Auth::logout();
         return redirect()->route('admin');
     }
@@ -35,7 +37,7 @@ class LoginController extends Controller
     // Menampilkan form NIK (Langkah 1)
     public function showNikForm()
     {
-        if(session('warga')) {
+        if (auth()->guard('warga')->check()) {
             return redirect()->route('pilih-surat');
         }
         return view('warga.layanan-mandiri.login.nik');
@@ -44,15 +46,17 @@ class LoginController extends Controller
     // Mengecek NIK (Langkah 1)
     public function checkNik(Request $request)
     {
-        $request->validate([
-            'nik' => 'required|exists:warga,nik',
-        ], [
-            'nik.exists' => 'Data NIK tidak dikenali, silahkan hubungi pengurus desa.',
-        ]);
-
-        // Jika NIK ditemukan, arahkan ke langkah 2
-        $nik = $request->nik;
-        return redirect()->route('login.showPinForm', ['nik' => $nik]);
+        try {
+            $request->validate([
+                'nik' => 'required|exists:warga,nik',
+            ]);
+            // Jika NIK ditemukan, arahkan ke langkah 2
+            $nik = $request->nik;
+            return redirect()->route('login.showPinForm', ['nik' => $nik]);
+        } catch (\Exception $e) {
+            session()->flash('error', 'NIK tidak ditemukan');
+            return redirect()->route('login.warga');
+        }
     }
 
     // Menampilkan form PIN (Langkah 2)
@@ -64,53 +68,44 @@ class LoginController extends Controller
     // Mengecek PIN (Langkah 2)
     public function checkPin(Request $request)
     {
-        $request->validate([
-            'nik' => 'required|exists:warga,nik',
-            'pin' => 'required',
-        ]);
-
-        $warga = Warga::where('nik', $request->nik)->first();
-
-        if (!$warga) {
-            return back()->withErrors(['nik' => 'NIK tidak ditemukan.']);
-        }
-
-        // Hitung percobaan salah
-        $attempts = Session::get('login_attempts', 0);
-
-        if (!password_verify($request->pin, $warga->pin)) {
-            $attempts++;
-            Session::put('login_attempts', $attempts);
-
-            // Jika 5 kali salah, blokir akses
-            if ($attempts >= 5) {
-                return back()->withErrors(['pin' => 'Anda telah memasukkan PIN yang salah sebanyak 5 kali. Akun Anda telah diblokir.']);
+        $request['pin'] = $request['pin1'] . $request['pin2'] . $request['pin3'] . $request['pin4'] . $request['pin5'] . $request['pin6'];
+        try {
+            $request->validate([
+                'nik' => 'required|exists:warga,nik',
+                'pin' => 'required',
+            ]);
+            $credentials = $request->only('nik', 'pin');
+            $warga = Warga::where('nik', $request->nik)->first();
+            if (!$warga) {
+                return back()->withErrors(['nik' => 'NIK tidak ditemukan.']);
             }
 
-            return back()->withErrors(['pin' => 'PIN yang Anda masukkan salah, silahkan coba lagi.']);
+            if (!password_verify($request->pin, $warga->pin)) {
+                session()->flash('error', 'PIN salah');
+                return redirect()->route('login.showPinForm', ['nik' => $request->nik]);
+            }
+            $res = auth()->guard('warga')->attempt([
+                'nik' => $credentials['nik'],
+                'password' => $credentials['pin'],
+            ]);
+            if ($res) {
+                return redirect()->route('pilih-surat');
+            }
+        } catch (\Exception $e) {
+            session()->flash('error', 'PIN salah');
+            return redirect()->route('login.warga');
         }
-
-        // Jika PIN benar, reset counter percobaan dan arahkan ke Halaman Utama
-        Session::forget('login_attempts');
-        session(['warga' => $warga]); // Simpan data warga ke session
-        return redirect()->route('pilih-surat')->with('success', 'Login berhasil!');
     }
 
     // Halaman Menu
     public function showMenu()
     {
-        $warga = session('warga'); // Ambil data warga dari session
-
-        if (!$warga) {
-            return redirect()->route('login'); // Jika session tidak ada, redirect ke login
-        }
-
-        return view('warga.layanan-mandiri.pilih-surat', ['warga' => $warga]);
+        return view('warga.layanan-mandiri.pilih-surat');
     }
 
     public function logout(Request $request)
     {
-        $request->session()->forget('warga');
+        auth()->guard('warga')->logout();
         return redirect()->route('login');
     }
 }

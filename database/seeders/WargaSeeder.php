@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Warga;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Hash;
 
 class WargaSeeder extends Seeder
 {
@@ -17,7 +18,7 @@ class WargaSeeder extends Seeder
         Warga::create(
             [
                 'nik' => '1234567890123456',
-                'pin' => bcrypt('123456'), // Enkripsi PIN untuk keamanan
+                'pin' => Hash::make('123456'), // Enkripsi PIN untuk keamanan
                 'nama_lengkap' => 'John Doe',
                 'tempat_lahir' => 'Jakarta',
                 'tanggal_lahir' => '1990-01-01',
@@ -36,7 +37,7 @@ class WargaSeeder extends Seeder
             Warga::create(
                 [
                     'nik' => $faker->nik,
-                    'pin' => bcrypt($faker->randomNumber(6,true)), // Enkripsi PIN untuk keamanan
+                    'pin' => bcrypt($faker->randomNumber(6, true)), // Enkripsi PIN untuk keamanan
                     'nama_lengkap' => $faker->name,
                     'tempat_lahir' => $faker->city,
                     'tanggal_lahir' => $faker->date,

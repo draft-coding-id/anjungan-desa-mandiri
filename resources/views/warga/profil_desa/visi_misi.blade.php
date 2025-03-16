@@ -1,59 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visi dan Misi - Anjungan Desa Mandiri Desa Rawapanjang</title>
-    <link rel="icon" href="https://rawapanjang-desa.id/desa/logo/1679693855_logo-pemkab-bogor.png" type="image/png">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f3f3;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .container {
-            width: 70%;
-            background-color: #fff;
-            padding: 80px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 50px;
-        }
-        p {
-            line-height: 1.75;
-            text-align: justify;
-        }
-        ul {
-            line-height: 1.75;
-        }
-        .button-container {
-            text-align: center;
-            margin-top: 50px;
-        }
-        .button {
-            background-color: orange;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .button:hover {
-            background-color: darkorange;
-        }
-    </style>
-</head>
-<body>
 
-<div class="container">
+@extends('layout.warga.app')
+@section('title' , 'Tentang Desa')
+@section('header' , 'Tentang Desa')
+@section('content')
+<div class="container" style="height: 100%">
     <h1>Visi & Misi Desa Rawapanjang</h1>
     <h3>VISI</h3>
     <p>
@@ -111,7 +61,8 @@
         <li>Membangun Lembaga Desa yang bebas dari KKN dan Korupsi. Birokrasi yg Bersih</li>
         <li>Membangun Transparansi / bebas korupsi</li>
         <li>Memberikan pelayanan yang ramah, sopan dan baik./ bebas pungli</li>
-        <li>Membangun masyarakat yg religius (Melalui keg. : Majelis Taklim, Tempat Ibadah, Peringatan Hari Besar Islam, Pendidikan</li>
+        <li>Membangun masyarakat yg religius (Melalui keg. : Majelis Taklim, Tempat Ibadah, Peringatan Hari Besar Islam,
+            Pendidikan</li>
         <li>Membangun Lingkungan Desa yang Bersih dan Asri.</li>
         <li>Membangun Lembaga desa yang peduli dan kompak</li>
         <li>Membangun dan Mengembangkan UMKM</li>
@@ -127,11 +78,8 @@
         <li>Membangun Desa yg bebas dari Rumah tidak Layak Huni</li>
         <li>Membangun Desa yg bebas dari Anak yg tidak sekolah</li>
     </ul>
-    
-    <div class="button-container">
-        <button class="button" onclick="window.history.back();">Kembali</button>
-    </div>
 </div>
-
-</body>
-</html>
+@section('footer')
+@include('layout.warga.tentang-desa-navbar')
+@endsection
+@endsection
