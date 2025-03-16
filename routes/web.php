@@ -13,13 +13,9 @@ use App\Http\Controllers\admin\WargaController;
 // use App\Http\Controllers\WargaController;
 // use App\Http\Controllers\Surat_Digital\skDomisiliController;
 
-// Code Testing
-Route::view('/test', '_test');
-// Route::get('/warga2', [WargaController::class, 'index']);
 
 // Route Mockup Baru
 Route::view('/', 'onboarding');
-Route::view('/onboarding', 'onboarding');
 Route::view('/warga', 'warga.halaman_utama')->name('halaman_utama'); //Lanjut ke views warga
 Route::view('/admin', 'admin.login')->name('login'); //Lanjut ke views admin
 
@@ -41,8 +37,16 @@ Route::view('/potensi-desa', 'warga.profil_desa.potensi_desa')->name('potensi-de
 Route::view('/statistik-desa', 'warga.profil_desa.statistik-desa')->name('statistik-desa');
 Route::view('/kerjasama', 'warga.profil_desa.kerjasama')->name('kerjasama');
 Route::view('/kabar-pembanguan', 'warga.profil_desa.kabar_pembangunan')->name('kabar-pembangunan');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('/pilih-surat', [LoginController::class, 'showMenu'])->name('pilih-surat')->middleware('auth');
+
+Route::middleware(['isAdmin'])->group(function () {
+    Route::get('/dashboard', [LoginController::class, 'showDashboard'])->name('dashboard');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::view('/layanan-umum', 'warga.layanan-mandiri.layanan_umum')->name('layanan-umum');
+    Route::view('/layanan-kependudukan', 'warga.layanan-mandiri.layanan_kependudukan')->name('layanan-kependudukan');
+    ROute::view('/layanan-pernikahan', 'warga.layanan-mandiri.layanan_pernikahan')->name('layanan-pernikahan');
+    Route::view('/layanan-usaha', 'warga.layanan-mandiri.layanan_usaha')->name('layanan-usaha');
+});
+
 Route::controller(SuratController::class)->group(function () {
     Route::get('/surat-keterangan-domisili', 'form_Surat_Keterangan_Domisili');
     Route::get('/surat-keterangan-pengantar', 'form_Surat_Keterangan_Pengantar');
@@ -77,7 +81,7 @@ Route::get('/get-detail-skp/{id}', [PreviewSuratController::class, 'getDetailSkp
 
 // ----- Views Admin Desa ----- //
 Route::post('/proses-login', [LoginController::class, 'cekAdminLogin'])->name('cek-credentials');
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::view('/beranda', 'admin.beranda')->name('admin-beranda');
     Route::view('/info-desa', 'admin.info-desa')->name('info-desa');
     Route::get('/data-warga', [WargaController::class, 'index'])->name('data-warga');
@@ -109,90 +113,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/riwayat-surat', [LayananSurat::class, 'getRiwayatSurat'])->name('riwayat.surat');
     Route::view('/surat-selesai', 'admin.layanan-surat.proses-surat.surat-selesai');
 });
-
     // ----- Ends of Views Admin Desa ----- //
-
-
-
-
 // ====================================================================== //
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Menu Login
-        // Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-        // Route::post('/login/nik', [AuthController::class, 'validateNIK']);
-        // Route::post('/login/pin', [AuthController::class, 'validatePIN']);
-        // Route::get('/menu', [AuthController::class, 'showMenu'])->name('menu');
-        // Route::get('/login', [LoginController::class, 'showNikForm'])->name('login.showNikForm');
-
-// Fitur utama
-// -- Route::view('/', 'halaman_utama')->name('halaman_utama');
-// -- Route::view('/layanan_digital', 'other.surat_digital');
-// -- Route::view('/profil_desa', 'other.profil_desa');
-
-// Preview Surat
-// use -- Route::view('/skd', 'preview_surat.surat_ket_domisili');
-// use -- Route::view('/skp', 'preview_surat.surat_ket_pengantar');
-// use -- Route::view('/sk', 'preview_surat.surat_kuasa');
-
-// Halaman Verifikasi Surat
-// use -- Route::view('/verif', 'other.verif_surat');
-// use -- Route::view('/berhasil', 'other.berhasil');
-
-// Route::get('/preview-surat', 'SKDController@preview')->name('preview.surat');
-
-// -- Route::get('/surat_keterangan_domisili', [skDomisiliController::class, 'showForm']);
-// Route::post('/sk-domisili/submit', [skDomisiliController::class, 'submitForm']);
-
-// -- Route::get('/surat-domisili', [SuratController::class, 'showForm'])->name('surat.showForm');
-// -- Route::post('/sk-domisili/submit', [SuratController::class, 'submitForm'])->name('surat.submitForm');
-
-// Route::get('/surat_keterangan_domisili', function () {
-//     return view('surat_digital.skd');
-// });
-
-// Halaman Profil Desa
-// -- Route::view('/tentang_kami', 'profil_desa.tentang_kami');
-// -- Route::view('/visi_misi', 'profil_desa.visi_misi');
-// -- Route::view('/sejarah_desa', 'profil_desa.sejarah_desa');

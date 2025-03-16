@@ -10,7 +10,7 @@
             justify-content: center;
             align-items: center;
             margin: 0; 
-            background-image: url('{{ asset('assets/Background Mockup Anjungan.png') }}');
+            background-image: url('{{ asset('assets/BackgroundMockupAnjungan.png') }}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;

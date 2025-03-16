@@ -11,7 +11,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('{{asset(' assets/Background Mockup Anjungan.png') }}');
+            background-image: url('{{asset('assets/BackgroundMockupAnjungan.png') }}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -103,7 +103,7 @@
         <form action="{{ route('submitForm') }}" method="POST">
             @csrf
             <div class="form-group">
-                <input type="number" hidden name="warga_id" value="{{session('warga')['id']}}">
+                <input type="number" hidden name="warga_id" value="{{$warga->id}}">
             </div>
             <div class="form-group">
                 <input type="hidden" name="jenis_surat" value="SKD">
@@ -144,7 +144,7 @@
             </div>
 
             <div class="button-container">
-                <a href="pilih-surat" class="button">Kembali</a>
+                <a href="{{route('layanan-kependudukan')}}" class="button">Kembali</a>
                 <button type="submit" class="button">Lanjutkan</button>
             </div>
         </form>

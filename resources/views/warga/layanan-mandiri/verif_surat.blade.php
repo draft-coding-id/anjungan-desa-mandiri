@@ -7,7 +7,7 @@
         body {
             font-family: sans-serif;
             /* color: white; */
-            background-image: url('{{asset(' assets/Background Mockup Anjungan.png') }}');
+            background-image: url('{{asset('assets/BackgroundMockupAnjungan.png') }}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;

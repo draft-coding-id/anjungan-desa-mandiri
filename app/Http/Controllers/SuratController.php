@@ -15,12 +15,10 @@ class SuratController extends Controller
     public function form_Surat_Keterangan_Domisili(Request $request)
     {
         // Data warga diambil dari session
-        $warga = session('warga');
+        $warga = auth()->guard('warga')->user();
         if (!$warga) {
             return redirect()->route('login');
         }
-
-        ProsesSurat::truncate();
         return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-domisili', ['warga' => $warga]);
     }
 
@@ -28,7 +26,7 @@ class SuratController extends Controller
     public function form_Surat_Keterangan_Pengantar(Request $request)
     {
         // Data warga diambil dari session
-        $warga = session('warga');
+        $warga = auth()->guard('warga')->user();
         if (!$warga) {
             return redirect()->route('login');
         }

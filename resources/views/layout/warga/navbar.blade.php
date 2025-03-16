@@ -3,7 +3,7 @@
     {{-- <h2>{{auth('warga')->user()->nama_lengkap}}</h2> --}}
     <div class="button-container">
         <!-- <button class="button" onclick="window.location.href='/layanan_digital';">Layanan Digital</button> -->
-        <a href='/login' class="button">Layanan <br>Mandiri</a>
+        <a href="{{route('dashboard')}}" class="button">Dashboard</a>
         <a href='/pengumuman-warga' class="button">Pengumuman</a>
         <a href='/tentang-desa-rawapanjang' class="button">Tentang Desa <br>Rawapanjang</a>
         <a href='/agenda-rawapanjang' class="button">Agenda <br>Rawapanjang</a>

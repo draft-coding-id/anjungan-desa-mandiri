@@ -13,7 +13,6 @@ class LoginController extends Controller
     // Admin Login
     public function cekAdminLogin(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'username' => 'required',
             'password' => 'required',
@@ -89,7 +88,7 @@ class LoginController extends Controller
                 'password' => $credentials['pin'],
             ]);
             if ($res) {
-                return redirect()->route('pilih-surat');
+                return redirect()->route('dashboard');
             }
         } catch (\Exception $e) {
             session()->flash('error', 'PIN salah');
@@ -97,15 +96,15 @@ class LoginController extends Controller
         }
     }
 
-    // Halaman Menu
-    public function showMenu()
-    {
-        return view('warga.layanan-mandiri.pilih-surat');
+    // Halaman Dashboard
+    public function showDashboard()
+    {  
+        return view('warga.dashboard_warga');
     }
 
     public function logout(Request $request)
     {
         auth()->guard('warga')->logout();
-        return redirect()->route('login');
+        return redirect()->route('login.warga');
     }
 }

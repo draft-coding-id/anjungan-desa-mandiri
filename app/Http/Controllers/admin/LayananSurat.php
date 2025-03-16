@@ -13,9 +13,9 @@ class LayananSurat extends Controller
 {
     public function index()
     {
-        $belumDiverifikasiAdmin = Surat::BelumDiverifikasiAdmin()->get();
-        $belumDiverifikasiKades = Surat::BelumDiverifikasiKades()->get();
-        $belumDikirimKeWarga = Surat::BelumDikirimkanKeWarga()->get();
+        $belumDiverifikasiAdmin = Surat::BelumDiverifikasiAdmin()->paginate(5);
+        $belumDiverifikasiKades = Surat::BelumDiverifikasiKades()->paginate(10);
+        $belumDikirimKeWarga = Surat::BelumDikirimkanKeWarga()->paginate(10);
         $suratSelesai = Surat::suratSelesai()->get();
         $increment = 1;
         return view('admin.layanan-surat.dalam-proses', [
@@ -154,7 +154,7 @@ class LayananSurat extends Controller
         ]);
     }
     // Untuk Post Request
-    public function suratDitolak($id , Request $request)
+    public function suratDitolak($id, Request $request)
     {
         dd($request->alasan_ditolak);
         $surat = Surat::findOrfail($id);

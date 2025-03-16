@@ -16,6 +16,16 @@
             background-position: center;
         }
 
+        a {
+            color: #000;
+            font-size: 16px;
+            /* text-decoration: none; */
+        }
+
+        form {
+            margin-bottom: 10px;
+        }
+
         .header {
             /* color: white; */
             text-align: center;
@@ -31,6 +41,7 @@
 
         .login-container {
             background: #fff;
+            opacity: 0.7;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -121,9 +132,10 @@
 
 <body>
     @if(session('error'))
-        <h2 style="position: absolute; top: 0; left: 0; right: 0; background-color: red; color: white; text-align: center; padding: 10px;">
-            {{ session('error') }}
-        </h2>
+    <h2
+        style="position: absolute; top: 0; left: 0; right: 0; background-color: red; color: white; text-align: center; padding: 10px;">
+        {{ session('error') }}
+    </h2>
     @endif
     <div class="header">
         <img src="https://rawapanjang-desa.id/desa/logo/1679693855_logo-pemkab-bogor.png" alt="Logo Desa" />
@@ -136,18 +148,14 @@
             <form action="{{route('cek-credentials')}}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <input type="text" id="username" name="username" placeholder="Nama Pengguna" >
-                    <input type="password" id="password" name="password" placeholder="Kata Sandi" >
+                    <input type="text" id="username" name="username" placeholder="Nama Pengguna">
+                    <input type="password" id="password" name="password" placeholder="Kata Sandi">
                 </div>
                 <div class="button-container" style="padding: 0;">
                     <button type="submit" class="button">Masuk</button>
                 </div>
             </form>
-        </div>
-    </div>
-    <div class="footer">
-        <div class="credit">
-            <p>&copy;</p>
+            <a href="{{route('login.warga')}}">Masuk sebagai warga</a>
         </div>
     </div>
 </body>

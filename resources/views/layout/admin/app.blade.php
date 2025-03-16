@@ -17,7 +17,7 @@
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
             </svg>
-            <h3>Admin Desa</h3>
+            <h3>{{auth()->user()->name}}</h3>
             <p>Desa Rawapanjang <br> Kabupaten Bogor</p>
         </div>
         @include('layout.admin.sidebar')

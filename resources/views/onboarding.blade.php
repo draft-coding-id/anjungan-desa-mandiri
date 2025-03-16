@@ -12,7 +12,7 @@
             font-family: sans-serif; 
             overflow-x: hidden;
             /* height: 100vh; Mengatur tinggi body agar menutupi seluruh viewport */
-            background-image: url('{{ asset('assets/Background Mockup Anjungan.png') }}');
+            background-image: url('{{asset('assets/BackgroundMockupAnjungan.png') }}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
