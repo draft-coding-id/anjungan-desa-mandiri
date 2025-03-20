@@ -6,13 +6,7 @@
     <h4>Layanan Surat > Dalam Proses</h4>
 </div>
 
-<div class="menu-surat">
-    <a href=/kelola-surat>Kelola Surat</a>
-    <a href=/layanan-surat class="active">Dalam Proses</a>
-    <a href=/surat-ditolak>Arsip Surat Ditolak</a>
-    <a href=/riwayat-surat>Riwayat</a>
-
-</div>
+@include('layout.admin.menu_surat')
 <h4>Data Layanan Surat</h4>
 <div class="content">
     <div class="mt-4">
@@ -72,7 +66,7 @@
             <tbody>
                 @forelse ( $belumDiverifikasiKades as $surat)
                 <tr>
-                    <td>{{$increment++}}</td>
+                    <td>{{$incrementForTableBelumTtdKades++ }}</td>
                     <td width="300px" height="50px"><a href="{{route('persetujuan.kades' , $surat->id)}}" class="button"
                             ;">{{$surat->status}}</a></td>
                     <td>{{$surat->isi_surat['nik']}}</td>
@@ -90,7 +84,7 @@
                     </td>
                 </tr>
             </tbody>
-      
+
         </table>
     </div>
     <div class="mt-4">
@@ -111,7 +105,7 @@
             <tbody>
                 @forelse ( $belumDikirimKeWarga as $surat)
                 <tr>
-                    <td>{{$increment++}}</td>
+                    <td>{{$incrementForTableBelumDiserahkan++}}</td>
                     <td width="250px" height="50px"><a href="{{route('surat.selesai' , $surat->id)}}" class="button"
                             ;">{{$surat->status}}</a></td>
                     <td>{{$surat->warga->nik}}</td>

@@ -94,10 +94,10 @@ Route::middleware(['auth'])->group(function () {
     // Layanan Surat
     // Route::view('/layanan-surat', 'admin.layanan-surat.dalam-proses');
     Route::get('/layanan-surat', [LayananSurat::class, 'index'])->name('layanan-surat.index');
-    Route::view('/kelola-surat', 'admin.layanan-surat.kelola-surat');
+    Route::view('/kelola-surat', 'admin.layanan-surat.kelola-surat')->name('layanan-surat.kelola-surat');
 
     // Proses Surat
-    Route::get('/surat-ditolak/', [LayananSurat::class, 'getAllSuratDitolak'])->name('surat.getAllDitolak');
+    Route::get('/surat-ditolak/', [LayananSurat::class, 'getAllSuratDitolak'])->name('layanan-surat.ditolak');
     Route::post('/surat-ditolak/{idSurat}', [LayananSurat::class, 'suratDitolak'])->name('surat.ditolak');
     Route::get('/verifikasi-admin/{idSurat}', [LayananSurat::class, 'verifikasiAdmin'])->name('verifikasi.admin');
     Route::post('/verifikasi-admin/{idSurat}', [LayananSurat::class, 'diVerifikasiAdmin'])->name('diverifikasi.admin');
@@ -110,7 +110,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/tandaiSuratdicetak/{idSurat}', [LayananSurat::class, 'tandaiCetak'])->name('tandaiSuratDicetak');
     Route::post('/tandaisudahdikirim/{idSurat}', [LayananSurat::class, 'tandaiDikirim'])->name('tandaiSuratDikirim');
     Route::post('/tandaiDiserahkan/{idSurat}', [LayananSurat::class, 'tandaiDiserahkan'])->name('tandaiSuratDiserahkan');
-    Route::get('/riwayat-surat', [LayananSurat::class, 'getRiwayatSurat'])->name('riwayat.surat');
+    Route::get('/riwayat-surat', [LayananSurat::class, 'getRiwayatSurat'])->name('layanan-surat.riwayat');
     Route::view('/surat-selesai', 'admin.layanan-surat.proses-surat.surat-selesai');
 });
     // ----- Ends of Views Admin Desa ----- //

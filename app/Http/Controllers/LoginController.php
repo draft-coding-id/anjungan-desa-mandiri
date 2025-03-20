@@ -47,13 +47,17 @@ class LoginController extends Controller
     {
         try {
             $request->validate([
-                'nik' => 'required|exists:warga,nik',
+                'nik' => 'required|min:16|exists:warga,nik',
+            ], [
+                'required' => 'NIK tidak boleh kosong',
+                'min' => 'NIK harus 16 digit',
+                'exists' => 'NIK tidak ditemukan',
             ]);
             // Jika NIK ditemukan, arahkan ke langkah 2
             $nik = $request->nik;
             return redirect()->route('login.showPinForm', ['nik' => $nik]);
         } catch (\Exception $e) {
-            session()->flash('error', 'NIK tidak ditemukan');
+            session()->flash('error', $e->getMessage());
             return redirect()->route('login.warga');
         }
     }
@@ -98,7 +102,7 @@ class LoginController extends Controller
 
     // Halaman Dashboard
     public function showDashboard()
-    {  
+    {
         return view('warga.dashboard_warga');
     }
 

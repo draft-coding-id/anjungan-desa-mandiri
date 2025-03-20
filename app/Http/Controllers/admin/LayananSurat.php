@@ -18,12 +18,16 @@ class LayananSurat extends Controller
         $belumDikirimKeWarga = Surat::BelumDikirimkanKeWarga()->paginate(10);
         $suratSelesai = Surat::suratSelesai()->get();
         $increment = 1;
+        $incrementForTableBelumTtdKades = 1;
+        $incrementForTableBelumDiserahkan = 1;
         return view('admin.layanan-surat.dalam-proses', [
             // 'skDomisilis' => $skDomisilis,
             'belumDiverifikasiAdmin' => $belumDiverifikasiAdmin,
             'belumDiverifikasiKades' => $belumDiverifikasiKades,
             'belumDikirimKeWarga' => $belumDikirimKeWarga,
-            'increment' => $increment
+            'increment' => $increment,
+            'incrementForTableBelumTtdKades' => $incrementForTableBelumTtdKades,
+            'incrementForTableBelumDiserahkan' => $incrementForTableBelumDiserahkan,
         ]);
     }
 
@@ -156,7 +160,6 @@ class LayananSurat extends Controller
     // Untuk Post Request
     public function suratDitolak($id, Request $request)
     {
-        dd($request->alasan_ditolak);
         $surat = Surat::findOrfail($id);
         $surat->update([
             'is_accepted' => false,
