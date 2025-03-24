@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ScanKtp;
+use Codesmiths\LaravelOcrSpace\OcrSpaceOptions;
+use Codesmiths\LaravelOcrSpace\Facades\OcrSpace;
 use App\Models\Warga;
+use Codesmiths\LaravelOcrSpace\Enums\Language;
+use Codesmiths\LaravelOcrSpace\Enums\OcrSpaceEngine;
+use Codesmiths\LaravelOcrSpace\ValueObjects\OcrSpaceResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -40,6 +46,48 @@ class LoginController extends Controller
             return redirect()->route('pilih-surat');
         }
         return view('warga.layanan-mandiri.login.nik');
+    }
+
+    public function scanKtp(Request $request)
+    {
+        // dd($request->all());
+        try {
+            $request->validate([
+                'ktp' => 'required|image|mimes:jpeg,png,jpg|max:1024',
+            ], [
+                'required' => 'Foto KTP tidak boleh kosong',
+                'image' => 'Foto KTP harus berupa gambar',
+                'mimes' => 'Foto KTP harus berformat jpeg, jpg, atau png',
+                'max' => 'Foto KTP tidak boleh lebih dari 1MB',
+            ]);
+            $file = $request->file('ktp');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $filePath = $file->storeAs('ktp', $filename, 'public');
+            $imageUrl = storage_path('app/public/' . $filePath);
+            $options = OcrSpaceOptions::make()
+                ->language(Language::English)
+                ->OCREngine(OcrSpaceEngine::Engine2);
+            $result = OcrSpace::parseImageFile($imageUrl, $options);
+            $getParsedText = $result->getParsedResults()->first()->getParsedText();
+            $lines = explode("\n", $getParsedText);
+            $getNik = '';
+            foreach ($lines as $line) {
+                if (strpos($line, '3206') !== false) {
+                    $getNik = $line;
+                    break;
+                }
+            }
+            $nik = str_replace(' ', '', $getNik);
+            $nik = str_replace(':', '', $nik);
+            $nik = substr($nik, 0, 16);
+            $warga = Warga::where('nik', $nik)->first();
+            if ($warga) {
+                return redirect()->route('login.showPinForm', ['nik' => $nik]);
+            }
+            return redirect()->back()->withErrors(['ktp' => 'NIK tidak ditemukan']);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['ktp' => $e->getMessage()]);
+        }
     }
 
     // Mengecek NIK (Langkah 1)

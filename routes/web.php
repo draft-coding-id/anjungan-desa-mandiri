@@ -23,8 +23,9 @@ Route::view('/admin', 'admin.login')->name('login'); //Lanjut ke views admin
 
 // ----- Views Warga ----- //
 Route::get('/login', [LoginController::class, 'showNikForm'])->name('login.warga');
-// Masuk Menu Layanan Mandiri
+Route::view('/login/pindai-ktp', 'warga.layanan-mandiri.login.pindai_ktp')->name('pindai-ktp');
 Route::post('/login/check-nik', [LoginController::class, 'checkNik'])->name('login.checkNik');
+Route::post('/login/scan-ktp', [LoginController::class, 'scanKtp'])->name('login.scanKtp');
 Route::get('/login/pin/{nik}', [LoginController::class, 'showPinForm'])->name('login.showPinForm');
 Route::post('/login/check-pin', [LoginController::class, 'checkPin'])->name('login.checkPin');
 Route::view('/pengumuman-warga', 'warga.profil_desa.pengumuman');
@@ -38,6 +39,7 @@ Route::view('/statistik-desa', 'warga.profil_desa.statistik-desa')->name('statis
 Route::view('/kerjasama', 'warga.profil_desa.kerjasama')->name('kerjasama');
 Route::view('/kabar-pembanguan', 'warga.profil_desa.kabar_pembangunan')->name('kabar-pembangunan');
 
+// Masuk Menu Layanan Mandiri
 Route::middleware(['isAdmin'])->group(function () {
     Route::get('/dashboard', [LoginController::class, 'showDashboard'])->name('dashboard');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

@@ -18,7 +18,7 @@
             height: 100vh;
             width: 100vw;
             font-family: sans-serif;
-            background-image: url('{{ asset('assets/BackgroundMockupAnjungan.png') }}');
+            background-image: url('{{asset('assets/BackgroundMockupAnjungan.png') }}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -71,26 +71,12 @@
         }
 
         input {
-            font-size: 36px;
+            width: 100%;
             padding: 10px;
-            width: 50px;
-            height: 50px;
             border: 1px solid #000000;
             border-radius: 5px;
             margin-top: 10px;
             background-color: transparent;
-        }
-
-        .pin {
-            font-size: 36px;
-            padding: 10px;
-            width: 50px;
-            height: 50px;
-            border: 1px solid #000000;
-            border-radius: 5px;
-            margin-top: 10px;
-            background-color: transparent;
-            text-align: center;
         }
 
         .button-container {
@@ -125,6 +111,49 @@
         .button:hover {
             background-color: #e68a00;
         }
+
+        .ktp-picture {
+            opacity: 0.75;
+            height: 250px;
+            width: 250px;
+            position: relative;
+            overflow: hidden;
+
+            /* default image */
+            background: url('{{asset('assets/id-card_2094626.png')}}');
+
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* box-shadow: 0 8px 6px -6px black; */
+        }
+
+        .file-uploader {
+            opacity: 0;
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+        }
+
+        .upload-icon {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* initial icon state */
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: #ccc;
+            -webkit-text-stroke-width: 2px;
+            -webkit-text-stroke-color: #bbb;
+        }
+
+        .ktp-picture:hover .upload-icon {
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -145,22 +174,24 @@
             </div>
             <div class="right-col" style="text-align: center">
                 <div>
-                    <h1>Silahkan masukan PIN Keamanan Anda</h1>
-                    <form action="{{route('login.checkPin')}}" method="POST">
+                    <h1>Selamat Datang</h1>
+                    <h2>Silahkan pindai E-KTP anda untuk masuk </h2>
+                </div>
+                <div>
+                    <h3>Upload File KTP Anda</h3>
+                    <form action="{{route('login.scanKtp')}}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <input hidden name="nik" value="{{$nik}}" />
-                        <input type="number" name="pin1" class="pin"/>
-                        <input type="number" name="pin2" class="pin"/>
-                        <input type="number" name="pin3" class="pin"/>
-                        <input type="number" name="pin4" class="pin"/>
-                        <input type="number" name="pin5" class="pin"/>
-                        <input type="number" name="pin6" class="pin"/>
-                        <input type="hidden" name="pin" id="pin" />
-                        @if(session('error'))
-                        <p style="color: red;">{{session('error')}}</p>
-                        @endif
+                        <div class="ktp-picture">
+                            <h1 class="upload-icon">
+                                <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
+                            </h1>
+                            <input class="file-uploader" type="file" accept="image/*" name="ktp" />
+                        </div>
+                        @error('ktp')
+                        <span style="color: red;">{{$message}}</span>
+                        @enderror
                         <div style="display: flex; justify-content: center; align-items: center;">
-                            <button type="submit" class="button">Masuk</button>
+                            <button type="submit" class="button">Cek</button>
                         </div>
                     </form>
                 </div>
@@ -170,7 +201,28 @@
             <a href="/warga" class="button">Kembali</a>
         </div>
     </main>
-
 </body>
+<script>
+    const fileUpload = document.querySelector('.file-uploader');
+    // console.log(fileUpload);
+    fileUpload.addEventListener('change' , function (){
+        const file = this.files[0];
+        const reader = new FileReader();
+        reader.onload = function(){
+            const ktpPicture = document.querySelector('.ktp-picture');
+            ktpPicture.style.background = `url(${reader.result})`;
+            ktpPicture.style.opacity = 1;
+            ktpPicture.style.width = '600px';
+            ktpPicture.style.height = '350px';
+            ktpPicture.style.backgroundPosition = 'center';
+            ktpPicture.style.backgroundRepeat = 'no-repeat';
+            ktpPicture.style.backgroundSize = 'cover';
+            // console.log(ktpPicture);
+        }
+        reader.readAsDataURL(file);
+
+    })
+
+</script>
 
 </html>

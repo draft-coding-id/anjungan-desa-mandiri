@@ -168,6 +168,7 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
         'C' => 
         array (
             'Cron\\' => 5,
+            'Codesmiths\\LaravelOcrSpace\\' => 27,
             'Carbon\\Doctrine\\' => 16,
             'Carbon\\' => 7,
         ),
@@ -517,6 +518,10 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
         array (
             0 => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron',
         ),
+        'Codesmiths\\LaravelOcrSpace\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cdsmths/laravel-ocr-space/src',
+        ),
         'Carbon\\Doctrine\\' => 
         array (
             0 => __DIR__ . '/..' . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine',
@@ -548,6 +553,8 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
         'App\\Http\\Controllers\\SuratController' => __DIR__ . '/../..' . '/app/Http/Controllers/SuratController.php',
         'App\\Http\\Controllers\\Surat_Digital\\skDomisiliController' => __DIR__ . '/../..' . '/app/Http/Controllers/Surat_Digital/skDomisiliController.php',
         'App\\Http\\Controllers\\admin\\LayananSurat' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/LayananSurat.php',
+        'App\\Http\\Controllers\\admin\\WargaController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/WargaController.php',
+        'App\\Http\\Middleware\\IsAdmin' => __DIR__ . '/../..' . '/app/Http/Middleware/IsAdmin.php',
         'App\\Jobs\\MakePdf' => __DIR__ . '/../..' . '/app/Jobs/MakePdf.php',
         'App\\Models\\AdminProsesSurat' => __DIR__ . '/../..' . '/app/Models/AdminProsesSurat.php',
         'App\\Models\\ProsesSurat' => __DIR__ . '/../..' . '/app/Models/ProsesSurat.php',
@@ -665,6 +672,21 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
         'Carbon\\Unit' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Unit.php',
         'Carbon\\WeekDay' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/WeekDay.php',
         'Carbon\\WrapperClock' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/WrapperClock.php',
+        'Codesmiths\\LaravelOcrSpace\\Enums\\InputType' => __DIR__ . '/..' . '/cdsmths/laravel-ocr-space/src/Enums/InputType.php',
+        'Codesmiths\\LaravelOcrSpace\\Enums\\Language' => __DIR__ . '/..' . '/cdsmths/laravel-ocr-space/src/Enums/Language.php',
+        'Codesmiths\\LaravelOcrSpace\\Enums\\OcrSpaceEngine' => __DIR__ . '/..' . '/cdsmths/laravel-ocr-space/src/Enums/OcrSpaceEngine.php',
+        'Codesmiths\\LaravelOcrSpace\\Enums\\ParsingType' => __DIR__ . '/..' . '/cdsmths/laravel-ocr-space/src/Enums/ParsingType.php',
+        'Codesmiths\\LaravelOcrSpace\\Exceptions\\InvalidRequestException' => __DIR__ . '/..' . '/cdsmths/laravel-ocr-space/src/Exceptions/InvalidRequestException.php',
+        'Codesmiths\\LaravelOcrSpace\\Exceptions\\MissingOcrSpaceOptionException' => __DIR__ . '/..' . '/cdsmths/laravel-ocr-space/src/Exceptions/MissingOcrSpaceOptionException.php',
+        'Codesmiths\\LaravelOcrSpace\\Facades\\OcrSpace' => __DIR__ . '/..' . '/cdsmths/laravel-ocr-space/src/Facades/OcrSpace.php',
+        'Codesmiths\\LaravelOcrSpace\\LaravelOcrSpaceServiceProvider' => __DIR__ . '/..' . '/cdsmths/laravel-ocr-space/src/LaravelOcrSpaceServiceProvider.php',
+        'Codesmiths\\LaravelOcrSpace\\OcrSpace' => __DIR__ . '/..' . '/cdsmths/laravel-ocr-space/src/OcrSpace.php',
+        'Codesmiths\\LaravelOcrSpace\\OcrSpaceOptions' => __DIR__ . '/..' . '/cdsmths/laravel-ocr-space/src/OcrSpaceOptions.php',
+        'Codesmiths\\LaravelOcrSpace\\ValueObjects\\Line' => __DIR__ . '/..' . '/cdsmths/laravel-ocr-space/src/ValueObjects/Line.php',
+        'Codesmiths\\LaravelOcrSpace\\ValueObjects\\OcrSpaceResponse' => __DIR__ . '/..' . '/cdsmths/laravel-ocr-space/src/ValueObjects/OcrSpaceResponse.php',
+        'Codesmiths\\LaravelOcrSpace\\ValueObjects\\ParsedResult' => __DIR__ . '/..' . '/cdsmths/laravel-ocr-space/src/ValueObjects/ParsedResult.php',
+        'Codesmiths\\LaravelOcrSpace\\ValueObjects\\TextOverlay' => __DIR__ . '/..' . '/cdsmths/laravel-ocr-space/src/ValueObjects/TextOverlay.php',
+        'Codesmiths\\LaravelOcrSpace\\ValueObjects\\Word' => __DIR__ . '/..' . '/cdsmths/laravel-ocr-space/src/ValueObjects/Word.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/CronExpression.php',

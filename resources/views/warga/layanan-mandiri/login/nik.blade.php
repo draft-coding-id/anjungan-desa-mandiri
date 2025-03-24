@@ -18,7 +18,7 @@
             height: 100vh;
             width: 100vw;
             font-family: sans-serif;
-            background-image: url('{{ asset('assets/BackgroundMockupAnjungan.png') }}');
+            background-image: url('{{asset('assets/BackgroundMockupAnjungan.png')}}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -111,8 +111,6 @@
         .button:hover {
             background-color: #e68a00;
         }
-
-
     </style>
 </head>
 
@@ -122,10 +120,10 @@
             <div class="left-col">
                 <img src="{{asset('assets/logo.png')}}" alt="Logo Desa Rawapanjang" />
                 <h1>
-                    Anjungan Desa Mandiri 
+                    Anjungan Desa Mandiri
                 </h1>
                 <h1>
-                    Desa Rawapanjang 
+                    Desa Rawapanjang
                 </h1>
                 <h1>
                     Kabupaten Bogor
@@ -134,7 +132,7 @@
             <div class="right-col" style="text-align: center">
                 <div>
                     <h1>Selamat Datang</h1>
-                    <h2>Silahkan pindai E-KTP anda untuk masuk </h2>
+                    <h2>Silahkan <a href="{{route('pindai-ktp')}}">pindai</a> E-KTP anda untuk masuk </h2>
                 </div>
                 <div>
                     <p>atau</p>
@@ -143,7 +141,7 @@
                     <h3>Masukan Nomor KTP Anda</h3>
                     <form action="{{route('login.checkNik')}}" method="POST">
                         @csrf
-                        <input type="number" name="nik"/>
+                        <input type="number" name="nik" />
                         @if(session('error'))
                         <p style="color: red;">{{session('error')}}</p>
                         @endif
