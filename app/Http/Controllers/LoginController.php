@@ -71,7 +71,9 @@ class LoginController extends Controller
             $getParsedText = $result->getParsedResults()->first()->getParsedText();
             $lines = explode("\n", $getParsedText);
             $getNik = '';
+
             foreach ($lines as $line) {
+                // ubah awalan nomor nik sesuai daerah
                 if (strpos($line, '3206') !== false) {
                     $getNik = $line;
                     break;
