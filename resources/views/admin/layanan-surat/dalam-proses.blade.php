@@ -28,13 +28,13 @@
                 @forelse ($belumDiverifikasiAdmin as $surat)
                 <tr>
                     <td>{{$increment++}}</td>
-                    <td height="50px" width="250px"><a href="{{route('verifikasi.admin' , $surat->id)}}" class="button"
+                    <td height="50px" width="250px"><a href="{{route('layanan-surat-dalam-proses.verifikasi-admin' , $surat->id)}}" class="button"
                             ;">{{$surat->status}}</a></td>
                     <!-- <td>12345</td> -->
                     <td>{{$surat->isi_surat['nik']}}</td>
                     <td>{{$surat->isi_surat['nama_lengkap']}}</td>
                     <td>{{$surat->no_hp}}</td>
-                    <td>Surat Keterangan Domisili</td>
+                    <td>{{$surat->jenis_surat}}</td>
                     <td>{{date($surat->created_at)}}</td>
                     @empty
                     <td colspan="7" style="text-align: center">Surat Sudah diverifikasi semua oleh admin</td>
@@ -67,12 +67,12 @@
                 @forelse ( $belumDiverifikasiKades as $surat)
                 <tr>
                     <td>{{$incrementForTableBelumTtdKades++ }}</td>
-                    <td width="300px" height="50px"><a href="{{route('persetujuan.kades' , $surat->id)}}" class="button"
+                    <td width="300px" height="50px"><a href="{{route('layanan-surat-dalam-proses.persetujuan-kades' , $surat->id)}}" class="button"
                             ;">{{$surat->status}}</a></td>
                     <td>{{$surat->isi_surat['nik']}}</td>
                     <td>{{$surat->isi_surat['nama_lengkap']}}</td>
                     <td>{{$surat->no_hp}}</td>
-                    <td>Surat Keterangan Domisili</td>
+                    <td>{{$surat->jenis_surat}}</td>
                     <td>{{date($surat->created_at)}}</td>
                     @empty
                     <td colspan="7" style="text-align: center">Surat Sudah di Tanda tanga semua oleh Kades</td>
@@ -106,15 +106,15 @@
                 @forelse ( $belumDikirimKeWarga as $surat)
                 <tr>
                     <td>{{$incrementForTableBelumDiserahkan++}}</td>
-                    <td width="250px" height="50px"><a href="{{route('surat.selesai' , $surat->id)}}" class="button"
+                    <td width="250px" height="50px"><a href="{{route('layanan-surat-dalam-proses.surat-selesai' , $surat->id)}}" class="button"
                             ;">{{$surat->status}}</a></td>
                     <td>{{$surat->warga->nik}}</td>
                     <td>{{$surat->warga->nik}}</td>
                     <td>{{$surat->no_hp}}</td>
-                    <td>Surat Keterangan Domisili</td>
+                    <td>{{$surat->jenis_surat}}</td>
                     <td>{{date($surat->created_at)}}</td>
                     @empty
-                    <td colspan="7" style="text-align: center">Surat Sudah di Tanda tanga semua oleh Kades</td>
+                    <td colspan="7" style="text-align: center">Surat Sudah di kirim ke warga</td>
                 </tr>
                 @endforelse
                 <tr>

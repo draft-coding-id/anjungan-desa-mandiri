@@ -47,7 +47,7 @@ class LayananSurat extends Controller
             'status' => 'Menunggu Tanda Tangan Kades',
             'updated_at' => now(),
         ]);
-        return redirect()->route('layanan-surat.index');
+        return redirect()->route('layanan-surat-dalam-proses');
     }
 
     public function persetujuanKades($id)
@@ -70,7 +70,7 @@ class LayananSurat extends Controller
             'file_surat' => $fileName,
         ]);
         MakePdf::dispatch($surat, $fileName);
-        return redirect()->route('layanan-surat.index');
+        return redirect()->route('layanan-surat-dalam-proses');
     }
 
     // Untuk meng Get surat yang sudah selesai
@@ -115,7 +115,7 @@ class LayananSurat extends Controller
             'status' => 'Surat Selesai dan telah dikirimkan melalui whatsapp',
             'updated_at' => now(),
         ]);
-        return redirect()->route('layanan-surat.index');
+        return redirect()->route('layanan-surat-dalam-proses');
     }
 
     /**
@@ -132,7 +132,7 @@ class LayananSurat extends Controller
             'status' => 'Surat Telah Dicetak',
             'updated_at' => now(),
         ]);
-        return redirect()->route('layanan-surat.index');
+        return redirect()->route('layanan-surat-dalam-proses');
     }
 
     public function tandaiDiserahkan($id)
@@ -144,7 +144,7 @@ class LayananSurat extends Controller
             'status' => 'Surat Telah Diserahkan',
             'updated_at' => now(),
         ]);
-        return redirect()->route('layanan-surat.index');
+        return redirect()->route('layanan-surat-dalam-proses');
     }
 
     // Untuk Meng Get semua Surat yang di tolak
@@ -166,7 +166,7 @@ class LayananSurat extends Controller
             'updated_at' => now(),
             'status' => 'Surat Ditolak ' . Auth::user()->name,
         ]);
-        return redirect()->route('layanan-surat.index');
+        return redirect()->route('layanan-surat-dalam-proses');
     }
 
     // Untuk mendapatkan riwayat surat

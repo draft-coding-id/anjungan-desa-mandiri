@@ -121,6 +121,8 @@
             <iframe src="/skp" width="100%" height="100%"></iframe>
             @elseif ($proses_surat['jenis_surat'] == "SKTM")
             <iframe src="/skktpdp" width="100%" height="100%"></iframe>
+            @elseif ($proses_surat['jenis_surat'] == "SKWH")
+            <iframe src="/skwh" width="100%" height="100%"></iframe>
             @endif
         </div>
         <form action="#" method="POST">

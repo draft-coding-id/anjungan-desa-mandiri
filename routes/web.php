@@ -53,6 +53,7 @@ Route::controller(SuratController::class)->group(function () {
     Route::get('/surat-keterangan-domisili', 'form_Surat_Keterangan_Domisili');
     Route::get('/surat-keterangan-pengantar', 'form_Surat_Keterangan_Pengantar');
     Route::get('/surat-keterangan-ktp-dalam-proses', 'form_Surat_Keterangan_KTP_Dalam_Proses');
+    Route::get('/surat-keterangan-wali-hakim', 'form_surat_keterangan_wali_hakim');
     Route::post('/submitForm', 'submitForm')->name('submitForm');
     Route::get('/konfirmasi', 'konfirmasi');
     // Route::post('/submitSurat', [SuratController::class, 'submitSurat']);
@@ -63,6 +64,7 @@ Route::controller(SuratController::class)->group(function () {
 // Layanan Mandiri - Preview Surat
 Route::get('/skd', [PreviewSuratController::class, 'skd'])->name('preview.skd');
 Route::get('/skp', [PreviewSuratController::class, 'skp']);
+Route::get('/skwh', [PreviewSuratController::class, 'skwh']);
 Route::get('/skck', [PreviewSuratController::class, 'skck']);
 Route::get('/skktpdp', [PreviewSuratController::class, 'skktpdp']);
 Route::get('/spkk', [PreviewSuratController::class, 'spkk']);
@@ -72,6 +74,7 @@ Route::get('/skwh', [PreviewSuratController::class, 'skwh']);
 // Preview Surat Admin
 Route::get('/get-detail-skd/{id}', [PreviewSuratController::class, 'getDetailSkd'])->name('get-detail-skd');
 Route::get('/get-detail-skp/{id}', [PreviewSuratController::class, 'getDetailSkp'])->name('get-detail-skp');
+Route::get('/get-detail-skwh/{id}', [PreviewSuratController::class, 'getDetailSkwh'])->name('get-detail-skwh');
 // Layanan Mandiri - Verifikasi Surat
 // Route::view('/verifikasi', 'warga.layanan-mandiri.verif_surat');
 // Route::view('/berhasil', 'warga.layanan-mandiri.berhasil');
@@ -95,24 +98,24 @@ Route::middleware(['auth'])->group(function () {
 
     // Layanan Surat
     // Route::view('/layanan-surat', 'admin.layanan-surat.dalam-proses');
-    Route::get('/layanan-surat', [LayananSurat::class, 'index'])->name('layanan-surat.index');
-    Route::view('/kelola-surat', 'admin.layanan-surat.kelola-surat')->name('layanan-surat.kelola-surat');
+    Route::get('/layanan-surat', [LayananSurat::class, 'index'])->name('layanan-surat-dalam-proses');
+    Route::view('/kelola-surat', 'admin.layanan-surat.kelola-surat')->name('layanan-surat-kelola-surat');
 
     // Proses Surat
-    Route::get('/surat-ditolak/', [LayananSurat::class, 'getAllSuratDitolak'])->name('layanan-surat.ditolak');
+    Route::get('/surat-ditolak/', [LayananSurat::class, 'getAllSuratDitolak'])->name('layanan-surat-ditolak');
     Route::post('/surat-ditolak/{idSurat}', [LayananSurat::class, 'suratDitolak'])->name('surat.ditolak');
-    Route::get('/verifikasi-admin/{idSurat}', [LayananSurat::class, 'verifikasiAdmin'])->name('verifikasi.admin');
+    Route::get('/verifikasi-admin/{idSurat}', [LayananSurat::class, 'verifikasiAdmin'])->name('layanan-surat-dalam-proses.verifikasi-admin');
     Route::post('/verifikasi-admin/{idSurat}', [LayananSurat::class, 'diVerifikasiAdmin'])->name('diverifikasi.admin');
-    Route::get('/persetujuan-kades/{idSurat}', [LayananSurat::class, 'persetujuanKades'])->name('persetujuan.kades');
+    Route::get('/persetujuan-kades/{idSurat}', [LayananSurat::class, 'persetujuanKades'])->name('layanan-surat-dalam-proses.persetujuan-kades');
     Route::post('/persetujuan-kades/{idSurat}', [LayananSurat::class, 'disetujuiKades'])->name('disetujui.kades');
     // Route::get('/print-surat/{idSurat}', [GeneratePDf::class, 'generate'])->name('generate.pdf');
     // Route::get('/tanda-tangan-surat' , [LayananSurat::class, 'tandaTanganSurat'])->name('tanda-tangan.surat');
-    Route::get('/surat-selesai/{idSurat}', [LayananSurat::class, 'suratSelesai'])->name('surat.selesai');
+    Route::get('/surat-selesai/{idSurat}', [LayananSurat::class, 'suratSelesai'])->name('layanan-surat-dalam-proses.surat-selesai');
     Route::post('/kirim-surat/{idSurat}', [LayananSurat::class, 'kirimSurat'])->name('kirimSurat');
     Route::post('/tandaiSuratdicetak/{idSurat}', [LayananSurat::class, 'tandaiCetak'])->name('tandaiSuratDicetak');
     Route::post('/tandaisudahdikirim/{idSurat}', [LayananSurat::class, 'tandaiDikirim'])->name('tandaiSuratDikirim');
     Route::post('/tandaiDiserahkan/{idSurat}', [LayananSurat::class, 'tandaiDiserahkan'])->name('tandaiSuratDiserahkan');
-    Route::get('/riwayat-surat', [LayananSurat::class, 'getRiwayatSurat'])->name('layanan-surat.riwayat');
+    Route::get('/riwayat-surat', [LayananSurat::class, 'getRiwayatSurat'])->name('layanan-surat-riwayat');
     Route::view('/surat-selesai', 'admin.layanan-surat.proses-surat.surat-selesai');
 });
     // ----- Ends of Views Admin Desa ----- //

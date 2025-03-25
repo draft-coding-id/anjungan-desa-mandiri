@@ -28,9 +28,23 @@ class PreviewSuratController extends Controller
 
         return view('warga.layanan-mandiri.preview-surat.surat_ket_pengantar', ['proses_surat' => $proses_surat]);
     }
-    public function getDetailSkp($id){
+    public function getDetailSkp($id)
+    {
         $surat = Surat::find($id);
         return view('admin.preview-surat.surat_ket_pengantar', ['surat' => $surat]);
+    }
+
+    public function skwh()
+    {
+        $proses_surat = session('surat');
+
+        return view('warga.layanan-mandiri.preview-surat.surat_ket_wali_hakim', ['proses_surat' => $proses_surat]);
+    }
+
+    public function getDetailSkwh($id)
+    {
+        $surat = Surat::find($id);
+        return view('admin.preview-surat.surat_ket_wali_hakim', ['surat' => $surat]);
     }
 
     public function skck()
@@ -59,12 +73,5 @@ class PreviewSuratController extends Controller
         $proses_surat = ProsesSurat::all();
 
         return view('warga.layanan-mandiri.preview-surat.surat_permohonan_perubahan_kk', ['proses_surat' => $proses_surat]);
-    }
-
-    public function skwh()
-    {
-        $proses_surat = ProsesSurat::all();
-
-        return view('warga.layanan-mandiri.preview-surat.surat_ket_wali_hakim', ['proses_surat' => $proses_surat]);
     }
 }

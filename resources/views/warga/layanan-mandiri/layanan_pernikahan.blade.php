@@ -7,9 +7,9 @@
 @section('surat-button')
 <a href="#" class="button-indigo">Surat <br> Keterangan <br> Rujuk Cerai</a>
 <a href="#" class="button-indigo">Surat <br> Permohonan <br> Cerai</a>
-<a href="#" class="button-indigo">Surat <br> Keterangan <br> Nikah</a>
-<a href="#" class="button-indigo">Surat <br> Keterangan <br> Pergi Kawin</a>
-<a href="#" class="button-indigo">Surat <br> Keterangan <br> Wali Hakim</a>
+{{-- <a href="#" class="button-indigo">Surat <br> Keterangan <br> Nikah</a> --}}
+{{-- <a href="#" class="button-indigo">Surat <br> Keterangan <br> Pergi Kawin</a> --}}
+<a href="/surat-keterangan-wali-hakim" class="button-indigo">Surat <br> Keterangan <br> Wali Hakim</a>
 @endsection
 
 @section('nav-button')

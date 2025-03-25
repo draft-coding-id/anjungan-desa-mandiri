@@ -291,18 +291,7 @@
             <h4>Admin Desa</h4>
             <p>Desa Rawapanjang <br> Kabupaten Bogor</p>
         </div>
-        <div class="sidebar-nav">
-            <a href=/beranda class="nav-link">Beranda</a>
-            <a href=/info-desa class="nav-link">Informasi Desa</a>
-            <a href=/data-warga class="nav-link">Data Warga</a>
-            <a href=/statistik class="nav-link">Statistik Desa</a>
-            <a href=/layanan-surat class="nav-link active">Layanan Surat</a>
-            <a href=/pengumuman class="nav-link">Pengumuman</a>
-            <a href=/artikel-desa class="nav-link">Artikel Desa</a>
-            <a href=/agenda class="nav-link">Agenda Desa</a>
-            <a href=/pengaturan-akun class="nav-link">Pengaturan Akun</a>
-            <a href=/admin class="nav-link">Logout</a>
-        </div>
+        @include('layout.admin.sidebar')
     </div>
 
     <!-- Main Content -->
@@ -315,17 +304,20 @@
             <h4>Layanan Surat > Dalam Proses > Judul Surat</h4>
         </div>
 
-        <div class="menu-surat">
-            <a href=/kelola-surat>Kelola Surat</a>
-            <a href=/layanan-surat>Dalam Proses</a>
-            <a href=/surat-ditolak>Arsip Surat Ditolak</a>
-            <a href=/riwayat-surat>Riwayat</a>
-        </div>
+       @include('layout.admin.menu_surat')
 
         <div class="content">
             <div class="content-1">
                 <div class="mt-4">
-                    <h3>{{$surat->jenis_surat}}</h3>
+                    <h3>@if($surat->jenis_surat == 'SKD')
+                        Surat Keterangan Domisili
+                        @elseif($surat->jenis_surat == 'SKP')
+                        Surat Keterangan Pengantar
+                        @elseif($surat->jenis_surat == 'SKTM')
+                        Surat Keterangan Tidak Mampu
+                        @elseif($surat->jenis_surat == "SKWH")
+                        Surat Keterangan Wali Hakim
+                        @endif</h3>
                     <h3>{{$surat->warga->nama_lengkap}}</h3>
                     <p>diajukan pada {{$surat->created_at->translatedFormat('d F Y')}}</p>
                     <br>
@@ -364,7 +356,7 @@
                 </div>
 
                 <div class="button-container">
-                    <a href="{{route('layanan-surat.index')}}" class="button">Kembali</a>
+                    <a href="{{route('layanan-surat-dalam-proses')}}" class="button">Kembali</a>
                     <a href="{{asset('surat/'. $surat->file_surat . " .pdf")}}" class="button" target="_blank">Cetak
                         Surat</a>
                     @if($surat->is_print == 0)

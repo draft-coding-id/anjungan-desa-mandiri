@@ -37,13 +37,22 @@ class SuratController extends Controller
     public function form_Surat_Keterangan_KTP_Dalam_Proses(Request $request)
     {
         // Data warga diambil dari session
-        $warga = session('warga');
+        $warga = auth()->guard('warga')->user();
+
         if (!$warga) {
             return redirect()->route('login');
         }
-
-        ProsesSurat::truncate();
         return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-ktp-dalam-proses', ['warga' => $warga]);
+    }
+
+    public function form_surat_keterangan_wali_hakim(Request $request)
+    {
+        // Data warga diambil dari session
+        $warga = auth()->guard('warga')->user();
+        if (!$warga) {
+            return redirect()->route('login');
+        }
+        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-wali-hakim', ['warga' => $warga]);
     }
 
     // Proses pengiriman data
@@ -126,6 +135,36 @@ class SuratController extends Controller
                     'rt.required' => 'RT harus diisi',
                     'rw.required' => 'RW harus diisi',
                     'keperluan.required' => 'Keperluan harus diisi',
+                ]);
+            } elseif ($request->jenis_surat == "SKWH") {
+                $validatedData = $request->validate([
+                    'jenis_surat' => 'required|string',
+                    'warga_id' => 'required',
+                    'nik' => 'required|string|min:16|max:16',
+                    'nama_lengkap' => 'required|string|min:3|max:255',
+                    'tempat_lahir' => 'required|string',
+                    'tanggal_lahir' => 'required|date|before:today',
+                    'jenis_kelamin' => 'required|string',
+                    'kewarganegaraan' => 'required|string',
+                    'agama' => 'required|string',
+                    'pekerjaan' => 'required|string',
+                    'alamat' => 'required|string',
+                ], [
+                    'jenis_surat.required' => 'Surat harus diisi',
+                    'nik.required' => 'NIK harus diisi',
+                    'nik.min' => 'NIK harus 16 digit',
+                    'nik.max' => 'NIK harus 16 digit',
+                    'nama_lengkap.required' => 'Nama Lengkap harus diisi',
+                    'nama_lengkap.min' => 'Nama Lengkap minimal 3 karakter',
+                    'nama_lengkap.max' => 'Nama Lengkap maksimal 255 karakter',
+                    'tempat_lahir.required' => 'Tempat Lahir harus diisi',
+                    'tanggal_lahir.required' => 'Tanggal Lahir harus diisi',
+                    'tanggal_lahir.before' => 'Tanggal Lahir tidak valid',
+                    'jenis_kelamin.required' => 'Jenis Kelamin harus diisi',
+                    'kewarganegaraan.required' => 'Kewarganegaraan harus diisi',
+                    'agama.required' => 'Agama harus diisi',
+                    'pekerjaan.required' => 'Pekerjaan harus diisi',
+                    'alamat.required' => 'Alamat harus diisi',
                 ]);
             }
             session(['surat' => $validatedData]);
