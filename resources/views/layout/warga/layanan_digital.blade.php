@@ -19,6 +19,7 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
+            overflow-y: auto;
             height: 100vh;
         }
 
@@ -26,9 +27,9 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: 200px;
+            gap: 100px;
             align-items: center;
-            height: 100vh;
+            /* height: 100vh; */
         }
 
         h1 {
