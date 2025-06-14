@@ -13,30 +13,54 @@ class LayananSurat extends Controller
 {
     public function index()
     {
-        $belumDiverifikasiAdmin = Surat::BelumDiverifikasiAdmin()->paginate(5);
-        $belumDiverifikasiKades = Surat::BelumDiverifikasiKades()->paginate(10);
+        $dalamProses = surat::DalamProses()->paginate(10);
         $belumDikirimKeWarga = Surat::BelumDikirimkanKeWarga()->paginate(10);
-        $suratSelesai = Surat::suratSelesai()->get();
         $increment = 1;
-        $incrementForTableBelumTtdKades = 1;
         $incrementForTableBelumDiserahkan = 1;
         return view('admin.layanan-surat.dalam-proses', [
-            // 'skDomisilis' => $skDomisilis,
-            'belumDiverifikasiAdmin' => $belumDiverifikasiAdmin,
-            'belumDiverifikasiKades' => $belumDiverifikasiKades,
+            'dalamProses' => $dalamProses,
             'belumDikirimKeWarga' => $belumDikirimKeWarga,
             'increment' => $increment,
-            'incrementForTableBelumTtdKades' => $incrementForTableBelumTtdKades,
             'incrementForTableBelumDiserahkan' => $incrementForTableBelumDiserahkan,
         ]);
     }
 
-    public function verifikasiAdmin($id)
+    public function lihatSurat($id)
     {
         $surat = Surat::find($id);
-        return view('admin.layanan-surat.proses-surat.verif-admin', [
+        return $surat;
+    }
+
+    public function previewSurat($jenisSurat, $id)
+    {
+        $surat = Surat::find($id);
+        $view = match ($jenisSurat) {
+            "SKD" => 'admin.preview-surat.surat_ket_domisili',
+            "SKP" => 'surat.preview.skp',
+            "SKWH" => 'surat.preview.skwh',
+            "SKCK" => 'surat.preview.skck',
+            "SKKTPDP" => 'surat.preview.skktpdp',
+            "SPKK" => 'surat.preview.spkk',
+            "SPPKK" => 'surat.preview.sppkk'
+        };
+        return view($view, [
             'surat' => $surat,
         ]);
+    }
+
+    public function setujuiSurat($id)
+    {
+        $surat = Surat::find($id);
+        $fileName = "surat-" . $surat->jenis_surat . $surat->id . "-" . $surat->warga->nik . "-" . date('hhmmss');
+        $surat->update([
+            'is_accepted' => true,
+            'status' => 'Telah disetujui oleh ' . Auth::user()->role,
+            'updated_at' => now(),
+            'is_approve_admin' => true,
+            'file_surat' => $fileName,
+        ]);
+        MakePdf::dispatch($surat, $fileName);
+        return redirect()->route('layanan-surat-dalam-proses');
     }
 
     public function diVerifikasiAdmin($id)
@@ -81,14 +105,6 @@ class LayananSurat extends Controller
             'surat' => $surat,
         ]);
     }
-
-    /**
-     * KirimSurat
-     *
-     * @param  mixed $id
-     * @param  mixed $request
-     * @return void
-     */
     public function kirimSurat($id, Request $request)
     {
         $message = urlencode($request->pesan_wa);
@@ -100,12 +116,7 @@ class LayananSurat extends Controller
         $url = "https://wa.me/" . $surat->no_hp . "?text=" . $message;
         return redirect($url);
     }
-    /**
-     * TAndaiDiKirim
-     * Berfungsi untuk menandai surat yang telah dikirim ke warga
-     * @param  mixed $id
-     * @return void
-     */
+
     public function tandaiDikirim($id)
     {
         $surat = Surat::find($id);
@@ -118,12 +129,6 @@ class LayananSurat extends Controller
         return redirect()->route('layanan-surat-dalam-proses');
     }
 
-    /**
-     * TandaiCetak
-     * Berfungsi untuk menandai surat yang telah dicetak
-     * @param  mixed $id
-     * @return void
-     */
     public function tandaiCetak($id)
     {
         $surat = Surat::find($id);
@@ -158,15 +163,16 @@ class LayananSurat extends Controller
         ]);
     }
     // Untuk Post Request
-    public function suratDitolak($id, Request $request)
+    public function suratDitolak($id,  Request $request)
     {
         $surat = Surat::findOrfail($id);
         $surat->update([
             'is_accepted' => false,
             'updated_at' => now(),
-            'status' => 'Surat Ditolak ' . Auth::user()->name,
+            'alasan_tolak' => $request->alasan,
+            'status' => 'Surat Ditolak Oleh ' . Auth::user()->role,
         ]);
-        return redirect()->route('layanan-surat-dalam-proses');
+        return redirect()->route('layanan-surat-ditolak');
     }
 
     // Untuk mendapatkan riwayat surat

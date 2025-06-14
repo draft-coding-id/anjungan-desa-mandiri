@@ -17,50 +17,50 @@
         .main-content {
             flex-grow: 1;
         }
+
         /* Sidebar */
         .sidebar {
-        width: 250px;
-        background-color: #fff;
-        height: 100vh;
-        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            background-color: #fff;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
         }
-        
+
         .sidebar-header {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(to right, #ff8a00 50%, #f7e700);
-        padding: 30px 20px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to right, #ff8a00 50%, #f7e700);
+            padding: 30px 20px 10px;
         }
-        
+
         .sidebar-nav {
-        padding: 10px;
+            padding: 10px;
         }
-        
+
         .nav-link {
-        display: block;
-        color: #333;
-        font-size: 14px;
-        text-decoration: none;
-        padding: 10px;
-        border-radius: 5px;
-        transition: 0.5s;
+            display: block;
+            color: #333;
+            font-size: 14px;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+            transition: 0.5s;
         }
-        
+
         .nav-link:hover {
-        border: 1px solid #ffa500;
-        /* Mengatur border solid dengan warna oranye */
-        background: white;
-        color: #ffa500;
-        /* Warna teks */
+            border: 1px solid #ffa500;
+            /* Mengatur border solid dengan warna oranye */
+            background: white;
+            color: #ffa500;
+            /* Warna teks */
         }
-        
+
         .nav-link.active {
-        background: linear-gradient(to right, #ff8a00 50%, #f7e700);
-        color: white;
-        /* Warna teks */
-        font-weight: bold;
+            background: linear-gradient(to right, #ff8a00 50%, #f7e700);
+            color: white;
+            /* Warna teks */
+            font-weight: bold;
         }
 
         .header {
@@ -133,12 +133,33 @@
         }
 
         .preview-container {
-            margin: auto;
-            border: 1px solid #ddd;
-            padding: 10px;
-            width: 900px;
-            height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            width: 100%;
         }
+
+        .preview-header {
+            width: 100%;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .preview-content {
+            width: 100%;
+            height: 700px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 6px;
+        }
+
+
 
         .button-container {
             text-align: center;
@@ -209,21 +230,39 @@
         .lightbox_content p {
             line-height: 1.5;
         }
+
+
+        @media (max-width: 768px) {
+            .preview-container {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            .preview-footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .preview-actions {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
-       <div class="sidebar-header">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-        </svg>
-        <h3>{{auth()->user()->name}}</h3>
-        <p>Desa Rawapanjang <br> Kabupaten Bogor</p>
-    </div>
+        <div class="sidebar-header">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <h3>{{auth()->user()->name}}</h3>
+            <p>Desa Rawapanjang <br> Kabupaten Bogor</p>
+        </div>
         @include('layout.admin.sidebar')
     </div>
 
@@ -262,22 +301,29 @@
                     Surat Keterangan Wali Hakim
                     @endif
                 </h3>
-                <h3>{{$surat->warga->nama_lengkap}}</h3>
+                <h3>Diajukan oleh {{$surat->warga->nama_lengkap}}</h3>
+                <h4>Status : {{$surat->status}}</h4>
                 <p>diajukan pada {{ $surat->created_at->translatedFormat('d F Y') }}</p>
             </div>
             <div class="preview-container">
-                @if($surat->jenis_surat == 'SKD')
-                <iframe src="{{route('get-detail-skd' , $surat->id)}}" width="100%" height="100%"></iframe>
-                @elseif($surat->jenis_surat == 'SKP')
-                <iframe src="{{route('get-detail-skp' , $surat->id)}}" width="100%" height="100%"></iframe>
-                @elseif($surat->jenis_surat == 'SKTM')
-                <iframe src="{{route('get-detail-sktm' , $surat->id)}}" width="100%" height="100%"></iframe>
-                @elseif($surat->jenis_surat == "SKWH")
-                <iframe src="{{route('get-detail-skwh' , $surat->id)}}" width="100%" height="100%"></iframe>
-                @endif
-            </div>
-            @yield('action-container')
+                <div class="preview-header">
+                    <h2>Preview Dokumen</h2>
+                </div>
 
+                <div class="preview-content">
+                    @if($surat->jenis_surat == 'SKD')
+                    <iframe src="{{route('get-detail-skd' , $surat->id)}}" width="100%" height="100%"></iframe>
+                    @elseif($surat->jenis_surat == 'SKP')
+                    <iframe src="{{route('get-detail-skp' , $surat->id)}}" width="100%" height="100%"></iframe>
+                    @elseif($surat->jenis_surat == 'SKTM')
+                    <iframe src="{{route('get-detail-sktm' , $surat->id)}}" width="100%" height="100%"></iframe>
+                    @elseif($surat->jenis_surat == "SKWH")
+                    <iframe src="{{route('get-detail-skwh' , $surat->id)}}" width="100%" height="100%"></iframe>
+                    @endif
+                </div>
+                @yield('action-container')
+
+            </div>
         </div>
     </div>
 </body>

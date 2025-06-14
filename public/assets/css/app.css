@@ -5,6 +5,40 @@ body {
     background-color: #f4f4f4;
 }
 
+.header-beranda {
+    padding:40px;
+    font-size:24px;
+}
+
+.card-beranda {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:20px;
+}
+
+.card {
+    padding: 20px;
+    border: 2px solid #000;
+    box-shadow: #ccc  4px 4px 8px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    color: #333;
+}
+
+.card:hover {
+    transform: translateX('2')
+}
+
+.card h2 {
+    font-size: 48px;
+}
+.card p {
+    font-size: 24px;
+}
+
 /* Sidebar Styles */
 .sidebar {
     width: 250px;
@@ -70,7 +104,7 @@ table {
 thead tr {
     background: linear-gradient(to right, #ff8a00 50%, #f7e700);
     color: white;
-    text-align: left;
+    text-align: center;
     font-weight: bold;
 }
 
@@ -83,6 +117,7 @@ td {
 tbody tr {
     transition: all 0.3s ease;
     cursor: pointer;
+    text-align: center;
 }
 
 tbody tr:nth-child(even) {
@@ -102,12 +137,41 @@ td button {
     border-radius: 4px;
     text-decoration: none;
     font-size: 13px;
+    padding: 10px 20px;
 }
+
+td .setuju-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+}
+
+td .setuju-button:hover {
+    background-color: #45a049;
+    color: white;
+}
+
+td .tolak-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+}
+
+td .tolak-button:hover {
+    background-color: #e53935;
+    color: white;
+}
+
 
 td a {
     background-color: #1e88e5;
     color: white;
     border: none;
+}
+
+td .aksi {
+    background-color: #e68a00;
+    padding: 10px 20px;
 }
 
 td button {
@@ -121,6 +185,269 @@ td a:hover,
 td button:hover {
     opacity: 0.8;
 }
+
+/* preview */
+.preview-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.preview-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 1000px;
+    width: 95%;
+    max-height: 95vh;
+    overflow: hidden;
+}
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.preview-body {
+    height: calc(100vh - 150px);
+}
+
+.close-button {
+    color:#000;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.close-button:hover {
+    color: #fff;
+}
+
+/* CSS untuk modal persetujuan */
+.approval-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.approval-content {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    width: 90%;
+    max-width: 1000px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.approval-content h2 {
+    margin: 0 0 25px 0;
+    font-size: 24px;
+    color: #333;
+    font-weight: 600;
+}
+
+.surat-info {
+    text-align: left;
+    margin: 20px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.info-row {
+    display: flex;
+    margin-bottom: 12px;
+    align-items: flex-start;
+}
+
+.info-row:last-child {
+    margin-bottom: 0;
+}
+
+.info-label {
+    font-weight: 600;
+    width: 300px;
+    color: #333;
+    flex-shrink: 0;
+}
+
+.info-value {
+    color: #555;
+    flex: 1;
+}
+
+.preview-section {
+    margin: 20px 0;
+}
+
+.preview-box {
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    padding: 10px 10px;
+    background: #fafafa;
+    color: #999;
+    font-size: 16px;
+    margin: 15px 0;
+}
+
+.confirmation-text {
+    margin: 20px 0;
+    color: #666;
+    font-size: 16px;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 100px;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+.btn-primary {
+    background: #4caf50;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #45a049;
+}
+
+.penolakan-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.penolakan-content {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    width: 90%;
+    max-width: 1000px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.penolakan-content h2 {
+    margin: 0 0 25px 0;
+    font-size: 24px;
+    color: #dc3545;
+    font-weight: 600;
+}
+
+/* Styling khusus untuk form penolakan */
+.alasan-penolakan {
+    margin: 20px 0;
+    text-align: left;
+}
+
+.alasan-penolakan label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.alasan-penolakan textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px;
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.alasan-penolakan textarea:focus {
+    outline: none;
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.alasan-penolakan .char-count {
+    text-align: right;
+    font-size: 12px;
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+.warning-text {
+    margin: 20px 0;
+    color: #dc3545;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background: #c82333;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* end of preview styel */
 
 /* Heading atas tabel */
 h4 {

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin - Anjungan Desa Mandiri</title>
-    <link rel="icon" href="https://rawapanjang-desa.id/desa/logo/1679693855_logo-pemkab-bogor.png" type="image/png">
+    <link rel="icon" href="assets/logo.png" type="image/png">
     <style>
         body {
             margin: 0;
@@ -15,11 +15,51 @@
             background-repeat: no-repeat;
             background-position: center;
         }
-
+        .modal-overlay {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0; top: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.15);
+        justify-content: center;
+        align-items: center;
+        }
+        .modal-overlay.active {
+        display: flex;
+        }
+        .custom-modal {
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        padding: 32px 24px 24px 24px;
+        max-width: 400px;
+        width: 90vw;
+        text-align: center;
+        border: 1.5px solid #444;
+        }
+        .custom-modal p {
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 24px;
+        margin-top: 0;
+        letter-spacing: 1px;
+        }
+        .custom-modal button {
+        padding: 8px 32px;
+        border-radius: 7px;
+        border: 1.5px solid #444;
+        background: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+        }
+        .custom-modal button:hover {
+        background: #f2f2f2;
+        }
         a {
             color: #000;
             font-size: 16px;
-            /* text-decoration: none; */
         }
 
         form {
@@ -27,21 +67,22 @@
         }
 
         .header {
-            /* color: white; */
             text-align: center;
             padding: 30px;
         }
 
         .page-content {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 100%;
+            min-height: 100vh;
+            width: 100vw;
         }
 
         .login-container {
             background: #fff;
-            opacity: 0.7;
+            opacity: 0.85;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -54,7 +95,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 20px 0 0 0;
         }
 
         .button {
@@ -83,17 +124,12 @@
         }
 
         .form-group {
-            margin: 30px 0;
+            margin: 30px 0 10px 0;
             text-align: left;
         }
 
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .form-group input {
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
             width: 90%;
             padding: 10px;
             border: 1px solid #ddd;
@@ -101,7 +137,7 @@
             font-size: 14px;
             color: #333;
             text-align: center;
-            margin: 10px
+            margin: 10px 0;
         }
 
         .form-group input:focus {
@@ -109,23 +145,35 @@
             outline: none;
         }
 
-        .footer {
-            width: 100%;
-            color: white;
-            text-align: center;
-            background-color: rgba(255, 153, 0, 0.5);
-            border: 2px solid rgba(0, 0, 0, 0.0);
-            margin-top: 30px;
+        .form-options {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 10px 0 0 0;
+            font-size: 14px;
         }
 
-        .credit {
+        .form-options label {
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 30px;
-            font-size: 12px;
-            background-color: #ff9900;
-            color: white;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .forgot-link {
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-left: 10px;
+        }
+
+        .header img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            background: #eee;
         }
     </style>
 </head>
@@ -137,27 +185,55 @@
         {{ session('error') }}
     </h2>
     @endif
-    <div class="header">
-        <img src="https://rawapanjang-desa.id/desa/logo/1679693855_logo-pemkab-bogor.png" alt="Logo Desa" />
-        <h1>Anjungan Desa Mandiri</h1>
-        <h2>Desa Rawapanjang<br>Kabupaten Bogor</h2>
-    </div>
     <div class="page-content">
+        <div class="header">
+            <img src="assets/logo.png" alt="Logo Desa" />
+            <h1>Anjungan Desa Mandiri</h1>
+            <h2>Desa Rawapanjang<br>Kabupaten Bogor</h2>
+        </div>
         <div class="login-container">
             <h2>Login Administrator Desa</h2>
             <form action="{{route('cek-credentials')}}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <input type="text" id="username" name="username" placeholder="Nama Pengguna">
-                    <input type="password" id="password" name="password" placeholder="Kata Sandi">
+                    <input type="text" id="username" name="username" placeholder="Nama Pengguna" required>
+                    <input type="password" id="password" name="password" placeholder="Kata Sandi" required>
                 </div>
-                <div class="button-container" style="padding: 0;">
+                <div class="form-options">
+                    <label>
+                        <input type="checkbox" id="show-password">
+                        Tampilkan Kata Sandi
+                    </label>
+                    <span class="forgot-link" onclick="showForgotPassword()">Lupa kata sandi?</span>
+                </div>
+                <div class="button-container">
                     <button type="submit" class="button">Masuk</button>
                 </div>
             </form>
             <a href="{{route('login.warga')}}">Masuk sebagai warga</a>
         </div>
+        <div class="modal-overlay" id="forgot-modal">
+            <div class="custom-modal">
+                <p>Mohon hubungi admin untuk<br>mengubah kata sandi Anda</p>
+                <button onclick="closeForgotModal()">Kembali</button>
+            </div>
+        </div>
     </div>
+    <script>
+        // Checkbox tampilkan kata sandi
+        document.getElementById('show-password').addEventListener('change', function () {
+            const pwd = document.getElementById('password');
+            pwd.type = this.checked ? 'text' : 'password';
+        });
+
+        // Popup lupa kata sandi
+        function showForgotPassword() {
+            document.getElementById('forgot-modal').classList.add('active');
+        }
+        function closeForgotModal() {
+            document.getElementById('forgot-modal').classList.remove('active');
+        }
+    </script>
 </body>
 
 </html>
