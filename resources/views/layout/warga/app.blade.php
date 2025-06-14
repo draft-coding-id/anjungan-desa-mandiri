@@ -18,6 +18,10 @@
             background-repeat: no-repeat;
             background-position: center;
             height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             /* Mengatur tinggi body agar menutupi seluruh viewport */
         }
 
