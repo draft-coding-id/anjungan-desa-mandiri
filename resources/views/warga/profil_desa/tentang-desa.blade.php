@@ -58,7 +58,7 @@
         </ul>
     </div>
 </div>
+@endsection
 @section('footer')
 @include('layout.warga.tentang-desa-navbar')
-@endsection
 @endsection

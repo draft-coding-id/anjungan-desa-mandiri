@@ -149,12 +149,12 @@
                     <form action="{{route('login.checkPin')}}" method="POST">
                         @csrf
                         <input hidden name="nik" value="{{$nik}}" />
-                        <input type="number" name="pin1" class="pin"/>
-                        <input type="number" name="pin2" class="pin"/>
-                        <input type="number" name="pin3" class="pin"/>
-                        <input type="number" name="pin4" class="pin"/>
-                        <input type="number" name="pin5" class="pin"/>
-                        <input type="number" name="pin6" class="pin"/>
+                        <input type="number" name="pin1" class="pin" min="0" max="9" maxlength="1" />
+                        <input type="number" name="pin2" class="pin" min="0" max="9" maxlength="1" />
+                        <input type="number" name="pin3" class="pin" min="0" max="9" maxlength="1" />
+                        <input type="number" name="pin4" class="pin" min="0" max="9" maxlength="1" />
+                        <input type="number" name="pin5" class="pin" min="0" max="9" maxlength="1" />
+                        <input type="number" name="pin6" class="pin" min="0" max="9" maxlength="1" />
                         <input type="hidden" name="pin" id="pin" />
                         @if(session('error'))
                         <p style="color: red;">{{session('error')}}</p>
@@ -170,6 +170,48 @@
             <a href="/warga" class="button">Kembali</a>
         </div>
     </main>
+
+    <script>
+        const pinInputs = document.querySelectorAll('.pin');
+
+        pinInputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                let value = e.target.value;
+
+                // Hanya izinkan angka 0–9
+                if (!/^[0-9]$/.test(value)) {
+                    e.target.value = '';
+                    return;
+                }
+
+                // Otomatis fokus ke input berikutnya jika ada
+                if (value.length === 1 && index < pinInputs.length - 1) {
+                    pinInputs[index + 1].focus();
+                }
+
+                // Update hidden input "pin" dengan nilai seluruh PIN
+                updatePin();
+            });
+
+            // Navigasi dengan tombol panah & backspace
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !input.value && index > 0) {
+                    pinInputs[index - 1].focus();
+                }
+                if (e.key === 'ArrowLeft' && index > 0) {
+                    pinInputs[index - 1].focus();
+                }
+                if (e.key === 'ArrowRight' && index < pinInputs.length - 1) {
+                    pinInputs[index + 1].focus();
+                }
+            });
+        });
+
+        function updatePin() {
+            const combined = Array.from(pinInputs).map(input => input.value).join('');
+            document.getElementById('pin').value = combined;
+        }
+    </script>
 
 </body>
 
