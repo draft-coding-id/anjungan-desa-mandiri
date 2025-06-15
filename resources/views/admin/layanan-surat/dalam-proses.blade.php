@@ -2,9 +2,7 @@
 @section('title', 'Layanan Surat')
 
 @section('content')
-<div class="path">
     <h4>Layanan Surat > Dalam Proses</h4>
-</div>
 
 @include('layout.admin.menu_surat')
 <h4>Data Layanan Surat</h4>

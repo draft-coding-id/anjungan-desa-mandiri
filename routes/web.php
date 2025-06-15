@@ -89,6 +89,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/beranda', [AdminController::class, 'index'])->name('admin-beranda');
     Route::view('/info-desa', 'admin.info-desa')->name('info-desa');
     Route::get('/data-warga', [WargaController::class, 'index'])->name('data-warga');
+    Route::get('/show-warga/{id}', [WargaController::class, 'showWarga'])->name('show-warga');
+    Route::post('/tambah-warga', [WargaController::class, 'tambahWarga'])->name('tambah-warga');
+    Route::post('/update-warga', [WargaController::class, 'updateWarga'])->name('update-warga');
     Route::view('/statistik', 'admin.statistik')->name('statistik');
     Route::view('/pengumuman', 'admin.pengumuman')->name('pengumuman');
     Route::view('/artikel-desa', 'admin.artikel-desa')->name('artikel-desa');
@@ -101,7 +104,7 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/kelola-surat', 'admin.layanan-surat.kelola-surat')->name('layanan-surat-kelola-surat');
 
     // Proses Surat
-    Route::post('/surat-disetujui/{idSurat}' , [LayananSurat::class, 'setujuiSurat'])->name('layanan-surat-dalam-proses.setujui');
+    Route::post('/surat-disetujui/{idSurat}', [LayananSurat::class, 'setujuiSurat'])->name('layanan-surat-dalam-proses.setujui');
     Route::get('/surat-ditolak/', [LayananSurat::class, 'getAllSuratDitolak'])->name('layanan-surat-ditolak');
     Route::post('/surat-ditolak/{idSurat}', [LayananSurat::class, 'suratDitolak'])->name('surat.ditolak');
     Route::get('/lihat-surat/{idSurat}', [LayananSurat::class, 'lihatSurat'])->name('layanan-surat-dalam-proses.lihat-surat');

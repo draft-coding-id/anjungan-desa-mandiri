@@ -14,9 +14,11 @@
         }
 
         /* Sidebar Styles */
+        /* Sidebar Styles */
         .sidebar {
-            width: 250px;
+            min-width: 250px;
             background-color: #fff;
+            height: 100vh;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
         }
 
@@ -25,7 +27,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(to right, #FF8A00 50%, #F7E700);
+            background: linear-gradient(to right, #ff8a00 50%, #f7e700);
             padding: 30px 20px 10px;
         }
 
@@ -36,7 +38,6 @@
         .nav-link {
             display: block;
             color: #333;
-            border: 1px solid #FFFFFF;
             font-size: 14px;
             text-decoration: none;
             padding: 10px;
@@ -45,19 +46,20 @@
         }
 
         .nav-link:hover {
-            border: 1px solid #FFA500;
+            border: 1px solid #ffa500;
             /* Mengatur border solid dengan warna oranye */
             background: white;
-            color: #FFA500;
+            color: #ffa500;
             /* Warna teks */
         }
 
         .nav-link.active {
-            background: linear-gradient(to right, #FF8A00 50%, #F7E700);
+            background: linear-gradient(to right, #ff8a00 50%, #f7e700);
             color: white;
             /* Warna teks */
             font-weight: bold;
         }
+
 
         /* Main Content Styles */
         .main-content {
@@ -213,10 +215,6 @@
             margin-bottom: 30px;
         }
 
-        p {
-            line-height: 1.5;
-        }
-
         .template-pesan {
             border: 2px solid #000000;
             border-radius: 20px;
@@ -287,12 +285,12 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
             </svg>
-            <h4>Admin Desa</h4>
+            <h3>{{auth()->user()->name}}</h3>
             <p>Desa Rawapanjang <br> Kabupaten Bogor</p>
         </div>
         @include('layout.admin.sidebar')
@@ -361,7 +359,7 @@
 
                 <div class="button-container">
                     <a href="{{route('layanan-surat-dalam-proses')}}" class="button">Kembali</a>
-                    <a href="{{asset('surat/'. $surat->file_surat . " .pdf")}}" class="button" target="_blank">Cetak
+                    <a href="{{asset('surat/'. $surat->file_surat . ".pdf")}}" class="button" target="_blank">Cetak
                         Surat</a>
                     @if($surat->is_print == 0)
                     <button id="handleShowPrintModal">Tandai sudah di Cetak</button>
