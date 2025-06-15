@@ -55,6 +55,8 @@ class SuratController extends Controller
         return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-wali-hakim', ['warga' => $warga]);
     }
 
+    
+
     // Proses pengiriman data
     public function submitForm(Request $request)
     {

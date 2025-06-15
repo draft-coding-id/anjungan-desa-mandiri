@@ -1,125 +1,158 @@
+@extends('layout.admin.app')
 
-@extends('layout.admin.layanan_surat')
-@section('title', 'Verifikasi Admin')
-@section('action-container')
-            <div class="button-container">
-                <button id="openDeniedLightbox">Tolak</button>
-                <button id="openVerifLightbox">Tanda Tangan</button>
-            </div>
+@section('title', 'Preview Surat - Laman Admin Desa Rawapanjang')
 
-            <!-- Kondisi Surat Disetujui -->
-            <div class="lightbox_container" id="verifLightbox">
-                <div class="lightbox_content">
-                    <h2>Setujui Pengajuan Surat?</h2>
-                    <p>Setelah ditandatangan, surat ini akan dilanjutkan kepada administrator desa untuk diserahkan
-                        kepada warga.</p>
-                    <button id="v_cancelButton">Kembali</button>
-                    <button id="verifButton">Tanda Tangan</button>
-                </div>
-            </div>
+@section('breadcrumb')
+<h4>Layanan Surat > Dalam Proses >
+    @if ($surat->jenis_surat == 'SKD')
+    Surat Keterangan Domisili
+    @elseif ($surat->jenis_surat == 'SKP')
+    Surat Keterangan Pengantar
+    @elseif ($surat->jenis_surat == 'SKTM')
+    Surat Keterangan Tidak Mampu
+    @elseif ($surat->jenis_surat == "SKWH")
+    Surat Keterangan Wali Hakim
+    @endif
+</h4>
+@endsection
 
-            <div class="lightbox_container" id="doneVerifLightbox">
-                <div class="lightbox_content">
-                    <h2>Surat Telah Disetujui</h2>
-                    <p>Surat akan dilanjutkan ke Administrator Desa untuk diserahkan kepada warga.</p>
-                    <!-- Menangani aksi saat tombol "Verifikasi" diklik -->
-                    <form action="{{route('disetujui.kades' , $surat->id)}}" method="POST">
+@section('menu-surat')
+@include('layout.admin.menu_surat')
+@endsection
+
+@section('additional-styles')
+<style>
+    .preview-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 800px;
+        width: 100%;
+    }
+
+    .preview-header {
+        width: 100%;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .preview-content {
+        width: 100%;
+        height: 700px;
+        padding: 15px;
+        border: 1px solid #eee;
+        border-radius: 6px;
+    }
+</style>
+@endsection
+
+@section('content')
+<div class="content" style="padding: 0px 30px;">
+    <div class="mt-4">
+        <h3>
+            @if($surat->jenis_surat == 'SKD')
+            Surat Keterangan Domisili
+            @elseif($surat->jenis_surat == 'SKP')
+            Surat Keterangan Pengantar
+            @elseif($surat->jenis_surat == 'SKTM')
+            Surat Keterangan Tidak Mampu
+            @elseif($surat->jenis_surat == "SKWH")
+            Surat Keterangan Wali Hakim
+            @endif
+        </h3>
+        <h3>Diajukan oleh {{$surat->warga->nama_lengkap}}</h3>
+        <h4>Status : {{$surat->status}}</h4>
+        <p>diajukan pada {{ $surat->created_at->translatedFormat('d F Y') }}</p>
+    </div>
+
+    <div class="preview-container">
+        <div class="preview-header">
+            <h2>Preview Dokumen</h2>
+        </div>
+
+        <div class="preview-content">
+            @if($surat->jenis_surat == 'SKD')
+            <iframe src="{{route('get-detail-skd' , $surat->id)}}" width="100%" height="100%"></iframe>
+            @elseif($surat->jenis_surat == 'SKP')
+            <iframe src="{{route('get-detail-skp' , $surat->id)}}" width="100%" height="100%"></iframe>
+            @elseif($surat->jenis_surat == 'SKTM')
+            <iframe src="{{route('get-detail-sktm' , $surat->id)}}" width="100%" height="100%"></iframe>
+            @elseif($surat->jenis_surat == "SKWH")
+            <iframe src="{{route('get-detail-skwh' , $surat->id)}}" width="100%" height="100%"></iframe>
+            @endif
+        </div>
+
+        <div class="button-container">
+            <button id="handleShowVerifyModal">Verifikasi Surat</button>
+            <button id="handleShowRejectModal">Tolak Surat</button>
+        </div>
+
+        <!-- Lightboxes -->
+        <div class="lightbox_container" id="verifyModal">
+            <div class="lightbox_content">
+                <h2>Verifikasi Surat?</h2>
+                <p>Apakah Anda yakin ingin memverifikasi surat ini?</p>
+                <div class="container-button">
+                    <button id="cancelVerify">Kembali</button>
+                    <form action="{{route('verifySurat', $surat->id)}}" method="POST">
                         @csrf
-                        <input type="hidden" name="status" value="diverifikasi">
-                        <input type="hidden" name="warga_id" value="{{$surat->warga_id}}">
-                        <button type="submit">Lanjutkan</button>
+                        <input type="hidden" name="status" value="Terverifikasi">
+                        <button type="submit">Verifikasi</button>
                     </form>
                 </div>
             </div>
-            <!--  -->
-            <!-- Kondisi Surat Ditolak -->
-            <div class="lightbox_container" id="deniedLightbox">
-                <div class="lightbox_content">
-                    <h2>Tolak Pengajuan Surat?</h2>
-                    <p>Silahkan pilih alasan yang paling sesuai.</p>
-                    <button id="d_cancelButton">Kembali</button>
-                    <button id="denyButton">Tolak</button>
-                </div>
-            </div>
+        </div>
 
-            <div class="lightbox_container" id="doneDenyLightbox">
-                <div class="lightbox_content">
-                    <h2>Pengajuan Surat Ditolak</h2>
-                    <p>Anda dapat kembali melihat surat ini di menu
-                        <br>Layanan Surat > Arsip Surat Ditolak
-                    </p>
-                    <!-- Menangani aksi saat tombol "Verifikasi" diklik -->
-                    <form action="{{route('surat.ditolak' , $surat->id)}}" method="POST">
-                        @csrf
-                        <input type="hidden" name="status" value="ditolak">
-                        <button type="submit">Pergi ke Arsip</button>
-                    </form>
-                </div>
+        <div class="lightbox_container" id="rejectModal">
+            <div class="lightbox_content">
+                <h2>Tolak Surat?</h2>
+                <p>Berikan alasan penolakan:</p>
+                <form action="{{route('rejectSurat', $surat->id)}}" method="POST">
+                    @csrf
+                    <textarea class="alasan_ditolak" name="alasan_ditolak" placeholder="Masukkan alasan penolakan..." required></textarea>
+                    <input type="hidden" name="status" value="Ditolak">
+                    <div class="container-button">
+                        <button type="button" id="cancelReject">Kembali</button>
+                        <button type="submit">Tolak Surat</button>
+                    </div>
+                </form>
             </div>
-            <!--  -->
         </div>
     </div>
-    <script>
-        // Kondisi Surat Diverifikasi
-                const openVerifLightboxButton = document.getElementById('openVerifLightbox');
-                const verifLightbox = document.getElementById('verifLightbox');
-                const doneVerifLightbox = document.getElementById('doneVerifLightbox');
-                const v_cancelButton = document.getElementById('v_cancelButton');
-                const verifButton = document.getElementById('verifButton');
+</div>
+@endsection
 
-                // Menampilkan lightbox saat tombol "Verifikasi" diklik
-                openVerifLightboxButton.addEventListener('click', () => {
-                    verifLightbox.classList.add('show');
-                });
+@section('scripts')
+<script>
+    // Modal handlers
+    const handleShowVerifyModal = document.getElementById('handleShowVerifyModal');
+    const handleShowRejectModal = document.getElementById('handleShowRejectModal');
+    const verifyModal = document.getElementById('verifyModal');
+    const rejectModal = document.getElementById('rejectModal');
+    const cancelVerify = document.getElementById('cancelVerify');
+    const cancelReject = document.getElementById('cancelReject');
 
-                // Menutup lightbox saat tombol "Kembali" diklik
-                v_cancelButton.addEventListener('click', () => {
-                    verifLightbox.classList.remove('show');
-                });
+    // Show modals
+    handleShowVerifyModal.addEventListener('click', () => {
+        verifyModal.classList.add('show');
+    });
 
-                // Beralih menampilkan lightbox verifikasi berhasil
-                verifButton.addEventListener('click', () => {
-                    verifLightbox.classList.remove('show');
-                    doneVerifLightbox.classList.add('show');
-                });
+    handleShowRejectModal.addEventListener('click', () => {
+        rejectModal.classList.add('show');
+    });
 
-                // Menutup lightbox saat area luar lightbox-content diklik
-                verifLightbox.addEventListener('click', (event) => {
-                    if (event.target === verifLightbox) {
-                        verifLightbox.classList.remove('show');
-                    }
-                });
+    // Hide modals
+    cancelVerify.addEventListener('click', () => {
+        verifyModal.classList.remove('show');
+    });
 
-            // ---
-            // Kondisi Surat Ditolak
-                const openDeniedLightboxButton = document.getElementById('openDeniedLightbox');
-                const deniedLightbox = document.getElementById('deniedLightbox');
-                const doneDenyLightbox = document.getElementById('doneDenyLightbox');
-                const d_cancelButton = document.getElementById('d_cancelButton');
-                const denyButton = document.getElementById('denyButton');
-
-                // Menampilkan lightbox saat tombol "Tolak" diklik
-                openDeniedLightboxButton.addEventListener('click', () => {
-                    deniedLightbox.classList.add('show');
-                });
-
-                // Menutup lightbox saat tombol "Kembali" diklik
-                d_cancelButton.addEventListener('click', () => {
-                    deniedLightbox.classList.remove('show');
-                });
-
-                // Beralih menampilkan lightbox pengajuan ditolak
-                denyButton.addEventListener('click', () => {
-                    deniedLightbox.classList.remove('show');
-                    doneDenyLightbox.classList.add('show');
-                });
-
-                // Menutup lightbox saat area luar lightbox-content diklik
-                deniedLightbox.addEventListener('click', (event) => {
-                    if (event.target === deniedLightbox) {
-                        deniedLightbox.classList.remove('show');
-                    }
-                });
-            // ---
-    </script>
+    cancelReject.addEventListener('click', () => {
+        rejectModal.classList.remove('show');
+    });
+</script>
 @endsection

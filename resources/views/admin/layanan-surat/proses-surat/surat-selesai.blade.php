@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/logo.png" type="image/png">
     <title>Kirim Surat - Laman Admin Desa Rawapanjang</title>
     <style>
         body {
@@ -14,9 +15,11 @@
         }
 
         /* Sidebar Styles */
+        /* Sidebar Styles */
         .sidebar {
-            width: 250px;
+            min-width: 250px;
             background-color: #fff;
+            height: 100vh;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
         }
 
@@ -25,7 +28,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(to right, #FF8A00 50%, #F7E700);
+            background: linear-gradient(to right, #ff8a00 50%, #f7e700);
             padding: 30px 20px 10px;
         }
 
@@ -36,7 +39,6 @@
         .nav-link {
             display: block;
             color: #333;
-            border: 1px solid #FFFFFF;
             font-size: 14px;
             text-decoration: none;
             padding: 10px;
@@ -45,19 +47,20 @@
         }
 
         .nav-link:hover {
-            border: 1px solid #FFA500;
+            border: 1px solid #ffa500;
             /* Mengatur border solid dengan warna oranye */
             background: white;
-            color: #FFA500;
+            color: #ffa500;
             /* Warna teks */
         }
 
         .nav-link.active {
-            background: linear-gradient(to right, #FF8A00 50%, #F7E700);
+            background: linear-gradient(to right, #ff8a00 50%, #f7e700);
             color: white;
             /* Warna teks */
             font-weight: bold;
         }
+
 
         /* Main Content Styles */
         .main-content {
@@ -213,10 +216,6 @@
             margin-bottom: 30px;
         }
 
-        p {
-            line-height: 1.5;
-        }
-
         .template-pesan {
             border: 2px solid #000000;
             border-radius: 20px;
@@ -287,8 +286,12 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
-            <img src="profile-photo.png" alt="Foto Akun" class="rounded-circle mb-2" width="100">
-            <h4>Admin Desa</h4>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <h3>{{auth()->user()->name}}</h3>
             <p>Desa Rawapanjang <br> Kabupaten Bogor</p>
         </div>
         @include('layout.admin.sidebar')
@@ -304,7 +307,7 @@
             <h4>Layanan Surat > Dalam Proses > Judul Surat</h4>
         </div>
 
-       @include('layout.admin.menu_surat')
+        @include('layout.admin.menu_surat')
 
         <div class="content">
             <div class="content-1">
@@ -357,7 +360,7 @@
 
                 <div class="button-container">
                     <a href="{{route('layanan-surat-dalam-proses')}}" class="button">Kembali</a>
-                    <a href="{{asset('surat/'. $surat->file_surat . " .pdf")}}" class="button" target="_blank">Cetak
+                    <a href="{{asset('surat/'. $surat->file_surat . ".pdf")}}" class="button" target="_blank">Cetak
                         Surat</a>
                     @if($surat->is_print == 0)
                     <button id="handleShowPrintModal">Tandai sudah di Cetak</button>
@@ -421,43 +424,43 @@
         </div>
         <script>
             // Kondisi Surat Diverifikasi
-                const handleShowSendModal = document.getElementById('handleShowSendModal');
-                const handleShowPrintModal = document.getElementById('handleShowPrintModal');
-                const handleShowGiveModal = document.getElementById('handleShowGiveModal');
-                const sendModal = document.getElementById('sendModal');
-                const printModal = document.getElementById('printModal');
-                const giveModal = document.getElementById('giveModal');
-                const cancelSend = document.getElementById('cancelSend');
-                const cancelPrint = document.getElementById('cancelPrint');
-                const cancelGive = document.getElementById('cancelGive');
-                // Menampilkan lightbox saat tombol "Verifikasi" diklik
-                console.log(handleShowPrintModal)
-                handleShowGiveModal.addEventListener('click', () => {
+            const handleShowSendModal = document.getElementById('handleShowSendModal');
+            const handleShowPrintModal = document.getElementById('handleShowPrintModal');
+            const handleShowGiveModal = document.getElementById('handleShowGiveModal');
+            const sendModal = document.getElementById('sendModal');
+            const printModal = document.getElementById('printModal');
+            const giveModal = document.getElementById('giveModal');
+            const cancelSend = document.getElementById('cancelSend');
+            const cancelPrint = document.getElementById('cancelPrint');
+            const cancelGive = document.getElementById('cancelGive');
+            // Menampilkan lightbox saat tombol "Verifikasi" diklik
+            console.log(handleShowPrintModal)
+            handleShowGiveModal.addEventListener('click', () => {
                 giveModal.classList.add('show');
-                });
+            });
 
-                handleShowSendModal.addEventListener('click', () => {
-                    sendModal.classList.add('show');
-                });
+            handleShowSendModal.addEventListener('click', () => {
+                sendModal.classList.add('show');
+            });
 
-                handleShowPrintModal.addEventListener('click', () => {
-                    printModal.classList.add('show');
-                });
-
-
+            handleShowPrintModal.addEventListener('click', () => {
+                printModal.classList.add('show');
+            });
 
 
-                // Menutup lightbox saat tombol "Kembali" diklik
-                cancelSend.addEventListener('click', () => {
-                    sendModal.classList.remove('show');
-                });
-                cancelPrint.addEventListener('click', () => {
-                    printModal.classList.remove('show');
-                });
 
-                cancelGive.addEventListener('click', () => {
-                    giveModal.classList.remove('show');
-                });
+
+            // Menutup lightbox saat tombol "Kembali" diklik
+            cancelSend.addEventListener('click', () => {
+                sendModal.classList.remove('show');
+            });
+            cancelPrint.addEventListener('click', () => {
+                printModal.classList.remove('show');
+            });
+
+            cancelGive.addEventListener('click', () => {
+                giveModal.classList.remove('show');
+            });
         </script>
 </body>
 

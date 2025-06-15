@@ -10,6 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /**
  * MakePdf
@@ -19,7 +20,7 @@ class MakePdf implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $surat;
     protected $fileName;
-
+    protected $qrCode;
     /**
      * __construct
      *
@@ -31,6 +32,7 @@ class MakePdf implements ShouldQueue
     {
         $this->surat = $surat;
         $this->fileName = $fileName;
+        $this->qrCode = QrCode::size(100)->generate(public_path('surat/' . $this->fileName . '.pdf'));
     }
 
 
@@ -42,7 +44,7 @@ class MakePdf implements ShouldQueue
     public function handle(): void
     {
         if ($this->surat->jenis_surat == 'SKD') {
-            $pdf = Pdf::loadView('admin.layanan-surat.surat-domisili-ttd-kades', ['surat' => $this->surat]);
+            $pdf = Pdf::loadView('admin.layanan-surat.surat-domisili-ttd-kades', ['surat' => $this->surat , 'qrCode' => $this->qrCode]);
         } elseif ($this->surat->jenis_surat == "SKP") {
             $pdf = Pdf::loadView('admin.layanan-surat.surat-keterangan-pengantar-ttd-kades', ['surat' => $this->surat]);
         } elseif ($this->surat->jenis_surat == "SKWH") {

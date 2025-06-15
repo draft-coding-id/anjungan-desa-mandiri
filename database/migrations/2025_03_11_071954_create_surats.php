@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('alasan_tolak')->nullable();
             $table->string('jenis_surat');
             $table->boolean('is_accepted')->default(true);
-            $table->boolean('is_verify_admin')->default(false);
+            $table->boolean('is_approve_admin')->default(false);
             $table->boolean('is_tanda_tangan_kades')->default(false);
             $table->boolean('is_send_to_warga')->default(false);
             $table->boolean('is_selesai')->default(false);

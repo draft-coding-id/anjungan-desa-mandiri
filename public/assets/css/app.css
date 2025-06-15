@@ -1,3 +1,10 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -5,9 +12,46 @@ body {
     background-color: #f4f4f4;
 }
 
+/* Header Beranda */
+.header-beranda {
+    padding: 40px;
+    font-size: 24px;
+}
+
+.card-beranda {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.card {
+    padding: 20px;
+    border: 2px solid #000;
+    box-shadow: #ccc 4px 4px 8px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    color: #333;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    transition: 500ms ease-in-out;
+}
+
+.card h2 {
+    font-size: 48px;
+}
+
+.card p {
+    font-size: 24px;
+}
+
 /* Sidebar Styles */
 .sidebar {
-    width: 250px;
+    min-width: 250px;
     background-color: #fff;
     height: 100vh;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
@@ -15,11 +59,16 @@ body {
 
 .sidebar-header {
     display: flex;
+    line-height: 1.5;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background: linear-gradient(to right, #ff8a00 50%, #f7e700);
     padding: 30px 20px 10px;
+}
+
+.sidebar-header p {
+    line-height: 1.5;
 }
 
 .sidebar-nav {
@@ -38,17 +87,22 @@ body {
 
 .nav-link:hover {
     border: 1px solid #ffa500;
-    /* Mengatur border solid dengan warna oranye */
     background: white;
     color: #ffa500;
-    /* Warna teks */
 }
 
 .nav-link.active {
     background: linear-gradient(to right, #ff8a00 50%, #f7e700);
     color: white;
-    /* Warna teks */
     font-weight: bold;
+}
+
+.header {
+    background-color: #ffa500;
+    background: linear-gradient(to left, #ff8a00 50%, #f7e700);
+    padding: 16px 8px;
+    display: flex;
+    align-items: center;
 }
 
 /* Main Content Styles */
@@ -56,7 +110,11 @@ body {
     flex-grow: 1;
 }
 
-/* Styling untuk tabel data warga */
+.main-container {
+    padding: 0px 40px;
+}
+
+/* Table Styles */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -70,7 +128,7 @@ table {
 thead tr {
     background: linear-gradient(to right, #ff8a00 50%, #f7e700);
     color: white;
-    text-align: left;
+    text-align: center;
     font-weight: bold;
 }
 
@@ -83,6 +141,7 @@ td {
 tbody tr {
     transition: all 0.3s ease;
     cursor: pointer;
+    text-align: center;
 }
 
 tbody tr:nth-child(even) {
@@ -93,7 +152,7 @@ tbody tr:hover {
     background-color: #ffefdf;
 }
 
-/* Styling tombol aksi */
+/* Table Action Buttons */
 td a,
 td button {
     display: inline-block;
@@ -102,12 +161,40 @@ td button {
     border-radius: 4px;
     text-decoration: none;
     font-size: 13px;
+    padding: 10px 20px;
+}
+
+td .setuju-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+}
+
+td .setuju-button:hover {
+    background-color: #45a049;
+    color: white;
+}
+
+td .tolak-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+}
+
+td .tolak-button:hover {
+    background-color: #e53935;
+    color: white;
 }
 
 td a {
     background-color: #1e88e5;
     color: white;
     border: none;
+}
+
+td .aksi {
+    background-color: #e68a00;
+    padding: 10px 20px;
 }
 
 td button {
@@ -122,7 +209,225 @@ td button:hover {
     opacity: 0.8;
 }
 
-/* Heading atas tabel */
+/* Preview Modal */
+.preview-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.preview-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 1000px;
+    width: 95%;
+    max-height: 95vh;
+    overflow: hidden;
+}
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.preview-body {
+    height: calc(100vh - 150px);
+}
+
+.close-button {
+    color: #000;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.close-button:hover {
+    color: #fff;
+}
+
+/* Approval Modal */
+.approval-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.approval-content {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    width: 90%;
+    max-width: 1000px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.approval-content h2 {
+    margin: 0 0 25px 0;
+    font-size: 24px;
+    color: #333;
+    font-weight: 600;
+}
+
+.surat-info {
+    text-align: left;
+    margin: 20px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.info-row {
+    display: flex;
+    margin-bottom: 12px;
+    align-items: flex-start;
+}
+
+.info-row:last-child {
+    margin-bottom: 0;
+}
+
+.info-label {
+    font-weight: 600;
+    width: 300px;
+    color: #333;
+    flex-shrink: 0;
+}
+
+.info-value {
+    color: #555;
+    flex: 1;
+}
+
+.preview-section {
+    margin: 20px 0;
+}
+
+.preview-box {
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    padding: 10px 10px;
+    background: #fafafa;
+    color: #999;
+    font-size: 16px;
+    margin: 15px 0;
+}
+
+.confirmation-text {
+    margin: 20px 0;
+    color: #666;
+    font-size: 16px;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+/* Rejection Modal */
+.penolakan-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.penolakan-content {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    width: 90%;
+    max-width: 1000px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.penolakan-content h2 {
+    margin: 0 0 25px 0;
+    font-size: 24px;
+    color: #dc3545;
+    font-weight: 600;
+}
+
+.alasan-penolakan {
+    margin: 20px 0;
+    text-align: left;
+}
+
+.alasan-penolakan label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.alasan-penolakan textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px;
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.alasan-penolakan textarea:focus {
+    outline: none;
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.alasan-penolakan .char-count {
+    text-align: right;
+    font-size: 12px;
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+.warning-text {
+    margin: 20px 0;
+    color: #dc3545;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+}
+
+/* Heading Styles */
 h4 {
     color: #333;
     margin: 20px 0;
@@ -141,8 +446,8 @@ h4:after {
     width: 60px;
     background: linear-gradient(to right, #ff8a00 50%, #f7e700);
 }
-/* Paginate */
-/* Styling untuk pagination */
+
+/* Pagination Styles */
 .pagination {
     display: flex;
     justify-content: center;
@@ -198,8 +503,8 @@ h4:after {
     color: #666;
     font-size: 13px;
 }
-/* End Of Style Table */
 
+/* Header Styles */
 .header {
     background-color: #ffa500;
     background: linear-gradient(to left, #ff8a00 50%, #f7e700);
@@ -208,27 +513,16 @@ h4:after {
     align-items: center;
 }
 
+/* Content Styles */
 .content {
     padding: 0px 30px 30px 30px;
-}
-
-button {
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #ffa500;
-    color: white;
-}
-
-button:hover {
-    background-color: #e68a00;
 }
 
 .path {
     padding: 0px 30px;
 }
 
+/* Menu Surat */
 .menu-surat {
     padding: 0 50px;
     display: flex;
@@ -238,8 +532,6 @@ button:hover {
 
 .menu-surat a {
     border: 1px solid #f4f4f4;
-    /* border-left: 0.25px solid #D9D9D9;
-                border-right: 0.25px solid #D9D9D9; */
     padding: 7px 20px;
     cursor: pointer;
     color: #333;
@@ -264,6 +556,71 @@ button:hover {
     color: white;
     font-weight: bold;
 }
+
+/* Button Styles */
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: linear-gradient(to right, #ff8a00 50%, #f7e700);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 138, 0, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 138, 0, 0.4);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background: #c82333;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Original button styles for compatibility */
+button {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #ffa500;
+    color: white;
+}
+
+button:hover {
+    background-color: #e68a00;
+}
+
 .button {
     text-decoration: none;
     border: none;
@@ -275,9 +632,257 @@ button:hover {
     color: white;
     font-weight: bold;
     width: 150px;
-    /* height: 40px; */
 }
 
 .button:hover {
     background-color: #e68a00;
+}
+
+/* ========================================
+   MODAL FORM STYLES (Tambah Warga)
+   ======================================== */
+
+/* When used as full-page layout */
+.page-layout {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Form Container */
+.form-container {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-header h2 {
+    color: #333;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Form Group Styles */
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.form-group label {
+    width: 140px;
+    font-weight: 500;
+    color: #333;
+    font-size: 16px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e1e5e9;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    background: #f8f9fa;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #ffa500;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+/* Add Button (Floating) */
+.add-button {
+    margin-top: 20px;
+    background: linear-gradient(to right, #ff8a00 50%, #f7e700);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(255, 138, 0, 0.3);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(255, 138, 0, 0.4);
+}
+
+.add-button svg {
+    transition: transform 0.3s ease;
+}
+
+.add-button:hover svg {
+    transform: rotate(90deg);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    width: 90%;
+    max-width: 1000px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideIn 0.3s ease;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f1f3f4;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.close {
+    background: #f8f9fa;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+    color: #6c757d;
+    transition: all 0.3s ease;
+}
+
+.close:hover {
+    background: #e9ecef;
+    color: #495057;
+    transform: rotate(90deg);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { 
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-container, .modal-content {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .form-group label {
+        width: auto;
+    }
+
+    .add-button {
+        bottom: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+
+    .main-container {
+        padding: 0px 20px;
+    }
+
+    .card-beranda {
+        flex-direction: column;
+    }
 }
