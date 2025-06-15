@@ -28,17 +28,34 @@ class WargaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function tambahWarga(Request $request)
     {
-        //
+        $wargaStore = Warga::create([
+            'nik' => $request->nik,
+            'pin' => $request->pin,
+            'nama_lengkap' => $request->nama,
+            'pekerjaan' => $request->pekerjaan,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'usia' => $request->usia,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'agama' => $request->agama,
+            'alamat' => $request->alamat,
+            'rt' => $request->rt,
+            'rw' => $request->rw,
+            'no_hp' => $request->no_hp,
+        ]);
+        $wargaStore->save();
+        return redirect()->route('data-warga');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function showWarga(string $id)
     {
-        //
+        $warga = Warga::findOrFail($id);
+        return json_encode($warga);
     }
 
     /**
@@ -52,9 +69,24 @@ class WargaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function updateWarga(Request $request)
     {
-        //
+        $warga = Warga::findOrFail($request->id_warga);
+        $warga->update([
+            'nik' => $request->nik,
+            'pin' => $request->pin,
+            'nama_lengkap' => $request->nama,
+            'pekerjaan' => $request->pekerjaan,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'usia' => $request->usia,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'agama' => $request->agama,
+            'alamat' => $request->alamat,
+            'rt' => $request->rt, 
+            'rw' => $request->rw,
+        ]);
+        return redirect()->route('data-warga');
     }
 
     /**

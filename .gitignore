@@ -5,6 +5,7 @@
 # /public/storage
 # /storage/*.key
 /vendor
+/node_modules
 .env
 # .env.backup
 # .env.production
@@ -17,5 +18,5 @@
 # yarn-error.log
 # /.fleet
 # /.idea
-# /.vscode
+/.vscode
 README-copy.md

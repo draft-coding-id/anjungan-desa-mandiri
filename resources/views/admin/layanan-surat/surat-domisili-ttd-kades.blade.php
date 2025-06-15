@@ -11,6 +11,12 @@
             font-family: 'Times New Roman';
         }
 
+        svg {
+            width: 100px !important;
+            height: 100px !important;
+            display: block;
+        }
+
         h1 {
             font-size: 24px;
             font-weight: normal;
@@ -93,7 +99,9 @@
                     <td style="padding-left: 10px;">: </td>
                     <td>{{ $surat->isi_surat['tempat_lahir'] }}, {{ $surat->isi_surat['tanggal_lahir'] }}</td>
                 </tr>
+
             </table>
+
             <p>Orang tersebut di atas adalah benar-benar warga kami yang bertempat tinggal di {{
                 $surat->isi_surat['alamat'] }} RT {{ $surat->isi_surat['rt'] }} RW {{ $surat->isi_surat['rw'] }} Desa
                 Rawapanjang, Kecamatan Bojonggede, Kabupaten Bogor.</p>
@@ -103,8 +111,7 @@
 
         <div class="footer">
             <p>Rawapanjang, {{$surat->updated_at->translatedFormat('d F Y') ?? ""}}</p>
-            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('assets/ttd_kades.png'))) }}"
-                height="116px" width="116px" alt="TTD Kades" />
+            <img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code height=" 116px" width="116px" alt="TTD Kades"">
             <p style="align-items: flex-start">Pejabat Desa</p>
         </div>
     </div>

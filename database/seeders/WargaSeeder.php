@@ -44,7 +44,7 @@ class WargaSeeder extends Seeder
                     'alamat' => $faker->address,
                     'rt' => $faker->randomNumber(3),
                     'rw' => $faker->randomNumber(3),
-                    'jenis_kelamin' => $faker->randomElement(['L', 'P']),
+                    'jenis_kelamin' => $faker->randomElement(['Laki-laki', 'Perempuan']),
                     'pekerjaan' => $faker->jobTitle,
                     'usia' => $faker->numberBetween(20, 60),
                     'agama' => $faker->randomElement(['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu']),
