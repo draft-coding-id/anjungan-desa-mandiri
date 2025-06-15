@@ -1,4 +1,4 @@
-@extends('layout.admin.template')
+@extends('layout.admin.app')
 
 @section('title', 'Preview Surat - Laman Admin Desa Rawapanjang')
 

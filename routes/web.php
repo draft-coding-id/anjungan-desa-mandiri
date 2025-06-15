@@ -115,6 +115,7 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('/print-surat/{idSurat}', [GeneratePDf::class, 'generate'])->name('generate.pdf');
     // Route::get('/tanda-tangan-surat' , [LayananSurat::class, 'tandaTanganSurat'])->name('tanda-tangan.surat');
     Route::get('/surat-selesai/{idSurat}', [LayananSurat::class, 'suratSelesai'])->name('layanan-surat-dalam-proses-surat-selesai');
+    Route::get('/kirim-surat-wa/{idSurat}', [LayananSurat::class, 'kirimWa'])->name('kirim-surat-wa');
     Route::post('/kirim-surat/{idSurat}', [LayananSurat::class, 'kirimSurat'])->name('kirimSurat');
     Route::post('/tandaiSuratdicetak/{idSurat}', [LayananSurat::class, 'tandaiCetak'])->name('tandaiSuratDicetak');
     Route::post('/tandaisudahdikirim/{idSurat}', [LayananSurat::class, 'tandaiDikirim'])->name('tandaiSuratDikirim');

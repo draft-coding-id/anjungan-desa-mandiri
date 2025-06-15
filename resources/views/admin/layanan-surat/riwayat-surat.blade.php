@@ -9,7 +9,7 @@
 @include('layout.admin.menu_surat')
 <div class="content">
     <div class="mt-4">
-        <h3>Riwayat Surat</h3>
+        <h4>Riwayat Surat</h4>
         <table class="table">
             <thead>
                 <tr>
@@ -27,9 +27,10 @@
                 @forelse ($surat as $data )
                 <tr>
                     <td>{{$increment++}}</td>
-                    <td><button>
+                    <td><a class="button" href="{{route('kirim-surat-wa' , $data->id)}}">
                             {{$data->status}}
-                        </button></td>
+                        </a>
+                    </td>
                     <td>{{$data->no_surat}}</td>
                     <td>{{$data->isi_surat['nik']}}</td>
                     <td>{{$data->isi_surat['nama_lengkap']}}</td>

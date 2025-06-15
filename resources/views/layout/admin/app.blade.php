@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
     <link rel="icon" href="assets/logo.png" type="image/png">
     <style>
-        @yield('additional-styles')
+        @yield('additional-styles');
     </style>
 </head>
 
