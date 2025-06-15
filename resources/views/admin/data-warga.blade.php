@@ -5,8 +5,9 @@
 
 <h2>Data Warga Desa Rawapanjang</h2>
 <div class="main-container">
+    <button onclick="window.location.href = '{{route("qrGenerate")}}' ">Coba QR</button>
 
-    <button class="add-button" onclick="openModal()">
+    <button class=" add-button" onclick="openModal()">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="12" y1="5" x2="12" y2="19"></line>
