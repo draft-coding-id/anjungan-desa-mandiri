@@ -45,10 +45,12 @@ Route::middleware(['isAdmin'])->group(function () {
     Route::view('/layanan-umum', 'warga.layanan-mandiri.layanan_umum')->name('layanan-umum');
     Route::view('/layanan-kependudukan', 'warga.layanan-mandiri.layanan_kependudukan')->name('layanan-kependudukan');
     ROute::view('/layanan-pernikahan', 'warga.layanan-mandiri.layanan_pernikahan')->name('layanan-pernikahan');
+    ROute::view('/layanan-catatan-sipil', 'warga.layanan-mandiri.layanan_catatan_sipil')->name('layanan-catatan-sipil');
     Route::view('/layanan-usaha', 'warga.layanan-mandiri.layanan_usaha')->name('layanan-usaha');
 });
 
 Route::controller(SuratController::class)->group(function () {
+    Route::get('/histori-progres-surat', 'histori_progres_surat')->name('histori_progres_surat');
     Route::get('/surat-keterangan-domisili', 'form_Surat_Keterangan_Domisili');
     Route::get('/surat-keterangan-pengantar', 'form_Surat_Keterangan_Pengantar');
     Route::get('/surat-keterangan-ktp-dalam-proses', 'form_Surat_Keterangan_KTP_Dalam_Proses');
@@ -56,7 +58,7 @@ Route::controller(SuratController::class)->group(function () {
     Route::post('/submitForm', 'submitForm')->name('submitForm');
     Route::get('/konfirmasi', 'konfirmasi');
     // Route::post('/submitSurat', [SuratController::class, 'submitSurat']);
-    Route::get('/berhasil/{no_hp}', 'berhasil');
+    Route::get('/berhasil', 'berhasil');
 });
 // Route::view('/surat-keterangan-domisili', 'warga.layanan-mandiri.form-surat.surat-keterangan-domisili');
 

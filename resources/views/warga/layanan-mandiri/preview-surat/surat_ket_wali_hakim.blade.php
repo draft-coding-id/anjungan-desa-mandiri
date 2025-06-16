@@ -85,36 +85,42 @@
                 </tr>
                 <tr>
                     <td>3.</td>
+                    <td>No HP</td>
+                    <td style="padding-left: 10px;">: </td>
+                    <td>{{ $proses_surat['no_hp']}}</td>
+                </tr>
+                <tr>
+                    <td>4.</td>
                     <td>Tempat/Tanggal Lahir</td>
                     <td style="padding-left: 10px;">: </td>
                     <td>{{ $proses_surat['tempat_lahir'] }}, {{ $proses_surat['tanggal_lahir'] }}</td>
                 </tr>
                 <tr>
-                    <td>4.</td>
+                    <td>5.</td>
                     <td>Tempat Tinggal</td>
                     <td style="padding-left: 10px;">: </td>
                     <td>{{ $proses_surat['alamat'] }}</td>
                 </tr>
                 <tr>
-                    <td>5.</td>
+                    <td>6.</td>
                     <td>Agama</td>
                     <td style="padding-left: 10px;">: </td>
                     <td>{{ $proses_surat['agama'] }}</td>
                 </tr>
                 <tr>
-                    <td>6.</td>
+                    <td>7.</td>
                     <td>Jenis Kelamin</td>
                     <td style="padding-left: 10px;">: </td>
                     <td>{{ $proses_surat['jenis_kelamin'] }}</td>
                 </tr>
                 <tr>
-                    <td>7.</td>
+                    <td>8.</td>
                     <td>Pekerjaan</td>
                     <td style="padding-left: 10px;">: </td>
                     <td>{{ $proses_surat['pekerjaan'] }}</td>
                 </tr>
                 <tr>
-                    <td>8.</td>
+                    <td>9.</td>
                     <td>Warga Negara</td>
                     <td style="padding-left: 10px;">: </td>
                     <td>{{ $proses_surat['kewarganegaraan'] }}</td>

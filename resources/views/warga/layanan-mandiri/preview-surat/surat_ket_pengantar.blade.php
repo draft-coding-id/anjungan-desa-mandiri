@@ -81,67 +81,73 @@
                 </tr>
                 <tr>
                     <td>2.</td>
+                    <td>Nomor HP</td>
+                    <td style="padding-left: 10px;">: </td>
+                    <td>{{ $proses_surat['no_hp'] }}</td>
+                </tr>
+                <tr>
+                    <td>3.</td>
                     <td>Nama Lengkap</td>
                     <td style="padding-left: 10px;">: </td>
                     <td>{{ $proses_surat['nama_lengkap'] }}</td>
                 </tr>
                 <tr>
-                    <td>3.</td>
+                    <td>4.</td>
                     <td>Tempat/Tanggal Lahir</td>
                     <td style="padding-left: 10px;">: </td>
                     <td>{{ $proses_surat['tempat_lahir'] }}, {{ $proses_surat['tanggal_lahir'] }}</td>
                 </tr>
                 <tr>
-                    <td>4.</td>
+                    <td>5.</td>
                     <td>Umur</td>
                     <td style="padding-left: 10px;">: </td>
                     <td>{{ $proses_surat['usia'] }}</td>
                 </tr>
                 <tr>
-                    <td>5.</td>
+                    <td>6.</td>
                     <td>Warga Negara</td>
                     <td style="padding-left: 10px;">: </td>
                     <td>{{ $proses_surat['warga_negara'] }}</td>
                 </tr>
                 <tr>
-                    <td>6.</td>
+                    <td>7.</td>
                     <td>Agama</td>
                     <td style="padding-left: 10px;">: </td>
                     <td>{{ $proses_surat['agama'] }}</td>
                 </tr>
                 <tr>
-                    <td>7.</td>
+                    <td>8.</td>
                     <td>Jenis Kelamin</td>
                     <td style="padding-left: 10px;">: </td>
                     <td>{{ $proses_surat['jenis_kelamin'] }}</td>
                 </tr>
                 <tr>
-                    <td>8.</td>
+                    <td>9.</td>
                     <td>Pekerjaan</td>
                     <td style="padding-left: 10px;">: </td>
                     <td>{{ $proses_surat['pekerjaan'] }}</td>
                 </tr>
                 <tr>
-                    <td>9.</td>
+                    <td>10.</td>
                     <td>Tempat Tinggal</td>
                     <td style="padding-left: 10px;">: </td>
                     <td>{{ $proses_surat['alamat'] }} RT {{ $proses_surat['rt'] }} RW {{ $proses_surat['rw'] }} Desa
                         {{$proses_surat['desa']}} , Kecamatan {{$proses_surat['kecamatan']}}, Kabupaten Bogor</td>
                 </tr>
                 <tr>
-                    <td>10.</td>
+                    <td>11.</td>
                     <td>Surat bukti diri KTP</td>
                     <td style="padding-left: 10px;">: </td>
                     <td>{{ $proses_surat['nik'] }}</td>
                 </tr>
                 <tr>
-                    <td>11.</td>
+                    <td>12.</td>
                     <td>Keperluan</td>
                     <td style="padding-left: 10px;">: </td>
                     <td>{{ $proses_surat['keperluan'] }}</td>
                 </tr>
                 <tr>
-                    <td>12.</td>
+                    <td>13.</td>
                     <td>Berlaku</td>
                     <td style="padding-left: 10px;">: </td>
                     <td>1 Januari 2025 s/d 31 April 2025</td>
@@ -161,7 +167,7 @@
                 <br>
                 <p>Pemegang Surat</p>
                 <br><br><br>
-                <span>{{$proses->surat['nama_lengkap']}}</span>
+                <span>{{$proses_surat['nama_lengkap']}}</span>
             </div>
             <div><br><br>
                 <p>Rawapanjang, Tanggal</p>

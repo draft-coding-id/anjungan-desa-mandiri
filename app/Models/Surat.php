@@ -26,6 +26,7 @@ class Surat extends Model
         'is_selesai',
         'isi_surat',
         'file_surat',
+        'file'
     ];
 
     protected $casts = [
