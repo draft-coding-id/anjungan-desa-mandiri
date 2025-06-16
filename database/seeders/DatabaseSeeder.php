@@ -6,6 +6,8 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,27 +16,29 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create(
+        $permission = ['akses daftar akun', 'lihat data warga', 'detail warga', 'detail surat', 'lihat surat', 'tolak surat', 'setujui surat', 'lihat surat ditolak', 'lihat riwayat surat'];
+        foreach($permission as $perm){
+            Permission::create(['name' => $perm]);
+        }
+        $admin = Role::create(['name' => 'admin']);
+        $rt = Role::create(['name' => 'rt']);
+        $rw = Role::create(['name' => 'rw']);
+        $kades = Role::create(['name' => 'kades']);
+        $admin->givePermissionTo('akses daftar akun' , 'lihat data warga', 'detail warga', 'detail surat', 'lihat surat', 'tolak surat', 'setujui surat', 'lihat surat ditolak', 'lihat riwayat surat');
+        $rt->givePermissionTo('lihat data warga' , 'detail warga' , 'detail surat' ,'lihat surat' , 'tolak surat' , 'setujui surat' , 'lihat surat ditolak' , 'lihat riwayat surat');
+        $rw->givePermissionTo('lihat data warga' , 'lihat surat' , 'lihat surat ditolak' , 'lihat riwayat surat');
+        $kades->givePermissionTo('lihat data warga' , 'lihat surat' , 'lihat surat ditolak' , 'lihat riwayat surat');
+        $user = User::factory()->create(
             [
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
                 'username' => 'admin',
+                'no_hp' => '012345678901',
+                'akses' => 'Admin',
                 'password' => Hash::make('123'),
-                'role' => 'admin',
             ]
         );
-        User::factory()->create(
-            [
-                'name' => 'Kades',
-                'email' => 'kades@gmail.com',
-                'username' => 'kades',
-                'password' => Hash::make('123'),
-                'role' => 'kades'
-            ]
-        );
-
+        $user->assignRole('admin');
         $this->call([
             WargaSeeder::class,
         ]);

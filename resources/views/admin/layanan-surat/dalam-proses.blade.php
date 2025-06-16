@@ -2,13 +2,14 @@
 @section('title', 'Layanan Surat')
 
 @section('content')
-    <h4>Layanan Surat > Dalam Proses</h4>
+<h4>Layanan Surat > Dalam Proses</h4>
 
 @include('layout.admin.menu_surat')
 <h4>Data Layanan Surat</h4>
 <div class="content">
+    @hasanyrole('admin|rt')
     <div class="mt-4">
-        <h3>Dalam Proses</h3>
+        <h3>Proses Surat</h3>
         <table class="table">
             <thead>
                 <tr>
@@ -49,21 +50,20 @@
                         <button class="setuju-button" onclick="setujuiSurat({{$surat->id}})">Setujui</button>
                         <button class="tolak-button" onclick="tolakSurat({{$surat->id}})">Tolak</button>
                     </td>
-                    <td>
-                        {{$surat->countdown($surat)}}
+                    <td class="countdown" data-endtime="{{ \Carbon\Carbon::parse($surat->created_at)->addMinutes(10)->timestamp }}">
+                        <span class="countdown-display">00:00</span>
                     </td>
                     @empty
-                    <td colspan="7" style="text-align: center">Semua Surat sudah diproses</td>
+                    <td colspan="12" style="text-align: center">Surat Sudah di kirim ke warga</td>
                 </tr>
                 @endforelse
-                <tr>
-                    <td colspan="7">
-                        {{$dalamProses->links()}}
-                    </td>
-                </tr>
             </tbody>
         </table>
     </div>
+    @endhasanyrole
+
+
+    @hasanyrole('admin|kades|rw')
     <div class="mt-4">
         <h3>Kabari Warga</h3>
         <table class="table">
@@ -83,8 +83,18 @@
                 @forelse ( $belumDikirimKeWarga as $surat)
                 <tr>
                     <td>{{$incrementForTableBelumDiserahkan++}}</td>
-                    <td width="250px" height="50px"><a href="{{route('layanan-surat-dalam-proses-surat-selesai' , $surat->id)}}"
-                            class="button" ;">Kabari warga</a></td>
+                    @hasanyrole('kades|rw')
+                    <td width="250px" height="50px">
+                        <button class="button">{{$surat->status}}</button>
+                    </td>
+                    @endhasanyrole
+                    @hasanyrole('admin|rt')
+                    <td width="250px" height="50px">
+                        <a href="{{route('layanan-surat-dalam-proses-surat-selesai' , $surat->id)}}" class="button" ;">Kabari warga
+                        </a>
+                    </td>
+                    @endhasanyrole
+
                     <td>{{$surat->warga->nik}}</td>
                     <td>{{$surat->warga->nik}}</td>
                     <td>{{$surat->no_hp}}</td>
@@ -94,17 +104,39 @@
                     <td colspan="7" style="text-align: center">Surat Sudah di kirim ke warga</td>
                 </tr>
                 @endforelse
-                <tr>
-                    <td colspan="7">
-                        {{$belumDikirimKeWarga->links()}}
-                    </td>
-                </tr>
             </tbody>
-            {{$belumDikirimKeWarga->links()}}
         </table>
     </div>
+    @endhasanyrole
 </div>
 <script>
+    function startCountdown() {
+        const countdownElements = document.querySelectorAll('.countdown');
+
+        countdownElements.forEach((el) => {
+            const endTime = parseInt(el.getAttribute('data-endtime')) * 1000;
+            const display = el.querySelector('.countdown-display');
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = endTime - now;
+
+                if (distance <= 0) {
+                    display.textContent = '00:00';
+                    return;
+                }
+
+                const minutes = Math.floor(distance / 60000);
+                const seconds = Math.floor((distance % 60000) / 1000);
+                display.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            }
+
+            updateCountdown(); // Run once immediately
+            setInterval(updateCountdown, 1000); // Update every second
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', startCountdown);
     async function getData(id) {
         const res = await fetch(`lihat-surat/${id}`).then(res => res.json());
         return res;

@@ -5,9 +5,8 @@
 
 <h2>Data Warga Desa Rawapanjang</h2>
 <div class="main-container">
-    <button onclick="window.location.href = '{{route("qrGenerate")}}' ">Coba QR</button>
-
-    <button class=" add-button" onclick="openModal()">
+    @role('admin')
+    <button class="add-button" onclick="openModal()">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -15,6 +14,7 @@
         </svg>
         Tambah Data
     </button>
+    @endrole
 
     <!-- Modal -->
     <div id="tambahModal" class="modal">
@@ -217,7 +217,9 @@
         <thead>
             <tr>
                 <th>No</th>
+                @role('admin')
                 <th>Aksi</th>
+                @endrole
                 <th>NIK</th>
                 <th>Nama</th>
                 <th>Alamat</th>
@@ -233,9 +235,11 @@
             @foreach ($data_warga as $warga)
             <tr>
                 <td>{{ $loop->iteration }}</td>
+                @role('admin')
                 <td>
                     <button class="aksi" data-id="{{ $warga->id }}">Kelola Data</button>
                 </td>
+                @endrole
                 <td>{{ $warga->nik }}</td>
                 <td>{{ $warga->nama_lengkap }}</td>
                 <td>{{ $warga->alamat }}</td>

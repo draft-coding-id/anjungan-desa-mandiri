@@ -26,9 +26,14 @@
                 @forelse ($surat as $data )
                 <tr>
                     <td>{{$increment}}</td>
-                    <td><button onclick="setujuiSurat({{$data->id}})">{{$data->status}}</button>
+                    @role('admin|rt')
+                    <td><button onclick="setujuiSurat({{$data->id}})">Verifikasi ditolak</button>
+                    @endrole
+                    @role('kades|rw')
+                    <td><button>{{$surat->status}}</button>
+                    @endrole
                     </td>
-                    <td></td>
+                    <td>{{$data->status}}</td>
                     <td>{{$data->no_surat}}</td>
                     <td>{{$data->isi_surat['nama_lengkap']}}</td>
                     <td>{{$data->no_hp}}</td>

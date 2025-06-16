@@ -16,9 +16,18 @@ use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
+
+    public function showLoginPage(){
+        if(Auth::user()){
+            return redirect()->route('admin-beranda');
+        }
+        return view('admin.login');
+    }
+
     // Admin Login
     public function cekAdminLogin(Request $request)
     {
+        
         $request->validate([
             'username' => 'required',
             'password' => 'required',
