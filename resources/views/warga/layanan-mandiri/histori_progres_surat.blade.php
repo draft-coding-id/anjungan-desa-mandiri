@@ -370,6 +370,7 @@
             <div class="header">
                 <h1 class="green">Histori & Progres Pengajuan Surat</h1>
             </div>
+            <a class="header-btn button" href="/layanan-umum">Kembali</a>
         </div>
 
         <table>
@@ -420,6 +421,10 @@
                 @endforelse
             </tbody>
         </table>
+
+        {{-- <div style="">
+            <a class="button" href="/layanan-umum">Kembali</a>
+        </div> --}}
     </main>
 </body>
 
