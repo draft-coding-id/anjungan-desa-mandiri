@@ -18,6 +18,10 @@
             background-repeat: no-repeat;
             background-position: center;
             height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             /* Mengatur tinggi body agar menutupi seluruh viewport */
         }
 
@@ -51,7 +55,7 @@
             text-align: center;
             margin-bottom: 30px;
             font-size: 18px;
-            color: #555;
+            color: black;
         }
 
         .form-group {
@@ -121,15 +125,42 @@
         .button-container {
             display: flex;
             overflow-x: auto;
-            justify-content: center;
-            /* align-items: center; */
+            overflow-y: hidden;
+            white-space: nowrap;
+            gap: 20px;
             padding: 20px;
             padding-top: 0px;
-            gap: 20px;
+            max-width: 90%;         /* Batasi lebar container */
+            margin: 0 auto;         /* Tengah secara horizontal */
             scrollbar-width: none;
+            -ms-overflow-style: none;
         }
 
+        .button-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera: hilangkan tampilan scrollbar */
+        }
+
+        .scroll-hint {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: bounceLeft 1.2s infinite;
+            font-size: 24px;
+            color: white;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        @keyframes bounceLeft {
+            0%, 100% { transform: translateY(-50%) translateX(0); opacity: 0.7; }
+            50% { transform: translateY(-50%) translateX(-6px); opacity: 1; }
+        }
+
+
+
         .button {
+            flex: 0 0 auto;             /* Jangan izinkan tombol mengecil atau membesar */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -141,7 +172,6 @@
             cursor: pointer;
             text-decoration: none;
             font-weight: bold;
-            flex-shrink: 0;
             font-size: 16px;
             line-height: 1.3;
             letter-spacing: 0.5px;
@@ -267,14 +297,14 @@
         .footer h3 {
             font-family: Arial, Helvetica, sans-serif;
             margin-bottom: 20px;
-            text-shadow: 1px 1px 0 white,
+            /* text-shadow: 1px 1px 0 white,
                 -1px 1px 0 white,
                 1px -1px 0 white,
                 -1px -1px 0 white,
                 2px 2px 0 white,
                 -2px 2px 0 white,
                 2px -2px 0 white,
-                -2px -2px 0 white;
+                -2px -2px 0 white; */
         }
 
         .credit {

@@ -11,7 +11,7 @@ use App\Http\Controllers\admin\WargaController;
 // Route Mockup Baru
 Route::view('/', 'onboarding');
 Route::view('/warga', 'warga.halaman_utama')->name('halaman_utama'); //Lanjut ke views warga
-Route::get('/admin', [LoginController::class , 'showLoginPage'])->name('login'); //Lanjut ke views admin
+Route::get('/admin', [LoginController::class, 'showLoginPage'])->name('login'); //Lanjut ke views admin
 
 // ====================================================================== //
 
@@ -40,17 +40,20 @@ Route::middleware(['isAdmin'])->group(function () {
     Route::view('/layanan-umum', 'warga.layanan-mandiri.layanan_umum')->name('layanan-umum');
     Route::view('/layanan-kependudukan', 'warga.layanan-mandiri.layanan_kependudukan')->name('layanan-kependudukan');
     ROute::view('/layanan-pernikahan', 'warga.layanan-mandiri.layanan_pernikahan')->name('layanan-pernikahan');
+    ROute::view('/layanan-catatan-sipil', 'warga.layanan-mandiri.layanan_catatan_sipil')->name('layanan-catatan-sipil');
     Route::view('/layanan-usaha', 'warga.layanan-mandiri.layanan_usaha')->name('layanan-usaha');
 });
 
 Route::controller(SuratController::class)->group(function () {
+    Route::get('/histori-progres-surat', 'histori_progres_surat')->name('histori_progres_surat');
     Route::get('/surat-keterangan-domisili', 'form_Surat_Keterangan_Domisili');
     Route::get('/surat-keterangan-pengantar', 'form_Surat_Keterangan_Pengantar');
     Route::get('/surat-keterangan-ktp-dalam-proses', 'form_Surat_Keterangan_KTP_Dalam_Proses');
     Route::get('/surat-keterangan-wali-hakim', 'form_surat_keterangan_wali_hakim');
     Route::post('/submitForm', 'submitForm')->name('submitForm');
     Route::get('/konfirmasi', 'konfirmasi');
-    Route::get('/berhasil/{no_hp}', 'berhasil');
+    // Route::post('/submitSurat', [SuratController::class, 'submitSurat']);
+    Route::get('/berhasil', 'berhasil');
 });
 
 // Layanan Mandiri - Preview Surat
@@ -83,7 +86,7 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/pengumuman', 'admin.pengumuman')->name('pengumuman');
     Route::view('/artikel-desa', 'admin.artikel-desa')->name('artikel-desa');
     Route::view('/agenda', 'admin.agenda')->name('agenda');
-    Route::get('/pengaturan-akses' , [AdminController::class , 'getUsers'])->name('pengaturan-akses')->middleware('permission:akses daftar akun');;
+    Route::get('/pengaturan-akses', [AdminController::class, 'getUsers'])->name('pengaturan-akses')->middleware('permission:akses daftar akun');;
 
 
     // Layanan Surat
@@ -91,7 +94,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/layanan-surat', [LayananSurat::class, 'index'])->name('layanan-surat-dalam-proses');
     Route::view('/kelola-surat', 'admin.layanan-surat.kelola-surat')->name('layanan-surat-kelola-surat');
     //
-    Route::get('/qr-generate' , [LayananSurat::class , 'qrGenerate'])->name('qrGenerate');
+    Route::get('/qr-generate', [LayananSurat::class, 'qrGenerate'])->name('qrGenerate');
 
     //
     // Proses Surat
@@ -109,7 +112,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/tandaiDiserahkan/{idSurat}', [LayananSurat::class, 'tandaiDiserahkan'])->name('tandaiSuratDiserahkan');
     Route::get('/riwayat-surat', [LayananSurat::class, 'getRiwayatSurat'])->name('layanan-surat-riwayat');
     Route::view('/surat-selesai', 'admin.layanan-surat.proses-surat.surat-selesai');
-    Route::get('/logout' , [AdminController::class , 'logout'])->name('logout-admin');
+    Route::get('/logout', [AdminController::class, 'logout'])->name('logout-admin');
 })->middleware('role:admin,kades,rt,rw');
     // ----- Ends of Views Admin Desa ----- //
 // ====================================================================== //

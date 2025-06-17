@@ -111,6 +111,14 @@
         .button:hover {
             background-color: #e68a00;
         }
+
+        .hubungi-admin {
+            color: blue;
+        }
+
+        .hubungi-admin:hover {
+            color: rgb(86, 86, 248);
+        }
     </style>
 </head>
 
@@ -145,6 +153,7 @@
                         @if(session('error'))
                         <p style="color: red;">{{session('error')}}</p>
                         @endif
+                        <span>Belum punya akun? <a target="_blank" href="http://wa.me/+62895392167815" class="hubungi-admin">Hubungi admin</a></span>
                         <div style="display: flex; justify-content: center; align-items: center;">
                             <button type="submit" class="button">Cek</button>
                         </div>

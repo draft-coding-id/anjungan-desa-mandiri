@@ -85,7 +85,7 @@
         {{ session('error') }}
     </div>
     @endif
-    <form action="{{ route('submitForm')}}" method="POST">
+    <form action="{{ route('submitForm')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <input type="hidden" name="jenis_surat" value="SKP">
@@ -100,6 +100,10 @@
         <div class="form-group">
             <label>NIK / No. KTP :</label>
             <input type="text" name="nik" value="{{ $warga->nik }}" readonly>
+        </div>
+        <div class="form-group">
+            <label>No HP :</label>
+            <input type="text" name="no_hp" required>
         </div>
         <div class="form-group">
             <label>Nama Lengkap :</label>
@@ -170,6 +174,10 @@
         <div class="form-group">
             <label>Keperluan :</label>
             <input type="text" name="keperluan" required>
+        </div>
+        <div class="form-group">
+            <label>File :</label>
+            <input type="file" name="file" required>
         </div>
         
         <div class="button-container">

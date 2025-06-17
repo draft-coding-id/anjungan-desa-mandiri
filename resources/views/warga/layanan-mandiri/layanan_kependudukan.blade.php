@@ -5,8 +5,12 @@
 @endsection
 
 @section('surat-button')
-<a href="" class="button-skyblue">Surat <br> Keterangan <br> Kematian</a>
+{{-- <a href="" class="button-skyblue">Surat <br> Keterangan <br> Kematian</a> --}}
 <a href="/surat-keterangan-domisili" class="button-skyblue">Surat <br> Keterangan <br> Domisili</a>
+<a href="" class="button-skyblue">Surat <br> Keterangan KTP <br> Dalam Proses </a>
+<a href="" class="button-skyblue">Surat <br> Keterangan Penduduk </a>
+<a href="" class="button-skyblue">Surat <br> Keterangan <br> Pindah Penduduk </a>
+<a href="" class="button-skyblue">Surat <br> Permohonan <br> Kartu Keluarga </a>
 <a href="" class="button-skyblue">Surat <br> Permohonan <br> Perubahan KK </a>
 @endsection
 

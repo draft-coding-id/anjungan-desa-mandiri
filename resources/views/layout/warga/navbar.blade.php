@@ -9,6 +9,7 @@
         <a href='/agenda-rawapanjang' class="button">Agenda <br>Rawapanjang</a>
         <a href='/lapak-warga' class="button">Lapak</a>
         <a href='/artikel-terkini' class="button">Artikel <br>Terkini</a>
+        {{-- <a href='/surat-kategori' class="button">Surat & Kategori</a> --}}
         @auth('warga')
         <a href='/logout' class="button">Logout</a>
         @endauth

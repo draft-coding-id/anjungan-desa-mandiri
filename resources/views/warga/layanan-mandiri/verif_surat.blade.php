@@ -127,13 +127,13 @@
         </div>
         <form action="#" method="POST">
             @csrf
-            <div class="form">
+            {{-- <div class="form">
                 <label style="font-weight: bold;">Nomor Ponsel :</label>
                 <input id="no_hp" type="number" placeholder="Masukkan Nomor HP" required>
-            </div>
+            </div> --}}
             <p>(Bila surat sudah selesai diproses akan kami hubungi ke nomor yang Anda masukkan)</p>
             <div class="button-container">
-                <a href="/pilih-surat" class="button">Kembali</a>
+                <a href="/surat-keterangan-pengantar" class="button">Kembali</a>
                 <button type="button" class="button" id="openLightbox">Lanjutkan</button>
             </div>
         </form>
@@ -168,7 +168,7 @@
 
         // Menangani aksi saat tombol "Lanjutkan" diklik
         confirmButton.addEventListener('click', function() {
-        window.location.href='/berhasil/'+noHp.value;
+        window.location.href='/berhasil/';
         });
 
         // Menutup lightbox saat area luar lightbox-content diklik

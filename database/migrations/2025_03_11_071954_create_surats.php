@@ -26,6 +26,7 @@ return new class extends Migration
             $table->boolean('is_print')->default(false);
             $table->boolean('is_diserahkan')->default(false);
             $table->string('file_surat')->nullable();
+            $table->string('file')->nullable();
             $table->string('no_hp');
             $table->json('isi_surat');
             $table->timestamps();
