@@ -114,6 +114,12 @@ body {
     padding: 0px 40px;
 }
 
+
+.container-riwayat {
+    display : flex;
+    flex-direction: column;
+}
+
 /* Table Styles */
 table {
     width: 100%;
@@ -428,6 +434,16 @@ td button:hover {
 }
 
 /* Heading Styles */
+
+.h5 {
+    color: #333;
+    margin: 20px 0;
+    font-size: 20px;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
 h4 {
     color: #333;
     margin: 20px 0;
@@ -686,6 +702,22 @@ button:hover {
     font-weight: 500;
     color: #333;
     font-size: 16px;
+}
+
+
+.search-input {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+.search-input input {
+    padding: 10px 20px;
+    border: 2px solid #e1e5e9;
+    border-radius: 10px;
+    margin: 0px 20px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    background: #f8f9fa;
 }
 
 .form-group input,

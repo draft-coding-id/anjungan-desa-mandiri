@@ -8,6 +8,7 @@ use App\Models\skDomisili;
 use App\Models\Surat;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class LayananSurat extends Controller
 {
@@ -54,45 +55,13 @@ class LayananSurat extends Controller
         $fileName = "surat-" . $surat->jenis_surat . $surat->id . "-" . $surat->warga->nik . "-" . date('hhmmss');
         $surat->update([
             'is_accepted' => true,
-            'status' => 'Telah disetujui oleh ' . Auth::user()->role,
+            'status' => 'Telah disetujui oleh ' . Auth::user()->akses,
             'updated_at' => now(),
             'is_approve_admin' => true,
             'file_surat' => $fileName,
         ]);
-        MakePdf::dispatch($surat, $fileName);
-        return redirect()->route('layanan-surat-dalam-proses');
-    }
+        Cache::forget('beranda');
 
-    public function diVerifikasiAdmin($id)
-    {
-        $surat = Surat::find($id);
-        $surat->update([
-            'is_verify_admin' => true,
-            'status' => 'Menunggu Tanda Tangan Kades',
-            'updated_at' => now(),
-        ]);
-        return redirect()->route('layanan-surat-dalam-proses');
-    }
-
-    public function persetujuanKades($id)
-    {
-        $surat = Surat::find($id);
-        return view('admin.layanan-surat.proses-surat.persetujuan-kades', [
-            'surat' => $surat,
-        ]);
-    }
-
-    public function disetujuiKades($id)
-    {
-        $surat = Surat::find($id);
-
-        $fileName = "surat-" . $surat->jenis_surat . $surat->id . "-" . $surat->warga->nik . "-" . date('hhmmss');
-        $surat->update([
-            'is_tanda_tangan_kades' => true,
-            'status' => 'Belum diserahkan Ke Warga',
-            'updated_at' => now(),
-            'file_surat' => $fileName,
-        ]);
         MakePdf::dispatch($surat, $fileName);
         return redirect()->route('layanan-surat-dalam-proses');
     }
@@ -120,7 +89,7 @@ class LayananSurat extends Controller
     public function kirimWa($id)
     {
         $surat = Surat::find($id);
-        $pesan_wa = "Hai saya dari seda ... ,  surat yang anda anjukan sudah selesai di tanda tangan oleh kepala desa. Anda bisa mengprint surat melalui link berikut ";
+        $pesan_wa = "Hai saya dari desa ... ,  surat yang anda anjukan sudah selesai di tanda tangan oleh kepala desa. Anda bisa mengprint surat melalui link berikut ";
         $file_path = asset('surat/'. $surat->file_surat . ".pdf");
         $message = urlencode($pesan_wa . $file_path);
         $url = "https://wa.me/" . $surat->no_hp . "?text=" . $message;
@@ -133,7 +102,7 @@ class LayananSurat extends Controller
         $surat->update([
             'is_send_to_warga' => true,
             'is_selesai' => true,
-            'status' => 'Surat telah dikirimp',
+            'status' => 'Surat telah dikirim',
             'updated_at' => now(),
         ]);
         return redirect()->route('layanan-surat-dalam-proses');
@@ -181,7 +150,7 @@ class LayananSurat extends Controller
             'is_accepted' => false,
             'updated_at' => now(),
             'alasan_tolak' => $request->alasan,
-            'status' => 'Surat Ditolak Oleh ' . Auth::user()->role,
+            'status' => 'Surat Ditolak Oleh ' . Auth::user()->akses,
         ]);
         return redirect()->route('layanan-surat-ditolak');
     }
@@ -194,6 +163,20 @@ class LayananSurat extends Controller
         return view('admin.layanan-surat.riwayat-surat', [
             'surat' => $surat,
             'increment' => $increment
+        ]);
+    }
+    // Search surat 
+    public function searchSurat(Request $request)
+    {
+        $search = $request->search; 
+        $surat = Surat::where('no_surat', 'LIKE', '%' . $search . '%')
+            ->RiwayatSurat() // jika perlu filter sama seperti getRiwayatSurat
+            ->get();
+
+        return view('admin.layanan-surat.riwayat-surat', [
+            'surat' => $surat,
+            'increment' => 1,
+            'search' => $search // untuk menampilkan kembali keyword pencarian
         ]);
     }
 }

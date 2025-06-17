@@ -1,22 +1,17 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
-use App\Http\Controllers\admin\GeneratePDf;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\PreviewSuratController;
 use App\Http\Controllers\admin\LayananSurat;
 use App\Http\Controllers\admin\WargaController;
-// use App\Http\Controllers\AuthController;
-// use App\Http\Controllers\WargaController;
-// use App\Http\Controllers\Surat_Digital\skDomisiliController;
-
 
 // Route Mockup Baru
 Route::view('/', 'onboarding');
 Route::view('/warga', 'warga.halaman_utama')->name('halaman_utama'); //Lanjut ke views warga
-Route::view('/admin', 'admin.login')->name('login'); //Lanjut ke views admin
+Route::get('/admin', [LoginController::class, 'showLoginPage'])->name('login'); //Lanjut ke views admin
 
 // ====================================================================== //
 
@@ -30,7 +25,7 @@ Route::post('/login/check-pin', [LoginController::class, 'checkPin'])->name('log
 Route::view('/pengumuman-warga', 'warga.profil_desa.pengumuman');
 Route::view('/agenda-rawapanjang', 'warga.profil_desa.agenda');
 Route::view('/lapak-warga', 'warga.profil_desa.lapak');
-Route::view('/artikel-terkini', 'warga.profil_desa.artikel-terkini');
+Route::view('/artikel-terkini', 'warga.profil_desa.artikel_terkini');
 Route::view('/tentang-desa-rawapanjang', 'warga.profil_desa.tentang-desa')->name('sejarah-desa');
 Route::view('/visi-misi', 'warga.profil_desa.visi_misi')->name('visi-misi');
 Route::view('/potensi-desa', 'warga.profil_desa.potensi_desa')->name('potensi-desa');
@@ -60,7 +55,6 @@ Route::controller(SuratController::class)->group(function () {
     // Route::post('/submitSurat', [SuratController::class, 'submitSurat']);
     Route::get('/berhasil', 'berhasil');
 });
-// Route::view('/surat-keterangan-domisili', 'warga.layanan-mandiri.form-surat.surat-keterangan-domisili');
 
 // Layanan Mandiri - Preview Surat
 Route::get('/skd', [PreviewSuratController::class, 'skd'])->name('preview.skd');
@@ -71,15 +65,6 @@ Route::get('/skktpdp', [PreviewSuratController::class, 'skktpdp']);
 Route::get('/spkk', [PreviewSuratController::class, 'spkk']);
 Route::get('/sppkk', [PreviewSuratController::class, 'sppkk']);
 Route::get('/skwh', [PreviewSuratController::class, 'skwh']);
-
-// Preview Surat Admin
-Route::get('/get-detail-skd/{id}', [PreviewSuratController::class, 'getDetailSkd'])->name('get-detail-skd');
-Route::get('/get-detail-skp/{id}', [PreviewSuratController::class, 'getDetailSkp'])->name('get-detail-skp');
-Route::get('/get-detail-skwh/{id}', [PreviewSuratController::class, 'getDetailSkwh'])->name('get-detail-skwh');
-// Layanan Mandiri - Verifikasi Surat
-// Route::view('/verifikasi', 'warga.layanan-mandiri.verif_surat');
-// Route::view('/berhasil', 'warga.layanan-mandiri.berhasil');
-
 // ----- Ends of Views Warga ----- //
 
 // ====================================================================== //
@@ -89,6 +74,9 @@ Route::get('/get-detail-skwh/{id}', [PreviewSuratController::class, 'getDetailSk
 Route::post('/proses-login', [LoginController::class, 'cekAdminLogin'])->name('cek-credentials');
 Route::middleware(['auth'])->group(function () {
     Route::get('/beranda', [AdminController::class, 'index'])->name('admin-beranda');
+    Route::post('/tambah-akun', [AdminController::class, 'tambahAkun'])->name('tambah-akun');
+    Route::get('/show-akun/{id}', [AdminController::class, 'showAkun'])->name('show-akun');
+    Route::post('/update-akun', [AdminController::class, 'updateAkun'])->name('update-akun');
     Route::view('/info-desa', 'admin.info-desa')->name('info-desa');
     Route::get('/data-warga', [WargaController::class, 'index'])->name('data-warga');
     Route::get('/show-warga/{id}', [WargaController::class, 'showWarga'])->name('show-warga');
@@ -98,14 +86,15 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/pengumuman', 'admin.pengumuman')->name('pengumuman');
     Route::view('/artikel-desa', 'admin.artikel-desa')->name('artikel-desa');
     Route::view('/agenda', 'admin.agenda')->name('agenda');
-    Route::view('/pengaturan-akun', 'admin.pengaturan-akun')->name('pengaturan-akun');
+    Route::get('/pengaturan-akses', [AdminController::class, 'getUsers'])->name('pengaturan-akses')->middleware('permission:akses daftar akun');;
+
 
     // Layanan Surat
     // Route::view('/layanan-surat', 'admin.layanan-surat.dalam-proses');
     Route::get('/layanan-surat', [LayananSurat::class, 'index'])->name('layanan-surat-dalam-proses');
     Route::view('/kelola-surat', 'admin.layanan-surat.kelola-surat')->name('layanan-surat-kelola-surat');
     //
-    Route::get('/qr-generate' , [LayananSurat::class , 'qrGenerate'])->name('qrGenerate');
+    Route::get('/qr-generate', [LayananSurat::class, 'qrGenerate'])->name('qrGenerate');
 
     //
     // Proses Surat
@@ -114,11 +103,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/surat-ditolak/{idSurat}', [LayananSurat::class, 'suratDitolak'])->name('surat.ditolak');
     Route::get('/lihat-surat/{idSurat}', [LayananSurat::class, 'lihatSurat'])->name('layanan-surat-dalam-proses.lihat-surat');
     Route::get('/preview-surat/{jenisSurat}/{id}', [LayananSurat::class, 'previewSurat'])->name('preview.surat');
-    Route::get('/setujui-surat/{idSurat}', [LayananSurat::class, 'diVerifikasiAdmin'])->name('layanan-surat-dalam-proses.setujui-surat');
-    Route::get('/persetujuan-kades/{idSurat}', [LayananSurat::class, 'persetujuanKades'])->name('layanan-surat-dalam-proses.persetujuan-kades');
-    Route::post('/persetujuan-kades/{idSurat}', [LayananSurat::class, 'disetujuiKades'])->name('disetujui.kades');
-    // Route::get('/print-surat/{idSurat}', [GeneratePDf::class, 'generate'])->name('generate.pdf');
-    // Route::get('/tanda-tangan-surat' , [LayananSurat::class, 'tandaTanganSurat'])->name('tanda-tangan.surat');
+    Route::get('/search-surat', [LayananSurat::class, 'searchSurat'])->name('search-surat');
     Route::get('/surat-selesai/{idSurat}', [LayananSurat::class, 'suratSelesai'])->name('layanan-surat-dalam-proses-surat-selesai');
     Route::get('/kirim-surat-wa/{idSurat}', [LayananSurat::class, 'kirimWa'])->name('kirim-surat-wa');
     Route::post('/kirim-surat/{idSurat}', [LayananSurat::class, 'kirimSurat'])->name('kirimSurat');
@@ -127,6 +112,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/tandaiDiserahkan/{idSurat}', [LayananSurat::class, 'tandaiDiserahkan'])->name('tandaiSuratDiserahkan');
     Route::get('/riwayat-surat', [LayananSurat::class, 'getRiwayatSurat'])->name('layanan-surat-riwayat');
     Route::view('/surat-selesai', 'admin.layanan-surat.proses-surat.surat-selesai');
-});
+    Route::get('/logout', [AdminController::class, 'logout'])->name('logout-admin');
+})->middleware('role:admin,kades,rt,rw');
     // ----- Ends of Views Admin Desa ----- //
 // ====================================================================== //
