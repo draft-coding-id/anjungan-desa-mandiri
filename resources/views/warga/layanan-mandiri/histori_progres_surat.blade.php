@@ -402,9 +402,9 @@
                         <td>
                             @php
                                 $progress = [];
-                                if ($surat->is_accepted) $progress[] = "Disetujui";
-                                if ($surat->is_approve_admin) $progress[] = "Diproses Admin";
-                                if ($surat->is_tanda_tangan_kades) $progress[] = "TTD Kepala Desa";
+                                if (!$surat->is_accepted) $progress[] = "Ditolak admin dengan alasan $surat->alasan_tolak ";
+                                if ($surat->is_accepted) $progress[] = "Diproses Admin";
+                                if ($surat->is_approve_admin) $progress[] = "Disetujui Admin";
                                 if ($surat->is_send_to_warga) $progress[] = "Dikirim ke Warga";
                                 if ($surat->is_print) $progress[] = "Dicetak";
                                 if ($surat->is_diserahkan) $progress[] = "Diserahkan";
