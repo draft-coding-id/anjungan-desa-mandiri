@@ -1,9 +1,9 @@
-@extends('layout.warga.app')
+@extends('layout.warga.tentang-desa-layout')
 @section('title' , 'Tentang Desa')
 @section('header' , 'Tentang Desa')
 @section('content')
-<div class="container">
-    <h1>Sejarah Desa Rawapanjang</h1>
+<div class="container" style="height: 100%">
+    <h1>Sejarah Desa </h1>
     <p>Desa Rawa Panjang adalah salah satu desa
         di Kecamatan Bojong Gede Kabupaten Bogor.
         Merupakan desa pemekaran dari Desa Pabuaran
@@ -58,7 +58,7 @@
         </ul>
     </div>
 </div>
-@endsection
 @section('footer')
 @include('layout.warga.tentang-desa-navbar')
+@endsection
 @endsection

@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Anjungan Desa Mandiri</title>
-    <link rel="icon" href="https://rawapanjang-desa.id/desa/logo/1679693855_logo-pemkab-bogor.png" type="image/png">
+    <link rel="icon" href="assets/logo.png" type="image/png">
+
     <style>
         body {
             margin: 0;

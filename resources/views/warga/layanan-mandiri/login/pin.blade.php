@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Anjungan Desa Mandiri</title>
-    <link rel="icon" href="https://rawapanjang-desa.id/desa/logo/1679693855_logo-pemkab-bogor.png" type="image/png">
+    <link rel="icon" href="assets/logo.png" type="image/png">
+
     <style>
         body {
             margin: 0;
@@ -18,7 +19,7 @@
             height: 100vh;
             width: 100vw;
             font-family: sans-serif;
-            background-image: url('{{ asset('assets/BackgroundMockupAnjungan.png') }}');
+            background-image: url('{{asset('assets/BackgroundMockupAnjungan.png') }}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -100,6 +101,10 @@
             padding: 20px;
         }
 
+        span {
+            margin-top: 20px;
+        }
+
         .button {
             display: flex;
             margin-top: 10px;
@@ -149,24 +154,30 @@
                     <form action="{{route('login.checkPin')}}" method="POST">
                         @csrf
                         <input hidden name="nik" value="{{$nik}}" />
-                        <input type="number" name="pin1" class="pin" min="0" max="9" maxlength="1" />
-                        <input type="number" name="pin2" class="pin" min="0" max="9" maxlength="1" />
-                        <input type="number" name="pin3" class="pin" min="0" max="9" maxlength="1" />
-                        <input type="number" name="pin4" class="pin" min="0" max="9" maxlength="1" />
-                        <input type="number" name="pin5" class="pin" min="0" max="9" maxlength="1" />
-                        <input type="number" name="pin6" class="pin" min="0" max="9" maxlength="1" />
+                        <input type="password" name="pin1" class="pin" min="0" max="9" maxlength="1" />
+                        <input type="password" name="pin2" class="pin" min="0" max="9" maxlength="1" />
+                        <input type="password" name="pin3" class="pin" min="0" max="9" maxlength="1" />
+                        <input type="password" name="pin4" class="pin" min="0" max="9" maxlength="1" />
+                        <input type="password" name="pin5" class="pin" min="0" max="9" maxlength="1" />
+                        <input type="password" name="pin6" class="pin" min="0" max="9" maxlength="1" />
                         <input type="hidden" name="pin" id="pin" />
                         @if(session('error'))
                         <p style="color: red;">{{session('error')}}</p>
                         @endif
-                        <div style="display: flex; justify-content: center; align-items: center;">
+                        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                            <span>
+                                Lupa pin ?
+                            </span>
+                            <a target="_blank" href="http://wa.me/+6287788840513" class="hubungi-admin">Hubungi admin</a>
                             <button type="submit" class="button">Masuk</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+
         <div class="button-container">
+
             <a href="/warga" class="button">Kembali</a>
         </div>
     </main>

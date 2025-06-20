@@ -1,5 +1,5 @@
 
-@extends('layout.warga.app')
+@extends('layout.warga.tentang-desa-layout')
 @section('title' , 'Tentang Desa')
 @section('header' , 'Tentang Desa')
 @section('content')

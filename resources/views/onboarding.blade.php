@@ -128,7 +128,8 @@
             <a href='/admin' class="button">Admin</a>
         </div>
         <div class="credit">
-            <p>&copy;</p>
+            <p>(c) Trisna Wahyu Mukti, Raihan Darmawan Pringgodigdo, Fakultas Ilmu Komputer
+                Universitas Pembangunan Nasional "Veteran" Jakarta</p>
         </div>
     </div>
 </body>

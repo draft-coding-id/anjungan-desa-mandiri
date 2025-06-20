@@ -7,7 +7,7 @@
         body {
             font-family: sans-serif;
             /* color: white; */
-            background-image: url('{{asset('assets/BackgroundMockupAnjungan.png') }}');
+            background-image: url('{{asset(' assets/BackgroundMockupAnjungan.png') }}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -111,7 +111,9 @@
 <body>
     <div class="container">
         <div class="header">
-            <h2>{{ $proses_surat['jenis_surat'] }}</h2>
+            <h2>
+                {{ $proses_surat['nama_jenis_surat'] }}
+            </h2>
             <h3>Apakah data yang Anda masukkan sudah sesuai?</h3>
         </div>
         <div class="preview-container">
@@ -123,17 +125,15 @@
             <iframe src="/skktpdp" width="100%" height="100%"></iframe>
             @elseif ($proses_surat['jenis_surat'] == "SKWH")
             <iframe src="/skwh" width="100%" height="100%"></iframe>
+            @elseif ($proses_surat['jenis_surat'] == "SKK")
+            <iframe src="/skk" width="100%" height="100%"></iframe>
             @endif
         </div>
         <form action="#" method="POST">
             @csrf
-            {{-- <div class="form">
-                <label style="font-weight: bold;">Nomor Ponsel :</label>
-                <input id="no_hp" type="number" placeholder="Masukkan Nomor HP" required>
-            </div> --}}
             <p>(Bila surat sudah selesai diproses akan kami hubungi ke nomor yang Anda masukkan)</p>
             <div class="button-container">
-                <a href="/surat-keterangan-pengantar" class="button">Kembali</a>
+                <a href="javascript:history.back()" class="button">Kembali</a>
                 <button type="button" class="button" id="openLightbox">Lanjutkan</button>
             </div>
         </form>
@@ -150,34 +150,34 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function(){
-        const lightbox = document.getElementById('lightbox');
-        const openLightboxButton = document.getElementById('openLightbox');
-        const noHp = document.getElementById('no_hp');
-        const cancelButton = document.getElementById('cancelButton');
-        const confirmButton = document.getElementById('confirmButton');
-        // Menampilkan lightbox saat tombol "Lanjutkan" diklik
-        openLightboxButton.addEventListener('click', function() {
-        lightbox.classList.add('show');
-        });
+        document.addEventListener("DOMContentLoaded", function() {
+            const lightbox = document.getElementById('lightbox');
+            const openLightboxButton = document.getElementById('openLightbox');
+            const noHp = document.getElementById('no_hp');
+            const cancelButton = document.getElementById('cancelButton');
+            const confirmButton = document.getElementById('confirmButton');
+            // Menampilkan lightbox saat tombol "Lanjutkan" diklik
+            openLightboxButton.addEventListener('click', function() {
+                lightbox.classList.add('show');
+            });
 
-        // Menutup lightbox saat tombol "Kembali" diklik
-        cancelButton.addEventListener('click', function() {
-        lightbox.classList.remove('show');
-        });
+            // Menutup lightbox saat tombol "Kembali" diklik
+            cancelButton.addEventListener('click', function() {
+                lightbox.classList.remove('show');
+            });
 
-        // Menangani aksi saat tombol "Lanjutkan" diklik
-        confirmButton.addEventListener('click', function() {
-        window.location.href='/berhasil/';
-        });
+            // Menangani aksi saat tombol "Lanjutkan" diklik
+            confirmButton.addEventListener('click', function() {
+                window.location.href = '/berhasil/';
+            });
 
-        // Menutup lightbox saat area luar lightbox-content diklik
-        lightbox.addEventListener('click', (event) => {
-        if (event.target === lightbox) {
-        lightbox.classList.remove('show');
-        }
-        });
-     })
+            // Menutup lightbox saat area luar lightbox-content diklik
+            lightbox.addEventListener('click', (event) => {
+                if (event.target === lightbox) {
+                    lightbox.classList.remove('show');
+                }
+            });
+        })
     </script>
 </body>
 

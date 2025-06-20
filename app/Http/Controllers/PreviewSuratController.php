@@ -47,6 +47,12 @@ class PreviewSuratController extends Controller
         return view('admin.preview-surat.surat_ket_wali_hakim', ['surat' => $surat]);
     }
 
+    public function skk()
+    {
+        $proses_surat = session('surat');
+        return view('warga.layanan-mandiri.preview-surat.surat_ket_kematian', ['proses_surat' => $proses_surat]);
+    }
+
     public function skck()
     {
         $proses_surat = ProsesSurat::all();

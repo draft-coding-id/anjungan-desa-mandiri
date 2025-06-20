@@ -18,7 +18,7 @@ class IsAdmin
         // If bukan login sebagai warga atau belum login sebagia warga
         if (auth()->guard('warga')->check() == false) {
             response()->json(['message' => 'Unauthorized'], 401);
-            return redirect()->route('login.warga');
+            return redirect()->route('login-warga');
         }
         return $next($request);
     }

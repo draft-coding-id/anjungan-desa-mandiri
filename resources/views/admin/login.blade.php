@@ -210,7 +210,7 @@
                     <button type="submit" class="button">Masuk</button>
                 </div>
             </form>
-            <a href="{{route('login.warga')}}">Masuk sebagai warga</a>
+            <a href="{{route('login-warga')}}">Masuk sebagai warga</a>
         </div>
         <div class="modal-overlay" id="forgot-modal">
             <div class="custom-modal">

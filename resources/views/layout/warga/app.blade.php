@@ -280,8 +280,6 @@
         }
 
         .footer {
-            /* position: fixed;
-    bottom: 0; */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -289,7 +287,6 @@
             height: 150px;
             color: white;
             text-align: center;
-            /* background-color: rgba(255, 153, 0, 0.5); */
             border: 2px solid rgba(0, 0, 0, 0.0);
             padding-bottom: 30px;
         }
@@ -297,14 +294,14 @@
         .footer h3 {
             font-family: Arial, Helvetica, sans-serif;
             margin-bottom: 20px;
-            /* text-shadow: 1px 1px 0 white,
+            text-shadow: 1px 1px 0 white,
                 -1px 1px 0 white,
                 1px -1px 0 white,
                 -1px -1px 0 white,
                 2px 2px 0 white,
                 -2px 2px 0 white,
                 2px -2px 0 white,
-                -2px -2px 0 white; */
+                -2px -2px 0 white;
         }
 
         .credit {

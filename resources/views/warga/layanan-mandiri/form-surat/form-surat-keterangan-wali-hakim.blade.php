@@ -22,9 +22,10 @@ Surat Keterangan Wali Hakim
             <td width="700px"><input type="text" name="nik" autocomplete="nik" value="{{$warga->nik}}" readonly /></td>
         </tr>
         <tr>
-            <td width="300px">No HP</td>
+            <td width="300px">File</td>
             <td width="50px">:</td>
-            <td width="700px"><input type="text" name="no_hp" required /></td>
+            <td width="700px"><input type="file" name="file" required />
+            </td>
         </tr>
         <tr>
             <td width="300px">Tempat Lahir / Tanggal lahir</td>
@@ -52,7 +53,7 @@ Surat Keterangan Wali Hakim
         <tr>
             <td width="300px">Agama</td>
             <td width="50px">:</td>
-            <td width="700px"><input type="text" name="agama" autocomplete="agama" value="{{$warga->agama}}" readonly/></td>
+            <td width="700px"><input type="text" name="agama" autocomplete="agama" value="{{$warga->agama}}" readonly /></td>
         </tr>
         <tr>
             <td width="300px">Pekerjaan</td>
@@ -66,11 +67,11 @@ Surat Keterangan Wali Hakim
             <td width="700px"><input type="text" name="kewarganegaraan" autocomplete="kewarganegaraan" value="WNI" readonly />
             </td>
         </tr>
+
         <tr>
-            <td width="300px">File</td>
+            <td width="300px">No HP</td>
             <td width="50px">:</td>
-            <td width="700px"><input type="file" name="file" required/>
-            </td>
+            <td width="700px"><input type="text" name="no_hp" required /></td>
         </tr>
         <tr>
             <td colspan="3" style="text-align: center;">

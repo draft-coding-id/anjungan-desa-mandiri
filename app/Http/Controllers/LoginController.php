@@ -52,7 +52,7 @@ class LoginController extends Controller
     public function showNikForm()
     {
         if (auth()->guard('warga')->check()) {
-            return redirect()->route('pilih-surat');
+            return redirect()->route('dashboard');
         }
         return view('warga.layanan-mandiri.login.nik');
     }
@@ -117,7 +117,7 @@ class LoginController extends Controller
             return redirect()->route('login.showPinForm', ['nik' => $nik]);
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
-            return redirect()->route('login.warga');
+            return redirect()->route('login-warga');
         }
     }
 
@@ -155,19 +155,19 @@ class LoginController extends Controller
             }
         } catch (\Exception $e) {
             session()->flash('error', 'PIN salah');
-            return redirect()->route('login.warga');
+            return redirect()->route('login-warga');
         }
     }
 
     // Halaman Dashboard
     public function showDashboard()
     {
-        return view('warga.dashboard_warga');
+        return view('warga.layanan-mandiri.layanan_umum');
     }
 
     public function logout(Request $request)
     {
         auth()->guard('warga')->logout();
-        return redirect()->route('login.warga');
+        return redirect()->route('halaman_utama');
     }
 }

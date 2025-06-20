@@ -16,27 +16,25 @@ Route::get('/admin', [LoginController::class, 'showLoginPage'])->name('login'); 
 // ====================================================================== //
 
 // ----- Views Warga ----- //
-Route::get('/login', [LoginController::class, 'showNikForm'])->name('login.warga');
+Route::get('/login', [LoginController::class, 'showNikForm'])->name('login-warga');
+Route::get('/logout-warga', [LoginController::class, 'logout'])->name('logout-warga');
+
 Route::view('/login/pindai-ktp', 'warga.layanan-mandiri.login.pindai_ktp')->name('pindai-ktp');
 Route::post('/login/check-nik', [LoginController::class, 'checkNik'])->name('login.checkNik');
 Route::post('/login/scan-ktp', [LoginController::class, 'scanKtp'])->name('login.scanKtp');
 Route::get('/login/pin/{nik}', [LoginController::class, 'showPinForm'])->name('login.showPinForm');
 Route::post('/login/check-pin', [LoginController::class, 'checkPin'])->name('login.checkPin');
-Route::view('/pengumuman-warga', 'warga.profil_desa.pengumuman');
 Route::view('/agenda-rawapanjang', 'warga.profil_desa.agenda');
 Route::view('/lapak-warga', 'warga.profil_desa.lapak');
-Route::view('/artikel-terkini', 'warga.profil_desa.artikel_terkini');
 Route::view('/tentang-desa-rawapanjang', 'warga.profil_desa.tentang-desa')->name('sejarah-desa');
 Route::view('/visi-misi', 'warga.profil_desa.visi_misi')->name('visi-misi');
-Route::view('/potensi-desa', 'warga.profil_desa.potensi_desa')->name('potensi-desa');
+
 Route::view('/statistik-desa', 'warga.profil_desa.statistik-desa')->name('statistik-desa');
-Route::view('/kerjasama', 'warga.profil_desa.kerjasama')->name('kerjasama');
 Route::view('/kabar-pembanguan', 'warga.profil_desa.kabar_pembangunan')->name('kabar-pembangunan');
 
 // Masuk Menu Layanan Mandiri
 Route::middleware(['isAdmin'])->group(function () {
     Route::get('/dashboard', [LoginController::class, 'showDashboard'])->name('dashboard');
-    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::view('/layanan-umum', 'warga.layanan-mandiri.layanan_umum')->name('layanan-umum');
     Route::view('/layanan-kependudukan', 'warga.layanan-mandiri.layanan_kependudukan')->name('layanan-kependudukan');
     ROute::view('/layanan-pernikahan', 'warga.layanan-mandiri.layanan_pernikahan')->name('layanan-pernikahan');
@@ -50,6 +48,7 @@ Route::controller(SuratController::class)->group(function () {
     Route::get('/surat-keterangan-pengantar', 'form_Surat_Keterangan_Pengantar');
     Route::get('/surat-keterangan-ktp-dalam-proses', 'form_Surat_Keterangan_KTP_Dalam_Proses');
     Route::get('/surat-keterangan-wali-hakim', 'form_surat_keterangan_wali_hakim');
+    Route::get('/surat-keterangan-kematian', 'form_surat_keterangan_kematian');
     Route::post('/submitForm', 'submitForm')->name('submitForm');
     Route::get('/konfirmasi', 'konfirmasi');
     // Route::post('/submitSurat', [SuratController::class, 'submitSurat']);
@@ -58,13 +57,14 @@ Route::controller(SuratController::class)->group(function () {
 
 // Layanan Mandiri - Preview Surat
 Route::get('/skd', [PreviewSuratController::class, 'skd'])->name('preview.skd');
-Route::get('/skp', [PreviewSuratController::class, 'skp']);
-Route::get('/skwh', [PreviewSuratController::class, 'skwh']);
-Route::get('/skck', [PreviewSuratController::class, 'skck']);
-Route::get('/skktpdp', [PreviewSuratController::class, 'skktpdp']);
-Route::get('/spkk', [PreviewSuratController::class, 'spkk']);
-Route::get('/sppkk', [PreviewSuratController::class, 'sppkk']);
-Route::get('/skwh', [PreviewSuratController::class, 'skwh']);
+Route::get('/skp', [PreviewSuratController::class, 'skp'])->name('preview.skp');
+Route::get('/skwh', [PreviewSuratController::class, 'skwh'])->name('preview.skwh');
+Route::get('/skck', [PreviewSuratController::class, 'skck'])->name('preview.skck');
+Route::get('/skktpdp', [PreviewSuratController::class, 'skktpdp'])->name('preview.skktpdp');
+Route::get('/spkk', [PreviewSuratController::class, 'spkk'])->name('preview.spkk');
+Route::get('/sppkk', [PreviewSuratController::class, 'sppkk'])->name('preview.sppkk');
+Route::get('/skwh', [PreviewSuratController::class, 'skwh'])->name('preview.skwh');
+Route::get('/skk', [PreviewSuratController::class, 'skk'])->name('preview.skk');
 // ----- Ends of Views Warga ----- //
 
 // ====================================================================== //

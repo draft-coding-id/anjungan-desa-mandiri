@@ -40,9 +40,9 @@
     <div class="header">
         <table width="100%">
             <tr>
-                <td width="25%">
-                    <img src="https://rawapanjang-desa.id/desa/logo/1679693855_logo-pemkab-bogor.png"
-                        alt="Logo Pemkab Bogor">
+                <td>
+                    <img src="{{asset('assets/logo.png')}}" height="116px" width="116px" alt="Logo Desa" />
+
                 </td>
                 <td width="100%">
                     <h1>PEMERINTAH KABUPATEN BOGOR
