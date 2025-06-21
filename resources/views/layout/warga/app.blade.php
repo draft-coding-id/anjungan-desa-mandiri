@@ -130,14 +130,17 @@
             gap: 20px;
             padding: 20px;
             padding-top: 0px;
-            max-width: 90%;         /* Batasi lebar container */
-            margin: 0 auto;         /* Tengah secara horizontal */
+            max-width: 90%;
+            /* Batasi lebar container */
+            margin: 0 auto;
+            /* Tengah secara horizontal */
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
 
         .button-container::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera: hilangkan tampilan scrollbar */
+            display: none;
+            /* Chrome, Safari, Opera: hilangkan tampilan scrollbar */
         }
 
         .scroll-hint {
@@ -153,14 +156,24 @@
         }
 
         @keyframes bounceLeft {
-            0%, 100% { transform: translateY(-50%) translateX(0); opacity: 0.7; }
-            50% { transform: translateY(-50%) translateX(-6px); opacity: 1; }
+
+            0%,
+            100% {
+                transform: translateY(-50%) translateX(0);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: translateY(-50%) translateX(-6px);
+                opacity: 1;
+            }
         }
 
 
 
         .button {
-            flex: 0 0 auto;             /* Jangan izinkan tombol mengecil atau membesar */
+            flex: 0 0 auto;
+            /* Jangan izinkan tombol mengecil atau membesar */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -251,6 +264,7 @@
             padding-top: 0px;
             gap: 20px;
             scrollbar-width: none;
+            cursor: pointer;
             /* Sembunyikan scrollbar di Edge, Chrome */
         }
 
