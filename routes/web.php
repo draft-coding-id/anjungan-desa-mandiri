@@ -106,7 +106,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/preview-surat/{jenisSurat}/{id}', [LayananSurat::class, 'previewSurat'])->name('preview.surat');
     Route::get('/search-surat', [LayananSurat::class, 'searchSurat'])->name('search-surat');
     Route::get('/surat-selesai/{idSurat}', [LayananSurat::class, 'suratSelesai'])->name('layanan-surat-dalam-proses-surat-selesai');
-    Route::get('/kirim-surat-wa/{idSurat}', [LayananSurat::class, 'kirimWa'])->name('kirim-surat-wa');
     Route::post('/kirim-surat/{idSurat}', [LayananSurat::class, 'kirimSurat'])->name('kirimSurat');
     Route::post('/tandaiSuratdicetak/{idSurat}', [LayananSurat::class, 'tandaiCetak'])->name('tandaiSuratDicetak');
     Route::post('/tandaisudahdikirim/{idSurat}', [LayananSurat::class, 'tandaiDikirim'])->name('tandaiSuratDikirim');

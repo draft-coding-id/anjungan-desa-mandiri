@@ -106,7 +106,7 @@
         </div>
 
         <div>
-            <p>Yang bertanda tangan di bawah ini Kepala Desa [nama_desa], Kecamatan [nama_kec], Kabupaten Bogor, Provinsi Jawa Barat menerangkan dengan sebenarnya bahwa:</p>
+            <p>Yang bertanda tangan di bawah ini Kepala Desa Rawapanjang, Kecamatan Bojonggede, Kabupaten Bogor, Provinsi Jawa Barat menerangkan dengan sebenarnya bahwa:</p>
             <table>
                 <tr>
                     <td class="section-title">1. Nama Lengkap</td>
@@ -182,7 +182,7 @@
                 </tr>
                 <tr>
                     <td class="section-title">8. Alamat/Tempat Tinggal</td>
-                    <td class="indent">: {{ $proses_surat['alamat'] ?? '[alamat]' }} Desa [nama_desa], Kecamatan [nama_kec], Kabupaten Bogor</td>
+                    <td class="indent">: {{ $proses_surat['alamat'] ?? '[alamat]' }} </td>
                 </tr>
                 @if(isset($proses_surat['keperluan']))
                 <tr>

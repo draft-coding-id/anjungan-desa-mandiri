@@ -33,7 +33,7 @@
     /* Kolom Kiri - Info Desa */
     .left-col {
       background-color: #D9D9D9BF;
-      width: 50vw;
+      width: 30vw;
       height: 100%;
       display: flex;
       gap: 10px;
@@ -56,7 +56,7 @@
 
     /* Kolom Kanan - Layanan Digital */
     .right-col {
-      width: 50vw;
+      width: 70vw;
       min-height: 100vh;
       display: flex;
       flex-direction: column;

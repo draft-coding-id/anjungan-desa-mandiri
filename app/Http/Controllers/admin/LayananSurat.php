@@ -91,17 +91,7 @@ class LayananSurat extends Controller
             'status' => 'Surat Telah Dikirim',
             'updated_at' => now(),
         ]);
-        $url = "https://wa.me/" . $surat->no_hp . "?text=" . $message;
-        return redirect($url);
-    }
-
-    public function kirimWa($id)
-    {
-        $surat = Surat::find($id);
-        $pesan_wa = "Hai saya dari desa ... ,  surat yang anda anjukan sudah selesai di tanda tangan oleh kepala desa. Anda bisa mengprint surat melalui link berikut ";
-        $file_path = asset('surat/'. $surat->file_surat . ".pdf");
-        $message = urlencode($pesan_wa . $file_path);
-        $url = "https://wa.me/" . $surat->no_hp . "?text=" . $message;
+        $url = "https://wa.me/+62" . $surat->no_hp . "?text=" . $message;
         return redirect($url);
     }
 

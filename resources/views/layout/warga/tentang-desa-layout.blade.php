@@ -236,11 +236,11 @@
     .button-container-tentang-desa {
       display: flex;
       overflow-x: auto;
-      align-items: end;
-      justify-content: space-between;
+      align-items: center;
+      justify-content: left;
       height: 100%;
       padding-top: 0px;
-      gap: 20px;
+      gap: 80px;
       scrollbar-width: none;
     }
 
@@ -251,6 +251,7 @@
       align-items: center;
       background-color: #ff9900;
       color: white;
+      text-align: center;
       padding: 10px 30px;
       border: 1px solid #ffffff;
       border-radius: 5px;
