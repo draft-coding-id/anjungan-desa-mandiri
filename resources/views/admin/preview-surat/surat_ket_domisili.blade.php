@@ -41,12 +41,6 @@
         <table width="100%">
             <tr>
                 <td width="25%">
-                    {{-- <img src="{{asset('assets/logo.png')}}" width="140px" height="auto" alt="Logo Pemkab Bogor">
-                    --}}
-                    {{-- {{
-                    $logoPath = asset('assets/logo.png'); $image = "data:image/png;base64," .
-                    base64_encode(file_get_contents($imagePath));
-                    }} --}}
                     <img src="{{asset('assets/logo.png')}}" width="120px" height="120px" alt="Logo Pemkab Bogor">
                 </td>
                 <td width="50%" style="text-align: center ;">

@@ -50,8 +50,8 @@
                     <tr>
                         <td>{{$increment++}}</td>
                         @role('admin|rt')
-                        <td><a class="button" href="{{route('kirim-surat-wa' , $data->id)}}">
-                                {{$data->status}}
+                        <td width="250px" height="50px">
+                            <a href="{{route('layanan-surat-dalam-proses-surat-selesai' , $data->id)}}" class="button" ;">Kabari warga
                             </a>
                         </td>
                         @endrole

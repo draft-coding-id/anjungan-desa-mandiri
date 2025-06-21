@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('agama'); // Agama
             $table->string('tempat_lahir'); // Tempat lahir
             $table->date('tanggal_lahir'); // Tanggal lahir
+            $table->string('kecamatan'); // Kecamatan
+            $table->string('desa'); // Desa
             $table->text('alamat'); // Alamat lengkap
             $table->string('rt', 3); // RT
             $table->string('rw', 3); // RW

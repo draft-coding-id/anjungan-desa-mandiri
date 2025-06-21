@@ -35,7 +35,7 @@
 
                 <div class="form-group">
                     <label>PIN:</label>
-                    <input type="text" minlength="6" maxlength="6 id=" pin" name="pin" required placeholder="Masukkan PIN">
+                    <input type="number" minlength="6" maxlength="6 id="pin" name="pin" required placeholder="Masukkan PIN">
                 </div>
 
                 <div class="form-group">
@@ -134,7 +134,7 @@
 
                 <div class="form-group">
                     <label>PIN:</label>
-                    <input type="text" minlength="6" maxlength="6" id="pin_edit" name="pin" required placeholder="Masukkan PIN">
+                    <input type="number" minlength="6" maxlength="6" id="pin_edit" name="pin" required placeholder="Masukkan PIN">
                 </div>
 
                 <div class="form-group">
@@ -226,9 +226,9 @@
                 <th>RT</th>
                 <th>RW</th>
                 <th>Tempat Lahir</th>
-                <th>Tanggal Lahir</th>
+                <th width="150px">Tanggal Lahir</th>
                 <th>Agama</th>
-                <th>Jenis Kelamin</th>
+                <th width="150px">Jenis Kelamin</th>
             </tr>
         </thead>
         <tbody>

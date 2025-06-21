@@ -33,7 +33,7 @@
 
                 <div class="form-group">
                     <label for="password">Kata Sandi</label>
-                    <input type="password" id="password" name="password" maxlength="6" required placeholder="Masukkan kata sandi">
+                    <input type="password" id="password" name="password" required placeholder="Masukkan kata sandi">
                 </div>
 
                 <div class="form-group">
@@ -55,16 +55,24 @@
                     <label for="otorisasi">Otorisasi</label>
                     <select id="role" name="role" required>
                         <option value="">Pilih otorisasi</option>
-                        <option value="admin">Admin</option>
-                        <option value="kades">Kades</option>
-                        <option value="rt">RT</option>
-                        <option value="rw">RW</option>
+                        <option value="admin">Administrator</option>
+                        <option value="kades">Kepala Desa</option>
+                        <option value="rt">Rukun Tetangga</option>
+                        <option value="rw">Rukun Warga</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="otorisasi">Akses</label>
                     <select name="akses" class="form-control" required>
+                        <optgroup label="Admin">
+                            @for($dataAdmin = 1; $dataAdmin <= 10; $dataAdmin++)
+                                <option value="{{ $dataAdmin }}">Admin {{ $dataAdmin }}</option>
+                                @endfor
+                        </optgroup>
+                        <optgroup label="Kades">
+                            <option value="kades">Kades</option>
+                        </optgroup>
                         <optgroup label="RW">
                             @for($dataRw = 1; $dataRw <= 10; $dataRw++)
                                 <option value="RW {{ $dataRw }}">RW {{ $dataRw }}</option>
@@ -116,7 +124,7 @@
 
                 <div class="form-group">
                     <label for="password_edit">Kata Sandi</label>
-                    <input type="password" maxlength="6" id="password_edit" name="password"
+                    <input type="password" id="password_edit" name="password"
                         placeholder="Kosongkan jika tidak diubah">
                 </div>
 
@@ -139,10 +147,10 @@
                     <label for="role_edit">Otorisasi</label>
                     <select id="role_edit" name="role" required>
                         <option value="">Pilih otorisasi</option>
-                        <option value="admin">Admin</option>
-                        <option value="kades">Kades</option>
-                        <option value="rt">RT</option>
-                        <option value="rw">RW</option>
+                        <option value="admin">Administrator</option>
+                        <option value="kades">Kepala Desa</option>
+                        <option value="rt">Rukun Tetangga</option>
+                        <option value="rw">Rukun Warga</option>
                     </select>
                 </div>
 
@@ -155,9 +163,7 @@
                                 @endfor
                         </optgroup>
                         <optgroup label="Kades">
-                            @for($dataKades = 1; $dataKades <= 10; $dataKades++)
-                                <option value="{{ $dataKades }}">Kades {{ $dataKades }}</option>
-                                @endfor
+                            <option value="kades">Kades</option>
                         </optgroup>
                         <optgroup label="RW">
                             @for($dataRw = 1; $dataRw <= 10; $dataRw++)

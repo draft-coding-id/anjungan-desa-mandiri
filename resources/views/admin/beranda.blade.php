@@ -57,7 +57,7 @@ $user = Auth::user();
                     <th>Jenis Surat</th>
                     <th>Keperluan / Catatan</th>
                     <th>Dokumen Verifikasi</th>
-                    <th width="150px">Aksi</th>
+                    <th width="250px">Aksi</th>
                     <th>Countdown</th>
                 </tr>
             </thead>
@@ -73,9 +73,9 @@ $user = Auth::user();
                     <td>{{$surat->isi_surat['rw']}}</td>
                     <td>{{$surat->no_hp}}</td>
                     <td>{{$surat->jenis_surat}}</td>
-                    <td>{{$surat->isi_surat['keperluan']}}</td>
+                    <td>{{ $surat->jenis_surat == "SKWH" ? "Menikah" : $surat->isi_surat['keperluan'] }}</td>
 
-                    <td height="50px" width="250px">
+                    <td height="50px" width="150px">
                         <button id="preview-dokumen-{{$surat->id}}" class="button" onclick="previewDokumen({{$surat->id}})">
                             Lihat Dokumen
                         </button>
@@ -149,7 +149,8 @@ $user = Auth::user();
         return res;
     }
     async function previewDokumen(id) {
-        const res = await fetch(`lihat-surat/${id}`).then(res => res.json());
+        const res = await fetch(`preview-dokumen/${id}`).then(res => res.json());
+        console.log(res);
         showPreviewModal(res);
     }
 
@@ -161,15 +162,15 @@ $user = Auth::user();
         modal.innerHTML = `
         <div class="preview-content">
             <div class="preview-header">
-                <h3>Preview ${data.jenis_surat}</h3>
+                <h3>Preview Dokumen</h3>
                 <button onclick="closePreview(this)" class="close-button">&times;</button>
             </div>
             <div class="preview-body">
                 <iframe 
                     id="preview-frame"
-                    src="/preview-surat/${data.jenis_surat}/${data.id}"
+                    src="${data.file}"
                     width="100%"
-                    height="600px"
+                    height="820px"
                     frameborder="0"
                     style="border: 1px solid #ddd; border-radius: 4px;"
                 >
@@ -209,7 +210,7 @@ $user = Auth::user();
                     </div>
                     <div class="info-row">
                         <span class="info-label">Catatan</span>
-                        <span class="info-value">: ${data.isi_surat['keperluan']}</span>
+                        <span class="info-value">: ${data.isi_surat['keperluan'] || "Tidak ada catatan"}</span>
                     </div>
                     <div class="info-row">
                         <span class="info-label">Dokumen Verifikasi</span>

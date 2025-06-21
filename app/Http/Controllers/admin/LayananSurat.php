@@ -31,14 +31,22 @@ class LayananSurat extends Controller
         $surat = Surat::find($id);
         return $surat;
     }
+    public function previewDokumen($id){
+        $surat = Surat::find($id); 
+        $fileUrl = asset('storage/' . $surat->file); // perhatikan perubahan ini
 
+        return response()->json([
+            'jenis_surat' => $surat->jenis_surat,
+            'file' => $fileUrl,
+        ]);
+    }
     public function previewSurat($jenisSurat, $id)
     {
         $surat = Surat::find($id);
         $view = match ($jenisSurat) {
             "SKD" => 'admin.preview-surat.surat_ket_domisili',
-            "SKP" => 'surat.preview.skp',
-            "SKWH" => 'surat.preview.skwh',
+            "SKP" => 'admin.preview-surat.surat_ket_pengantar',
+            "SKWH" => 'admin.preview-surat.surat_ket_wali_hakim',
             "SKCK" => 'surat.preview.skck',
             "SKKTPDP" => 'surat.preview.skktpdp',
             "SPKK" => 'surat.preview.spkk',

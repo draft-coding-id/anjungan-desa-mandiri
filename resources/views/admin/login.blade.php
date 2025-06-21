@@ -168,12 +168,11 @@
         }
 
         .header img {
-            width: 70px;
-            height: 70px;
+            width: 150px;
+            height: 150px;
             object-fit: contain;
             margin-bottom: 10px;
             border-radius: 8px;
-            background: #eee;
         }
     </style>
 </head>
@@ -210,7 +209,7 @@
                     <button type="submit" class="button">Masuk</button>
                 </div>
             </form>
-            <a href="{{route('login-warga')}}">Masuk sebagai warga</a>
+            <a href="{{route('halaman_utama')}}">Masuk sebagai warga</a>
         </div>
         <div class="modal-overlay" id="forgot-modal">
             <div class="custom-modal">

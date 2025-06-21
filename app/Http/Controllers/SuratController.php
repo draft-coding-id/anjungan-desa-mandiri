@@ -198,6 +198,7 @@ class SuratController extends Controller
             } elseif ($request->jenis_surat == "SKWH") {
                 $validatedData = $request->validate([
                     'jenis_surat' => 'required|string',
+                    'keperluan' => 'required|string',
                     'warga_id' => 'required',
                     'nik' => 'required|string|min:16|max:16',
                     'no_hp' => 'required|string',
@@ -208,6 +209,10 @@ class SuratController extends Controller
                     'kewarganegaraan' => 'required|string',
                     'agama' => 'required|string',
                     'pekerjaan' => 'required|string',
+                    'kecamatan' => 'required|string',
+                    'desa' => 'required|string',
+                    'rt' => 'required|string',
+                    'rw' => 'required|string',
                     'alamat' => 'required|string',
                     'file' => 'required|file|mimes:pdf,jpg,jpeg,png|max:4096',
                 ], [
@@ -227,7 +232,11 @@ class SuratController extends Controller
                     'kewarganegaraan.required' => 'Kewarganegaraan harus diisi',
                     'agama.required' => 'Agama harus diisi',
                     'pekerjaan.required' => 'Pekerjaan harus diisi',
+                    'kecamatan.required' => "Kecamatan harus diisi",
+                    'desa.required' => 'Desa harus diisi',
                     'alamat.required' => 'Alamat harus diisi',
+                    'rt.required' => 'rt harus diisi',
+                    'rw.required' => 'rw harus diisi',
                 ]);
 
                 if ($request->hasFile('file')) {

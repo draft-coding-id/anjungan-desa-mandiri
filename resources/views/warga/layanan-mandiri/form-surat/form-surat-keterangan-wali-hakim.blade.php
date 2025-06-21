@@ -9,6 +9,7 @@ Surat Keterangan Wali Hakim
     <table>
         <input type="hidden" name="jenis_surat" value="SKWH">
         <input type="hidden" name="warga_id" value="{{$warga->id}}">
+        <input type="hidden" name="keperluan" value="Menikah">
         <tr>
             <td width="300px">Nama Lengkap</td>
             <td width="50px">:</td>
@@ -46,6 +47,26 @@ Surat Keterangan Wali Hakim
                     value="{{$warga->jenis_kelamin}}" /></td>
         </tr>
         <tr>
+            <td width="300px">Kecamatan</td>
+            <td width="50px">:</td>
+            <td width="700px"><input type="text" rows="5" name="kecamatan" autocomplete="Kecamatan" readonly value="{{$warga->kecamatan}}"></input></td>
+        </tr>
+        <tr>
+            <td width="300px">Desa</td>
+            <td width="50px">:</td>
+            <td width="700px"><input type="text" rows="5" name="desa" autocomplete="desa" readonly value="{{$warga->desa}}"></input></td>
+        </tr>
+        <tr>
+            <td width="300px">RT</td>
+            <td width="50px">:</td>
+            <td width="700px"><input type="text" rows="5" name="rt" readonly value="{{$warga->rt}}"></input></td>
+        </tr>
+        <tr>
+            <td width="300px">RW</td>
+            <td width="50px">:</td>
+            <td width="700px"><input type="text" rows="5" name="rw" readonly value="{{$warga->rw}}"></input></td>
+        </tr>
+        <tr>
             <td width="300px">Alamat</td>
             <td width="50px">:</td>
             <td width="700px"><textarea rows="5" name="alamat" autocomplete="alamat" readonly>{{$warga->alamat}}</textarea></td>
@@ -75,6 +96,7 @@ Surat Keterangan Wali Hakim
         </tr>
         <tr>
             <td colspan="3" style="text-align: center;">
+                <button class="submit-button" onclick="window.history.back();">Kembali</button>
                 <button type="submit" class="submit-button">Lanjutkan</button>
             </td>
         </tr>

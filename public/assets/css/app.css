@@ -53,7 +53,7 @@ body {
 .sidebar {
     min-width: 250px;
     background-color: #fff;
-    height: 100vh;
+    min-height: 100vh;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -111,9 +111,8 @@ body {
 }
 
 .main-container {
-    padding: 0px 40px;
+    padding: 0px 20px;
 }
-
 
 .container-riwayat {
     display : flex;
@@ -140,7 +139,7 @@ thead tr {
 
 th,
 td {
-    padding: 12px 15px;
+    padding: 12px 8px;
     border-bottom: 1px solid #dddddd;
 }
 
@@ -215,7 +214,11 @@ td button:hover {
     opacity: 0.8;
 }
 
-/* Preview Modal */
+/* =============================================
+   RESPONSIVE MODAL STYLES - ENHANCED
+   ============================================= */
+
+/* Preview Modal - Enhanced Responsive */
 .preview-container {
     position: fixed;
     top: 0;
@@ -227,16 +230,21 @@ td button:hover {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    padding: 10px;
+    backdrop-filter: blur(3px);
 }
 
 .preview-content {
     background: white;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 12px;
     max-width: 1000px;
-    width: 95%;
+    width: 100%;
     max-height: 95vh;
     overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    animation: modalSlideIn 0.3s ease-out;
 }
 
 .preview-header {
@@ -244,26 +252,38 @@ td button:hover {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f1f3f4;
 }
 
 .preview-body {
     height: calc(100vh - 150px);
+    overflow-y: auto;
 }
 
 .close-button {
-    color: #000;
-    background: none;
+    color: #6c757d;
+    background: #f8f9fa;
     border: none;
-    font-size: 24px;
+    font-size: 20px;
     cursor: pointer;
-    padding: 5px;
+    padding: 8px;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
 }
 
 .close-button:hover {
-    color: #fff;
+    background: #e9ecef;
+    color: #495057;
+    transform: rotate(90deg);
 }
 
-/* Approval Modal */
+/* Approval Modal - Enhanced Responsive */
 .approval-modal {
     position: fixed;
     top: 0;
@@ -275,16 +295,22 @@ td button:hover {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    padding: 15px;
+    backdrop-filter: blur(3px);
 }
 
 .approval-content {
     background: white;
-    border-radius: 12px;
+    border-radius: 16px;
     padding: 30px;
-    width: 90%;
+    width: 100%;
     max-width: 1000px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-height: 95vh;
+    overflow-y: auto;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
     text-align: center;
+    position: relative;
+    animation: modalSlideIn 0.3s ease-out;
 }
 
 .approval-content h2 {
@@ -299,7 +325,7 @@ td button:hover {
     margin: 20px 0;
     padding: 20px;
     background: #f8f9fa;
-    border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid #e9ecef;
 }
 
@@ -307,6 +333,8 @@ td button:hover {
     display: flex;
     margin-bottom: 12px;
     align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .info-row:last-child {
@@ -315,7 +343,7 @@ td button:hover {
 
 .info-label {
     font-weight: 600;
-    width: 300px;
+    min-width: 120px;
     color: #333;
     flex-shrink: 0;
 }
@@ -323,6 +351,7 @@ td button:hover {
 .info-value {
     color: #555;
     flex: 1;
+    min-width: 200px;
 }
 
 .preview-section {
@@ -332,11 +361,12 @@ td button:hover {
 .preview-box {
     border: 2px dashed #ddd;
     border-radius: 8px;
-    padding: 10px 10px;
+    padding: 15px;
     background: #fafafa;
     color: #999;
     font-size: 16px;
     margin: 15px 0;
+    text-align: center;
 }
 
 .confirmation-text {
@@ -350,9 +380,10 @@ td button:hover {
     gap: 15px;
     justify-content: center;
     margin-top: 25px;
+    flex-wrap: wrap;
 }
 
-/* Rejection Modal */
+/* Rejection Modal - Enhanced Responsive */
 .penolakan-modal {
     position: fixed;
     top: 0;
@@ -364,18 +395,22 @@ td button:hover {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    padding: 15px;
+    backdrop-filter: blur(3px);
 }
 
 .penolakan-content {
     background: white;
-    border-radius: 12px;
+    border-radius: 16px;
     padding: 30px;
-    width: 90%;
+    width: 100%;
     max-width: 1000px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    max-height: 90vh;
+    max-height: 95vh;
     overflow-y: auto;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+    animation: modalSlideIn 0.3s ease-out;
 }
 
 .penolakan-content h2 {
@@ -399,14 +434,15 @@ td button:hover {
 
 .alasan-penolakan textarea {
     width: 100%;
-    min-height: 100px;
-    padding: 12px;
+    min-height: 120px;
+    padding: 15px;
     border: 2px solid #e9ecef;
-    border-radius: 6px;
+    border-radius: 10px;
     font-size: 14px;
     font-family: inherit;
     resize: vertical;
     box-sizing: border-box;
+    transition: border-color 0.3s ease;
 }
 
 .alasan-penolakan textarea:focus {
@@ -427,14 +463,107 @@ td button:hover {
     color: #dc3545;
     font-size: 16px;
     font-weight: 500;
-    padding: 12px;
+    padding: 15px;
     background: #f8d7da;
     border: 1px solid #f5c6cb;
-    border-radius: 6px;
+    border-radius: 8px;
+}
+
+/* General Modal Styles - Enhanced */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+    padding: 15px;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    max-width: 1000px;
+    max-height: 95vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalSlideIn 0.3s ease-out;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f1f3f4;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.modal-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.close {
+    background: #f8f9fa;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: #6c757d;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.close:hover {
+    background: #e9ecef;
+    color: #495057;
+    transform: rotate(90deg);
+}
+
+/* Modal Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modalSlideIn {
+    from { 
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 /* Heading Styles */
-
 .h5 {
     color: #333;
     margin: 20px 0;
@@ -470,10 +599,12 @@ h4:after {
     margin: 25px 0;
     padding: 0;
     list-style: none;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 
 .pagination li {
-    margin: 0 3px;
+    margin: 2px;
 }
 
 .pagination li a,
@@ -520,18 +651,9 @@ h4:after {
     font-size: 13px;
 }
 
-/* Header Styles */
-.header {
-    background-color: #ffa500;
-    background: linear-gradient(to left, #ff8a00 50%, #f7e700);
-    padding-left: 20px;
-    display: flex;
-    align-items: center;
-}
-
 /* Content Styles */
 .content {
-    padding: 0px 30px 30px 30px;
+    padding: 0px 10px 30px 10px;
 }
 
 .path {
@@ -544,11 +666,13 @@ h4:after {
     display: flex;
     align-items: center;
     border-bottom: 2px solid #333;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 
 .menu-surat a {
     border: 1px solid #f4f4f4;
-    padding: 7px 20px;
+    padding: 8px 15px;
     cursor: pointer;
     color: #333;
     border-radius: 0px;
@@ -556,6 +680,7 @@ h4:after {
     text-decoration: none;
     font-size: 14px;
     letter-spacing: 0.5px;
+    white-space: nowrap;
 }
 
 .menu-surat a:hover {
@@ -575,7 +700,7 @@ h4:after {
 
 /* Button Styles */
 .btn {
-    padding: 12px 30px;
+    padding: 12px 25px;
     border: none;
     border-radius: 10px;
     font-size: 16px;
@@ -584,8 +709,12 @@ h4:after {
     transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    min-width: 120px;
 }
 
 .btn-primary {
@@ -626,11 +755,13 @@ h4:after {
 /* Original button styles for compatibility */
 button {
     border: none;
-    padding: 5px 10px;
+    padding: 8px 15px;
     border-radius: 5px;
     cursor: pointer;
     background-color: #ffa500;
     color: white;
+    font-size: 14px;
+    transition: all 0.3s ease;
 }
 
 button:hover {
@@ -641,13 +772,14 @@ button:hover {
     text-decoration: none;
     border: none;
     text-align: center;
-    padding: 10px 10px;
+    padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
     background-color: #ffa500;
     color: white;
     font-weight: bold;
-    width: 150px;
+    min-width: 120px;
+    display: inline-block;
 }
 
 .button:hover {
@@ -655,10 +787,9 @@ button:hover {
 }
 
 /* ========================================
-   MODAL FORM STYLES (Tambah Warga)
+   FORM STYLES - ENHANCED RESPONSIVE
    ======================================== */
 
-/* When used as full-page layout */
 .page-layout {
     min-height: 100vh;
     display: flex;
@@ -667,14 +798,13 @@ button:hover {
     padding: 20px;
 }
 
-/* Form Container */
 .form-container {
     background: white;
     border-radius: 20px;
-    padding: 40px;
+    padding: 30px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 600px;
+    max-width: 700px;
     position: relative;
 }
 
@@ -685,45 +815,51 @@ button:hover {
 
 .form-header h2 {
     color: #333;
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 600;
     margin-bottom: 10px;
 }
 
-/* Form Group Styles */
 .form-group {
     margin-bottom: 20px;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .form-group label {
-    width: 140px;
+    min-width: 120px;
     font-weight: 500;
     color: #333;
     font-size: 16px;
+    flex-shrink: 0;
 }
-
 
 .search-input {
     margin-bottom: 20px;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
+
 .search-input input {
-    padding: 10px 20px;
+    padding: 12px 20px;
     border: 2px solid #e1e5e9;
     border-radius: 10px;
-    margin: 0px 20px;
     font-size: 16px;
     transition: border-color 0.3s ease;
     background: #f8f9fa;
+    flex: 1;
+    min-width: 200px;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
     flex: 1;
+    min-width: 200px;
     padding: 12px 16px;
     border: 2px solid #e1e5e9;
     border-radius: 10px;
@@ -734,7 +870,8 @@ button:hover {
 
 .form-group input:focus,
 .form-group select:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.search-input input:focus {
     outline: none;
     border-color: #ffa500;
     background: white;
@@ -743,16 +880,18 @@ button:hover {
 
 .form-group textarea {
     resize: vertical;
-    min-height: 80px;
+    min-height: 100px;
 }
 
 .form-row {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 .form-row .form-group {
     flex: 1;
+    min-width: 250px;
 }
 
 .button-container {
@@ -760,16 +899,16 @@ button:hover {
     justify-content: center;
     gap: 15px;
     margin-top: 30px;
+    flex-wrap: wrap;
 }
 
-/* Add Button (Floating) */
 .add-button {
     margin-top: 20px;
     background: linear-gradient(to right, #ff8a00 50%, #f7e700);
     color: white;
     border: none;
     border-radius: 10px;
-    padding: 10px 15px;
+    padding: 12px 20px;
     font-weight: 600;
     cursor: pointer;
     box-shadow: 0 8px 25px rgba(255, 138, 0, 0.3);
@@ -777,6 +916,7 @@ button:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
 }
 
 .add-button:hover {
@@ -792,129 +932,614 @@ button:hover {
     transform: rotate(90deg);
 }
 
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    animation: fadeIn 0.3s ease;
-}
+/* =============================================
+   RESPONSIVE BREAKPOINTS - ENHANCED
+   ============================================= */
 
-.modal.show {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-content {
-    background: white;
-    border-radius: 20px;
-    padding: 40px;
-    width: 90%;
-    max-width: 1000px;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-    animation: slideIn 0.3s ease;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid #f1f3f4;
-}
-
-.modal-title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #333;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.close {
-    background: #f8f9fa;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 20px;
-    color: #6c757d;
-    transition: all 0.3s ease;
-}
-
-.close:hover {
-    background: #e9ecef;
-    color: #495057;
-    transform: rotate(90deg);
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideIn {
-    from { 
-        opacity: 0;
-        transform: translateY(-50px) scale(0.9);
+/* Large Desktop */
+@media (min-width: 1200px) {
+    .modal-content,
+    .approval-content,
+    .penolakan-content {
+        padding: 40px;
     }
-    to { 
-        opacity: 1;
-        transform: translateY(0) scale(1);
+    
+    .form-container {
+        padding: 40px;
     }
 }
 
-/* Responsive Design */
+/* Tablet and Small Desktop */
+@media (max-width: 1024px) {
+    .main-container {
+        padding: 0px 20px;
+    }
+    
+    .menu-surat {
+        padding: 0 20px;
+    }
+    
+    .content {
+        padding: 0px 20px 20px 20px;
+    }
+    
+    .path {
+        padding: 0px 20px;
+    }
+    
+    .modal-content,
+    .approval-content,
+    .penolakan-content {
+        padding: 25px;
+    }
+    
+    .form-container {
+        padding: 25px;
+    }
+}
+
+/* Mobile Large */
 @media (max-width: 768px) {
-    .form-container, .modal-content {
-        padding: 20px;
-        margin: 10px;
+    .sidebar {
+        position: fixed;
+        left: -250px;
+        z-index: 1000;
+        transition: left 0.3s ease;
     }
-
+    
+    .sidebar.active {
+        left: 0;
+    }
+    
+    .main-content {
+        width: 100%;
+    }
+    
+    .header-beranda {
+        padding: 20px;
+        font-size: 20px;
+    }
+    
+    .card-beranda {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .card h2 {
+        font-size: 32px;
+    }
+    
+    .card p {
+        font-size: 18px;
+    }
+    
+    .main-container {
+        padding: 0px 15px;
+    }
+    
+    .menu-surat {
+        padding: 0 15px;
+        overflow-x: auto;
+    }
+    
+    .content {
+        padding: 0px 15px 15px 15px;
+    }
+    
+    .path {
+        padding: 0px 15px;
+    }
+    
+    /* Modal Responsive */
+    .modal,
+    .approval-modal,
+    .penolakan-modal,
+    .preview-container {
+        padding: 10px;
+    }
+    
+    .modal-content,
+    .approval-content,
+    .penolakan-content,
+    .preview-content {
+        padding: 20px;
+        border-radius: 12px;
+        max-height: 90vh;
+    }
+    
+    .modal-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .modal-title {
+        font-size: 20px;
+        width: 100%;
+    }
+    
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+    
+    /* Info Rows Responsive */
+    .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .info-label {
+        min-width: auto;
+        font-size: 14px;
+    }
+    
+    .info-value {
+        min-width: auto;
+        font-size: 14px;
+    }
+    
+    /* Button Group Responsive */
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+        min-width: auto;
+    }
+    
+    /* Form Responsive */
+    .form-container {
+        padding: 20px;
+        border-radius: 12px;
+    }
+    
+    .form-header h2 {
+        font-size: 22px;
+    }
+    
     .form-row {
         flex-direction: column;
         gap: 0;
     }
-
+    
+    .form-row .form-group {
+        min-width: auto;
+    }
+    
     .form-group {
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
     }
-
+    
     .form-group label {
-        width: auto;
-    }
-
-    .add-button {
-        bottom: 20px;
-        right: 20px;
-        padding: 12px 20px;
+        min-width: auto;
         font-size: 14px;
     }
-
-    .main-container {
-        padding: 0px 20px;
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        min-width: auto;
+        width: 100%;
     }
-
-    .card-beranda {
+    
+    .search-input {
         flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-input input {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .button-container {
+        flex-direction: column;
+    }
+    
+    .add-button {
+        width: 100%;
+        padding: 15px;
+    }
+    
+    /* Table Responsive */
+    table {
+        font-size: 12px;
+        min-width: 600px;
+    }
+    
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0 -15px;
+        padding: 0 15px;
+    }
+    
+    th, td {
+        padding: 8px 10px;
+        white-space: nowrap;
+    }
+    
+    td a, td button {
+        padding: 6px 10px;
+        margin: 0 2px;
+        font-size: 11px;
+    }
+    
+    /* Pagination Mobile */
+    .pagination {
+        gap: 2px;
+    }
+    
+    .pagination li a,
+    .pagination li span {
+        height: 32px;
+        min-width: 32px;
+        padding: 0 8px;
+        font-size: 12px;
+    }
+    
+    /* Preview Modal Mobile */
+    .preview-body {
+        height: calc(100vh - 120px);
+    }
+    
+    .preview-box {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    /* Textarea Mobile */
+    .alasan-penolakan textarea {
+        min-height: 100px;
+        padding: 12px;
+        font-size: 14px;
+    }
+    
+    .warning-text {
+        padding: 12px;
+        font-size: 14px;
+    }
+}
+
+/* Mobile Small */
+@media (max-width: 480px) {
+    .header-beranda {
+        padding: 15px;
+        font-size: 18px;
+    }
+    
+    .card {
+        padding: 15px;
+    }
+    
+    .card h2 {
+        font-size: 24px;
+    }
+    
+    .card p {
+        font-size: 16px;
+    }
+    
+    .main-container {
+        padding: 0px 10px;
+    }
+    
+    .menu-surat {
+        padding: 0 10px;
+    }
+    
+    .content {
+        padding: 0px 10px 10px 10px;
+    }
+    
+    .path {
+        padding: 0px 10px;
+    }
+    
+    /* Ultra Small Modal */
+    .modal,
+    .approval-modal,
+    .penolakan-modal,
+    .preview-container {
+        padding: 5px;
+    }
+    
+    .modal-content,
+    .approval-content,
+    .penolakan-content,
+    .preview-content {
+        padding: 15px;
+        border-radius: 8px;
+        max-height: 95vh;
+    }
+    
+    .modal-title {
+        font-size: 18px;
+    }
+    
+    .close {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+        top: 10px;
+        right: 10px;
+    }
+    
+    /* Form Ultra Small */
+    .form-container {
+        padding: 15px;
+        border-radius: 8px;
+    }
+    
+    .form-header h2 {
+        font-size: 20px;
+    }
+    
+    .form-group label {
+        font-size: 13px;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    
+    .btn {
+        padding: 10px;
+        font-size: 13px;
+    }
+    
+    /* Sidebar Mobile Toggle */
+    .sidebar-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 20px;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+    }
+    
+    /* Table Ultra Small */
+    table {
+        font-size: 11px;
+        min-width: 600px;
+    }
+    
+    th, td {
+        padding: 6px 8px;
+    }
+    
+    td a, td button {
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+    
+    /* Button adjustments for very small screens */
+    .button-group .btn {
+        padding: 10px;
+        font-size: 13px;
+    }
+    
+    .add-button {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+    
+    /* Info sections ultra small */
+    .surat-info {
+        padding: 15px;
+    }
+    
+    .info-label,
+    .info-value {
+        font-size: 13px;
+    }
+    
+    .confirmation-text {
+        font-size: 14px;
+    }
+    
+    .warning-text {
+        padding: 10px;
+        font-size: 13px;
+    }
+    
+    .alasan-penolakan textarea {
+        padding: 10px;
+        font-size: 13px;
+    }
+    
+    .preview-box {
+        padding: 8px;
+        font-size: 13px;
+    }
+    
+    /* Heading adjustments */
+    h4 {
+        font-size: 20px;
+    }
+    
+    .h5 {
+        font-size: 18px;
+    }
+}
+
+/* Mobile Extra Small */
+@media (max-width: 360px) {
+    .main-container,
+    .content,
+    .path,
+    .menu-surat {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    
+    .modal,
+    .approval-modal,
+    .penolakan-modal,
+    .preview-container {
+        padding: 3px;
+    }
+    
+    .modal-content,
+    .approval-content,
+    .penolakan-content,
+    .preview-content {
+        padding: 12px;
+    }
+    
+    .form-container {
+        padding: 12px;
+    }
+    
+    .card {
+        padding: 12px;
+    }
+    
+    .card h2 {
+        font-size: 20px;
+    }
+    
+    .card p {
+        font-size: 14px;
+    }
+    
+    .surat-info {
+        padding: 12px;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea,
+    .search-input input {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+    
+    .btn {
+        padding: 8px;
+        font-size: 12px;
+    }
+    
+    .add-button {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+    
+    table {
+        min-width: 450px;
+    }
+}
+
+/* Landscape Orientation Adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+    .modal-content,
+    .approval-content,
+    .penolakan-content,
+    .preview-content {
+        max-height: 95vh;
+        padding: 15px;
+    }
+    
+    .modal-header {
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+    }
+    
+    .form-container {
+        max-height: 95vh;
+        overflow-y: auto;
+    }
+    
+    .preview-body {
+        height: calc(100vh - 100px);
+    }
+    
+    .button-group {
+        margin-top: 15px;
+    }
+    
+    .form-header {
+        margin-bottom: 20px;
+    }
+    
+    .surat-info {
+        margin: 15px 0;
+        padding: 15px;
+    }
+}
+
+/* High DPI / Retina Display Adjustments */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .modal-content,
+    .approval-content,
+    .penolakan-content,
+    .preview-content {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+    }
+    
+    .form-container {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+    
+    .btn {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-primary {
+        box-shadow: 0 4px 20px rgba(255, 138, 0, 0.25);
+    }
+}
+
+/* Dark Mode Support (if needed) */
+
+/* Print Styles for Modal Content */
+@media print {
+    .modal,
+    .approval-modal,
+    .penolakan-modal {
+        position: static;
+        background: none;
+        padding: 0;
+    }
+    
+    .modal-content,
+    .approval-content,
+    .penolakan-content {
+        box-shadow: none;
+        border: 1px solid #000;
+        padding: 20px;
+        max-height: none;
+        overflow: visible;
+    }
+    
+    .close,
+    .button-group {
+        display: none;
+    }
+    
+    .modal-header {
+        border-bottom: 2px solid #000;
+    }
+    
+    .surat-info {
+        border: 1px solid #000;
+        background: none;
     }
 }

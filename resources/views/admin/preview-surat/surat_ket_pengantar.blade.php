@@ -43,8 +43,7 @@
         <table width="100%">
             <tr>
                 <td width="25%">
-                    <img src="https://rawapanjang-desa.id/desa/logo/1679693855_logo-pemkab-bogor.png"
-                        alt="Logo Pemkab Bogor">
+                    <img src="{{asset('assets/logo.png')}}" width="120px" height="120px" alt="Logo Pemkab Bogor">
                 </td>
                 <td width="100%">
                     <h1>PEMERINTAH KABUPATEN BOGOR
@@ -72,7 +71,7 @@
         <div>
             <p>Yang bertanda tangan di bawah ini Kepala Desa Rawapanjang, Kecamatan Bojonggede, Kabupaten Bogor,
                 Provinsi Jawa Barat menerangkan dengan sebenarnya bahwa :</p>
-           <table class="content">
+            <table class="content">
                 <tr>
                     <td>1.</td>
                     <td>NIK / No KTP</td>
@@ -126,7 +125,8 @@
                     <td>Tempat Tinggal</td>
                     <td style="padding-left: 10px;">: </td>
                     <td>{{ $surat->isi_surat['alamat'] }} RT {{ $surat->isi_surat['rt'] }} RW {{ $surat->isi_surat['rw'] }} Desa
-                        {{ $surat->isi_surat['desa'] }}, Kecamatan {{ $surat->isi_surat['kecamatan'] }}, Kabupaten Bogor</td>
+                        {{ $surat->isi_surat['desa'] }}, Kecamatan {{ $surat->isi_surat['kecamatan'] }}, Kabupaten Bogor
+                    </td>
                 </tr>
                 <tr>
                     <td>10.</td>
@@ -162,32 +162,32 @@
                 <p>Pemegang Surat</p>
                 <br><br><br>
                 <span>{{$surat->isi_surat['nama_lengkap']}}</span>
-            </div>
-            <div><br><br>
-                <p>Rawapanjang, {{$surat->updated_at->translatedFormat('d F Y') ?? ""}}</p>
-                <br><br><br>
-                <p style="align-items: flex-start">Pejabat Desa</p>
-            </div>
-        </div> --}}
-        <div class="footer">
-            <table>
-                <tr>
-                    <td>
-                        <p>Pemegang Surat</p>
-                        <br><br><br><br><br><br><br>
-                        <span>{{$surat->isi_surat['nama_lengkap']}}</span>
-                    </td>
-                    <td >
-                        <div style="width: 400px"></div>
-                    </td>
-                    <td>
-                        <p>Rawapanjang, {{$surat->updated_at->translatedFormat('d F Y') ?? ""}}</p>
-                        <br><br><br><br><br><br><br>
-                        <p style="align-items: flex-start">Pejabat Desa</p>
-                    </td>
-                </tr>
-            </table>
-        </div>
+    </div>
+    <div><br><br>
+        <p>Rawapanjang, {{$surat->updated_at->translatedFormat('d F Y') ?? ""}}</p>
+        <br><br><br>
+        <p style="align-items: flex-start">Pejabat Desa</p>
+    </div>
+    </div> --}}
+    <div class="footer">
+        <table>
+            <tr>
+                <td>
+                    <p>Pemegang Surat</p>
+                    <br><br><br><br><br><br><br>
+                    <span>{{$surat->isi_surat['nama_lengkap']}}</span>
+                </td>
+                <td>
+                    <div style="width: 400px"></div>
+                </td>
+                <td>
+                    <p>Rawapanjang, {{$surat->updated_at->translatedFormat('d F Y') ?? ""}}</p>
+                    <br><br><br><br><br><br><br>
+                    <p style="align-items: flex-start">Pejabat Desa</p>
+                </td>
+            </tr>
+        </table>
+    </div>
     </div>
 </body>
 

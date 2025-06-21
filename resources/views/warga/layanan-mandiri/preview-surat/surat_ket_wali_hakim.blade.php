@@ -68,7 +68,7 @@
             <br>
         </div>
         <div>
-            <p>Yang bertanda tangan di bawah ini Kepala Desa .... , Kecamatan ... Kabupaten Bogor , Provinsi Jawa Barat
+            <p>Yang bertanda tangan di bawah ini Kepala Desa {{ $proses_surat['desa'] }} , Kecamatan {{ $proses_surat['kecamatan'] }} Kabupaten Bogor , Provinsi Jawa Barat
                 menerangkan dengan sebenarnya bahwa</p>
             <table class="content">
                 <tr>
@@ -126,16 +126,16 @@
                     <td>{{ $proses_surat['kewarganegaraan'] }}</td>
                 </tr>
             </table>
-            <p>Yang namanya tersebut diatas memang benar warga kami yang akan menikah di KUA .Nama Kecatamana. Kabupaten
-                [nama kabupaten]. Berhubung orang tersebut tidak memiliki wali nasab, kami mohon dengan hormat Bapak
-                Kepala KUA [nama kecamatan] supaya berkenan menjadi wali </p>
+            <p>Yang namanya tersebut diatas memang benar warga kami yang akan menikah di KUA {{ $proses_surat['kecamatan'] }} Kabupaten
+                Bogor. Berhubung orang tersebut tidak memiliki wali nasab, kami mohon dengan hormat Bapak
+                Kepala KUA {{ $proses_surat['kecamatan'] }} supaya berkenan menjadi wali </p>
             <p>Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya</p>
         </div>
 
         <div class="footer">
             <br><br>
-            <p>[nama_desa], [Tanggal Tandan tangan]</p>
-            <p>[Pendangatangan]</p>
+            <p>{{ $proses_surat['desa'] }}, </p>
+            <p>Kepala Desa {{ $proses_surat['desa'] }}, Kecamatan {{ $proses_surat['kecamatan'] }}</p>
             <br><br><br>
             <p>____________________</p>
         </div>

@@ -110,39 +110,13 @@
     @endhasanyrole
 </div>
 <script>
-    function startCountdown() {
-        const countdownElements = document.querySelectorAll('.countdown');
-
-        countdownElements.forEach((el) => {
-            const endTime = parseInt(el.getAttribute('data-endtime')) * 1000;
-            const display = el.querySelector('.countdown-display');
-
-            function updateCountdown() {
-                const now = new Date().getTime();
-                const distance = endTime - now;
-
-                if (distance <= 0) {
-                    display.textContent = '00:00';
-                    return;
-                }
-
-                const minutes = Math.floor(distance / 60000);
-                const seconds = Math.floor((distance % 60000) / 1000);
-                display.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-            }
-
-            updateCountdown(); // Run once immediately
-            setInterval(updateCountdown, 1000); // Update every second
-        });
-    }
-
-    document.addEventListener('DOMContentLoaded', startCountdown);
     async function getData(id) {
         const res = await fetch(`lihat-surat/${id}`).then(res => res.json());
         return res;
     }
     async function previewDokumen(id) {
-        const res = await fetch(`lihat-surat/${id}`).then(res => res.json());
+        const res = await fetch(`preview-dokumen/${id}`).then(res => res.json());
+        console.log(res);
         showPreviewModal(res);
     }
 
@@ -154,15 +128,15 @@
         modal.innerHTML = `
         <div class="preview-content">
             <div class="preview-header">
-                <h3>Preview ${data.jenis_surat}</h3>
+                <h3>Preview Dokumen</h3>
                 <button onclick="closePreview(this)" class="close-button">&times;</button>
             </div>
             <div class="preview-body">
                 <iframe 
                     id="preview-frame"
-                    src="/preview-surat/${data.jenis_surat}/${data.id}"
+                    src="${data.file}"
                     width="100%"
-                    height="600px"
+                    height="820px"
                     frameborder="0"
                     style="border: 1px solid #ddd; border-radius: 4px;"
                 >
@@ -202,7 +176,7 @@
                     </div>
                     <div class="info-row">
                         <span class="info-label">Catatan</span>
-                        <span class="info-value">: ${data.isi_surat['keperluan']}</span>
+                        <span class="info-value">: ${data.isi_surat['keperluan'] || "Tidak ada catatan"}</span>
                     </div>
                     <div class="info-row">
                         <span class="info-label">Dokumen Verifikasi</span>

@@ -26,6 +26,8 @@ class Warga extends Authenticatable
         'usia',
         'pekerjaan',
         'jenis_kelamin',
+        'kecamatan',
+        'desa',
         'alamat',
         'rt',
         'rw',

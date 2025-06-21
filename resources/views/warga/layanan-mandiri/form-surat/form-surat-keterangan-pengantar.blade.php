@@ -163,13 +163,13 @@
                 <label>
                     Kecamatan :
                 </label>
-                <input type="text" name="kecamatan" value="">
+                <input type="text" name="kecamatan" value="{{$warga->kecamatan}}" readonly>
             </div>
             <div class="form-group">
                 <label>
                     Desa :
                 </label>
-                <input type="text" name="desa" value="">
+                <input type="text" name="desa" value="{{$warga->desa}}" readonly>
             </div>
             <div class="form-group">
                 <label>Alamat / Tempat Tinggal :</label>
