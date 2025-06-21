@@ -17,7 +17,7 @@
     }
 
     main {
-      height: 100vh;
+      min-height: 100vh;
       width: 100vw;
       background-image: url('{{asset('assets/BackgroundMockupAnjungan.png')}}');
       background-size: cover;
@@ -57,7 +57,7 @@
     /* Kolom Kanan - Layanan Digital */
     .right-col {
       width: 50vw;
-      height: 100%;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -198,8 +198,13 @@
     .header-btn {
       position: absolute;
       right: 5%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap : 10px;
+      text-decoration: none;
+      font-weight: bold;
       top: 10%;
-      background-color: #ff9900;
       color: white;
       padding: 10px 20px;
       border-radius: 8px;
@@ -208,7 +213,18 @@
       font-size: 14px;
     }
 
-    .header-btn:hover {
+    .header-btn a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      background-color: #ff9900;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .header-btn a :hover {
       background-color: #e68a00;
     }
 
@@ -325,7 +341,6 @@
 <body>
   <main>
     <!-- Tombol Histori & Progres Surat (Position Absolute) -->
-    <a href="/histori-progres-surat" class="header-btn">Histori & Progres Surat</a>
 
     <div class="container">
       <!-- Kolom Kiri - Info Desa -->
@@ -338,6 +353,12 @@
 
       <!-- Kolom Kanan - Layanan Digital -->
       <div class="right-col">
+        <div class="header-btn">
+          <a href="/histori-progres-surat">Histori & Progres Surat</a>
+          <a href="#">Ganti PIN</a>
+        </div>
+
+
         <div class="content-wrapper">
           <!-- Header -->
           <div class="header-wrapper">

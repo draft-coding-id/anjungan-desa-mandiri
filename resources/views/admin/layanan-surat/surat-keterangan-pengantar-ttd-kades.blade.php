@@ -175,9 +175,8 @@
                     </td>
                     <td>
                         <p>Rawapanjang, {{$surat->updated_at->translatedFormat('d F Y') ?? ""}}</p>
-                        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('assets/ttd_kades.png'))) }}"
-                            height="116px" width="116px" alt="TTD Kades" />
-                        <p style="align-items: flex-start">Pejabat Desa</p>
+                        <img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code height=" 116px" width="116px" alt="TTD Kades"">
+                        <p style=" align-items: flex-start">Pejabat Desa</p>
                     </td>
                 </tr>
             </table>

@@ -47,12 +47,10 @@
 </head>
 
 <body>
-    <div class="heading">
+    <div class="header">
         <table width="100%">
             <tr>
                 <td width="20%">
-                    {{-- <img src="{{asset('assets/logo.png')}}" width="120px" height="120px" alt="Logo Pemkab Bogor">
-                    --}}
                     <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('assets/logo.png'))) }}"
                         width="120px" height="120px" alt="Logo Pemkab Bogor" />
                 </td>

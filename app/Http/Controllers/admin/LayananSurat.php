@@ -47,6 +47,7 @@ class LayananSurat extends Controller
             "SKD" => 'admin.preview-surat.surat_ket_domisili',
             "SKP" => 'admin.preview-surat.surat_ket_pengantar',
             "SKWH" => 'admin.preview-surat.surat_ket_wali_hakim',
+            "SKK" => 'admin.preview-surat.surat_ket_kematian',
             "SKCK" => 'surat.preview.skck',
             "SKKTPDP" => 'surat.preview.skktpdp',
             "SPKK" => 'surat.preview.spkk',

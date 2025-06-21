@@ -35,7 +35,7 @@
 
                 <div class="form-group">
                     <label>PIN:</label>
-                    <input type="number" minlength="6" maxlength="6 id="pin" name="pin" required placeholder="Masukkan PIN">
+                    <input type="password" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="6" maxlength="6" id="pin" name="pin" required placeholder="Masukkan PIN">
                 </div>
 
                 <div class="form-group">
@@ -134,7 +134,7 @@
 
                 <div class="form-group">
                     <label>PIN:</label>
-                    <input type="number" minlength="6" maxlength="6" id="pin_edit" name="pin" required placeholder="Masukkan PIN">
+                    <input type="password" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="6" maxlength="6" id="pin_edit" name="pin" required placeholder="Masukkan PIN">
                 </div>
 
                 <div class="form-group">

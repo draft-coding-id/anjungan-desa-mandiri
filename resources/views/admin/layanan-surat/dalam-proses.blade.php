@@ -110,6 +110,36 @@
     @endhasanyrole
 </div>
 <script>
+    function startCountdown() {
+        const countdownElements = document.querySelectorAll('.countdown');
+
+        countdownElements.forEach((el) => {
+            const endTime = parseInt(el.getAttribute('data-endtime')) * 1000;
+            const display = el.querySelector('.countdown-display');
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = endTime - now;
+
+                if (distance <= 0) {
+                    display.textContent = '00:00';
+                    return;
+                }
+
+                const minutes = Math.floor(distance / 60000);
+                const seconds = Math.floor((distance % 60000) / 1000);
+                display.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            }
+
+            updateCountdown(); // Run once immediately
+            setInterval(updateCountdown, 1000); // Update every second
+        });
+    }
+    document.addEventListener('DOMContentLoaded', startCountdown);
+    async function getData(id) {
+        const res = await fetch(`lihat-surat/${id}`).then(res => res.json());
+        return res;
+    }
     async function getData(id) {
         const res = await fetch(`lihat-surat/${id}`).then(res => res.json());
         return res;
