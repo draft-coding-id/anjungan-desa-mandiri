@@ -8,7 +8,7 @@
         <a href='/lapak-warga' class="button">Lapak</a>
     </div>
     <div class="credit">
-        <p>(c) Trisna Wahyu Mukti, Raihan Darmawan Pringgodigdo, Fakultas Ilmu Komputer
+        <p>&copy;2025 Trisna Wahyu Mukti, Raihan Darmawan Pringgodigdo, Fakultas Ilmu Komputer
             Universitas Pembangunan Nasional "Veteran" Jakarta</p>
     </div>
 </div>

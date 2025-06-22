@@ -257,7 +257,6 @@
         }
 
         button:hover:not(:disabled) {
-            background-color: #e68a00;
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(255, 138, 0, 0.3);
         }
@@ -382,7 +381,7 @@
         }
 
         .whatsapp-button:hover {
-            background: #20ba5a;
+            background: #2e8b57;
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
@@ -810,7 +809,7 @@
                 @endif
             </div>
             <div class="credit">
-                <p>(c) Trisna Wahyu Mukti, Raihan Darmawan Pringgodigdo, Fakultas Ilmu Komputer
+                <p>&copy; 2025 Trisna Wahyu Mukti, Raihan Darmawan Pringgodigdo, Fakultas Ilmu Komputer
                     Universitas Pembangunan Nasional "Veteran" Jakarta</p>
             </div>
         </div>

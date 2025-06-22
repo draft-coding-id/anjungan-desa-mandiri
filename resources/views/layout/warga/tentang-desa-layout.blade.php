@@ -252,14 +252,14 @@
       background-color: #ff9900;
       color: white;
       text-align: center;
-      padding: 10px 30px;
+      padding: 20px 60px;
       border: 1px solid #ffffff;
       border-radius: 5px;
       cursor: pointer;
       text-decoration: none;
       font-weight: bold;
       flex-shrink: 0;
-      font-size: 16px;
+      font-size: 20px;
       line-height: 1.3;
       letter-spacing: 0.5px;
       height: 50px;
