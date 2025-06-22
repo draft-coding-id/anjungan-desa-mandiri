@@ -52,7 +52,7 @@
     }
 
     .left-col h1 {
-      font-size: clamp(24px, 3vw, 36px);
+      font-size: clamp(28px, 4vw, 40px);
       text-align: center;
       line-height: 1.2;
       margin: 5px 0;
@@ -99,7 +99,7 @@
     }
 
     .header h1 {
-      font-size: clamp(24px, 4vw, 32px);
+      font-size: clamp(28px, 5vw, 36px);
       margin-bottom: 15px;
       color: #333;
       font-weight: 700;
@@ -159,13 +159,13 @@
       cursor: pointer;
       text-decoration: none;
       font-weight: 600;
-      font-size: clamp(14px, 2vw, 18px);
+      font-size: clamp(16px, 2.5vw, 20px);
       text-align: center;
       line-height: 1.3;
-      padding: 20px 15px;
-      min-height: 100px;
+      padding: 50px 0px;
+      min-height: 120px;
       width: 100%;
-      max-width: 180px;
+      max-width: 200px;
       transition: all 0.3s ease;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
       border: none;
@@ -226,9 +226,10 @@
       text-decoration: none;
       color: white;
       font-weight: 600;
-      font-size: clamp(12px, 1.5vw, 14px);
+      font-size: clamp(22px, 1.8vw, 26px);
+      padding: 20px 40px;
       background: linear-gradient(135deg, #ff9900, #ff8c00);
-      padding: 10px 20px;
+      padding: 10px 26px;
       border-radius: 25px;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -245,6 +246,7 @@
     /* Container Surat */
     .surat-container {
       display: grid;
+      font-size: 30px;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 20px;
       justify-content: center;
@@ -274,12 +276,12 @@
       align-items: center;
       background: linear-gradient(135deg, #ff9900, #ff8c00);
       color: white;
-      padding: 12px 24px;
+      padding: 20px 40px;
       border-radius: 25px;
       cursor: pointer;
       text-decoration: none;
       font-weight: 600;
-      font-size: clamp(14px, 2vw, 16px);
+      font-size: clamp(20px, 2vw, 24px);
       text-align: center;
       min-height: 45px;
       transition: all 0.3s ease;
@@ -330,7 +332,7 @@
       }
 
       .left-col h1 {
-        font-size: clamp(18px, 4vw, 24px);
+        font-size: clamp(20px, 5vw, 28px);
         margin: 3px 0;
       }
 
@@ -353,14 +355,15 @@
       }
 
       .header-btn a {
-        font-size: 12px;
+        font-size: clamp(14px, 4vw, 16px);
+
         padding: 8px 16px;
       }
 
       .surat-container {
         grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
         gap: 12px;
-        padding: 0 10px;
+        padding: 10px 20px;
       }
 
       .button-green,
@@ -368,9 +371,9 @@
       .button-indigo,
       .button-coffee {
         max-width: none;
-        min-height: 80px;
-        font-size: clamp(11px, 3vw, 14px);
-        padding: 15px 10px;
+        min-height: 90px;
+        font-size: clamp(14px, 4vw, 16px);
+        padding: 20px 10px;
       }
 
       .nav-container {
@@ -413,8 +416,8 @@
       .button-skyblue,
       .button-indigo,
       .button-coffee {
-        min-height: 70px;
-        font-size: 12px;
+        min-height: 90px;
+        font-size: 18px;
       }
 
       .nav-container {
@@ -441,7 +444,7 @@
     /* Large Desktop */
     @media (min-width: 1400px) {
       .surat-container {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 25px;
       }
 
@@ -449,9 +452,9 @@
       .button-skyblue,
       .button-indigo,
       .button-coffee {
-        max-width: 200px;
-        min-height: 120px;
-        font-size: 18px;
+        max-width: 300px;
+        max-height: 150px;
+        font-size: 26px;
       }
     }
   </style>
