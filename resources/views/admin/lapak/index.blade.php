@@ -65,8 +65,18 @@
       </ul>
     </div>
     @endif
-    <form id="tambahForm" action="{{ route('lapaks.store') }}" method="POST">
+    <form id="tambahForm" action="{{ route('lapaks.store') }}" method="POST" enctype="multipart/form-data">
       @csrf
+
+      <div class="form-group">
+        <label for="gambar">Gambar Lapak:</label>
+        <input type="file" id="gambar" name="gambar" accept="image/*">
+
+        {{-- Optional: tampilkan error untuk gambar --}}
+        @error('gambar')
+        <div style="color: red;">{{ $message }}</div>
+        @enderror
+      </div>
 
       <div class="form-group">
         <label for="nama">Nama Lapak:</label>
@@ -155,6 +165,7 @@
 </script>
 @endif
 <script>
+
   function openModal() {
     document.getElementById('tambahModal').classList.add('show');
     document.body.style.overflow = 'hidden';

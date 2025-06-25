@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('lapak', function (Blueprint $table) {
             $table->id();
+            $table->string('gambar');
             $table->foreignId('warga_id')->constrained('warga')->onDelete('cascade')->onUpdate('cascade');
             $table->string('nama');
             $table->text('deskripsi');

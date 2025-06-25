@@ -189,6 +189,7 @@
             scrollbar-width: thin;
             scrollbar-color: rgba(255, 153, 0, 0.5) transparent;
             position: relative;
+            bottom: 20px;
         }
 
         .button-container::-webkit-scrollbar {
@@ -219,6 +220,699 @@
             color: rgba(255, 255, 255, 0.8);
             z-index: 2;
             pointer-events: none;
+        }
+
+        .lapak-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: clamp(20px, 4vw, 35px);
+            padding: clamp(20px, 4vw, 50px);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Enhanced Lapak Card */
+        .lapak-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 153, 0, 0.2);
+            border-radius: 25px;
+            padding: 0;
+            box-shadow:
+                0 10px 40px rgba(0, 0, 0, 0.08),
+                0 4px 12px rgba(255, 153, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transform: translateY(0);
+        }
+
+        .lapak-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff9900, #ff8c00, #ffaa00);
+            border-radius: 25px 25px 0 0;
+            z-index: 1;
+        }
+
+        .lapak-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.15),
+                0 8px 30px rgba(255, 153, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border-color: rgba(255, 153, 0, 0.4);
+        }
+
+        /* Enhanced Image Placeholder */
+        .lapak-image-placeholder {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #ff9900, #ff8c00, #ffaa00);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 25px 25px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lapak-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 25px 25px 0 0;
+            transition: transform 0.4s ease;
+        }
+
+        .lapak-card:hover .lapak-image {
+            transform: scale(1.05);
+        }
+
+        .no-image-placeholder {
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .no-image-placeholder span {
+            font-size: clamp(40px, 8vw, 60px);
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        .no-image-placeholder p {
+            font-size: clamp(14px, 3vw, 18px);
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            margin: 0;
+        }
+
+        /* Enhanced Card Content */
+        .lapak-card-content {
+            padding: clamp(25px, 5vw, 30px);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .lapak-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 5px;
+        }
+
+        .lapak-nama {
+            font-size: clamp(18px, 4vw, 24px);
+            font-weight: 700;
+            color: #333;
+            margin: 0;
+            line-height: 1.3;
+            flex: 1;
+            text-align: left;
+            background: linear-gradient(135deg, #333, #555);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .lapak-kategori {
+            background: linear-gradient(135deg, #ff9900, #ff8c00);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: clamp(11px, 2.5vw, 13px);
+            font-weight: 600;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lapak-kategori::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .lapak-card:hover .lapak-kategori::before {
+            left: 100%;
+        }
+
+        .lapak-deskripsi {
+            color: #666;
+            font-size: clamp(14px, 3vw, 16px);
+            line-height: 1.6;
+            margin: 0;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-align: left;
+            min-height: 48px;
+        }
+
+        .lapak-harga {
+            font-size: clamp(22px, 5vw, 28px);
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff9900, #ff6600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 5px 0;
+            text-shadow: 0 2px 4px rgba(255, 153, 0, 0.2);
+            position: relative;
+        }
+
+        /* Enhanced Actions */
+        .lapak-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: auto;
+            padding-top: 10px;
+        }
+
+        .lapak-btn {
+            flex: 1;
+            min-width: 110px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: clamp(13px, 2.8vw, 15px);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lapak-btn span {
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .lapak-btn:hover span {
+            transform: scale(1.2);
+        }
+
+        .lapak-btn-detail {
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            color: white;
+            border: 2px solid transparent;
+        }
+
+        .lapak-btn-detail:hover {
+            background: linear-gradient(135deg, #5f4fcf, #8b7ff0);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.4);
+        }
+
+        .lapak-btn-primary {
+            background: linear-gradient(135deg, #ff9900, #ff8c00);
+            color: white;
+            border: 2px solid transparent;
+        }
+
+        .lapak-btn-primary:hover {
+            background: linear-gradient(135deg, #ff8c00, #ff7700);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 153, 0, 0.4);
+        }
+
+        .lapak-btn-secondary {
+            background: rgba(255, 255, 255, 0.9);
+            color: #ff9900;
+            border: 2px solid #ff9900;
+        }
+
+        .lapak-btn-secondary:hover {
+            background: #ff9900;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 153, 0, 0.3);
+        }
+
+        /* Enhanced Owner */
+        .lapak-owner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid rgba(255, 153, 0, 0.15);
+            font-size: clamp(13px, 2.5vw, 15px);
+            color: #666;
+            font-weight: 500;
+        }
+
+        .lapak-owner-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #ff9900, #ff8c00);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(255, 153, 0, 0.3);
+        }
+
+        /* Enhanced Empty State */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: clamp(60px, 10vw, 100px);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .empty-state-icon {
+            font-size: clamp(60px, 12vw, 100px);
+            filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.3));
+            animation: bounce 2s infinite;
+        }
+
+        .empty-state h2 {
+            font-size: clamp(24px, 6vw, 36px);
+            margin: 0;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            font-weight: 700;
+        }
+
+        .empty-state p {
+            font-size: clamp(16px, 3.5vw, 20px);
+            opacity: 0.9;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            margin: 0;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-20px);
+            }
+
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: flex;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            animation: modalFadeIn 0.3s ease-out;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
+            backdrop-filter: blur(20px);
+            margin: auto;
+            padding: 0;
+            border: 3px solid rgba(255, 153, 0, 0.3);
+            border-radius: 25px;
+            width: min(90%, 600px);
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow:
+                0 25px 80px rgba(0, 0, 0, 0.2),
+                0 10px 40px rgba(255, 153, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            animation: modalSlideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff9900, #ff8c00, #ffaa00);
+            border-radius: 25px 25px 0 0;
+            z-index: 1;
+        }
+
+        .modal-header {
+            padding: 30px 30px 20px;
+            border-bottom: 2px solid rgba(255, 153, 0, 0.1);
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 153, 0, 0.05), rgba(255, 140, 0, 0.02));
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: clamp(22px, 5vw, 28px);
+            font-weight: 700;
+            color: #333;
+            background: linear-gradient(135deg, #333, #555);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #ff9900;
+            background: rgba(255, 153, 0, 0.1);
+            transform: scale(1.1);
+        }
+
+        .modal-body {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin-bottom: 10px;
+        }
+
+        .modal-no-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #ff9900, #ff8c00);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: 10px;
+            box-shadow: 0 10px 30px rgba(255, 153, 0, 0.3);
+        }
+
+        .modal-no-image span {
+            font-size: 60px;
+            margin-bottom: 10px;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        .modal-no-image p {
+            font-size: 18px;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            margin: 0;
+        }
+
+        .modal-info {
+            display: grid;
+            gap: 15px;
+        }
+
+        .modal-info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .modal-info-label {
+            font-weight: 700;
+            color: #ff9900;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-info-value {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .modal-info-value.price {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff9900, #ff6600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal-info-value.kategori {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff9900, #ff8c00);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3);
+            width: fit-content;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(255, 153, 0, 0.1);
+        }
+
+        .modal-btn {
+            flex: 1;
+            min-width: 140px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-btn span {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-btn:hover span {
+            transform: scale(1.2);
+        }
+
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #ff9900, #ff8c00);
+            color: white;
+        }
+
+        .modal-btn-primary:hover {
+            background: linear-gradient(135deg, #ff8c00, #ff7700);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 153, 0, 0.4);
+        }
+
+        .modal-btn-secondary {
+            background: rgba(255, 255, 255, 0.9);
+            color: #ff9900;
+            border: 2px solid #ff9900;
+        }
+
+        .modal-btn-secondary:hover {
+            background: #ff9900;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 153, 0, 0.3);
+        }
+
+        .modal-owner {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: rgba(255, 153, 0, 0.05);
+            border-radius: 15px;
+            border: 2px solid rgba(255, 153, 0, 0.1);
+            margin-top: 10px;
+        }
+
+        .modal-owner-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #ff9900, #ff8c00);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3);
+        }
+
+        .modal-owner span {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .lapak-container {
+                grid-template-columns: 1fr;
+                padding: 15px;
+                gap: 25px;
+            }
+
+            .lapak-card-content {
+                padding: 20px;
+            }
+
+            .lapak-image,
+            .lapak-image-placeholder {
+                height: 200px;
+            }
+
+            .lapak-actions {
+                flex-direction: column;
+            }
+
+            .lapak-btn {
+                min-width: auto;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 10px;
+            }
+
+            .modal-header,
+            .modal-body {
+                padding: 20px;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+
+            .modal-btn {
+                min-width: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .lapak-card-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .lapak-kategori {
+                align-self: flex-end;
+            }
+
+            .lapak-image,
+            .lapak-image-placeholder {
+                height: 180px;
+            }
+
+            .modal-image,
+            .modal-no-image {
+                height: 200px;
+            }
         }
 
         @keyframes bounceLeft {
@@ -526,18 +1220,6 @@
     </div>
 
     <div class="page-content">
-        <!-- Example responsive video implementation -->
-        <div class="video-wrapper">
-            <div class="video-container">
-                <iframe
-                    src="https://www.youtube.com/embed/5Ds6RMBPjKg?autoplay=1&mute=1&loop=1&playlist=5Ds6RMBPjKg"
-                    title="Video Profil Desa Rawapanjang"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin"
-                    allowfullscreen>
-                </iframe>
-            </div>
-        </div>
         @yield('content')
     </div>
 

@@ -17,10 +17,24 @@
       <div class="modal-title">Edit Lapak</div>
       <a href="{{ route('lapaks.index') }}" class="close">&times;</a>
     </div>
-    <form id="editForm" method="POST" action="{{ route('lapaks.update', $lapak->id) }}">
+    <form id="editForm" method="POST" action="{{ route('lapaks.update', $lapak->id) }}" enctype="multipart/form-data">
       @csrf
       @method('PUT')
       <input type="hidden" name="id" id="edit-id" value="{{ $lapak->id }}">
+
+      <div class="form-group">
+        <label for="edit-gambar">Gambar Lapak</label>
+        @if($lapak->gambar)
+        <div style="margin-bottom:10px;">
+          <img src="{{ asset('storage/'.$lapak->gambar) }}" alt="Gambar Lapak" style="max-width:120px; border-radius:6px;">
+        </div>
+        @endif
+        <input type="file" name="gambar" id="edit-gambar" accept="image/*">
+        @error('gambar')
+        <div style="color: red;">{{ $message }}</div>
+        @enderror
+        <small class="form-text text-muted">Kosongkan jika tidak ingin mengganti gambar.</small>
+      </div>
 
       <div class="form-group">
         <label for="edit-nama">Nama Lapak</label>

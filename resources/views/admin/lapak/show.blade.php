@@ -10,6 +10,13 @@
     </div>
     <div class="modal-body">
       <div class="surat-info">
+        <div class="info-row" style="justify-content: center;">
+          @if($lapak->gambar)
+          <img src="{{ asset('storage/'.$lapak->gambar) }}" alt="Gambar Lapak" style="max-width:200px; border-radius:10px; margin-bottom:16px;">
+          @else
+          <span style="color:#aaa; font-style:italic;">Tidak ada gambar</span>
+          @endif
+        </div>
         <div class="info-row">
           <div class="info-label">Nama Lapak</div>
           <div class="info-value">{{ $lapak->nama }}</div>

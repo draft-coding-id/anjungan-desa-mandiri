@@ -8,6 +8,7 @@ class Lapak extends Model
 {
     protected $table = "lapak" ;
     protected $fillable = [
+        'gambar',
         'nama',
         'deskripsi',
         'kategori',

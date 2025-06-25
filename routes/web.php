@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\admin\AdminController;
+use App\Models\Lapak;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LapakController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SuratController;
-use App\Http\Controllers\PreviewSuratController;
 use App\Http\Controllers\admin\LayananSurat;
+use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\WargaController;
-use App\Http\Controllers\LapakController;
+use App\Http\Controllers\PreviewSuratController;
 
 // Route Mockup Baru
 Route::view('/', 'onboarding');
@@ -26,7 +27,17 @@ Route::post('/login/scan-ktp', [LoginController::class, 'scanKtp'])->name('login
 Route::get('/login/pin/{nik}', [LoginController::class, 'showPinForm'])->name('login.showPinForm');
 Route::post('/login/check-pin', [LoginController::class, 'checkPin'])->name('login.checkPin');
 Route::view('/agenda-rawapanjang', 'warga.profil_desa.agenda');
-Route::view('/lapak-warga', 'warga.profil_desa.lapak');
+Route::view('/lapak-warga', 'warga.profil_desa.lapak' , ['lapaks' => Lapak::all()]);
+
+Route::get('/lapak-warga/detail/{id}', function ($id) {
+    $lapak = Lapak::with('warga')->find($id);
+
+    if (!$lapak) {
+        return response()->json(['error' => 'Lapak tidak ditemukan'], 404);
+    }
+
+    return response()->json($lapak);
+})->name('lapak.detail');
 Route::view('/tentang-desa-rawapanjang', 'warga.profil_desa.tentang-desa')->name('sejarah-desa');
 Route::view('/visi-misi', 'warga.profil_desa.visi_misi')->name('visi-misi');
 
