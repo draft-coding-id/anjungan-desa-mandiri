@@ -1,6 +1,4 @@
 @extends('layout.warga.tentang-desa-layout')
-@section('title' , 'Tentang Desa')
-@section('header' , 'Tentang Desa Rawapanjang ')
 @section('content')
 <div class="container" style="height: 100%">
     <h1>Sejarah Desa </h1>

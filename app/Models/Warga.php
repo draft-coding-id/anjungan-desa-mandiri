@@ -9,7 +9,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use App\Models\Lapak;
 class Warga extends Authenticatable
 {
     use HasFactory;
@@ -63,5 +63,9 @@ class Warga extends Authenticatable
     public function getAuthPassword()
     {
         return $this->pin;
+    }
+
+    public function lapak(){
+        return $this->hasMany(Lapak::class);
     }
 }

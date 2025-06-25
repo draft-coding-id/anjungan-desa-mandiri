@@ -7,6 +7,7 @@ use App\Http\Controllers\SuratController;
 use App\Http\Controllers\PreviewSuratController;
 use App\Http\Controllers\admin\LayananSurat;
 use App\Http\Controllers\admin\WargaController;
+use App\Http\Controllers\LapakController;
 
 // Route Mockup Baru
 Route::view('/', 'onboarding');
@@ -88,6 +89,8 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/agenda', 'admin.agenda')->name('agenda');
     Route::get('/pengaturan-akses', [AdminController::class, 'getUsers'])->name('pengaturan-akses')->middleware('permission:akses daftar akun');;
 
+    Route::resource('/lapak-desa', LapakController::class)
+        ->names('lapaks');
 
     // Layanan Surat
     // Route::view('/layanan-surat', 'admin.layanan-surat.dalam-proses');
