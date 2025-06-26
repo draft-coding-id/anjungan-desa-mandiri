@@ -8,6 +8,7 @@ use App\Http\Controllers\SuratController;
 use App\Http\Controllers\admin\LayananSurat;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\WargaController;
+use App\Http\Controllers\KabarPembangunan;
 use App\Http\Controllers\PreviewSuratController;
 
 // Route Mockup Baru
@@ -102,7 +103,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/lapak-desa', LapakController::class)
         ->names('lapaks');
-
+    Route::resource('/pembangunan-desa' , KabarPembangunan::class)->names('pembangunan-desa');
     // Layanan Surat
     // Route::view('/layanan-surat', 'admin.layanan-surat.dalam-proses');
     Route::get('/layanan-surat', [LayananSurat::class, 'index'])->name('layanan-surat-dalam-proses');

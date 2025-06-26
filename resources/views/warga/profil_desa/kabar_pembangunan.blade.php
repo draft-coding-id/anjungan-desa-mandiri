@@ -1,6 +1,6 @@
-@extends('layout.warga.app')
-@section('title' , 'Tentang Desa')
-@section('header' , 'Tentang Desa')
+@extends('layout.warga.tentang-desa-layout')
+@section('title' , 'Tentang Desa | Kabar Pembangunan')
+@section('header' , 'Tentang Desa | Kabar Pembangunan')
 @section('content')
 <div class="container">
     <h2>Kabar pembangunan</h2>

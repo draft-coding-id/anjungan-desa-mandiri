@@ -192,24 +192,6 @@
     }
   });
 
-
-  function openEditModal(lapak) {
-    document.getElementById('edit-id').value = lapak.id;
-    document.getElementById('edit-nama').value = lapak.nama;
-    document.getElementById('edit-deskripsi').value = lapak.deskripsi;
-    document.getElementById('edit-kategori').value = lapak.kategori;
-    document.getElementById('edit-harga').value = lapak.harga;
-    document.getElementById('edit-link_gmaps').value = lapak.link_gmaps;
-    document.getElementById('edit-warga_id').value = lapak.warga_id;
-
-    document.getElementById('editForm').action = '/lapak-desa/' + lapak.id;
-    document.getElementById('editModal').classList.add('show');
-  }
-
-  function closeEditModal() {
-    document.getElementById('editModal').classList.remove('show');
-  }
-
   function openDeleteModal(id) {
     document.getElementById('deleteForm').action = '/lapak-desa/' + id;
     document.getElementById('deleteModal').classList.add('show');

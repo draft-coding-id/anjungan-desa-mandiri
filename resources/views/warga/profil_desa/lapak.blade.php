@@ -72,7 +72,7 @@
 @section('back-button')
 <div class="button-container">
     <a href="{{route('halaman_utama')}}" class="button">
-        <span>⬅️</span> Kembali
+        Kembali
     </a>
 </div>
 @endsection

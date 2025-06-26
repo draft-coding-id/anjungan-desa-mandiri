@@ -8,6 +8,7 @@
     <a href='{{route('info-desa')}}' class="nav-link {{ request()->routeIs('info-desa') ? 'active' : '' }}">Informasi Desa</a>
     <a href='{{route('lapaks.index')}}' class="nav-link {{ request()->routeIs('lapaks.*') ? 'active' : '' }}">Lapak Desa</a>
     <a href='{{route('statistik')}}' class="nav-link {{ request()->routeIs('statistik') ? 'active' : '' }}">Statistik Desa</a>
+    <a href='{{route('pembangunan-desa.index')}}' class="nav-link {{ request()->routeIs('pembangunan-desa.*') ? 'active' : '' }}">Pembangunan Desa</a>
     <!-- <a href='{{route('pengumuman')}}' class="nav-link {{ request()->routeIs('pengumuman') ? 'active' : '' }}">Pengumuman</a> -->
     <!-- <a href='{{route('artikel-desa')}}' class="nav-link {{ request()->routeIs('artikel-desa') ? 'active' : '' }}">Artikel Desa</a> -->
     <a href='{{route('agenda')}}' class="nav-link {{ request()->routeIs('agenda') ? 'active' : '' }}">Agenda Desa</a>
