@@ -41,6 +41,24 @@ class LapakController extends Controller
             'link_gmaps' => 'nullable|url',
             'no_hp' => 'required|min:10',
             'warga_id' => 'required|exists:warga,id',
+        ], [
+            'gambar.image' => 'Gambar harus berupa file gambar.',
+            'gambar.mimes' => 'Gambar harus berformat jpeg, png, jpg, gif, atau svg.',
+            'gambar.max' => 'Gambar tidak boleh lebih dari 2MB.',
+            'nama.required' => 'Nama lapak harus diisi.',
+            'nama.string' => 'Nama lapak harus berupa teks.',
+            'nama.max' => 'Nama lapak tidak boleh lebih dari 255 karakter.',
+            'deskripsi.required' => 'Deskripsi harus diisi.',
+            'kategori.required' => 'Kategori harus diisi.',
+            'kategori.string' => 'Kategori harus berupa teks.',
+            'kategori.max' => 'Kategori tidak boleh lebih dari 255 karakter.',
+            'harga.required' => 'Harga harus diisi.',
+            'harga.numeric' => 'Harga harus berupa angka.',
+            'link_gmaps.url' => 'Link Google Maps tidak valid.',
+            'no_hp.required' => 'Nomor HP harus diisi.',
+            'no_hp.min' => 'Nomor HP harus terdiri dari minimal 10 digit.',
+            'warga_id.required' => 'Warga harus dipilih.',
+            'warga_id.exists' => 'Warga yang dipilih tidak valid.',
         ]);
 
         $data = $request->all();
@@ -57,25 +75,6 @@ class LapakController extends Controller
         return redirect()->route('lapaks.index')->with('success', 'Lapak berhasil ditambahkan!');
     }
 
-    public function show(string $id)
-    {
-        $lapak = Lapak::with('warga')->findOrFail($id);
-        return view('admin.lapak.show', ['lapak' => $lapak]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        $lapak = Lapak::findOrFail($id);
-        $wargas = Warga::where('id', '!=', $lapak->warga_id)->get();
-        return view('admin.lapak.edit-modal', ['wargas' => $wargas, 'lapak' => $lapak]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $lapak = Lapak::findOrFail($id);
@@ -89,6 +88,24 @@ class LapakController extends Controller
             'link_gmaps' => 'nullable|url',
             'no_hp' => 'required|min:10',
             'warga_id' => 'required|exists:warga,id',
+        ], [
+            'gambar.image' => 'Gambar harus berupa file gambar.',
+            'gambar.mimes' => 'Gambar harus berformat jpeg, png, jpg, gif, atau svg.',
+            'gambar.max' => 'Gambar tidak boleh lebih dari 2MB.',
+            'nama.required' => 'Nama lapak harus diisi.',
+            'nama.string' => 'Nama lapak harus berupa teks.',
+            'nama.max' => 'Nama lapak tidak boleh lebih dari 255 karakter.',
+            'deskripsi.required' => 'Deskripsi harus diisi.',
+            'kategori.required' => 'Kategori harus diisi.',
+            'kategori.string' => 'Kategori harus berupa teks.',
+            'kategori.max' => 'Kategori tidak boleh lebih dari 255 karakter.',
+            'harga.required' => 'Harga harus diisi.',
+            'harga.numeric' => 'Harga harus berupa angka.',
+            'link_gmaps.url' => 'Link Google Maps tidak valid.',
+            'no_hp.required' => 'Nomor HP harus diisi.',
+            'no_hp.min' => 'Nomor HP harus terdiri dari minimal 10 digit.',
+            'warga_id.required' => 'Warga harus dipilih.',
+            'warga_id.exists' => 'Warga yang dipilih tidak valid.',
         ]);
 
         $data = $request->all();
@@ -110,21 +127,5 @@ class LapakController extends Controller
         $lapak->update($data);
 
         return redirect()->route('lapaks.index')->with('success', 'Lapak berhasil diupdate!');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $lapak = Lapak::findOrFail($id);
-
-        // Hapus gambar dari storage jika ada
-        if ($lapak->gambar && Storage::disk('public')->exists($lapak->gambar)) {
-            Storage::disk('public')->delete($lapak->gambar);
-        }
-
-        $lapak->delete();
-        return redirect()->route('lapaks.index');
     }
 }

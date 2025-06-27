@@ -45,7 +45,9 @@
         3px -3px 0 white,
         -3px -3px 0 white;
     }
-
+    .sejarah-desa-content {
+      line-height: 30px;
+    }
     .page-content {
       flex: 1;
       display: flex;

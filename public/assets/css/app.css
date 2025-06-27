@@ -169,6 +169,10 @@ td button {
     padding: 10px 20px;
 }
 
+td ul li {
+    list-style: none;
+}
+
 td .setuju-button {
     background-color: #4caf50;
     color: white;
@@ -659,6 +663,64 @@ h4:after {
 .path {
     padding: 0px 30px;
 }
+/* Table Repeater */
+.repeater-container {
+    margin-top: 10px;
+  }
+  
+  .repeater-header {
+    margin-bottom: 15px;
+  }
+  
+  #pemimpinTable {
+    margin-top: 10px;
+  }
+  
+  #pemimpinTable th {
+    background-color: #f8f9fa;
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  #pemimpinTable td {
+    vertical-align: middle;
+  }
+  
+  .btn-remove {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  
+  .btn-remove:hover {
+    background-color: #c82333;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838;
+  }
+  
+  .form-control-sm {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+  }
 
 /* Menu Surat */
 .menu-surat {

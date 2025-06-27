@@ -8,9 +8,11 @@ use App\Http\Controllers\SuratController;
 use App\Http\Controllers\admin\LayananSurat;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\WargaController;
+use App\Http\Controllers\InformasiDesa;
 use App\Http\Controllers\KabarPembangunan;
 use App\Http\Controllers\PreviewSuratController;
 use App\Models\KabarPembangunan as ModelsKabarPembangunan;
+use App\Models\SejarahDesa;
 
 // Route Mockup Baru
 Route::view('/', 'onboarding');
@@ -29,7 +31,12 @@ Route::post('/login/scan-ktp', [LoginController::class, 'scanKtp'])->name('login
 Route::get('/login/pin/{nik}', [LoginController::class, 'showPinForm'])->name('login.showPinForm');
 Route::post('/login/check-pin', [LoginController::class, 'checkPin'])->name('login.checkPin');
 Route::view('/agenda-rawapanjang', 'warga.profil_desa.agenda');
-Route::view('/lapak-warga', 'warga.profil_desa.lapak' , ['lapaks' => Lapak::all()]);
+Route::get('/lapak-warga',  function () {
+    $lapaks = Lapak::all();
+    return view('warga.profil_desa.lapak', [
+        'lapaks' => $lapaks,
+    ]);
+});
 
 Route::get('/lapak-warga/detail/{id}', function ($id) {
     $lapak = Lapak::with('warga')->find($id);
@@ -41,18 +48,28 @@ Route::get('/lapak-warga/detail/{id}', function ($id) {
     return response()->json($lapak);
 })->name('lapak.detail');
 
-Route::get('/kabar-pembangunan/detail/{id}' , function($id){
+Route::get('/kabar-pembangunan/detail/{id}', function ($id) {
     $pembangunan = ModelsKabarPembangunan::findOrFail($id);
-    if(!$pembangunan){
+    if (!$pembangunan) {
         return response()->json(['error' => 'Pembangunan tidak ditemukan'], 404);
     }
     return response()->json($pembangunan);
 })->name('kabar-pembangunan.detail');
-Route::view('/tentang-desa-rawapanjang', 'warga.profil_desa.tentang-desa')->name('sejarah-desa');
+Route::get('/tentang-desa-rawapanjang', function () {
+    $sejarahDesa = SejarahDesa::first();
+    return view('warga.profil_desa.tentang-desa', [
+        'sejarahDesa' => $sejarahDesa,
+    ]);
+})->name('sejarah-desa');
 Route::view('/visi-misi', 'warga.profil_desa.visi_misi')->name('visi-misi');
 
 Route::view('/statistik-desa', 'warga.profil_desa.statistik-desa')->name('statistik-desa');
-Route::view('/kabar-pembanguan', 'warga.profil_desa.kabar_pembangunan' , ['pembangunans' => ModelsKabarPembangunan::all()])->name('kabar-pembangunan');
+Route::get('/kabar-pembanguan', function () {
+    $pembangunans = ModelsKabarPembangunan::all();
+    return view('warga.profil_desa.kabar_pembangunan', [
+        'pembangunans' => $pembangunans,
+    ]);
+})->name('kabar-pembangunan');
 
 // Masuk Menu Layanan Mandiri
 Route::middleware(['isAdmin'])->group(function () {
@@ -99,7 +116,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/tambah-akun', [AdminController::class, 'tambahAkun'])->name('tambah-akun');
     Route::get('/show-akun/{id}', [AdminController::class, 'showAkun'])->name('show-akun');
     Route::post('/update-akun', [AdminController::class, 'updateAkun'])->name('update-akun');
-    Route::view('/info-desa', 'admin.info-desa')->name('info-desa');
+    Route::get('/info-desa', [InformasiDesa::class, 'index'])->name('info-desa.index');
+    Route::post('/info-desa/store', [InformasiDesa::class, 'storeSejarahDesa'])->name('info-desa.sejarah-desa.store');
+    Route::get('/info-desa/detail/{id}', [InformasiDesa::class, 'showSejarahDesa'])->name('info-desa.sejarah-desa.show');
+    Route::get('/info-desa/edit/{id}', [InformasiDesa::class, 'editSejarahDesa'])->name('info-desa.sejarah-desa.edit');
+    Route::put('/info-desa/update/{id}', [InformasiDesa::class, 'updateSejarahDesa'])->name('info-desa.sejarah-desa.update');
+    Route::delete('/info-desa/delete/{id}', [InformasiDesa::class, 'deleteSejarahDesa'])->name('info-desa.sejarah-desa.delete');
+    Route::get('/info-desa/visi-misi')->name('info-desa.visi-misi');
     Route::get('/data-warga', [WargaController::class, 'index'])->name('data-warga');
     Route::get('/show-warga/{id}', [WargaController::class, 'showWarga'])->name('show-warga');
     Route::post('/tambah-warga', [WargaController::class, 'tambahWarga'])->name('tambah-warga');
@@ -112,7 +135,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/lapak-desa', LapakController::class)
         ->names('lapaks');
-    Route::resource('/pembangunan-desa' , KabarPembangunan::class)->names('pembangunan-desa');
+    Route::resource('/pembangunan-desa', KabarPembangunan::class)->names('pembangunan-desa');
     // Layanan Surat
     // Route::view('/layanan-surat', 'admin.layanan-surat.dalam-proses');
     Route::get('/layanan-surat', [LayananSurat::class, 'index'])->name('layanan-surat-dalam-proses');
