@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\WargaController;
 use App\Http\Controllers\KabarPembangunan;
 use App\Http\Controllers\PreviewSuratController;
+use App\Models\KabarPembangunan as ModelsKabarPembangunan;
 
 // Route Mockup Baru
 Route::view('/', 'onboarding');
@@ -39,11 +40,19 @@ Route::get('/lapak-warga/detail/{id}', function ($id) {
 
     return response()->json($lapak);
 })->name('lapak.detail');
+
+Route::get('/kabar-pembangunan/detail/{id}' , function($id){
+    $pembangunan = ModelsKabarPembangunan::findOrFail($id);
+    if(!$pembangunan){
+        return response()->json(['error' => 'Pembangunan tidak ditemukan'], 404);
+    }
+    return response()->json($pembangunan);
+})->name('kabar-pembangunan.detail');
 Route::view('/tentang-desa-rawapanjang', 'warga.profil_desa.tentang-desa')->name('sejarah-desa');
 Route::view('/visi-misi', 'warga.profil_desa.visi_misi')->name('visi-misi');
 
 Route::view('/statistik-desa', 'warga.profil_desa.statistik-desa')->name('statistik-desa');
-Route::view('/kabar-pembanguan', 'warga.profil_desa.kabar_pembangunan')->name('kabar-pembangunan');
+Route::view('/kabar-pembanguan', 'warga.profil_desa.kabar_pembangunan' , ['pembangunans' => ModelsKabarPembangunan::all()])->name('kabar-pembangunan');
 
 // Masuk Menu Layanan Mandiri
 Route::middleware(['isAdmin'])->group(function () {

@@ -208,6 +208,393 @@
       opacity: 0.9;
     }
 
+    .pembangunan-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 25px;
+      padding: 20px 0;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .pembangunan-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 1px solid #e0e0e0;
+      position: relative;
+    }
+
+    .pembangunan-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      border-color: #ff9900;
+    }
+
+    .pembangunan-image-placeholder {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pembangunan-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .pembangunan-card:hover .pembangunan-image {
+      transform: scale(1.05);
+    }
+
+    .no-image-placeholder {
+      text-align: center;
+      color: #666;
+    }
+
+    .no-image-placeholder span {
+      font-size: 40px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .no-image-placeholder p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .pembangunan-card-content {
+      padding: 20px;
+    }
+
+    .pembangunan-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+      gap: 10px;
+    }
+
+    .pembangunan-nama {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin: 0;
+      line-height: 1.3;
+      flex: 1;
+    }
+
+    .pembangunan-tahun {
+      background: linear-gradient(135deg, #ff9900, #e68a00);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .pembangunan-anggaran {
+      font-size: 20px;
+      font-weight: bold;
+      color: #28a745;
+      margin-bottom: 15px;
+      padding: 10px;
+      background: linear-gradient(135deg, #d4edda, #c3e6cb);
+      border-radius: 8px;
+      border-left: 4px solid #28a745;
+    }
+
+    .pembangunan-lokasi {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 20px;
+      padding: 8px;
+      background: #f8f9fa;
+      border-radius: 6px;
+    }
+
+    .lokasi-icon {
+      color: #ff9900;
+      font-size: 16px;
+    }
+
+    .pembangunan-actions {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .pembangunan-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex: 1;
+      justify-content: center;
+      min-width: 80px;
+    }
+
+    .pembangunan-btn-detail {
+      background: linear-gradient(135deg, #6c757d, #5a6268);
+      color: white;
+    }
+
+    .pembangunan-btn-detail:hover {
+      background: linear-gradient(135deg, #5a6268, #495057);
+      transform: translateY(-2px);
+    }
+
+    .pembangunan-btn-primary {
+      background: linear-gradient(135deg, #ff9900, #e68a00);
+      color: white;
+    }
+
+    .pembangunan-btn-primary:hover {
+      background: linear-gradient(135deg, #e68a00, #cc7700);
+      transform: translateY(-2px);
+    }
+
+    .pembangunan-meta {
+      border-top: 1px solid #eee;
+      padding-top: 15px;
+    }
+
+    .pembangunan-sumber {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #666;
+      font-size: 13px;
+    }
+
+    .meta-icon {
+      color: #ff9900;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: #666;
+    }
+
+    .empty-state-icon {
+      font-size: 60px;
+      margin-bottom: 20px;
+      opacity: 0.7;
+    }
+
+    .empty-state h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .empty-state p {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: flex;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+      animation: modalFadeIn 0.3s ease-out;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: modalSlideIn 0.3s ease-out;
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-header {
+      padding: 20px 25px;
+      border-bottom: 2px solid #ff9900;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(135deg, #ff9900, #e68a00);
+      color: white;
+      border-radius: 15px 15px 0 0;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .close {
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      color: white;
+      transition: color 0.3s ease;
+    }
+
+    .close:hover {
+      color: #f0f0f0;
+    }
+
+    .modal-body {
+      padding: 25px;
+    }
+
+    .modal-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .modal-no-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: #666;
+    }
+
+    .modal-no-image span {
+      font-size: 50px;
+      margin-bottom: 10px;
+    }
+
+    .modal-info {
+      display: grid;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .modal-info-item {
+      padding: 15px;
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      border-radius: 10px;
+      border-left: 4px solid #ff9900;
+    }
+
+    .modal-info-label {
+      font-weight: bold;
+      color: #ff9900;
+      font-size: 14px;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .modal-info-value {
+      color: #333;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .modal-info-value.price {
+      font-size: 20px;
+      font-weight: bold;
+      color: #28a745;
+    }
+
+    .modal-info-value.tahun {
+      font-weight: bold;
+      color: #ff9900;
+    }
+
+    .modal-actions {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+
+    .modal-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      margin: 0 5px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .modal-btn-primary {
+      background: linear-gradient(135deg, #ff9900, #e68a00);
+      color: white;
+    }
+
+    .modal-btn-primary:hover {
+      background: linear-gradient(135deg, #e68a00, #cc7700);
+      transform: translateY(-2px);
+    }
+
     .footer {
       display: flex;
       flex-direction: column;
@@ -306,6 +693,33 @@
       .stats-grid {
         grid-template-columns: 1fr;
       }
+
+      .pembangunan-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 15px;
+      }
+
+      .pembangunan-card-content {
+        padding: 15px;
+      }
+
+      .pembangunan-actions {
+        flex-direction: column;
+      }
+
+      .pembangunan-btn {
+        flex: none;
+      }
+
+      .modal-content {
+        margin: 20px;
+        width: calc(100% - 40px);
+      }
+
+      .modal-body {
+        padding: 20px;
+      }
     }
   </style>
 </head>
@@ -317,10 +731,6 @@
       Tentang Desa Rawapanjang
     </h2>
   </div>
-  {{-- <div class="video-container">
-        <p>Video Profil Desa</p>
-        <!-- <video controls> <source src="video-profil-desa.mp4" type="video/mp4"> Replace with your video source Your browser does not support the video tag. </video>  -->
-    </div> --}}
   <div class="page-content">
     @yield('content')
   </div>
