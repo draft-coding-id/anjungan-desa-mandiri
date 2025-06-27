@@ -135,13 +135,15 @@
         <td>{{$increment++}}</td>
         @hasanyrole('admin')
         <td>
+          <a href="{{ route('info-desa.sejarah-desa.show' , $data->id) }}">Detail Informasi Desa</a>
+
           <a href="{{ route('info-desa.sejarah-desa.edit' , $data->id) }}" class="button">Edit Informasi Desa</a>
           <button onclick="openDeleteModal({{ $data->id }})">Hapus</button>
         </td>
         @endhasanyrole
         @hasanyrole('kades|rw|rt')
         <td>
-          <a href="{{ route('info-desa.sejarah-desa.show' , $data->id) }}" class="button">Detail Informasi Desa</a>
+          <a href="{{ route('info-desa.sejarah-desa.show' , $data->id) }}">Detail Informasi Desa</a>
         </td>
         @endhasanyrole
         <td>{{ $data->judul }}</td>

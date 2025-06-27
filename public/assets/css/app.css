@@ -347,7 +347,7 @@ td button:hover {
 
 .info-label {
     font-weight: 600;
-    min-width: 120px;
+    min-width: 150px;
     color: #333;
     flex-shrink: 0;
 }
