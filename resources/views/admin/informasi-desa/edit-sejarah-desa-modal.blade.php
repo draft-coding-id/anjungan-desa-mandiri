@@ -15,7 +15,7 @@
   <div class="modal-content">
     <div class="modal-header">
       <div class="modal-title">Edit Sejarah Desa</div>
-      <a href="{{ route('info-desa.index') }}" class="close">&times;</a>
+      <a href="{{ route('info-desa.sejarah-desa.index') }}" class="close">&times;</a>
     </div>
     <form id="editForm" method="POST" action="{{ route('info-desa.sejarah-desa.update', $sejarahDesa->id) }}" enctype="multipart/form-data">
       @csrf
@@ -99,7 +99,7 @@
 
       <div class="button-container">
         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-        <a href="{{ route('info-desa.index') }}" class="btn btn-secondary">Tutup</a>
+        <a href="{{ route('info-desa.sejarah-desa.index') }}" class="btn btn-secondary">Tutup</a>
       </div>
     </form>
   </div>

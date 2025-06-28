@@ -5,7 +5,7 @@
     @can('akses daftar akun')
     <a href='{{ route('pengaturan-akses') }}' class="nav-link {{ request()->routeIs('pengaturan-akses') ? 'active' : '' }}">Pengaturan Akses</a>
     @endcan
-    <a href='{{route('info-desa.index')}}' class="nav-link {{ request()->routeIs('info-desa.*') ? 'active' : '' }}">Informasi Desa</a>
+    <a href='{{route('info-desa.sejarah-desa.index')}}' class="nav-link {{ request()->routeIs('info-desa.*') ? 'active' : '' }}">Informasi Desa</a>
     <a href='{{route('lapaks.index')}}' class="nav-link {{ request()->routeIs('lapaks.*') ? 'active' : '' }}">Lapak Desa</a>
     <a href='{{route('statistik')}}' class="nav-link {{ request()->routeIs('statistik') ? 'active' : '' }}">Statistik Desa</a>
     <a href='{{route('pembangunan-desa.index')}}' class="nav-link {{ request()->routeIs('pembangunan-desa.*') ? 'active' : '' }}">Pembangunan Desa</a>

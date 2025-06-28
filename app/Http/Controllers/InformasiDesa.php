@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SejarahDesa;
+use App\Models\VisiMisi;
 use Illuminate\Http\Request;
 
 class InformasiDesa extends Controller
@@ -17,7 +18,6 @@ class InformasiDesa extends Controller
     }
     public function storeSejarahDesa(Request $request)
     {
-        // Validasi input termasuk array pemimpin_desa
         $request->validate([
             'judul' => 'required|string|max:255',
             'content' => 'required|string',
@@ -44,7 +44,7 @@ class InformasiDesa extends Controller
                 'pemimpin_desa' => json_encode($request->pemimpin_desa), // Convert array to JSON
             ]);
 
-            return redirect()->route('info-desa.index')
+            return redirect()->route('info-desa.sejarah-desa.index')
                 ->with('success', 'Data sejarah desa berhasil disimpan');
         } catch (\Exception $e) {
             return redirect()->back()
@@ -75,12 +75,68 @@ class InformasiDesa extends Controller
             'pemimpin_desa' => 'required'
         ]);
         $sejarahDesa->update($request->all());
-        return redirect()->route('info-desa.index');
+        return redirect()->route('info-desa.sejarah-desa.index');
     }
 
     public function deleteSejarahDesa($id){
         $data = SejarahDesa::findOrFail($id);
         $data->delete();
-        return redirect()->route('info-desa.index');
+        return redirect()->route('info-desa.sejarah-desa.index');
+    }
+
+    public function indexVisiMisi(){
+        $visiMisi = VisiMisi::all();
+        $increment = 1;
+        return view('admin.informasi-desa.index-visi-misi' , [
+            'visiMisi' => $visiMisi,
+            'increment' => $increment
+        ]);
+    }
+
+    public function storeVisiMisi(Request $request){
+        $request->validate([
+            'judul' => 'required',
+            'konten' => 'required',
+        ], [
+            'judul.required' => 'Judul tidak boleh kosong',
+            'konten' => 'Konten tidak boleh kosonng'
+        ]);
+
+        VisiMisi::create($request->all());
+        return redirect()->route('info-desa.visi-misi.index');
+
+    }
+
+    public function showVisiMisi($id){
+        $visiMisi = VisiMisi::findOrFail($id);
+        return view('admin.informasi-desa.show-visi-misi-desa-modal' , [
+            'visiMisi' => $visiMisi,
+        ]);
+    }
+
+    public function editVisiMisi($id){
+        $visiMisi = visiMisi::findOrFail($id);
+        return view('admin.informasi-desa.edit-visi-misi-desa-modal', [
+            'visiMisi' => $visiMisi,
+        ]);
+    }
+
+    public function updateVisiMisi(Request $request , $id){
+        $visiMisi = visiMisi::findOrFail($id);
+        $request->validate([
+            'judul' => 'required',
+            'konten' => 'required',
+        ], [
+            'judul.required' => 'Judul tidak boleh kosong',
+            'konten' => 'Konten tidak boleh kosonng'
+        ]);
+        $visiMisi->update($request->all());
+        return redirect()->route('info-desa.visi-misi.index');
+    }
+
+    public function deleteVisiMisi($id){
+        $visiMisi = VisiMisi::findOrFail($id);
+        $visiMisi->delete();
+        return redirect()->route('info-desa.visi-misi.index');
     }
 }

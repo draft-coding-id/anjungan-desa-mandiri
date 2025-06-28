@@ -45,9 +45,11 @@
         3px -3px 0 white,
         -3px -3px 0 white;
     }
+
     .sejarah-desa-content {
       line-height: 30px;
     }
+
     .page-content {
       flex: 1;
       display: flex;
@@ -735,6 +737,9 @@
   </div>
   <div class="page-content">
     @yield('content')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    @stack('scripts')
+
   </div>
   @yield('form-container')
   @yield('back-button')

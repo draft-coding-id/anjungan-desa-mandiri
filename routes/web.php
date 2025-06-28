@@ -1,18 +1,20 @@
 <?php
 
 use App\Models\Lapak;
+use App\Models\VisiMisi;
+use App\Models\SejarahDesa;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InformasiDesa;
 use App\Http\Controllers\LapakController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SuratController;
+use App\Http\Controllers\KabarPembangunan;
 use App\Http\Controllers\admin\LayananSurat;
+use App\Http\Controllers\StatistikController;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\WargaController;
-use App\Http\Controllers\InformasiDesa;
-use App\Http\Controllers\KabarPembangunan;
 use App\Http\Controllers\PreviewSuratController;
 use App\Models\KabarPembangunan as ModelsKabarPembangunan;
-use App\Models\SejarahDesa;
 
 // Route Mockup Baru
 Route::view('/', 'onboarding');
@@ -61,9 +63,20 @@ Route::get('/tentang-desa-rawapanjang', function () {
         'sejarahDesa' => $sejarahDesa,
     ]);
 })->name('sejarah-desa');
-Route::view('/visi-misi', 'warga.profil_desa.visi_misi')->name('visi-misi');
+Route::get('/visi-misi', function () {
+    $visiMisi = VisiMisi::all();
+    return view('warga.profil_desa.visi_misi', [
+        'visiMisi' => $visiMisi,
+    ]);
+})->name('visi-misi');
+// Routes untuk statistik desa
+Route::prefix('statistik')->group(function () {
+    Route::get('/{kategori}', [StatistikController::class, 'getStatistik'])
+        ->where('kategori', 'jenis_kelamin|rentang_usia|kategori_usia|agama|pekerjaan');
 
-Route::view('/statistik-desa', 'warga.profil_desa.statistik-desa')->name('statistik-desa');
+    Route::get('/ringkasan/umum', [StatistikController::class, 'getRingkasanStats']);
+});
+Route::get('/statistik-desa', [StatistikController::class, 'index'])->name('statistik.index');
 Route::get('/kabar-pembanguan', function () {
     $pembangunans = ModelsKabarPembangunan::all();
     return view('warga.profil_desa.kabar_pembangunan', [
@@ -116,13 +129,18 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/tambah-akun', [AdminController::class, 'tambahAkun'])->name('tambah-akun');
     Route::get('/show-akun/{id}', [AdminController::class, 'showAkun'])->name('show-akun');
     Route::post('/update-akun', [AdminController::class, 'updateAkun'])->name('update-akun');
-    Route::get('/info-desa', [InformasiDesa::class, 'index'])->name('info-desa.index');
+    Route::get('/info-desa', [InformasiDesa::class, 'index'])->name('info-desa.sejarah-desa.index');
     Route::post('/info-desa/store', [InformasiDesa::class, 'storeSejarahDesa'])->name('info-desa.sejarah-desa.store');
     Route::get('/info-desa/detail/{id}', [InformasiDesa::class, 'showSejarahDesa'])->name('info-desa.sejarah-desa.show');
     Route::get('/info-desa/edit/{id}', [InformasiDesa::class, 'editSejarahDesa'])->name('info-desa.sejarah-desa.edit');
     Route::put('/info-desa/update/{id}', [InformasiDesa::class, 'updateSejarahDesa'])->name('info-desa.sejarah-desa.update');
     Route::delete('/info-desa/delete/{id}', [InformasiDesa::class, 'deleteSejarahDesa'])->name('info-desa.sejarah-desa.delete');
-    Route::get('/info-desa/visi-misi')->name('info-desa.visi-misi');
+    Route::get('/info-desa/visi-misi', [InformasiDesa::class, 'indexVisiMisi'])->name('info-desa.visi-misi.index');
+    Route::get('/info-desa/visi-misi/{id}', [InformasiDesa::class, 'showVisiMisi'])->name('info-desa.visi-misi.show');
+    Route::post('/info-desa/visi-misi/store', [InformasiDesa::class, 'storeVisiMisi'])->name('info-desa.visi-misi.store');
+    Route::get('/info-desa/visi-misi/edit/{id}', [InformasiDesa::class, 'editVisiMisi'])->name('info-desa.visi-misi.edit');
+    Route::put('/info-desa/visi-misi/update/{id}', [InformasiDesa::class, 'updateVisiMisi'])->name('info-desa.visi-misi.update');
+    Route::delete('/info-desa/visi-misi/delete/{id}', [InformasiDesa::class, 'deleteVisiMisi'])->name('info-desa.visi-misi.delete');
     Route::get('/data-warga', [WargaController::class, 'index'])->name('data-warga');
     Route::get('/show-warga/{id}', [WargaController::class, 'showWarga'])->name('show-warga');
     Route::post('/tambah-warga', [WargaController::class, 'tambahWarga'])->name('tambah-warga');
