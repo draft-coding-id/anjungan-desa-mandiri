@@ -36,9 +36,6 @@ class StatistikController extends Controller
                 case 'pekerjaan':
                     return $this->getPekerjaanStats();
 
-                case 'kecamatan':
-                    return $this->getKecamatanStats();
-
                 default:
                     return response()->json(['error' => 'Kategori tidak valid'], 400);
             }
@@ -55,7 +52,7 @@ class StatistikController extends Controller
             ->get()
             ->map(function ($item) {
                 return [
-                    'label' => $item->jenis_kelamin === 'L' ? 'Laki-laki' : 'Perempuan',
+                    'label' => $item->jenis_kelamin ,
                     'count' => $item->count
                 ];
             });
@@ -226,24 +223,6 @@ class StatistikController extends Controller
 
         return response()->json($stats);
     }
-
-    private function getKecamatanStats()
-    {
-        $stats = DB::table('warga')
-            ->select('kecamatan', DB::raw('COUNT(*) as count'))
-            ->groupBy('kecamatan')
-            ->orderBy('count', 'desc')
-            ->get()
-            ->map(function ($item) {
-                return [
-                    'label' => ucfirst($item->kecamatan),
-                    'count' => $item->count
-                ];
-            });
-
-        return response()->json($stats);
-    }
-
     // Method untuk mendapatkan ringkasan statistik umum
     public function getRingkasanStats()
     {

@@ -11,6 +11,6 @@
     <a href='{{route('pembangunan-desa.index')}}' class="nav-link {{ request()->routeIs('pembangunan-desa.*') ? 'active' : '' }}">Pembangunan Desa</a>
     <!-- <a href='{{route('pengumuman')}}' class="nav-link {{ request()->routeIs('pengumuman') ? 'active' : '' }}">Pengumuman</a> -->
     <!-- <a href='{{route('artikel-desa')}}' class="nav-link {{ request()->routeIs('artikel-desa') ? 'active' : '' }}">Artikel Desa</a> -->
-    <a href='{{route('agenda')}}' class="nav-link {{ request()->routeIs('agenda') ? 'active' : '' }}">Agenda Desa</a>
+    <!-- <a href='{{route('agenda')}}' class="nav-link {{ request()->routeIs('agenda') ? 'active' : '' }}">Agenda Desa</a> -->
     <a href="{{route('logout-admin')}}" class="nav-link">Logout</a>
 </div>

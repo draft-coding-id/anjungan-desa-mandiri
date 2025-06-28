@@ -67,11 +67,11 @@
                     <select name="akses" class="form-control" required>
                         <optgroup label="Admin">
                             @for($dataAdmin = 1; $dataAdmin <= 10; $dataAdmin++)
-                                <option value="{{ $dataAdmin }}">Admin {{ $dataAdmin }}</option>
+                                <option value="Admin {{ $dataAdmin }}">Admin {{ $dataAdmin }}</option>
                                 @endfor
                         </optgroup>
                         <optgroup label="Kades">
-                            <option value="kades">Kades</option>
+                            <option value="Kades">Kades</option>
                         </optgroup>
                         <optgroup label="RW">
                             @for($dataRw = 1; $dataRw <= 10; $dataRw++)
@@ -155,15 +155,15 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="otorisasi">Akses</label>
-                    <select name="akses" class="form-control" required>
+                    <label for="akses_edit">Akses</label>
+                    <select id="akses_edit" name="akses_edit" class="form-control" required>
                         <optgroup label="Admin">
                             @for($dataAdmin = 1; $dataAdmin <= 10; $dataAdmin++)
-                                <option value="{{ $dataAdmin }}">Admin {{ $dataAdmin }}</option>
+                                <option value="Admin {{ $dataAdmin }}">Admin {{ $dataAdmin }}</option>
                                 @endfor
                         </optgroup>
                         <optgroup label="Kades">
-                            <option value="kades">Kades</option>
+                            <option value="Kades">Kades</option>
                         </optgroup>
                         <optgroup label="RW">
                             @for($dataRw = 1; $dataRw <= 10; $dataRw++)
@@ -372,6 +372,7 @@
     });
 
     function openEditModal(user) {
+        console.log(user);
         document.getElementById('editModal').classList.add('show');
         document.body.style.overflow = 'hidden';
 

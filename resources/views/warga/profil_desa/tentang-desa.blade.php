@@ -11,10 +11,10 @@
         <ul>
             @forelse($sejarahDesa->pemimpin_desa as $item)
             <li>
-                <strong>{{ $item['nama'] }}</strong><br>
+                <strong>{{ $item['nama'] }}</strong> | Masa Jabatan :  
                 <small class="text-muted">
-                    {{ \Carbon\Carbon::parse($item['mulai_jabat'])->translatedFormat('d F Y') }} -
-                    {{ \Carbon\Carbon::parse($item['akhir_jabat'])->translatedFormat('d F Y') }}
+                    {{ \Carbon\Carbon::parse($item['mulai_jabat'])->translatedFormat('Y') }} -
+                    {{ \Carbon\Carbon::parse($item['akhir_jabat'])->translatedFormat('Y') }}
                 </small>
             </li>
             @empty

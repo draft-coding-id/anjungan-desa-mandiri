@@ -13,7 +13,6 @@
                 <option value="rentang_usia">Rentang Usia</option>
                 <option value="agama">Agama</option>
                 <option value="pekerjaan">Pekerjaan</option>
-                <option value="kecamatan">Kecamatan</option>
             </select>
         </div>
     </div>
@@ -174,7 +173,6 @@
                     'kategori_usia': 'Distribusi Kategori Usia',
                     'agama': 'Distribusi Agama',
                     'pekerjaan': 'Distribusi Pekerjaan',
-                    'kecamatan': 'Distribusi Kecamatan'
                 };
 
                 createChart(data, labels[kategori]);

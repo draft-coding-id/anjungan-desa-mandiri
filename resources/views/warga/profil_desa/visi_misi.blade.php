@@ -5,7 +5,7 @@
 <div class="container" style="height: 100%">
     <h1>Visi & Misi Desa Rawapanjang</h1>
     @forelse($visiMisi as $data)
-        @if($data->judul == 'Visi' || $data->judul == 'visi')
+        @if($data->judul == 'VISI')
         <h3>{{$data->judul}}</h3>
         <p>
             {{ $data->konten[0] }}

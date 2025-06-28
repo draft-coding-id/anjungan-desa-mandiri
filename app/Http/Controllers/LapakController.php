@@ -26,10 +26,12 @@ class LapakController extends Controller
     {
         $wargas = Warga::all(); // Untuk dropdown pilih warga
     }
+    public function show(string $id)
+    {
+        $lapak = Lapak::with('warga')->findOrFail($id);
+        return view('admin.lapak.show', ['lapak' => $lapak]);
+    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -74,7 +76,12 @@ class LapakController extends Controller
 
         return redirect()->route('lapaks.index')->with('success', 'Lapak berhasil ditambahkan!');
     }
-
+    public function edit(string $id)
+    {
+        $lapak = Lapak::findOrFail($id);
+        $wargas = Warga::where('id', '!=', $lapak->warga_id)->get();
+        return view('admin.lapak.edit-modal', ['wargas' => $wargas, 'lapak' => $lapak]);
+    }
     public function update(Request $request, string $id)
     {
         $lapak = Lapak::findOrFail($id);
@@ -127,5 +134,12 @@ class LapakController extends Controller
         $lapak->update($data);
 
         return redirect()->route('lapaks.index')->with('success', 'Lapak berhasil diupdate!');
+    }
+
+    public function destroy(string $id)
+    {
+        $lapak = Lapak::findOrFail($id);
+        $lapak->delete();
+        return redirect()->route('lapaks.index');
     }
 }

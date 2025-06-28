@@ -6,7 +6,7 @@
   <div class="modal-content">
     <div class="modal-header">
       <div class="modal-title">Detail Sejarah Desa</div>
-      <a href="{{ route('info-desa.index') }}" class="close">&times;</a>
+      <a href="{{ route('info-desa.sejarah-desa.index') }}" class="close">&times;</a>
     </div>
     <div class="modal-body">
       <div class="surat-info">
@@ -36,7 +36,7 @@
     </div>
     <div class="modal-footer">
       <div class="button-container">
-        <a href="{{ route('info-desa.index') }}" class="btn btn-secondary">Tutup</a>
+        <a href="{{ route('info-desa.sejarah-desa.index') }}" class="btn btn-secondary">Tutup</a>
       </div>
     </div>
   </div>

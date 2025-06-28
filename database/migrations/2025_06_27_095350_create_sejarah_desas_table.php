@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sejarah_desa', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            $table->string('content');
+            $table->text('content');
             $table->json('pemimpin_desa');
             $table->timestamps();
         });
