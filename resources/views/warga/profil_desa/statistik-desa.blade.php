@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="main-title">Statistik Desa Rawapanjang</div>
-
+    @if($countWarga !== 0)
     <div class="section">
         <div class="section-title">📊 Pilih Kategori Statistik</div>
         <div class="list-container">
@@ -31,6 +31,11 @@
             <!-- Detail akan dimuat di sini -->
         </div>
     </div>
+    @else 
+    <div class="section">
+        <h2>Belum ada informasi statistik</h2>
+    </div>
+    @endif
 </div>
 @endsection
 

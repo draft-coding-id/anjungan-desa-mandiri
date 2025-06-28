@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Warga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -10,7 +11,10 @@ class StatistikController extends Controller
 {
     public function index()
     {
-        return view('warga.profil_desa.statistik-desa');
+        $countWarga = Warga::all()->count();
+        return view('warga.profil_desa.statistik-desa' , [
+            'countWarga' => $countWarga
+        ]);
     }
 
     public function getStatistik($kategori)
