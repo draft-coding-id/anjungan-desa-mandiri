@@ -145,7 +145,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/show-warga/{id}', [WargaController::class, 'showWarga'])->name('show-warga');
     Route::post('/tambah-warga', [WargaController::class, 'tambahWarga'])->name('tambah-warga');
     Route::post('/update-warga', [WargaController::class, 'updateWarga'])->name('update-warga');
-    Route::view('/statistik', 'admin.statistik')->name('statistik');
+    // Route::view('/statistik', 'admin.statistik')->name('statistik');
     Route::view('/pengumuman', 'admin.pengumuman')->name('pengumuman');
     Route::view('/artikel-desa', 'admin.artikel-desa')->name('artikel-desa');
     Route::view('/agenda', 'admin.agenda')->name('agenda');
