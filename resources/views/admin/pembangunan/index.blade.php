@@ -177,7 +177,7 @@
       </tr>
       @empty
       <tr>
-        <td colspan="11" style="text-align: center">Belum ada data pembangunan</td>
+        <td colspan="9" style="text-align: center">Belum ada data pembangunan</td>
       </tr>
       @endforelse
     </tbody>
