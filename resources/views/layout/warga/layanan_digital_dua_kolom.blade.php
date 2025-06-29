@@ -22,7 +22,7 @@
     main {
       min-height: 100vh;
       width: 100vw;
-      background-image: url('{{asset('assets/BackgroundMockupAnjungan.png')}}');
+      background-image: url('{{asset(' assets/BackgroundMockupAnjungan.png')}}');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -475,7 +475,7 @@
       <div class="right-col">
         <div class="header-btn">
           <a href="/histori-progres-surat">Histori & Progres Surat</a>
-          <a href="#">Ganti PIN</a>
+          <a target="_blank" href="http://wa.me/+6287788840513">Ganti PIN</a>
         </div>
 
         <div class="content-wrapper">

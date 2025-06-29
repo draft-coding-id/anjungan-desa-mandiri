@@ -19,7 +19,7 @@
             height: 100vh;
             width: 100vw;
             font-family: sans-serif;
-            background-image: url('{{asset('assets/BackgroundMockupAnjungan.png')}}');
+            background-image: url('{{asset(' assets/BackgroundMockupAnjungan.png')}}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -154,7 +154,7 @@
                         @if(session('error'))
                         <p style="color: red;">{{session('error')}}</p>
                         @endif
-                        <span>Belum punya akun? <a target="_blank" href="http://wa.me/+62895392167815" class="hubungi-admin">Hubungi admin</a></span>
+                        <span>Belum punya akun? <a target="_blank" href="http://wa.me/+6287788840513" class="hubungi-admin">Hubungi admin</a></span>
                         <div style="display: flex; justify-content: center; align-items: center;">
                             <button type="submit" class="button">Cek</button>
                         </div>
