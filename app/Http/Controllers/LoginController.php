@@ -17,8 +17,9 @@ use Illuminate\Support\Facades\Session;
 class LoginController extends Controller
 {
 
-    public function showLoginPage(){
-        if(Auth::user()){
+    public function showLoginPage()
+    {
+        if (Auth::user()) {
             return redirect()->route('admin-beranda');
         }
         return view('admin.login');
@@ -27,7 +28,7 @@ class LoginController extends Controller
     // Admin Login
     public function cekAdminLogin(Request $request)
     {
-        
+
         $request->validate([
             'username' => 'required',
             'password' => 'required',
@@ -156,6 +157,55 @@ class LoginController extends Controller
         } catch (\Exception $e) {
             session()->flash('error', 'PIN salah');
             return redirect()->route('login-warga');
+        }
+    }
+
+    public function gantiPin()
+    {
+        return view('warga.layanan-mandiri.login.ganti_pin');
+    }
+
+    public function updatePin(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'pin_lama' => 'required|digits:6',
+            'pin' => 'required|digits:6',
+            'pin_confirmation' => 'required|same:pin',
+        ], [
+            'pin_lama.required' => 'PIN lama harus diisi',
+            'pin_lama.digits' => 'PIN lama harus 6 digit angka',
+            'pin.required' => 'PIN baru harus diisi',
+            'pin.digits' => 'PIN baru harus 6 digit angka',
+            'pin_confirmation.required' => 'Konfirmasi PIN harus diisi',
+            'pin_confirmation.same' => 'Konfirmasi PIN tidak sama dengan PIN baru',
+        ]);
+
+        try {
+            // Ambil data warga yang sedang login
+            $warga = auth()->guard('warga')->user();
+
+            // Verifikasi PIN lama
+            if (!Hash::check($request->pin_lama, $warga->pin)) {
+                return back()->with('error', 'PIN lama tidak sesuai');
+            }
+
+            // Pastikan PIN baru berbeda dengan PIN lama
+            if ($request->pin_lama === $request->pin) {
+                return back()->with('error', 'PIN baru harus berbeda dengan PIN lama');
+            }
+
+            // Update PIN baru
+            Warga::where('id', $warga->id)->update([
+                'pin' => Hash::make($request->pin)
+            ]);
+
+            // Redirect dengan pesan sukses
+            return back()->with('success', 'PIN berhasil diubah');
+        } catch (\Exception $e) {
+            // Log error untuk debugging
+
+            return back()->with('error', 'Terjadi kesalahan saat mengubah PIN. Silakan coba lagi.');
         }
     }
 

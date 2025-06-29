@@ -66,9 +66,11 @@ body {
     background: linear-gradient(to right, #ff8a00 50%, #f7e700);
     padding: 30px 20px 10px;
 }
-
+.sidebar-header img {
+    margin-bottom : 14px;
+}
 .sidebar-header p {
-    line-height: 1.5;
+    line-height: 1.8;
 }
 
 .sidebar-nav {

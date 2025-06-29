@@ -2,7 +2,7 @@
 @section('title', 'Layanan Catatan Sipil')
 
 @section('header-button')
-<h1 class="coffe">Layanan Catatan Sipil</h1>
+<h1 class="coffee">Layanan Catatan Sipil</h1>
 @endsection
 
 @section('surat-button')

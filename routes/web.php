@@ -87,6 +87,8 @@ Route::get('/kabar-pembanguan', function () {
 // Masuk Menu Layanan Mandiri
 Route::middleware(['isAdmin'])->group(function () {
     Route::get('/dashboard', [LoginController::class, 'showDashboard'])->name('dashboard');
+    Route::get('/ganti-pin' , [LoginController::class , 'gantiPin'])->name('ganti-pin');
+    Route::post('/ganti-pin/', [LoginController::class , 'updatePin'])->name('ganti-pin.update');
     Route::view('/layanan-umum', 'warga.layanan-mandiri.layanan_umum')->name('layanan-umum');
     Route::view('/layanan-kependudukan', 'warga.layanan-mandiri.layanan_kependudukan')->name('layanan-kependudukan');
     ROute::view('/layanan-pernikahan', 'warga.layanan-mandiri.layanan_pernikahan')->name('layanan-pernikahan');
