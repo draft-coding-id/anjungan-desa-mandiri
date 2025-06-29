@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('{{ asset(' assets/Background Mockup Anjungan.png') }}');
+            background-image: url('{{ asset('assets/Background Mockup Anjungan.png') }}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
