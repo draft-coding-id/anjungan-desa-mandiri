@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('{{ asset(' assets/BackgroundMockupAnjungan.png') }}');
+            background-image: url('{{ asset('assets/BackgroundMockupAnjungan.png') }}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -111,8 +111,9 @@
                 <input type="text" name="nik" value="{{ $warga->nik }}" readonly>
             </div>
             <div class="form-group">
-                <label>File :</label>
-                <input type="file" name="file" required>
+                <label>Upload Kartu Keluarga : </label>
+                <input type="file" name="file" accept=".pdf" required>
+                <label>file pdf</label>
             </div>
             <div class="form-group">
                 <label>Nama Lengkap :</label>

@@ -22,7 +22,7 @@
     main {
       min-height: 100vh;
       width: 100vw;
-      background-image: url('{{asset(' assets/BackgroundMockupAnjungan.png')}}');
+      background-image: url('{{asset('assets/BackgroundMockupAnjungan.png')}}');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
