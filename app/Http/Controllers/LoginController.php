@@ -46,7 +46,7 @@ class LoginController extends Controller
     public function logoutAdmin()
     {
         Auth::logout();
-        return redirect()->route('admin');
+        return redirect()->route('logout-admin');
     }
 
     // Menampilkan form NIK (Langkah 1)
