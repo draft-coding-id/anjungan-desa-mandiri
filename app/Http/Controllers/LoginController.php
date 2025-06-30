@@ -84,7 +84,7 @@ class LoginController extends Controller
 
             foreach ($lines as $line) {
                 // ubah awalan nomor nik sesuai daerah
-                if (strpos($line, '3206') !== false) {
+                if (strpos($line, '12') !== false) {
                     $getNik = $line;
                     break;
                 }
