@@ -475,7 +475,7 @@
       <div class="right-col">
         <div class="header-btn">
           <a href="/histori-progres-surat">Histori & Progres Surat</a>
-          <a target="_blank" href="http://wa.me/+6287788840513">Ganti PIN</a>
+          <a href="{{route('ganti-pin')}}">Ganti PIN</a>
         </div>
 
         <div class="content-wrapper">
