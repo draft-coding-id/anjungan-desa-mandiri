@@ -111,7 +111,7 @@
                 <input type="text" name="nik" value="{{ $warga->nik }}" readonly>
             </div>
             <div class="form-group">
-                <label>Upload Kartu Keluarga : </label>
+                <label>Upload Kartu Keluarga :</label>
                 <input type="file" name="file" accept=".pdf" required>
                 <label>file pdf</label>
             </div>
