@@ -46,7 +46,7 @@ class LoginController extends Controller
     public function logoutAdmin()
     {
         Auth::logout();
-        return redirect()->route('admin');
+        return redirect()->route('logout-admin');
     }
 
     // Menampilkan form NIK (Langkah 1)
@@ -84,7 +84,7 @@ class LoginController extends Controller
 
             foreach ($lines as $line) {
                 // ubah awalan nomor nik sesuai daerah
-                if (strpos($line, '1') !== false) {
+                if (strpos($line, '12') !== false) {
                     $getNik = $line;
                     break;
                 }
