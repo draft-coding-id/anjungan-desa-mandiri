@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('tambah_data_warga', function (Blueprint $table) {
             $table->id();
+            $table->string('no_kk', 16); 
+            $table->string('no_hp'); 
+            $table->ask('status_kawin'); // tipe data belum ditentukan
+            $table->ask('pendidikan'); // tipe data belum ditentukan
+            $table->boolean('kewarganegaraan');
+            $table->ask('golongan_darah'); // tipe data belum ditentukan
             $table->timestamps();
         });
     }

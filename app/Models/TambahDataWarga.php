@@ -9,21 +9,16 @@ class TambahDataWarga extends Model
 {
     use HasFactory;
 
-    /**
-     * Nama tabel yang terhubung dengan model ini.
-     *
-     * @var string
-     */
-    protected $table = 'tambah_data_warga'; // Tambahkan baris ini
+    protected $table = 'tambah_data_warga';
 
-    /**
-     * Kolom yang boleh diisi secara massal.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'kk',
+        'no_kk',
+        'no_hp',
+        'status_kawin',
+        'pendidikan',
         'kewarganegaraan',
-        // ... isi dengan nama kolom lain yang diperlukan
+        'golongan_darah',
+
+        // ... tambah lagi dengan nama kolom lainnya kalo diperlukan
     ];
 }
