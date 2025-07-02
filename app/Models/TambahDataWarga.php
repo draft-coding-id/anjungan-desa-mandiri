@@ -18,7 +18,7 @@ class TambahDataWarga extends Model
         'pendidikan',
         'kewarganegaraan',
         'golongan_darah',
-
+        'warga_id'
         // ... tambah lagi dengan nama kolom lainnya kalo diperlukan
     ];
 }
