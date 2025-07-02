@@ -17,21 +17,19 @@ class WargaSeeder extends Seeder
     {
         Warga::create(
             [
-                'nik' => '1234567890123456',
+                'nik' => '3171042106860001',
                 'pin' => Hash::make('123456'), // Enkripsi PIN untuk keamanan
-                'nama_lengkap' => 'John Doe',
+                'nama_lengkap' => 'Andi Wid Bwo',
                 'tempat_lahir' => 'Jakarta',
-                'tanggal_lahir' => '1990-01-01',
+                'tanggal_lahir' => '1986-06-21',
                 'kecamatan' => 'Bojonggede',
                 'desa' => 'Rawapanjang',
-                'alamat' => 'Jl. Kebun Raya No. 1',
+                'alamat' => 'Jl. Merdeka No. 10',
                 'rt' => '1',
                 'rw' => '2',
                 'jenis_kelamin' => "Laki-laki",
-                'pekerjaan' => 'PNS',
-                'usia' => 30,
+                'pekerjaan' => 'Pegawai Swasta',
                 'agama' => 'Islam',
-
             ],
         );
         $faker = Faker::create('id_ID');
