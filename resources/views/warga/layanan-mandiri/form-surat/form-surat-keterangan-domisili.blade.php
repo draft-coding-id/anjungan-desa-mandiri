@@ -38,16 +38,16 @@
             text-align: center;
             margin-bottom: 30px;
             font-size: 18px;
-            color: #555;
+            /* color: #555; */
         }
 
         .form-group {
-            margin: 20px;
+            margin: 30px;
         }
 
         .form-group label {
             display: inline-block;
-            width: 200px;
+            width: 90%;
             font-weight: bold;
             margin-bottom: 10px
         }
@@ -97,7 +97,7 @@
     <div class="form-container">
         <h1>Surat Keterangan Domisili</h1>
         <h3>Silahkan isi data yang diperlukan</h3>
-
+        <br>
         <form action="{{ route('submitForm') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
@@ -107,13 +107,17 @@
                 <input type="hidden" name="jenis_surat" value="SKD">
             </div>
             <div class="form-group">
-                <label>NIK / No. KTP :</label>
+                <label>Nomor Induk Kependudukan (NIK) / Nomor KTP :</label>
                 <input type="text" name="nik" value="{{ $warga->nik }}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Nomor Kartu Keluarga :</label>
+                <input type="text" name="no_kk" required>
             </div>
             <div class="form-group">
                 <label>Upload Kartu Keluarga :</label>
                 <input type="file" name="file" accept=".pdf" required>
-                <label>(mohon upload file dengan format pdf)</label>
+                <label style="margin-top: 10px; margin-left: 30px; color: red;">(mohon upload file dengan format pdf)</label>
             </div>
             <div class="form-group">
                 <label>Nama Lengkap :</label>
@@ -133,11 +137,11 @@
                 <input type="text" name="alamat" value="{{ $warga->alamat }}" readonly>
             </div>
             <div class="form-group">
-                <label>RT :</label>
+                <label style="width: 200px;">RT :</label>
                 <input type="number" name="rt" value="{{ $warga->rt }}" readonly>
             </div>
             <div class="form-group">
-                <label>RW :</label>
+                <label style="width: 200px;">RW :</label>
                 <input type="number" name="rw" value="{{ $warga->rw }}" readonly>
             </div>
             <hr>
@@ -146,7 +150,7 @@
                 <input type="text" name="keperluan" required>
             </div>
             <div class="form-group">
-                <label>No HP :</label>
+                <label>Nomor HP :</label>
                 <input type="text" name="no_hp" required>
             </div>
 
