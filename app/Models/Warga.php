@@ -23,7 +23,7 @@ class Warga extends Authenticatable
         'agama',
         'tempat_lahir',
         'tanggal_lahir',
-        'usia',
+        'usia', // kolom ini mau dihapus
         'pekerjaan',
         'jenis_kelamin',
         'kecamatan',

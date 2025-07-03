@@ -12,23 +12,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('warga', function (Blueprint $table) {
-            $table->id(); // Primary key
-            $table->string('nik', 16)->unique(); // NIK sebagai unique identifier
+            $table->id();
+            $table->string('nik', 16)->unique();
             $table->string('pin'); // PIN untuk login
-            $table->string('nama_lengkap'); // Nama lengkap warga
-            $table->string('jenis_kelamin'); // Jenis kelamin
-            $table->string('pekerjaan'); // Pekerjaan
-            $table->integer('usia'); // Usia
-            $table->string('agama'); // Agama
-            $table->string('tempat_lahir'); // Tempat lahir
-            $table->date('tanggal_lahir'); // Tanggal lahir
-            $table->string('kecamatan'); // Kecamatan
-            $table->string('desa'); // Desa
-            $table->text('alamat'); // Alamat lengkap
-            $table->string('rt', 3); // RT
-            $table->string('rw', 3); // RW
-            $table->rememberToken(); // Remember token
-            $table->timestamps(); // Created at dan updated at
+            $table->string('nama_lengkap');
+            $table->string('jenis_kelamin');
+            $table->string('pekerjaan'); 
+            $table->integer('usia'); // kolom ini mau dihapus
+            $table->string('agama'); 
+            $table->string('tempat_lahir'); 
+            $table->date('tanggal_lahir'); 
+            $table->string('kecamatan'); 
+            $table->string('desa');
+            $table->text('alamat');
+            $table->string('rt', 3);
+            $table->string('rw', 3);
+            $table->rememberToken();
+            $table->timestamps(); 
         });
     }
 
