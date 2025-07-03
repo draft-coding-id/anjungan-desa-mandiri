@@ -27,10 +27,11 @@ class SuratController extends Controller
     {
         // Data warga diambil dari session
         $warga = auth()->guard('warga')->user();
+        $tambah_data_warga = auth()->guard('warga')->user();
         if (!$warga) {
             return redirect()->route('login');
         }
-        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-domisili', ['warga' => $warga]);
+        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-domisili', ['warga' => $warga, 'tambah_data_warga' => $tambah_data_warga,]);
     }
 
     // Tampilkan formulir Surat Keterangan Pengantar

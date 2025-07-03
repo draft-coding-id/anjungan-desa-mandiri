@@ -21,4 +21,7 @@ class TambahDataWarga extends Model
         'warga_id'
         // ... tambah lagi dengan nama kolom lainnya kalo diperlukan
     ];
+
+    protected $guard = 'tambah_data_warga';
+
 }

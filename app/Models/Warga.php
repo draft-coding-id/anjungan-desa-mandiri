@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\TambahDataWarga;
 use App\Models\Lapak;
 class Warga extends Authenticatable
 {
@@ -67,5 +68,9 @@ class Warga extends Authenticatable
 
     public function lapak(){
         return $this->hasMany(Lapak::class);
+    }
+    public function dataTambahan()
+    {
+        return $this->hasOne(TambahDataWarga::class);
     }
 }

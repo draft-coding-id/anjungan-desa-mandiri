@@ -101,7 +101,7 @@
         <form action="{{ route('submitForm') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <input type="number" hidden name="warga_id" value="{{$warga->id}}">
+                <input type="number" hidden name="warga_id" value="{{ $warga->id }}">
             </div>
             <div class="form-group">
                 <input type="hidden" name="jenis_surat" value="SKD">
@@ -112,7 +112,7 @@
             </div>
             <div class="form-group">
                 <label>Nomor Kartu Keluarga :</label>
-                <input type="text" name="no_kk" required>
+                <input type="text" name="no_kk" value="{{ $warga->no_kk }}" required>
             </div>
             <div class="form-group">
                 <label>Upload Kartu Keluarga :</label>
