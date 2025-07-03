@@ -21,6 +21,10 @@ class WargaSeeder extends Seeder
                 'pin' => Hash::make('123456'), // Enkripsi PIN untuk keamanan
                 'nama_lengkap' => 'Andi Wid Bwo',
                 'tempat_lahir' => 'Jakarta',
+                'status_kawin' => 'Kawin',
+                'pendidikan' => 'S1',
+                'kewarganegaraan' => 'WNI',
+                'golongan_darah' => 'O',
                 'tanggal_lahir' => '1986-06-21',
                 'kecamatan' => 'Bojonggede',
                 'desa' => 'Rawapanjang',
@@ -39,6 +43,10 @@ class WargaSeeder extends Seeder
                     'nik' => $faker->nik,
                     'pin' => bcrypt($faker->randomNumber(6, true)), // Enkripsi PIN untuk keamanan
                     'nama_lengkap' => $faker->name,
+                    'status_kawin' => $faker->randomElement(['Belum Kawin', 'Kawin', 'Cerai Hidup', 'Cerai Mati']),
+                    'pendidikan' => $faker->randomElement(['SD', 'SMP', 'SMA', 'D3', 'S1', 'S2', 'S3']),
+                    'kewarganegaraan' => $faker->randomElement(['WNI', 'WNA']),
+                    'golongan_darah' => $faker->randomElement(['A', 'B', 'AB', 'O']),
                     'tempat_lahir' => $faker->city,
                     'tanggal_lahir' => $faker->date,
                     'kecamatan' => $faker->city,
@@ -48,7 +56,6 @@ class WargaSeeder extends Seeder
                     'rw' => $faker->numberBetween(1,20),
                     'jenis_kelamin' => $faker->randomElement(['Laki-laki', 'Perempuan']),
                     'pekerjaan' => $faker->jobTitle,
-                    'usia' => $faker->numberBetween(20, 60),
                     'agama' => $faker->randomElement(['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu']),
                 ]
             );

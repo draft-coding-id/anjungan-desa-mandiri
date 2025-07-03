@@ -19,11 +19,16 @@ class Warga extends Authenticatable
     protected $fillable = [
         'nik',
         'pin',
+        'no_kk', 
+        'file_kk',
+        'status_kawin',
+        'pendidikan',
+        'kewarganegaraan',
+        'golongan_darah',
         'nama_lengkap',
         'agama',
         'tempat_lahir',
         'tanggal_lahir',
-        'usia', // kolom ini mau dihapus
         'pekerjaan',
         'jenis_kelamin',
         'kecamatan',

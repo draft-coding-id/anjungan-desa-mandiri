@@ -112,12 +112,18 @@
         .button:hover {
             background-color: #e68a00;
         }
-
-        .hubungi-admin {
+        span {
+            font-size: 14px;
+            color: #333;
+            text-align: center;
+            display: block;
+            margin-top: 10px;
+        }
+        .registrasi {
             color: blue;
         }
 
-        .hubungi-admin:hover {
+        .registrasi:hover {
             color: rgb(86, 86, 248);
         }
     </style>
@@ -154,7 +160,7 @@
                         @if(session('error'))
                         <p style="color: red;">{{session('error')}}</p>
                         @endif
-                        <span>Belum punya akun? <a target="_blank" href="http://wa.me/+6287788840513" class="hubungi-admin">Hubungi admin</a></span>
+                        <span>Belum punya akun? <a href="{{route('registrasi-warga')}}" class="registrasi">Registrasi Sekarang</a></span>
                         <div style="display: flex; justify-content: center; align-items: center;">
                             <button type="submit" class="button">Cek</button>
                         </div>

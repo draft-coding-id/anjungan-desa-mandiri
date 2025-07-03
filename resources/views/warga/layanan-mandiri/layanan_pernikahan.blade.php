@@ -16,6 +16,6 @@
 
 @section('nav-button')
 <a href="{{route('layanan-kependudukan')}}" class="button">Kembali</a>
-<a href="{{route('logout-warga')}}" class="button">Halaman Utama</a>
+<a href="{{route('halaman_utama')}}" class="button">Halaman Utama</a>
 <a href="{{route('layanan-catatan-sipil')}}" class="button">Selanjutnya</a>
 @endsection

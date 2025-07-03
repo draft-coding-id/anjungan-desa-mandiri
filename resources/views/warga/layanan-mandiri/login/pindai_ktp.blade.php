@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Anjungan Desa Mandiri</title>
-    <link rel="icon" href="https://rawapanjang-desa.id/desa/logo/1679693855_logo-pemkab-bogor.png" type="image/png">
+    <link rel="icon" href="assets/logo.png" type="image/png">
+
     <style>
         body {
             margin: 0;
@@ -18,7 +19,7 @@
             height: 100vh;
             width: 100vw;
             font-family: sans-serif;
-            background-image: url('{{asset('assets/BackgroundMockupAnjungan.png') }}');
+            background-image: url('{{asset("assets/BackgroundMockupAnjungan.png") }}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -120,7 +121,7 @@
             overflow: hidden;
 
             /* default image */
-            background: url('{{asset('assets/id-card_2094626.png')}}');
+            background: url('{{asset("assets/id-card_2094626.png")}}');
 
             background-position: center;
             background-repeat: no-repeat;
@@ -205,10 +206,10 @@
 <script>
     const fileUpload = document.querySelector('.file-uploader');
     // console.log(fileUpload);
-    fileUpload.addEventListener('change' , function (){
+    fileUpload.addEventListener('change', function() {
         const file = this.files[0];
         const reader = new FileReader();
-        reader.onload = function(){
+        reader.onload = function() {
             const ktpPicture = document.querySelector('.ktp-picture');
             ktpPicture.style.background = `url(${reader.result})`;
             ktpPicture.style.opacity = 1;
@@ -222,7 +223,6 @@
         reader.readAsDataURL(file);
 
     })
-
 </script>
 
 </html>

@@ -17,7 +17,7 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
-            background-image: url('{{asset('assets/BackgroundMockupAnjungan.png')}}');
+            background-image: url('{{asset("assets/BackgroundMockupAnjungan.png")}}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -129,7 +129,7 @@
             flex: 1;
             align-items: center;
             justify-content: center;
-            padding: clamp(15px, 3vw, 30px);
+            /* padding: clamp(10px, 3vw, 10px); */
             min-height: 60vh;
         }
 

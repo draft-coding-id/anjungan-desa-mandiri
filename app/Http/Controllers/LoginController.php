@@ -49,6 +49,72 @@ class LoginController extends Controller
         return redirect()->route('logout-admin');
     }
 
+
+    // Fungsi untuk registrasi warga
+    public function registerWarga(Request $request)
+    {
+        try {
+            $request->validate([
+                'nik' => 'required|unique:warga,nik|digits:16',
+                'pin' => 'required|min:6',
+                'no_kk' => 'nullable|string|max:16',
+                'file_kk' => 'nullable|file|mimes:pdf|max:2048',
+                'status_kawin' => 'required|in:Belum Kawin,Kawin,Cerai Hidup,Cerai Mati',
+                'pendidikan' => 'required|string|max:100',
+                'kewarganegaraan' => 'required|in:WNI,WNA',
+                'golongan_darah' => 'required|in:A,B,AB,O',
+                'nama_lengkap' => 'required|string|max:255',
+                'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
+                'pekerjaan' => 'required|string|max:100',
+                'agama' => 'required|in:Islam,Kristen,Katolik,Hindu,Buddha,Konghucu',
+                'tempat_lahir' => 'required|string|max:100',
+                'tanggal_lahir' => 'required|date|before:today',
+                'kecamatan' => 'required|string|max:100',
+                'desa' => 'required|string|max:100',
+                'alamat' => 'required|string|max:500',
+                'rt' => 'required|string|max:3',
+                'rw' => 'required|string|max:3',
+            ], [
+                'nik.required' => 'NIK wajib diisi',
+                'nik.unique' => 'NIK sudah terdaftar',
+                'nik.digits' => 'NIK harus 16 digit',
+                'pin.required' => 'PIN wajib diisi',
+                'pin.min' => 'PIN minimal 6 karakter',
+                'nama_lengkap.required' => 'Nama lengkap wajib diisi',
+                'jenis_kelamin.required' => 'Jenis kelamin wajib dipilih',
+                'golongan_darah.required' => 'Golongan darah wajib dipilih',
+                'tempat_lahir.required' => 'Tempat lahir wajib diisi',
+                'tanggal_lahir.required' => 'Tanggal lahir wajib diisi',
+                'tanggal_lahir.before' => 'Tanggal lahir harus sebelum hari ini',
+                'agama.required' => 'Agama wajib dipilih',
+                'status_kawin.required' => 'Status perkawinan wajib dipilih',
+                'pendidikan.required' => 'Pendidikan wajib dipilih',
+                'pekerjaan.required' => 'Pekerjaan wajib diisi',
+                'kewarganegaraan.required' => 'Kewarganegaraan wajib dipilih',
+                'kecamatan.required' => 'Kecamatan wajib diisi',
+                'desa.required' => 'Desa/Kelurahan wajib diisi',
+                'alamat.required' => 'Alamat lengkap wajib diisi',
+                'rt.required' => 'RT wajib diisi',
+                'rw.required' => 'RW wajib diisi',
+                'file_kk.mimes' => 'File KK harus berformat PDF',
+                'file_kk.max' => 'Ukuran file KK maksimal 2MB',
+            ]);
+
+            // Prepare data untuk disimpan
+            $data = $request->except(['file_kk']);
+
+            // Hash PIN untuk keamanan
+            $data['pin'] = Hash::make($request->pin);
+            Warga::create($data);
+
+            return redirect()->back()->with('success', 'Registrasi berhasil! Silakan login menggunakan NIK dan PIN yang telah dibuat.');
+        }catch (\Exception $e) {
+            return redirect()->back()
+                ->withErrors(['error' => 'Terjadi kesalahan sistem: ' . $e->getMessage()])
+                ->withInput();
+        }
+    }
+
     // Menampilkan form NIK (Langkah 1)
     public function showNikForm()
     {
@@ -60,7 +126,6 @@ class LoginController extends Controller
 
     public function scanKtp(Request $request)
     {
-        // dd($request->all());
         try {
             $request->validate([
                 'ktp' => 'required|image|mimes:jpeg,png,jpg|max:1024',
@@ -84,7 +149,7 @@ class LoginController extends Controller
 
             foreach ($lines as $line) {
                 // ubah awalan nomor nik sesuai daerah
-                if (strpos($line, '12') !== false) {
+                if (strpos($line, '317') !== false) {
                     $getNik = $line;
                     break;
                 }

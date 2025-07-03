@@ -30,6 +30,8 @@ use App\Models\KabarPembangunan as ModelsKabarPembangunan;
     Route::view('/login/pindai-ktp', 'warga.layanan-mandiri.login.pindai_ktp')->name('pindai-ktp');
     Route::post('/login/check-nik', [LoginController::class, 'checkNik'])->name('login.checkNik');
     Route::post('/login/scan-ktp', [LoginController::class, 'scanKtp'])->name('login.scanKtp');
+    Route::view('/registrasi-warga' , 'warga.layanan-mandiri.login.registrasi_warga')->name('registrasi-warga');
+    Route::post('/registrasi-warga/store', [LoginController::class, 'registerWarga'])->name('warga.register');
     Route::get('/login/pin/{nik}', [LoginController::class, 'showPinForm'])->name('login.showPinForm');
     Route::post('/login/check-pin', [LoginController::class, 'checkPin'])->name('login.checkPin');
     Route::view('/agenda-rawapanjang', 'warga.profil_desa.agenda');
