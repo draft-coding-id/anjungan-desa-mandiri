@@ -16,10 +16,10 @@ return new class extends Migration
             $table->foreignId('warga_id')->constrained('warga')->onDelete('cascade')->onUpdate('cascade');
             $table->string('no_kk', 16); 
             $table->string('no_hp'); 
-            $table->ask('status_kawin'); // tipe data belum ditentukan
-            $table->ask('pendidikan'); // tipe data belum ditentukan
+            $table->enum('status_kawin', ['Belum Kawin', 'Kawin', 'Cerai Hidup', 'Cerai Mati']);
+            $table->string('pendidikan');
             $table->boolean('kewarganegaraan');
-            $table->ask('golongan_darah'); // tipe data belum ditentukan
+            $table->enum('golongan_darah', ['A', 'B', 'AB', 'O']);
             $table->timestamps();
         });
     }
