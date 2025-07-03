@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('no_hp'); 
             $table->enum('status_kawin', ['Belum Kawin', 'Kawin', 'Cerai Hidup', 'Cerai Mati']);
             $table->string('pendidikan');
-            $table->boolean('kewarganegaraan');
+            $table->enum('kewarganegaraan', ['WNI', 'WNA']);
             $table->enum('golongan_darah', ['A', 'B', 'AB', 'O']);
             $table->timestamps();
         });
