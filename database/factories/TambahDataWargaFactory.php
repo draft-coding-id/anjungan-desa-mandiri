@@ -20,8 +20,8 @@ class TambahDataWargaFactory extends Factory
         return [
             // Ambil ID acak dari tabel warga yang sudah ada
             'warga_id' => Warga::inRandomOrder()->first()->id,
-            'no_kk' => $this->faker->unique()->numerify('################'), // 16 digit angka
-            'no_hp' => $this->faker->phoneNumber(),
+            'no_kk' => $this->faker->numerify('35##############'), // 16 digit angka
+            'no_hp' => $this->faker->numerify('08##########'),
             'status_kawin' => $this->faker->randomElement(['Belum Kawin', 'Kawin', 'Cerai Hidup', 'Cerai Mati']),
             'pendidikan' => $this->faker->randomElement(['SD', 'SMP', 'SMA', 'D3', 'S1', 'S2']),
             'kewarganegaraan' => 'WNI',

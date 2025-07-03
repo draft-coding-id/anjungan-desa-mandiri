@@ -13,8 +13,6 @@ class TambahDataWargaSeeder extends Seeder
      */
     public function run(): void
     {
-        // Perintah ini akan membuat 20 data baru
-        // menggunakan resep dari TambahDataWargaFactory
-        TambahDataWarga::factory(20)->create();
+        TambahDataWarga::factory(35)->create();
     }
 }
