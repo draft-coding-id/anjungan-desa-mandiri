@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Warga;
+use App\Models\TambahDataWarga;
 use App\Models\ProsesSurat;
 use App\Models\skDomisili;
 use App\Models\Surat;
@@ -27,11 +28,11 @@ class SuratController extends Controller
     {
         // Data warga diambil dari session
         $warga = auth()->guard('warga')->user();
-        $tambah_data_warga = auth()->guard('warga')->user();
+        // $tambah_data_warga = TambahDataWarga::with('warga')->find($id);
         if (!$warga) {
             return redirect()->route('login');
         }
-        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-domisili', ['warga' => $warga, 'tambah_data_warga' => $tambah_data_warga,]);
+        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-domisili', ['warga' => $warga]);
     }
 
     // Tampilkan formulir Surat Keterangan Pengantar

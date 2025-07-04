@@ -66,7 +66,8 @@ class Warga extends Authenticatable
         return $this->pin;
     }
 
-    public function lapak(){
+    public function lapak()
+    {
         return $this->hasMany(Lapak::class);
     }
     public function dataTambahan()

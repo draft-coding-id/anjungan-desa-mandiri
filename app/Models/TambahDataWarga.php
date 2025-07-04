@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Warga;
 
 class TambahDataWarga extends Model
 {
     use HasFactory;
-
-    protected $table = 'tambah_data_warga';
-
+    protected $table = "tambah_data_warga";
     protected $fillable = [
         'no_kk',
         'no_hp',
@@ -19,9 +18,10 @@ class TambahDataWarga extends Model
         'kewarganegaraan',
         'golongan_darah',
         'warga_id'
-        // ... tambah lagi dengan nama kolom lainnya kalo diperlukan
     ];
 
-    protected $guard = 'tambah_data_warga';
-
+    public function warga()
+    {
+        return $this->belongsTo(Warga::class, 'warga_id');
+    }
 }

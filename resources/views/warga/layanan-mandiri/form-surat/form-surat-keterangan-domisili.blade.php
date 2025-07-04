@@ -112,7 +112,7 @@
             </div>
             <div class="form-group">
                 <label>Nomor Kartu Keluarga :</label>
-                <input type="text" name="no_kk" value="{{ $warga->no_kk }}" required>
+                <input type="text" name="no_kk" value="{{ $warga->dataTambahan->no_kk ?? 'data belum terbaca' }}" required>
             </div>
             <div class="form-group">
                 <label>Upload Kartu Keluarga :</label>
@@ -151,7 +151,8 @@
             </div>
             <div class="form-group">
                 <label>Nomor HP :</label>
-                <input type="text" name="no_hp" required>
+                <!-- <input type="text" name="no_hp" required> -->
+                <input type="text" name="no_hp" value="{{ $warga->dataTambahan->no_hp ?? 'data belum terbaca' }}" required>
             </div>
 
             <div class="button-container">

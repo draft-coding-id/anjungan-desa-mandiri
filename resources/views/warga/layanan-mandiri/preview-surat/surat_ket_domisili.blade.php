@@ -75,6 +75,11 @@
                     <td>{{ $proses_surat['nik'] }}</td>
                 </tr>
                 <tr>
+                    <td>No KK</td>
+                    <td style="padding-left: 10px;">: </td>
+                    <td>{{ $proses_surat['no_kk'] }}</td>
+                </tr>
+                <tr>
                     <td>No HP</td>
                     <td style="padding-left: 10px;">: </td>
                     <td>{{ $proses_surat['no_hp'] }}</td>
