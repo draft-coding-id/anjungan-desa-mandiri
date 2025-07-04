@@ -19,4 +19,5 @@
 # /.fleet
 # /.idea
 /.vscode
+/public/storage
 README-copy.md

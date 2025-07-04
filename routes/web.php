@@ -93,9 +93,8 @@ Route::middleware(['isAdmin'])->group(function () {
     Route::post('/ganti-pin/', [LoginController::class , 'updatePin'])->name('ganti-pin.update');
     Route::view('/layanan-umum', 'warga.layanan-mandiri.layanan_umum')->name('layanan-umum');
     Route::view('/layanan-kependudukan', 'warga.layanan-mandiri.layanan_kependudukan')->name('layanan-kependudukan');
-    ROute::view('/layanan-pernikahan', 'warga.layanan-mandiri.layanan_pernikahan')->name('layanan-pernikahan');
-    ROute::view('/layanan-catatan-sipil', 'warga.layanan-mandiri.layanan_catatan_sipil')->name('layanan-catatan-sipil');
-    Route::view('/layanan-usaha', 'warga.layanan-mandiri.layanan_usaha')->name('layanan-usaha');
+    Route::view('/layanan-pernikahan', 'warga.layanan-mandiri.layanan_pernikahan')->name('layanan-pernikahan');
+    Route::view('/layanan-catatan-sipil', 'warga.layanan-mandiri.layanan_catatan_sipil')->name('layanan-catatan-sipil');
 });
 
 Route::controller(SuratController::class)->group(function () {

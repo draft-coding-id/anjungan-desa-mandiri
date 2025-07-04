@@ -1,106 +1,151 @@
-@extends('layout.warga.form_surat')
-@section('title' , 'Surat Keterangan Wali Hakim')
+@extends('layout.warga.form-surat')
+
+@section('title', 'Surat Keterangan Wali Hakim')
+
 @section('header-content')
 Surat Keterangan Wali Hakim
 @endsection
-@section('form-content')
-<form action="{{route('submitForm')}}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <table>
-        <input type="hidden" name="jenis_surat" value="SKWH">
-        <input type="hidden" name="warga_id" value="{{$warga->id}}">
-        <input type="hidden" name="keperluan" value="Menikah">
-        <tr>
-            <td width="300px">Nama Lengkap</td>
-            <td width="50px">:</td>
-            <td width="700px"><input type="text" name="nama_lengkap" autocomplete="name"
-                    value="{{$warga->nama_lengkap}}" readonly />
-            </td>
-        </tr>
-        <tr>
-            <td width="300px">NIK</td>
-            <td width="50px">:</td>
-            <td width="700px"><input type="text" name="nik" autocomplete="nik" value="{{$warga->nik}}" readonly /></td>
-        </tr>
-        <tr>
-            <td width="300px">File</td>
-            <td width="50px">:</td>
-            <td width="700px"><input type="file" name="file" required />
-            </td>
-        </tr>
-        <tr>
-            <td width="300px">Tempat Lahir / Tanggal lahir</td>
-            <td width="50px">:</td>
-            <td width="700px"><input type="text" name="tempat_lahir" autocomplete="tempat-lahir" readonly
-                    value="{{$warga->tempat_lahir}}" /></td>
-        </tr>
-        <tr>
-            <td width="300px">Tanggal Lahir</td>
-            <td width="50px">:</td>
-            <td width="300px"><input type="date" name="tanggal_lahir" autocomplete="tanggal-lahir" readonly
-                    value="{{$warga->tanggal_lahir}}" /></td>
-        </tr>
-        <tr>
-            <td width="300px">Jenis Kelamin</td>
-            <td width="50px">:</td>
-            <td width="700px"><input type="text" name="jenis_kelamin" autocomplete="jenis-kelamin" readonly
-                    value="{{$warga->jenis_kelamin}}" /></td>
-        </tr>
-        <tr>
-            <td width="300px">Kecamatan</td>
-            <td width="50px">:</td>
-            <td width="700px"><input type="text" rows="5" name="kecamatan" autocomplete="Kecamatan" readonly value="{{$warga->kecamatan}}"></input></td>
-        </tr>
-        <tr>
-            <td width="300px">Desa</td>
-            <td width="50px">:</td>
-            <td width="700px"><input type="text" rows="5" name="desa" autocomplete="desa" readonly value="{{$warga->desa}}"></input></td>
-        </tr>
-        <tr>
-            <td width="300px">RT</td>
-            <td width="50px">:</td>
-            <td width="700px"><input type="text" rows="5" name="rt" readonly value="{{$warga->rt}}"></input></td>
-        </tr>
-        <tr>
-            <td width="300px">RW</td>
-            <td width="50px">:</td>
-            <td width="700px"><input type="text" rows="5" name="rw" readonly value="{{$warga->rw}}"></input></td>
-        </tr>
-        <tr>
-            <td width="300px">Alamat</td>
-            <td width="50px">:</td>
-            <td width="700px"><textarea rows="5" name="alamat" autocomplete="alamat" readonly>{{$warga->alamat}}</textarea></td>
-        </tr>
-        <tr>
-            <td width="300px">Agama</td>
-            <td width="50px">:</td>
-            <td width="700px"><input type="text" name="agama" autocomplete="agama" value="{{$warga->agama}}" readonly /></td>
-        </tr>
-        <tr>
-            <td width="300px">Pekerjaan</td>
-            <td width="50px">:</td>
-            <td width="700px"><input type="text" name="pekerjaan" autocomplete="pekerjaan" readonly
-                    value="{{$warga->pekerjaan}}" /></td>
-        </tr>
-        <tr>
-            <td width="300px">Kewarganegaraan</td>
-            <td width="50px">:</td>
-            <td width="700px"><input type="text" name="kewarganegaraan" autocomplete="kewarganegaraan" value="WNI" readonly />
-            </td>
-        </tr>
 
+@section('form-content')
+<x-info-box :message="'Silakan lengkapi data berikut untuk pembuatan Surat Keterangan Wali Hakim.'" />
+
+<form action="{{ route('submitForm') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <input type="hidden" name="jenis_surat" value="SKWH">
+    <input type="hidden" name="warga_id" value="{{ $warga->id }}">
+    <input type="hidden" name="keperluan" value="Menikah">
+
+    <!-- Section: Data Pribadi -->
+    <div class="section-title">Data Pribadi</div>
+    <table class="form-table">
         <tr>
-            <td width="300px">No HP</td>
-            <td width="50px">:</td>
-            <td width="700px"><input type="text" name="no_hp" required /></td>
+            <td>Nama Lengkap <span class="required">*</span></td>
+            <td>:</td>
+            <td>
+                <input type="text" name="nama_lengkap" value="{{ $warga->nama_lengkap }}" readonly />
+            </td>
         </tr>
         <tr>
-            <td colspan="3" style="text-align: center;">
-                <button class="submit-button" onclick="window.history.back();">Kembali</button>
-                <button type="submit" class="submit-button">Lanjutkan</button>
+            <td>NIK <span class="required">*</span></td>
+            <td>:</td>
+            <td>
+                <input type="text" name="nik" value="{{ $warga->nik }}" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>Tempat Lahir <span class="required">*</span></td>
+            <td>:</td>
+            <td>
+                <input type="text" name="tempat_lahir" value="{{ $warga->tempat_lahir }}" readonly>
+            </td>
+        </tr>
+        <tr>
+            <td>Tanggal Lahir <span class="required">*</span></td>
+            <td>:</td>
+            <td>
+                <input type="date" name="tanggal_lahir" value="{{ $warga->tanggal_lahir }}" readonly>
+            </td>
+        </tr>
+        <tr>
+            <td>Jenis Kelamin <span class="required">*</span></td>
+            <td>:</td>
+            <td>
+                <input type="text" name="jenis_kelamin" value="{{ $warga->jenis_kelamin }}" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>Agama <span class="required">*</span></td>
+            <td>:</td>
+            <td>
+                <input type="text" name="agama" value="{{ $warga->agama }}" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>Pekerjaan <span class="required">*</span></td>
+            <td>:</td>
+            <td>
+                <input type="text" name="pekerjaan" value="{{ $warga->pekerjaan }}" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>Kewarganegaraan <span class="required">*</span></td>
+            <td>:</td>
+            <td>
+                <input type="text" name="kewarganegaraan" value="{{ $warga->kewarganegaraan }}" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>Kecamatan <span class="required">*</span></td>
+            <td>:</td>
+            <td>
+                <input type="text" name="kecamatan" value="{{ $warga->kecamatan }}" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>Desa <span class="required">*</span></td>
+            <td>:</td>
+            <td>
+                <input type="text" name="desa" value="{{ $warga->desa }}" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>RT <span class="required">*</span></td>
+            <td>:</td>
+            <td>
+                <input type="text" name="rt" value="{{ $warga->rt }}" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>RW <span class="required">*</span></td>
+            <td>:</td>
+            <td>
+                <input type="text" name="rw" value="{{ $warga->rw }}" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>Alamat <span class="required">*</span></td>
+            <td>:</td>
+            <td>
+                <textarea name="alamat" readonly>{{ $warga->alamat }}</textarea>
             </td>
         </tr>
     </table>
 
+    <!-- Section: Dokumen Pendukung -->
+    <div class="section-title">Dokumen Pendukung</div>
+    <table class="form-table">
+        <tr>
+            <td>Upload File <span class="required">*</span></td>
+            <td>:</td>
+            <td>
+                <input type="file" name="file" />
+                @if($warga->file_kk)
+                <div>
+                    <strong>File Kartu Keluarga yang sudah di-upload:</strong>
+                    <a href="{{ asset('storage/' . $warga->file_kk) }}" target="_blank">{{ basename($warga->file_kk) }}</a>
+                </div>
+                @endif
+
+                <div class="file-info">Mohon upload file dengan format PDF (maksimal 2MB)</div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Section: Informasi Tambahan -->
+    <div class="section-title">Informasi Tambahan</div>
+    <table class="form-table">
+        <tr>
+            <td>No HP <span class="required">*</span></td>
+            <td>:</td>
+            <td>
+                <input type="text" name="no_hp" required />
+            </td>
+        </tr>
+    </table>
+
+    <div class="button-container">
+        <a href="{{ route('layanan-kependudukan') }}" class="button secondary">Kembali</a>
+        <button type="submit" class="button">Lanjutkan</button>
+    </div>
 </form>
 @endsection

@@ -93,10 +93,9 @@ class SuratController extends Controller
                     'rt' => 'required|numeric',
                     'rw' => 'required|numeric',
                     'keperluan' => 'required|string',
-                    'file' => 'required|file|mimes:pdf,doc,docx|max:4096',
+                    'file' => 'file|mimes:pdf,doc,docx|max:2048',
                 ], [
-                    'file.required' => 'File harus diunggah',
-                    'file.max' => 'Ukuran file maksimal 4MB',
+                    'file.max' => 'Ukuran file maksimal 2MB',
                     'jenis_surat.required' => 'Surat harus diisi',
                     'nik.required' => 'NIK harus diisi',
                     'nik.min' => 'NIK harus 16 digit',
@@ -131,7 +130,7 @@ class SuratController extends Controller
                 $validatedData = $request->validate([
                     'jenis_surat' => 'required|string',
                     'warga_id' => 'required',
-                    'KK' => 'required|string|min:16|max:16',
+                    'no_kk' => 'required|string|min:16|max:16',
                     'nik' => 'required|string|min:16|max:16',
                     'no_hp' => 'required|string',
                     'nama_lengkap' => 'required|string|min:3|max:255',
@@ -140,7 +139,6 @@ class SuratController extends Controller
                     'jenis_kelamin' => 'required|string',
                     'warga_negara' => 'required|string',
                     'agama' => 'required|string',
-                    'usia' => 'required|string',
                     'pekerjaan' => 'required|string',
                     'gol_darah' => 'required|string',
                     'kecamatan' => 'required|string',
@@ -149,10 +147,9 @@ class SuratController extends Controller
                     'rt' => 'required|numeric',
                     'rw' => 'required|numeric',
                     'keperluan' => 'required|string',
-                    'file' => 'required|file|mimes:pdf,jpg,jpeg,png|max:4096',
+                    'file' => 'file|mimes:pdf|max:2048',
                 ], [
-                    'file.required' => 'File harus diunggah',
-                    'file.max' => 'Ukuran file maksimal 4MB',
+                    'file.max' => 'Ukuran file maksimal 2MB',
                     'jenis_surat.required' => 'Surat harus diisi',
                     'KK.required' => 'Nomor KK harus diisi',
                     'KK.min' => 'Nomor KK harus 16 digit',
@@ -214,10 +211,9 @@ class SuratController extends Controller
                     'rt' => 'required|string',
                     'rw' => 'required|string',
                     'alamat' => 'required|string',
-                    'file' => 'required|file|mimes:pdf,jpg,jpeg,png|max:4096',
+                    'file' => 'file|mimes:pdf|max:2048',
                 ], [
-                    'file.required' => 'File harus diunggah',
-                    'file.max' => 'Ukuran file maksimal 4MB',
+                    'file.max' => 'Ukuran file maksimal 2MB',
                     'jenis_surat.required' => 'Surat harus diisi',
                     'nik.required' => 'NIK harus diisi',
                     'nik.min' => 'NIK harus 16 digit',
@@ -297,7 +293,7 @@ class SuratController extends Controller
                     'keterangan_keperluan' => 'nullable|string',
 
                     // Dokumen Pendukung
-                    'file' => 'nullable|file|max:4096',
+                    'file' => 'nullable|file|max:2048',
                 ], [
                     // Error messages untuk data pemohon
                     'nama_lengkap.required' => 'Nama pemohon harus diisi',
@@ -353,7 +349,7 @@ class SuratController extends Controller
 
                     // Error messages untuk file
                     'file.file' => 'File KK harus berupa file',
-                    'file.max' => 'Ukuran file KK maksimal 4MB',
+                    'file.max' => 'Ukuran file KK maksimal 2MB',
                 ]);
 
                 // Handle file upload jika ada
@@ -421,13 +417,19 @@ class SuratController extends Controller
         $noHp = $data['no_hp'] ?? null;
 
         // Simpan ke database
+        $warga = Warga::find($data['warga_id']);
+        $warga->update([
+            'file_kk' => $data['file_path'] ?? null,
+            'no_kk' => $data['no_kk'] ?? null,
+        ]);
         Surat::create([
             'warga_id' => $data['warga_id'],
             'jenis_surat' => $data['jenis_surat'],
             'isi_surat' => $data,
-            'file' => $data['file_path'],
+            'file' => $data['file_path'] ?? $warga->file_kk,
             'no_hp' => $noHp
         ]);
+   
 
         session()->forget('surat');
         return view('warga.layanan-mandiri.berhasil');
