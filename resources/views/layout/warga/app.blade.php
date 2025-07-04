@@ -950,12 +950,13 @@
             max-width: clamp(100px, 20vw, 140px);
             text-align: center;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
+            /* box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3); */
+            box-shadow: 0 0 12px 1px white;
         }
 
         .button:hover {
             background: linear-gradient(135deg, #ff8c00, #ff9900);
-            transform: translateY(-2px);
+            transform: translateY(-10px);
             box-shadow: 0 6px 20px rgba(255, 153, 0, 0.4);
         }
 

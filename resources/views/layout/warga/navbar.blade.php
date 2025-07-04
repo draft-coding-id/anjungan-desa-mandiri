@@ -9,7 +9,7 @@
         <a target="_blank" href='https://desa-rawapanjang.id/' class="button">Website Desa <br>Rawapanjang</a>
         
         <a href='/logout-warga' class="button" 
-            style="background: red; box-shadow: inset 0 0 12px 0 white, 0 0 20px 0 white;">
+            style="background: red; box-shadow: inset 0 0 12px 0 white, 0 0 25px 3px white;">
             Logout</a>
     </div>
     <div class="credit">

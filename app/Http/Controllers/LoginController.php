@@ -212,7 +212,7 @@ class LoginController extends Controller
     // Halaman Dashboard
     public function showDashboard()
     {
-        return view('warga.layanan-mandiri.layanan_umum');
+        return view('warga.layanan-mandiri.pilih-surat');
     }
 
     public function logout(Request $request)
