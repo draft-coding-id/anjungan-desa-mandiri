@@ -68,7 +68,7 @@
         <p>Kami akan segera menghubungi Anda begitu surat selesai diproses</p>
         <br><br>
         <div class="button-container">
-            <a href="{{route('logout-warga')}}" class="button">Halaman Utama</a>
+            <a href="{{route('halaman_utama')}}" class="button">Halaman Utama</a>
         </div>
     </div>
 </body>

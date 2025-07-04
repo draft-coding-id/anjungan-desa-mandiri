@@ -13,5 +13,5 @@
 
 @section('nav-button')
 <a href="{{route('layanan-pernikahan')}}" class="button">Kembali</a>
-<a href="{{route('logout-warga')}}" class="button">Halaman Utama</a>
+<a href="{{route('halaman_utama')}}" class="button">Halaman Utama</a>
 @endsection

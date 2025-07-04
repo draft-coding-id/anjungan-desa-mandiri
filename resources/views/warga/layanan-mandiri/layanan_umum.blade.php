@@ -12,6 +12,6 @@
 @endsection
 
 @section('nav-button')
-<a href="{{route('logout-warga')}}" class="button">Halaman Utama</a>
+<a href="{{route('halaman_utama')}}" class="button">Halaman Utama</a>
 <a href="{{route('layanan-kependudukan')}}" class="button">Selanjutnya</a>
 @endsection
