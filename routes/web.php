@@ -88,13 +88,13 @@ use App\Models\KabarPembangunan as ModelsKabarPembangunan;
 
 // Masuk Menu Layanan Mandiri
 Route::middleware(['isAdmin'])->group(function () {
-    Route::get('/dashboard', [LoginController::class, 'showDashboard'])->name('dashboard');
     Route::get('/ganti-pin' , [LoginController::class , 'gantiPin'])->name('ganti-pin');
-    Route::post('/ganti-pin/', [LoginController::class , 'updatePin'])->name('ganti-pin.update');
-    Route::view('/layanan-umum', 'warga.layanan-mandiri.layanan_umum')->name('layanan-umum');
-    Route::view('/layanan-kependudukan', 'warga.layanan-mandiri.layanan_kependudukan')->name('layanan-kependudukan');
-    Route::view('/layanan-pernikahan', 'warga.layanan-mandiri.layanan_pernikahan')->name('layanan-pernikahan');
-    Route::view('/layanan-catatan-sipil', 'warga.layanan-mandiri.layanan_catatan_sipil')->name('layanan-catatan-sipil');
+    Route::post('/ganti-pin/update', [LoginController::class , 'updatePin'])->name('ganti-pin.update');
+    Route::get('/layanan-umum', [SuratController::class , 'layananUmum'])->name('layanan-umum');
+    Route::get('/layanan-kependudukan', [SuratController::class , 'layananKependudukan'])->name('layanan-kependudukan');
+    Route::get('/layanan-pernikahan', [SuratController::class , 'layananPernikahan'])->name('layanan-pernikahan');
+    Route::get('/layanan-catatan-sipil', [SuratController::class , 'layananCatatanSipil'])->name('layanan-catatan-sipil');
+    Route::get('/form-surat-{kodeSurat}' , [SuratController::class , 'formSurat'])->name('formSurat');
 });
 
 Route::controller(SuratController::class)->group(function () {
@@ -104,7 +104,7 @@ Route::controller(SuratController::class)->group(function () {
     Route::get('/surat-keterangan-ktp-dalam-proses', 'form_Surat_Keterangan_KTP_Dalam_Proses');
     Route::get('/surat-keterangan-wali-hakim', 'form_surat_keterangan_wali_hakim');
     Route::get('/surat-keterangan-kematian', 'form_surat_keterangan_kematian');
-    Route::post('/submitForm', 'submitForm')->name('submitForm');
+    Route::post('/submitForm/{kodeSurat}', 'submitForm')->name('submitForm');
     Route::get('/konfirmasi', 'konfirmasi');
     // Route::post('/submitSurat', [SuratController::class, 'submitSurat']);
     Route::get('/berhasil', 'berhasil');
@@ -160,7 +160,12 @@ Route::middleware(['auth'])->group(function () {
     // Layanan Surat
     // Route::view('/layanan-surat', 'admin.layanan-surat.dalam-proses');
     Route::get('/layanan-surat', [LayananSurat::class, 'index'])->name('layanan-surat-dalam-proses');
-    Route::view('/kelola-surat', 'admin.layanan-surat.kelola-surat')->name('layanan-surat-kelola-surat');
+    Route::prefix('/kelola-surat')->name('kelola-surat.')->group(function () {
+      Route::get('/' , [LayananSurat::class , 'indexKelolaSurat'])->name('index');  
+      Route::post('/store' , [LayananSurat::class , 'storeKelolaSurat'])->name('store');
+      Route::get('/show/{id}' , [LayananSurat::class , 'showKelolaSurat'])->name('show');
+      Route::delete('delete/{id}' , [LayananSurat::class , 'deleteKelolaSurat'])->name('delete');
+    });
     //
     Route::get('/qr-generate', [LayananSurat::class, 'qrGenerate'])->name('qrGenerate');
 

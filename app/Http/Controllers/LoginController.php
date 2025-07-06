@@ -217,7 +217,7 @@ class LoginController extends Controller
                 'password' => $credentials['pin'],
             ]);
             if ($res) {
-                return redirect()->route('dashboard');
+                return redirect()->route('layanan-umum');
             }
         } catch (\Exception $e) {
             session()->flash('error', 'PIN salah');
@@ -272,12 +272,6 @@ class LoginController extends Controller
 
             return back()->with('error', 'Terjadi kesalahan saat mengubah PIN. Silakan coba lagi.');
         }
-    }
-
-    // Halaman Dashboard
-    public function showDashboard()
-    {
-        return view('warga.layanan-mandiri.layanan_umum');
     }
 
     public function logout(Request $request)

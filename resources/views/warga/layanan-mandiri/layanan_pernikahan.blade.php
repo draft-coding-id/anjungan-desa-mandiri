@@ -6,12 +6,11 @@
 @endsection
 
 @section('surat-button')
-<a href="#" class="button-indigo">Surat <br> Keterangan <br> Menikah</a>
-<a href="#" class="button-indigo">Surat <br> Keterangan Wali</a>
-<a href="/surat-keterangan-wali-hakim" class="button-indigo">Surat <br> Keterangan <br> Wali Hakim</a>
-<a href="#" class="button-indigo">Surat <br> Pengantar <br> Nikah</a>
-<a href="#" class="button-indigo">Surat <br> Permohonan <br> Cerai</a>
-<a href="#" class="button-indigo">Surat <br> Pernyataan <br> Janda/Duda</a>
+@forelse($jenisSurat as $surat)
+<a href="{{ route('formSurat' , $surat->kode) }}" class="button-indigo">{{$surat->nama}}</a>
+@empty
+<a href="#" class="button-indigo disabled">Tidak ada layanan</a>
+@endforelse
 @endsection
 
 @section('nav-button')

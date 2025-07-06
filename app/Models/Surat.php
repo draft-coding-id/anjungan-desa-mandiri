@@ -49,14 +49,7 @@ class Surat extends Model
     public function generateNomorSurat()
     {
         // Tentukan kode jenis surat
-        $kodeJenis = [
-            'SKD' => 'SKD',
-            'SKP' => 'SKP',
-            'SKN' => 'SKN',
-            'SKTM' => 'SKTM',
-            'SKWH' => 'SKWH',
-            'SKK' => 'SKK',
-        ][$this->jenis_surat] ?? 'UNK';
+        $kodeJenis = $this->jenis_surat;
 
         // Ambil bulan & tahun saat ini
         $bulan = date('m');
@@ -74,6 +67,11 @@ class Surat extends Model
     public function warga()
     {
         return $this->belongsTo(Warga::class);
+    }
+
+    public function jenisSurat()
+    {
+        return $this->belongsTo(JenisSurat::class, 'jenis_surat_id');
     }
     public function countdown($row)
     {

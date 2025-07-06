@@ -77,6 +77,8 @@ class DatabaseSeeder extends Seeder
             WargaSeeder::class,
             SejarahDesaSeeder::class,
             VisiMisiSeeder::class,
+            KategoriSuratSeeder::class,
+            FormFieldTemplateSeeder::class,
         ]);
     }
 }

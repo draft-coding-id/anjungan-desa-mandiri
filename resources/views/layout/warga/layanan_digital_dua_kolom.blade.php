@@ -22,7 +22,7 @@
     main {
       min-height: 100vh;
       width: 100vw;
-      background-image: url('{{asset('assets/BackgroundMockupAnjungan.png')}}');
+      background-image: url('{{asset("assets/BackgroundMockupAnjungan.png")}}');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -127,6 +127,7 @@
       background: linear-gradient(135deg, #02BEBE, #17a2b8);
       color: white;
       border-radius: 40px;
+      display: inline-block;
       box-shadow: 0 4px 15px rgba(2, 190, 190, 0.3);
     }
 
@@ -135,6 +136,7 @@
       background: linear-gradient(135deg, #7602BE, #8b5cf6);
       color: white;
       border-radius: 40px;
+      display: inline-block;
       box-shadow: 0 4px 15px rgba(118, 2, 190, 0.3);
     }
 
@@ -143,6 +145,7 @@
       background: linear-gradient(135deg, #B2A91C, #d4b023);
       color: white;
       border-radius: 40px;
+      display: inline-block;
       box-shadow: 0 4px 15px rgba(178, 169, 28, 0.3);
     }
 

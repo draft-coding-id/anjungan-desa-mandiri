@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\JenisSurat;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,10 +15,12 @@ return new class extends Migration
         Schema::create('surat', function (Blueprint $table) {
             $table->id();
             $table->foreignId('warga_id')->constrained('warga');
+            $table->foreignIdFor(JenisSurat::class , 'jenis_surat_id')
+                ->constrained('jenis_surat')
+                ->onDelete('cascade')->onUpdate('cascade')->onUpdate('cascade');
             $table->string('no_surat');
             $table->string('status')->default('Menunggu Verifikasi Admin');
             $table->string('alasan_tolak')->nullable();
-            $table->string('jenis_surat');
             $table->boolean('is_accepted')->default(true);
             $table->boolean('is_approve_admin')->default(false);
             $table->boolean('is_tanda_tangan_kades')->default(false);

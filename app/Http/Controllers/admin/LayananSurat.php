@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
 use App\Jobs\MakePdf;
-use App\Models\skDomisili;
 use App\Models\Surat;
-use Illuminate\Support\Facades\Auth;
+use App\Models\skDomisili;
 use Illuminate\Http\Request;
+use App\Models\KategoriSurat;
+use App\Models\JenisSuratField;
+use App\Models\FormFieldTemplate;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use App\Models\JenisSurat as JenisSuratModel;
 
 class LayananSurat extends Controller
 {
@@ -177,5 +181,93 @@ class LayananSurat extends Controller
             'increment' => 1,
             'search' => $search // untuk menampilkan kembali keyword pencarian
         ]);
+    }
+
+    // Index Kelola Surat 
+    public function indexKelolaSurat(){
+        $jenisSurats = JenisSuratModel::with('kategori')->paginate(10);
+        $kategoris = KategoriSurat::all();
+
+        // Group form field templates by category
+        $formFieldTemplates = FormFieldTemplate::orderBy('category')
+            ->orderBy('name')
+            ->get()
+            ->groupBy('category');
+
+        return view('admin.layanan-surat.kelola-surat.index', compact('jenisSurats', 'kategoris', 'formFieldTemplates'));
+    }
+
+    // Store Jenis Surat 
+    public function storeKelolaSurat(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'kode' => 'required|string|max:50|unique:jenis_surat,kode',
+            'kategori_id' => 'required|exists:kategori_surat,id',
+            'text_content' => 'nullable|array',
+            'text_content.*' => 'string|max:500',
+        ]);
+
+        $jenisSurat = JenisSuratModel::create([
+            'nama' => $request->nama,
+            'kode' => $request->kode,
+            'kategori_id' => $request->kategori_id,
+            'text_content' => $request->text_content ? json_encode($request->text_content) : null,
+        ]);
+
+        // Save form fields
+        if ($request->has('form_fields')) {
+            $order = 1;
+            foreach ($request->form_fields as $fieldTemplateId) {
+                $template = FormFieldTemplate::find($fieldTemplateId);
+                if ($template) {
+                    JenisSuratField::create([
+                        'jenis_surat_id' => $jenisSurat->id,
+                        'form_field_template_id' => $fieldTemplateId,
+                        'order' => $order++,
+                        'is_required' => $template->is_required_default,
+                        'is_readonly' => $template->category === 'Pemohon',
+                    ]);
+                }
+            }
+        }
+
+        // Always add required fields
+        $alwaysActiveFields = FormFieldTemplate::where('is_always_active', true)->get();
+        foreach ($alwaysActiveFields as $field) {
+            // Check if not already added
+            $exists = JenisSuratField::where('jenis_surat_id', $jenisSurat->id)
+                ->where('form_field_template_id', $field->id)
+                ->exists();
+
+            if (!$exists) {
+                JenisSuratField::create([
+                    'jenis_surat_id' => $jenisSurat->id,
+                    'form_field_template_id' => $field->id,
+                    'order' => $order++,
+                    'is_required' => true
+                ]);
+            }
+        }
+
+        return redirect()->route('kelola-surat.index')
+            ->with('success', 'Jenis surat berhasil ditambahkan');
+    }
+
+    public function showKelolaSurat($id)
+    {
+        $jenisSurat = JenisSuratModel::with(['kategori', 'jenisSuratFields.formFieldTemplate'])
+            ->findOrFail($id);
+
+        return view('admin.layanan-surat.kelola-surat.show', [
+            'jenisSurat' => $jenisSurat,
+        ]);
+    }
+
+    public function deleteKelolaSurat($id)
+    {
+        $jenisSurat = JenisSuratModel::findOrFail($id);
+        $jenisSurat->delete();
+        return redirect()->route('kelola-surat.index')->with('success', 'Jenis Surat berhasil dihapus.');
     }
 }
