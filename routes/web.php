@@ -157,7 +157,19 @@ Route::middleware(['auth'])->group(function () {
     // Layanan Surat
     // Route::view('/layanan-surat', 'admin.layanan-surat.dalam-proses');
     Route::get('/layanan-surat', [LayananSurat::class, 'index'])->name('layanan-surat-dalam-proses');
-    Route::view('/kelola-surat', 'admin.layanan-surat.kelola-surat')->name('layanan-surat-kelola-surat');
+    Route::prefix('kelola-surat')->name('kelola-surat.')->group(function () {
+        Route::get('/', [LayananSurat::class, 'indexKelolaSurat'])->name('index');
+
+        Route::post('/store', [LayananSurat::class, 'storeKelolaSurat'])->name('store');
+
+        Route::get('/edit/{id}', [LayananSurat::class, 'editKelolaSurat'])->name('edit');
+
+        Route::put('/update/{id}', [LayananSurat::class, 'updateKelolaSurat'])->name('update');
+
+        Route::delete('/delete/{id}', [LayananSurat::class, 'destroyKelolaSurat'])->name('delete');
+
+        Route::get('/show/{id}', [LayananSurat::class, 'showKelolaSurat'])->name('show');
+    });
     //
     Route::get('/qr-generate', [LayananSurat::class, 'qrGenerate'])->name('qrGenerate');
 
