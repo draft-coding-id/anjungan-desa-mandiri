@@ -254,14 +254,30 @@ class LayananSurat extends Controller
             ->with('success', 'Jenis surat berhasil ditambahkan');
     }
 
+    public function editKelolaSurat($id)
+    {
+        $jenisSurat = JenisSuratModel::with(['kategori', 'jenisSuratFields.formFieldTemplate'])
+            ->findOrFail($id);
+    }
+
     public function showKelolaSurat($id)
     {
         $jenisSurat = JenisSuratModel::with(['kategori', 'jenisSuratFields.formFieldTemplate'])
             ->findOrFail($id);
 
-        return view('admin.layanan-surat.kelola-surat.show', [
+        // Ambil semua field yang berhubungan dengan ttd_
+        $ttdFields = $jenisSurat->jenisSuratFields
+            ->filter(function ($field) {
+                return isset($field->formFieldTemplate) &&
+                    str_starts_with($field->formFieldTemplate->name, 'ttd_');
+            });
+
+        $html = view('admin.layanan-surat.kelola-surat.show', [
             'jenisSurat' => $jenisSurat,
-        ]);
+            'ttdFields' => $ttdFields,
+        ])->render();
+
+        return response()->json(['html'=> $html]);
     }
 
     public function deleteKelolaSurat($id)

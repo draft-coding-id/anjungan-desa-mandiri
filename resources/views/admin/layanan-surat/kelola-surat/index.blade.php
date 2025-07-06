@@ -38,7 +38,8 @@
                     <td>{{ $surat->kategori->nama ?? '-' }}</td>
                     <td>{{ $surat->jenisSuratFields->count() }} field</td>
                     <td>
-                        <a href="{{ route('kelola-surat.show', $surat->id) }}" class="btn btn-primary">Show</a>
+                        <a href="javascript:void(0)" onclick="showSurat({{ $surat->id }})" class="btn btn-primary">Show</a>
+                        <a href="#" onclick="showSurat({{ $surat->id }})" class="btn btn-primary">Edit</a>
                         <a href="#" onclick="openDeleteModal({{ $surat->id }})" class="btn btn-danger">Hapus</a>
                     </td>
                 </tr>
@@ -204,6 +205,38 @@
             </form>
         </div>
     </div>
+
+    <!-- Modal show preview surat -->
+    <div id="modalSurat" style="
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.6);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    ">
+        <div style="
+            background: #fff;
+            padding: 20px;
+            width: 900px;
+            max-height: 90%;
+            overflow: auto;
+            border-radius: 8px;
+            position: relative;
+        ">
+            <button onclick="closeShowModal()" style="
+                position: absolute;
+                top: 10px; right: 10px;
+                background: #c00;
+                color: white;
+                border: none;
+                padding: 5px 10px;
+                cursor: pointer;
+            ">Tutup</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
 </div>
 @endsection
 
@@ -268,5 +301,21 @@
     function removeTextContentRow(button) {
         const row = button.closest('tr');
         row.remove();
+    }
+</script>
+
+<script>
+    function showSurat(id) {
+        fetch('/kelola-surat/show/' + id)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('modalContent').innerHTML = data.html;
+                document.getElementById('modalSurat').style.display = 'flex';
+            });
+    }
+
+    function closeShowModal() {
+        document.getElementById('modalSurat').style.display = 'none';
+        document.getElementById('modalContent').innerHTML = ''; // clear content
     }
 </script>

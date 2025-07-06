@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         // Membuat Admin
         $adminUser = User::factory()->create([
             'name' => 'Admin',
-            'email' => 'admin@gmail.com',
+        'email' => 'admin@gmail.com',
             'username' => 'admin',
             'no_hp' => '012345678901',
             'akses' => 'Admin 1',
