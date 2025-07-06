@@ -237,28 +237,6 @@
     }
     let textContentRowIndex = 0;
 
-    function openModal() {
-        document.getElementById('tambahModal').classList.add('show');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-        document.getElementById('tambahModal').classList.remove('show');
-        document.body.style.overflow = 'auto';
-        document.getElementById('tambahForm').reset();
-        // Clear text content table
-        document.getElementById('textContentTableBody').innerHTML = '';
-        textContentRowIndex = 0;
-    }
-
-    function openDeleteModal(id) {
-        // Add your delete modal logic here
-        if (confirm('Apakah Anda yakin ingin menghapus jenis surat ini?')) {
-            // Handle delete action
-            console.log('Delete item with ID:', id);
-        }
-    }
-
     function addTextContentRow() {
         const tableBody = document.getElementById('textContentTableBody');
         const newRow = document.createElement('tr');
