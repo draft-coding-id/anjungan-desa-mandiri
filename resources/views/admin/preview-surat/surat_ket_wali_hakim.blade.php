@@ -1,145 +1,72 @@
-<!DOCTYPE html>
-<html lang="id">
+@extends('layout.admin.preview_surat')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surat Keterangan Wali Hakim</title>
-    <style>
-        body {
-            background: #ffffff;
-            font-family: 'Times New Roman';
-        }
+@section('title', 'Surat Keterangan Wali Hakim')
 
-        h1 {
-            font-size: 24px;
-            font-weight: normal;
-        }
+@section('surat-title', 'SURAT KETERANGAN WALI HAKIM')
 
-        p {
-            line-height: 1.5;
-        }
+@section('content')
+<div>
+    <p>Yang bertanda tangan di bawah ini Kepala Desa {{ $surat->isi_surat['desa'] ?? 'Rawapanjang' }}, Kecamatan {{ $surat->isi_surat['kecamatan'] ?? 'Bojonggede' }}, Kabupaten Bogor, Provinsi Jawa Barat menerangkan dengan sebenarnya bahwa:</p>
 
-        .header {
-            text-align: center;
-        }
+    <table class="data-table">
+        <tr>
+            <td>1. Nama Lengkap</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['nama_lengkap'] ?? '[Nama Lengkap]' }}</td>
+        </tr>
+        <tr>
+            <td>2. NIK / No KTP</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['nik'] ?? '[NIK]' }}</td>
+        </tr>
+        <tr>
+            <td>3. No HP</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['no_hp'] ?? '[No HP]' }}</td>
+        </tr>
+        <tr>
+            <td>4. Tempat/Tanggal Lahir</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['tempat_lahir'] ?? '[Tempat Lahir]' }}, {{ $surat->isi_surat['tanggal_lahir'] ?? '[Tanggal Lahir]' }}</td>
+        </tr>
+        <tr>
+            <td>5. Tempat Tinggal</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['alamat'] ?? '[Alamat]' }}</td>
+        </tr>
+        <tr>
+            <td>6. Agama</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['agama'] ?? '[Agama]' }}</td>
+        </tr>
+        <tr>
+            <td>7. Jenis Kelamin</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['jenis_kelamin'] ?? '[Jenis Kelamin]' }}</td>
+        </tr>
+        <tr>
+            <td>8. Pekerjaan</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['pekerjaan'] ?? '[Pekerjaan]' }}</td>
+        </tr>
+        <tr>
+            <td>9. Kewarganegaraan</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['kewarganegaraan'] ?? '[Kewarganegaraan]' }}</td>
+        </tr>
+    </table>
 
-        .content {
-            margin-left: 50px;
-            margin-right: 50px;
-            text-align: justify;
-        }
+    <p>Yang namanya tersebut diatas memang benar warga kami yang akan menikah di KUA {{ $surat->isi_surat['kecamatan'] ?? 'Bojonggede' }} Kabupaten Bogor. Berhubung orang tersebut tidak memiliki wali nasab, kami mohon dengan hormat Bapak Kepala KUA {{ $surat->isi_surat['kecamatan'] ?? 'Bojonggede' }} supaya berkenan menjadi wali.</p>
 
-        .footer {
-            text-align: right;
-        }
-    </style>
-</head>
+    <p>Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
+</div>
+@endsection
 
-<body>
-    <div class="header">
-        <table width="100%">
-            <tr>
-                <td>
-                    <img src="{{asset('assets/logo.png')}}" height="116px" width="116px" alt="Logo Desa" />
-
-                </td>
-                <td width="100%">
-                    <h1>PEMERINTAH KABUPATEN BOGOR
-                        <br>KECAMATAN BOJONGGEDE
-                        <br>DESA RAWAPANJANG
-                    </h1>
-                    <p style="margin-top:-10px; margin-bottom:0px;">Jl. Talang Kp Kelapa RT.02 RW.15 No.02 Kode Pos
-                        16920</p>
-                </td>
-            </tr>
-            <tr>
-                <td colspan='7'>
-                    <hr style="border: 2px solid black;">
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="content">
-        <div class="header">
-            <h2>Surat Keterangan Wali Hakim</h2>
-            <p style="margin-top:-10px;">Nomor: {{$surat->no_surat}}</p>
-            <br>
-        </div>
-        <div>
-            <p>Yang bertanda tangan di bawah ini Kepala Desa {{ $surat->isi_surat['desa'] }}, Kecamatan {{ $surat->isi_surat['kecamatan'] }}, Kabupaten Bogor , Provinsi Jawa Barat
-                menerangkan dengan sebenarnya bahwa</p>
-            <table class="content">
-                <tr>
-                    <td>1.</td>
-                    <td>Nama Lengkap</td>
-                    <td style="padding-left: 10px;">: </td>
-                    <td>{{ $surat->isi_surat['nama_lengkap'] }}</td>
-                </tr>
-                <tr>
-                    <td>2.</td>
-                    <td>NIK / No KTP</td>
-                    <td style="padding-left: 10px;">: </td>
-                    <td>{{ $surat->isi_surat['nik']}}</td>
-                </tr>
-                <tr>
-                    <td>3.</td>
-                    <td>No HP</td>
-                    <td style="padding-left: 10px;">: </td>
-                    <td>{{ $surat->isi_surat['no_hp']}}</td>
-                </tr>
-                <tr>
-                    <td>4.</td>
-                    <td>Tempat/Tanggal Lahir</td>
-                    <td style="padding-left: 10px;">: </td>
-                    <td>{{ $surat->isi_surat['tempat_lahir'] }}, {{ $surat->isi_surat['tanggal_lahir'] }}</td>
-                </tr>
-                <tr>
-                    <td>5.</td>
-                    <td>Tempat Tinggal</td>
-                    <td style="padding-left: 10px;">: </td>
-                    <td>{{ $surat->isi_surat['alamat'] }}</td>
-                </tr>
-                <tr>
-                    <td>6.</td>
-                    <td>Agama</td>
-                    <td style="padding-left: 10px;">: </td>
-                    <td>{{ $surat->isi_surat['agama'] }}</td>
-                </tr>
-                <tr>
-                    <td>7.</td>
-                    <td>Jenis Kelamin</td>
-                    <td style="padding-left: 10px;">: </td>
-                    <td>{{ $surat->isi_surat['jenis_kelamin'] }}</td>
-                </tr>
-                <tr>
-                    <td>8.</td>
-                    <td>Pekerjaan</td>
-                    <td style="padding-left: 10px;">: </td>
-                    <td>{{ $surat->isi_surat['pekerjaan'] }}</td>
-                </tr>
-                <tr>
-                    <td>9.</td>
-                    <td>Kewawrganegaraan</td>
-                    <td style="padding-left: 10px;">: </td>
-                    <td>{{ $surat->isi_surat['kewarganegaraan'] }}</td>
-                </tr>
-            </table>
-            <p>Yang namanya tersebut diatas memang benar warga kami yang akan menikah di KUA {{ $surat->isi_surat['kecamatan'] }} Kabupaten
-                Bogor. Berhubung orang tersebut tidak memiliki wali nasab, kami mohon dengan hormat Bapak
-                Kepala KUA {{ $surat->isi_surat['kecamatan'] }} supaya berkenan menjadi wali </p>
-            <p>Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya</p>
-        </div>
-
-        <div class="footer">
-            <br><br>
-            <p>{{ $surat->isi_surat['desa'] }}, </p>
-            <p>Kepala Desa {{ $surat->isi_surat['desa'] }}, Kecamatan {{ $surat->isi_surat['kecamatan'] }}</p>
-            <br><br><br>
-            <p>____________________</p>
-        </div>
-    </div>
-</body>
-
-</html>
+@section('footer')
+<div class="just-signature-right">
+    <p>Rawapanjang, {{ $surat->updated_at->translatedFormat('d F Y') }}</p>
+    <p>Kepala Desa Rawapanjang</p>
+    <br><br><br>
+    <p>____________________</p>
+</div>
+@endsection

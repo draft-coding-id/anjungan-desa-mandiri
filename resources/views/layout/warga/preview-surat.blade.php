@@ -88,6 +88,16 @@
     .footer .signature {
       margin-top: 40px;
     }
+
+    .footer .photo {
+      width: 80px;
+      height: 100px;
+      border: 1px dashed #000;
+      overflow: hidden;
+      display : flex;
+      justify-content: center;
+      align-items: center;
+    }
   </style>
 </head>
 

@@ -80,300 +80,278 @@ class SuratController extends Controller
     public function submitForm(Request $request)
     {
         try {
-            if ($request->jenis_surat == "SKD") {
-                $validatedData = $request->validate([
-                    'jenis_surat' => 'required|string',
-                    'warga_id' => 'required',
-                    'nik' => 'required|string|min:16|max:16',
-                    'no_hp' => 'required|string',
-                    'nama_lengkap' => 'required|string|min:3|max:255',
-                    'tempat_lahir' => 'required|string',
-                    'tanggal_lahir' => 'required|date|before:today',
-                    'alamat' => 'required|string',
-                    'rt' => 'required|numeric',
-                    'rw' => 'required|numeric',
-                    'keperluan' => 'required|string',
-                    'file' => 'file|mimes:pdf,doc,docx|max:2048',
-                ], [
-                    'file.max' => 'Ukuran file maksimal 2MB',
-                    'jenis_surat.required' => 'Surat harus diisi',
-                    'nik.required' => 'NIK harus diisi',
-                    'nik.min' => 'NIK harus 16 digit',
-                    'nik.max' => 'NIK harus 16 digit',
-                    'nama_lengkap.required' => 'Nama Lengkap harus diisi',
-                    'nama_lengkap.min' => 'Nama Lengkap minimal 3 karakter',
-                    'nama_lengkap.max' => 'Nama Lengkap maksimal 255 karakter',
-                    'tempat_lahir.required' => 'Tempat Lahir harus diisi',
-                    'tanggal_lahir.required' => 'Tanggal Lahir harus diisi',
-                    'tanggal_lahir.before' => 'Tanggal Lahir tidak valid',
-                    'alamat.required' => 'Alamat harus diisi',
-                    'rt.required' => 'RT harus diisi',
-                    'rw.required' => 'RW harus diisi',
-                    'keperluan.required' => 'Keperluan harus diisi',
-                ]);
+            $jenisSurat = $request->jenis_surat;
 
-                if ($request->hasFile('file')) {
-                    $file = $request->file('file');
-
-                    // Simpan nama dan path ke validatedData
-                    $validatedData['file_tmp_name'] = $file->getClientOriginalName();
-                    $validatedData['file_tmp_path'] = $file->storeAs(
-                        'temp',
-                        time() . '_' . $file->getClientOriginalName(),
-                        'public'
-                    );
-
-                    // Hapus objek file agar tidak ikut disimpan di session
-                    unset($validatedData['file']);
-                }
-            } elseif ($request->jenis_surat == "SKP") {
-                $validatedData = $request->validate([
-                    'jenis_surat' => 'required|string',
-                    'warga_id' => 'required',
-                    'no_kk' => 'required|string|min:16|max:16',
-                    'nik' => 'required|string|min:16|max:16',
-                    'no_hp' => 'required|string',
-                    'nama_lengkap' => 'required|string|min:3|max:255',
-                    'tempat_lahir' => 'required|string',
-                    'tanggal_lahir' => 'required|date|before:today',
-                    'jenis_kelamin' => 'required|string',
-                    'warga_negara' => 'required|string',
-                    'agama' => 'required|string',
-                    'pekerjaan' => 'required|string',
-                    'gol_darah' => 'required|string',
-                    'kecamatan' => 'required|string',
-                    'desa' => 'required|string',
-                    'alamat' => 'required|string',
-                    'rt' => 'required|numeric',
-                    'rw' => 'required|numeric',
-                    'keperluan' => 'required|string',
-                    'file' => 'file|mimes:pdf|max:2048',
-                ], [
-                    'file.max' => 'Ukuran file maksimal 2MB',
-                    'jenis_surat.required' => 'Surat harus diisi',
-                    'KK.required' => 'Nomor KK harus diisi',
-                    'KK.min' => 'Nomor KK harus 16 digit',
-                    'KK.max' => 'Nomor KK harus 16 digit',
-                    'nik.required' => 'NIK harus diisi',
-                    'nik.min' => 'NIK harus 16 digit',
-                    'nik.max' => 'NIK harus 16 digit',
-                    'nama_lengkap.required' => 'Nama Lengkap harus diisi',
-                    'nama_lengkap.min' => 'Nama Lengkap minimal 3 karakter',
-                    'nama_lengkap.max' => 'Nama Lengkap maksimal 255 karakter',
-                    'tempat_lahir.required' => 'Tempat Lahir harus diisi',
-                    'tanggal_lahir.required' => 'Tanggal Lahir harus diisi',
-                    'tanggal_lahir.before' => 'Tanggal Lahir tidak valid',
-                    'jenis_kelamin.required' => 'Jenis Kelamin harus diisi',
-                    'warga_negara.required' => 'Warga Negara harus diisi',
-                    'agama.required' => 'Agama harus diisi',
-                    'usia.required' => 'Usia harus diisi',
-                    'usia.numeric' => 'Usia harus angka',
-                    'pekerjaan.required' => 'Pekerjaan harus diisi',
-                    'gol_darah.required' => 'Golongan Darah harus diisi',
-                    'kecamatan.required' => 'Kecamatan harus diisi',
-                    'desa.required' => 'Desa harus diisi',
-                    'alamat.required' => 'Alamat harus diisi',
-                    'rt.required' => 'RT harus diisi',
-                    'rw.required' => 'RW harus diisi',
-                    'keperluan.required' => 'Keperluan harus diisi',
-                ]);
-
-                if ($request->hasFile('file')) {
-                    $file = $request->file('file');
-
-                    // Simpan nama dan path ke validatedData
-                    $validatedData['file_tmp_name'] = $file->getClientOriginalName();
-                    $validatedData['file_tmp_path'] = $file->storeAs(
-                        'temp',
-                        time() . '_' . $file->getClientOriginalName(),
-                        'public'
-                    );
-
-                    // Hapus objek file agar tidak ikut disimpan di session
-                    unset($validatedData['file']);
-                }
-            } elseif ($request->jenis_surat == "SKWH") {
-                $validatedData = $request->validate([
-                    'jenis_surat' => 'required|string',
-                    'keperluan' => 'required|string',
-                    'warga_id' => 'required',
-                    'nik' => 'required|string|min:16|max:16',
-                    'no_hp' => 'required|string',
-                    'nama_lengkap' => 'required|string|min:3|max:255',
-                    'tempat_lahir' => 'required|string',
-                    'tanggal_lahir' => 'required|date|before:today',
-                    'jenis_kelamin' => 'required|string',
-                    'kewarganegaraan' => 'required|string',
-                    'agama' => 'required|string',
-                    'pekerjaan' => 'required|string',
-                    'kecamatan' => 'required|string',
-                    'desa' => 'required|string',
-                    'rt' => 'required|string',
-                    'rw' => 'required|string',
-                    'alamat' => 'required|string',
-                    'file' => 'file|mimes:pdf|max:2048',
-                ], [
-                    'file.max' => 'Ukuran file maksimal 2MB',
-                    'jenis_surat.required' => 'Surat harus diisi',
-                    'nik.required' => 'NIK harus diisi',
-                    'nik.min' => 'NIK harus 16 digit',
-                    'nik.max' => 'NIK harus 16 digit',
-                    'nama_lengkap.required' => 'Nama Lengkap harus diisi',
-                    'nama_lengkap.min' => 'Nama Lengkap minimal 3 karakter',
-                    'nama_lengkap.max' => 'Nama Lengkap maksimal 255 karakter',
-                    'tempat_lahir.required' => 'Tempat Lahir harus diisi',
-                    'tanggal_lahir.required' => 'Tanggal Lahir harus diisi',
-                    'tanggal_lahir.before' => 'Tanggal Lahir tidak valid',
-                    'jenis_kelamin.required' => 'Jenis Kelamin harus diisi',
-                    'kewarganegaraan.required' => 'Kewarganegaraan harus diisi',
-                    'agama.required' => 'Agama harus diisi',
-                    'pekerjaan.required' => 'Pekerjaan harus diisi',
-                    'kecamatan.required' => "Kecamatan harus diisi",
-                    'desa.required' => 'Desa harus diisi',
-                    'alamat.required' => 'Alamat harus diisi',
-                    'rt.required' => 'rt harus diisi',
-                    'rw.required' => 'rw harus diisi',
-                ]);
-
-                if ($request->hasFile('file')) {
-                    $file = $request->file('file');
-
-                    // Simpan nama dan path ke validatedData
-                    $validatedData['file_tmp_name'] = $file->getClientOriginalName();
-                    $validatedData['file_tmp_path'] = $file->storeAs(
-                        'temp',
-                        time() . '_' . $file->getClientOriginalName(),
-                        'public'
-                    );
-
-                    // Hapus objek file agar tidak ikut disimpan di session
-                    unset($validatedData['file']);
-                }
-            } elseif ($request->jenis_surat == "SKK") {
-                $validatedData = $request->validate([
-                    // Data dasar
-                    'jenis_surat' => 'required|string',
-                    'warga_id' => 'required',
-
-                    // Data Pemohon
-                    'nama_lengkap' => 'required|string|min:3|max:255',
-                    'nik' => 'required|string|min:16|max:16',
-                    'tempat_lahir' => 'required|string',
-                    'tanggal_lahir' => 'required|date|before:today',
-                    'jenis_kelamin' => 'required|string',
-                    'agama' => 'required|string',
-                    'pekerjaan' => 'required|string',
-                    'kewarganegaraan' => 'required|string',
-                    'alamat' => 'required|string',
-                    'no_hp' => 'required|string',
-                    'rt' => 'required',
-                    'rw' => 'required',
-                    // Data Almarhum/Almarhumah
-                    'almarhum_nama' => 'required|string|min:3|max:255',
-                    'almarhum_nik' => 'required|string|min:16|max:16',
-                    'almarhum_tempat_lahir' => 'required|string',
-                    'almarhum_tanggal_lahir' => 'required|date|before:today',
-                    'almarhum_jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan',
-                    'almarhum_agama' => 'required|string|in:Islam,Kristen,Katolik,Hindu,Buddha,Konghucu',
-                    'almarhum_pekerjaan' => 'nullable|string',
-                    'almarhum_kewarganegaraan' => 'required|string|in:WNI,WNA',
-                    'almarhum_alamat' => 'required|string',
-
-                    // Data Kematian
-                    'tanggal_meninggal' => 'required|date|before_or_equal:today',
-                    'tempat_meninggal' => 'required|string',
-                    'sebab_kematian' => 'nullable|string',
-
-                    // Hubungan dengan Almarhum
-                    'hubungan_keluarga' => 'required|string|in:Ayah,Ibu,Suami,Istri,Anak,Saudara,Keponakan,Lainnya',
-                    'keterangan_hubungan' => 'nullable|string|required_if:hubungan_keluarga,Lainnya',
-
-                    // Keperluan
-                    'keperluan' => 'required|string|in:Administrasi Pemakaman,Klaim Asuransi,Pengurusan Warisan,Administrasi Bank,Lainnya',
-                    'keterangan_keperluan' => 'nullable|string',
-
-                    // Dokumen Pendukung
-                    'file' => 'nullable|file|max:2048',
-                ], [
-                    // Error messages untuk data pemohon
-                    'nama_lengkap.required' => 'Nama pemohon harus diisi',
-                    'nama_lengkap.min' => 'Nama pemohon minimal 3 karakter',
-                    'nama_lengkap.max' => 'Nama pemohon maksimal 255 karakter',
-                    'nik.required' => 'NIK pemohon harus diisi',
-                    'nik.min' => 'NIK pemohon harus 16 digit',
-                    'nik.max' => 'NIK pemohon harus 16 digit',
-                    'tempat_lahir.required' => 'Tempat lahir pemohon harus diisi',
-                    'tanggal_lahir.required' => 'Tanggal lahir pemohon harus diisi',
-                    'tanggal_lahir.before' => 'Tanggal lahir pemohon tidak valid',
-                    'jenis_kelamin.required' => 'Jenis kelamin pemohon harus diisi',
-                    'agama.required' => 'Agama pemohon harus diisi',
-                    'pekerjaan.required' => 'Pekerjaan pemohon harus diisi',
-                    'kewarganegaraan.required' => 'Kewarganegaraan pemohon harus diisi',
-                    'alamat.required' => 'Alamat pemohon harus diisi',
-                    'no_hp.required' => 'No HP pemohon harus diisi',
-                    'rt.required' => 'RT pemohon harus diisi',
-                    'rw.required' => 'RW pemohon harus diisi',
-
-                    // Error messages untuk data almarhum
-                    'almarhum_nama.required' => 'Nama almarhum/almarhumah harus diisi',
-                    'almarhum_nama.min' => 'Nama almarhum/almarhumah minimal 3 karakter',
-                    'almarhum_nama.max' => 'Nama almarhum/almarhumah maksimal 255 karakter',
-                    'almarhum_nik.required' => 'NIK almarhum/almarhumah harus diisi',
-                    'almarhum_nik.min' => 'NIK almarhum/almarhumah harus 16 digit',
-                    'almarhum_nik.max' => 'NIK almarhum/almarhumah harus 16 digit',
-                    'almarhum_tempat_lahir.required' => 'Tempat lahir almarhum/almarhumah harus diisi',
-                    'almarhum_tanggal_lahir.required' => 'Tanggal lahir almarhum/almarhumah harus diisi',
-                    'almarhum_tanggal_lahir.before' => 'Tanggal lahir almarhum/almarhumah tidak valid',
-                    'almarhum_jenis_kelamin.required' => 'Jenis kelamin almarhum/almarhumah harus diisi',
-                    'almarhum_jenis_kelamin.in' => 'Jenis kelamin almarhum/almarhumah tidak valid',
-                    'almarhum_agama.required' => 'Agama almarhum/almarhumah harus diisi',
-                    'almarhum_agama.in' => 'Agama almarhum/almarhumah tidak valid',
-                    'almarhum_kewarganegaraan.required' => 'Kewarganegaraan almarhum/almarhumah harus diisi',
-                    'almarhum_kewarganegaraan.in' => 'Kewarganegaraan almarhum/almarhumah tidak valid',
-                    'almarhum_alamat.required' => 'Alamat almarhum/almarhumah harus diisi',
-
-                    // Error messages untuk data kematian
-                    'tanggal_meninggal.required' => 'Tanggal meninggal harus diisi',
-                    'tanggal_meninggal.before_or_equal' => 'Tanggal meninggal tidak boleh melebihi hari ini',
-                    'waktu_meninggal.date_format' => 'Format waktu meninggal tidak valid (HH:MM)',
-                    'tempat_meninggal.required' => 'Tempat meninggal harus diisi',
-
-                    // Error messages untuk hubungan keluarga
-                    'hubungan_keluarga.required' => 'Hubungan keluarga harus diisi',
-                    'hubungan_keluarga.in' => 'Hubungan keluarga tidak valid',
-                    'keterangan_hubungan.required_if' => 'Keterangan hubungan harus diisi jika memilih "Lainnya"',
-
-                    // Error messages untuk keperluan
-                    'keperluan.required' => 'Keperluan surat harus diisi',
-                    'keperluan.in' => 'Keperluan surat tidak valid',
-
-                    // Error messages untuk file
-                    'file.file' => 'File KK harus berupa file',
-                    'file.max' => 'Ukuran file KK maksimal 2MB',
-                ]);
-
-                // Handle file upload jika ada
-                if ($request->hasFile('file')) {
-                    $file = $request->file('file');
-
-                    // Simpan nama dan path ke validatedData
-                    $validatedData['file_tmp_name'] = $file->getClientOriginalName();
-                    $validatedData['file_tmp_path'] = $file->storeAs(
-                        'temp',
-                        time() . '_' . $file->getClientOriginalName(),
-                        'public'
-                    );
-
-                    // Hapus objek file agar tidak ikut disimpan di session
-                    unset($validatedData['file']);
-                }
+            // Validasi berdasarkan jenis surat
+            switch ($jenisSurat) {
+                case 'SKD':
+                    $validatedData = $this->validateSkd($request);
+                    break;
+                case 'SKKTP':
+                    $validatedData = $this->validateSkktp($request);
+                    break;
+                case 'SKN':
+                    $validatedData = $this->validateSkn($request);
+                    break;
+                case 'SKTM':
+                    $validatedData = $this->validateSktm($request);
+                    break;
+                case 'SKP':
+                    $validatedData = $this->validateSkp($request);
+                    break;
+                case 'SKWH':
+                    $validatedData = $this->validateSkwh($request);
+                    break;
+                case 'SKK':
+                    $validatedData = $this->validateSkk($request);
+                    break;
+                default:
+                    return redirect()->back()->with('error', 'Jenis surat tidak valid');
             }
 
+            // Handle file upload jika ada
+            $validatedData = $this->handleFileUpload($request, $validatedData);
+
+            // Simpan ke session
             session(['surat' => $validatedData]);
+
             return redirect('/konfirmasi');
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
+    }
+
+    // Validasi SKD (Surat Keterangan Domisili)
+    private function validateSkd(Request $request)
+    {
+        return $request->validate([
+            'jenis_surat' => 'required|string',
+            'warga_id' => 'required',
+            'nik' => 'required|string|min:16|max:16',
+            'nama_lengkap' => 'required|string|min:3|max:255',
+            'tempat_lahir' => 'required|string',
+            'tanggal_lahir' => 'required|date|before:today',
+            'alamat' => 'required|string',
+            // Field yang harus diinput user
+            'rt' => 'required|numeric',
+            'rw' => 'required|numeric',
+            'no_hp' => 'required|string',
+            'keperluan' => 'required|string',
+            'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        ], $this->getValidationMessages());
+    }
+
+    // Validasi SKKTP (Surat Keterangan KTP Dalam Proses)
+    private function validateSkktp(Request $request)
+    {
+        return $request->validate([
+            'jenis_surat' => 'required|string',
+            'warga_id' => 'required',
+            'nik' => 'required|string|min:16|max:16',
+            'nama_lengkap' => 'required|string|min:3|max:255',
+            'tempat_lahir' => 'required|string',
+            'tanggal_lahir' => 'required|date|before:today',
+            'jenis_kelamin' => 'required|string',
+            'alamat' => 'required|string',
+            'agama' => 'required|string',
+            'status_kawin' => 'required|string',
+            'pekerjaan' => 'required|string',
+            'kewarganegaraan' => 'required|string',
+            // Field yang harus diinput user
+            'desa' => 'required|string',
+            'rt' => 'required|numeric',
+            'rw' => 'required|numeric',
+            'no_hp' => 'required|string',
+            'keperluan' => 'required|string',
+            'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        ], $this->getValidationMessages());
+    }
+
+    // Validasi SKN (Surat Keterangan Nikah)
+    private function validateSkn(Request $request)
+    {
+        return $request->validate([
+            'jenis_surat' => 'required|string',
+            'warga_id' => 'required',
+            // Field yang harus diinput user
+            'rt' => 'required|numeric',
+            'rw' => 'required|numeric',
+            'no_hp' => 'required|string',
+            'keperluan' => 'required|string',
+            'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        ], $this->getValidationMessages());
+    }
+
+    // Validasi SKTM (Surat Keterangan Tidak Mampu)
+    private function validateSktm(Request $request)
+    {
+        return $request->validate([
+            'jenis_surat' => 'required|string',
+            'warga_id' => 'required',
+            // Field yang harus diinput user
+            'rt' => 'required|numeric',
+            'rw' => 'required|numeric',
+            'no_hp' => 'required|string',
+            'keperluan' => 'required|string',
+            'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        ], $this->getValidationMessages());
+    }
+
+    // Validasi SKP (Surat Keterangan Pengantar)
+    private function validateSkp(Request $request)
+    {
+        return $request->validate([
+            'jenis_surat' => 'required|string',
+            'warga_id' => 'required',
+            'no_kk' => 'required|string|min:16|max:16',
+            'nik' => 'required|string|min:16|max:16',
+            'nama_lengkap' => 'required|string|min:3|max:255',
+            'tempat_lahir' => 'required|string',
+            'tanggal_lahir' => 'required|date|before:today',
+            'jenis_kelamin' => 'required|string',
+            'warga_negara' => 'required|string',
+            'agama' => 'required|string',
+            'pekerjaan' => 'required|string',
+            'gol_darah' => 'required|string',
+            'kecamatan' => 'required|string',
+            'desa' => 'required|string',
+            'alamat' => 'required|string',
+            'rt' => 'required|numeric',
+            'rw' => 'required|numeric',
+            // Field yang harus diinput user
+            'no_hp' => 'required|string',
+            'keperluan' => 'required|string',
+            'file' => 'nullable|file|mimes:pdf|max:2048',
+        ], $this->getValidationMessages());
+    }
+
+    // Validasi SKWH (Surat Keterangan Wali Hakim)
+    private function validateSkwh(Request $request)
+    {
+        return $request->validate([
+            'jenis_surat' => 'required|string',
+            'warga_id' => 'required',
+            'nik' => 'required|string|min:16|max:16',
+            'nama_lengkap' => 'required|string|min:3|max:255',
+            'tempat_lahir' => 'required|string',
+            'tanggal_lahir' => 'required|date|before:today',
+            'jenis_kelamin' => 'required|string',
+            'kewarganegaraan' => 'required|string',
+            'agama' => 'required|string',
+            'pekerjaan' => 'required|string',
+            'kecamatan' => 'required|string',
+            'desa' => 'required|string',
+            'alamat' => 'required|string',
+            // Field yang harus diinput user
+            'no_hp' => 'required|string',
+            'keperluan' => 'required|string',
+            'file' => 'nullable|file|mimes:pdf|max:2048',
+        ], $this->getValidationMessages());
+    }
+
+    // Validasi SKK (Surat Keterangan Kematian)
+    private function validateSkk(Request $request)
+    {
+        return $request->validate([
+            // Data dasar
+            'jenis_surat' => 'required|string',
+            'warga_id' => 'required',
+
+            // Data Pemohon
+            'nama_lengkap' => 'required|string|min:3|max:255',
+            'nik' => 'required|string|min:16|max:16',
+            'tempat_lahir' => 'required|string',
+            'tanggal_lahir' => 'required|date|before:today',
+            'jenis_kelamin' => 'required|string',
+            'agama' => 'required|string',
+            'pekerjaan' => 'required|string',
+            'kewarganegaraan' => 'required|string',
+            'alamat' => 'required|string',
+
+            // Data Almarhum/Almarhumah
+            'almarhum_nama' => 'required|string|min:3|max:255',
+            'almarhum_nik' => 'required|string|min:16|max:16',
+            'almarhum_tempat_lahir' => 'required|string',
+            'almarhum_tanggal_lahir' => 'required|date|before:today',
+            'almarhum_jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan',
+            'almarhum_agama' => 'required|string|in:Islam,Kristen,Katolik,Hindu,Buddha,Konghucu',
+            'almarhum_pekerjaan' => 'nullable|string',
+            'almarhum_kewarganegaraan' => 'required|string|in:WNI,WNA',
+            'almarhum_alamat' => 'required|string',
+
+            // Data Kematian
+            'tanggal_meninggal' => 'required|date|before_or_equal:today',
+            'tempat_meninggal' => 'required|string',
+            'sebab_kematian' => 'nullable|string',
+
+            // Hubungan dengan Almarhum
+            'hubungan_keluarga' => 'required|string|in:Ayah,Ibu,Suami,Istri,Anak,Saudara,Keponakan,Lainnya',
+            'keterangan_hubungan' => 'nullable|string|required_if:hubungan_keluarga,Lainnya',
+
+            // Field yang harus diinput user
+            'rt' => 'required',
+            'rw' => 'required',
+            'no_hp' => 'required|string',
+            'keperluan' => 'required|string|in:Administrasi Pemakaman,Klaim Asuransi,Pengurusan Warisan,Administrasi Bank,Lainnya',
+            'keterangan_keperluan' => 'nullable|string',
+            'file' => 'nullable|file|max:2048',
+        ], $this->getValidationMessages());
+    }
+
+    // Handle file upload
+    private function handleFileUpload(Request $request, array $validatedData)
+    {
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+
+            // Simpan nama dan path ke validatedData
+            $validatedData['file_tmp_name'] = $file->getClientOriginalName();
+            $validatedData['file_tmp_path'] = $file->storeAs(
+                'temp',
+                time() . '_' . $file->getClientOriginalName(),
+                'public'
+            );
+
+            // Hapus objek file agar tidak ikut disimpan di session
+            unset($validatedData['file']);
+        }
+
+        return $validatedData;
+    }
+
+    // Pesan validasi yang umum digunakan
+    private function getValidationMessages()
+    {
+        return [
+            'file.max' => 'Ukuran file maksimal 2MB',
+            'jenis_surat.required' => 'Jenis surat harus diisi',
+            'nik.required' => 'NIK harus diisi',
+            'nik.min' => 'NIK harus 16 digit',
+            'nik.max' => 'NIK harus 16 digit',
+            'nama_lengkap.required' => 'Nama lengkap harus diisi',
+            'nama_lengkap.min' => 'Nama lengkap minimal 3 karakter',
+            'nama_lengkap.max' => 'Nama lengkap maksimal 255 karakter',
+            'tempat_lahir.required' => 'Tempat lahir harus diisi',
+            'tanggal_lahir.required' => 'Tanggal lahir harus diisi',
+            'tanggal_lahir.before' => 'Tanggal lahir tidak valid',
+            'jenis_kelamin.required' => 'Jenis kelamin harus diisi',
+            'alamat.required' => 'Alamat harus diisi',
+            'agama.required' => 'Agama harus diisi',
+            'status_kawin.required' => 'Status Kawin harus diisi',
+            'pekerjaan.required' => 'Pekerjaan harus diisi',
+            'kewarganegaraan.required' => 'Kewarganegaraan harus diisi',
+            'rt.required' => 'RT harus diisi',
+            'rw.required' => 'RW harus diisi',
+            'no_hp.required' => 'No HP harus diisi',
+            'keperluan.required' => 'Keperluan harus diisi',
+
+            // Pesan untuk data almarhum (SKK)
+            'almarhum_nama.required' => 'Nama almarhum/almarhumah harus diisi',
+            'almarhum_nik.required' => 'NIK almarhum/almarhumah harus diisi',
+            'tanggal_meninggal.required' => 'Tanggal meninggal harus diisi',
+            'tempat_meninggal.required' => 'Tempat meninggal harus diisi',
+            'hubungan_keluarga.required' => 'Hubungan keluarga harus diisi',
+        ];
     }
 
     // Verifikasi Surat
@@ -383,6 +361,7 @@ class SuratController extends Controller
         // Mapping jenis surat
         $jenis_surat_mapping = [
             'SKD' => 'Surat Keterangan Domisili',
+            'SKKTP' => 'Surat Keterangan KTP Dalam Proses',
             'SKP' => 'Surat Keterangan Pengantar',
             'SKTM' => 'Surat Keterangan KTP Dalam Proses',
             'SKWH' => 'Surat Keterangan Wali Hakim',

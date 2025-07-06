@@ -138,7 +138,7 @@ Surat Keterangan Pengantar
             <td>Upload Kartu Keluarga <span class="required">*</span></td>
             <td>:</td>
             <td>
-                <input type="file" name="file">
+                <input type="file" name="file" accept=".pdf" >
                 <!-- Menampilkan nama file yang telah di-upload -->
                 @if($warga->file_kk)
                 <div>
@@ -151,23 +151,24 @@ Surat Keterangan Pengantar
         </tr>
     </table>
 
-    <!-- Section: Informasi Tambahan -->
+
     <div class="section-title">Informasi Tambahan</div>
     <table class="form-table">
-        <tr>
-            <td>Keperluan <span class="required">*</span></td>
-            <td>:</td>
-            <td>
-                <input type="text" name="keperluan" placeholder="Peminjaman Gedung" required>
-            </td>
-        </tr>
         <tr>
             <td>No HP <span class="required">*</span></td>
             <td>:</td>
             <td>
-                <input type="text" name="no_hp" value="" required placeholder="Contoh: 081234567890">
+                <input type="tel" name="no_hp" required placeholder="Contoh: 081234567890">
             </td>
         </tr>
+        <tr>
+            <td>Keperluan <span class="required">*</span></td>
+            <td>:</td>
+            <td>
+                <textarea name="keperluan" required placeholder="Tuliskan keperluan Anda..."></textarea>
+            </td>
+        </tr>
+
     </table>
 
     <div class="button-container">

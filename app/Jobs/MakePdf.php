@@ -45,6 +45,16 @@ class MakePdf implements ShouldQueue
     {
         if ($this->surat->jenis_surat == 'SKD') {
             $pdf = Pdf::loadView('admin.layanan-surat.surat-domisili-ttd-kades', ['surat' => $this->surat , 'qrCode' => $this->qrCode]);
+        } elseif($this->surat->jenis_surat == 'SKKTP') {
+            $pdf = Pdf::loadView('admin.layanan-surat.skktp_ttd_kades', ['surat' => $this->surat , 'qrCode' => $this->qrCode]);
+        } elseif ($this->surat->jenis_surat == "SKCK") {
+            $pdf = Pdf::loadView('admin.preview-surat.surat_ket_skck', ['surat' => $this->surat]);
+        } elseif ($this->surat->jenis_surat == "SKKTPDP") {
+            $pdf = Pdf::loadView('admin.preview-surat.surat_ket_ktp_dlm_proses', ['surat' => $this->surat]);
+        } elseif ($this->surat->jenis_surat == "SPKK") {
+            $pdf = Pdf::loadView('admin.preview-surat.surat_ket_pengantar_spkk', ['surat' => $this->surat]);
+        } elseif ($this->surat->jenis_surat == "SPPKK") {
+            $pdf = Pdf::loadView('admin.preview-surat.surat_ket_pengantar_sppkk', ['surat' => $this->surat]);
         } elseif ($this->surat->jenis_surat == "SKP") {
             $pdf = Pdf::loadView('admin.layanan-surat.surat-keterangan-pengantar-ttd-kades', ['surat' => $this->surat , 'qrCode' => $this->qrCode]);
         } elseif ($this->surat->jenis_surat == "SKWH") {

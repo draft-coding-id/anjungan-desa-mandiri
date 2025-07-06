@@ -102,19 +102,20 @@ Surat Keterangan Domisili
 
   <table class="form-table">
     <tr>
-      <td>Keperluan <span class="required">*</span></td>
-      <td>:</td>
-      <td>
-        <textarea name="keperluan" required placeholder="Tuliskan keperluan Anda..."></textarea>
-      </td>
-    </tr>
-    <tr>
       <td>No HP <span class="required">*</span></td>
       <td>:</td>
       <td>
         <input type="tel" name="no_hp" required placeholder="Contoh: 081234567890">
       </td>
     </tr>
+    <tr>
+      <td>Keperluan <span class="required">*</span></td>
+      <td>:</td>
+      <td>
+        <textarea name="keperluan" required placeholder="Tuliskan keperluan Anda..."></textarea>
+      </td>
+    </tr>
+
   </table>
 
   <div class="button-container">

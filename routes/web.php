@@ -17,80 +17,80 @@ use App\Http\Controllers\PreviewSuratController;
 use App\Models\KabarPembangunan as ModelsKabarPembangunan;
 
 // Route Mockup Baru
-    Route::view('/', 'onboarding');
-    Route::view('/warga', 'warga.halaman_utama')->name('halaman_utama'); //Lanjut ke views warga
-    Route::get('/admin', [LoginController::class, 'showLoginPage'])->name('login'); //Lanjut ke views admin
+Route::view('/', 'onboarding');
+Route::view('/warga', 'warga.halaman_utama')->name('halaman_utama'); //Lanjut ke views warga
+Route::get('/admin', [LoginController::class, 'showLoginPage'])->name('login'); //Lanjut ke views admin
 
 // ====================================================================== //
 
 // ----- Views Warga ----- //
-    Route::get('/login', [LoginController::class, 'showNikForm'])->name('login-warga');
-    Route::get('/logout-warga', [LoginController::class, 'logout'])->name('logout-warga');
+Route::get('/login', [LoginController::class, 'showNikForm'])->name('login-warga');
+Route::get('/logout-warga', [LoginController::class, 'logout'])->name('logout-warga');
 
-    Route::view('/login/pindai-ktp', 'warga.layanan-mandiri.login.pindai_ktp')->name('pindai-ktp');
-    Route::post('/login/check-nik', [LoginController::class, 'checkNik'])->name('login.checkNik');
-    Route::post('/login/scan-ktp', [LoginController::class, 'scanKtp'])->name('login.scanKtp');
-    Route::view('/registrasi-warga' , 'warga.layanan-mandiri.login.registrasi_warga')->name('registrasi-warga');
-    Route::post('/registrasi-warga/store', [LoginController::class, 'registerWarga'])->name('warga.register');
-    Route::get('/login/pin/{nik}', [LoginController::class, 'showPinForm'])->name('login.showPinForm');
-    Route::post('/login/check-pin', [LoginController::class, 'checkPin'])->name('login.checkPin');
-    Route::view('/agenda-rawapanjang', 'warga.profil_desa.agenda');
-    Route::get('/lapak-warga',  function () {
-        $lapaks = Lapak::all();
-        return view('warga.profil_desa.lapak', [
-            'lapaks' => $lapaks,
-        ]);
-    });
+Route::view('/login/pindai-ktp', 'warga.layanan-mandiri.login.pindai_ktp')->name('pindai-ktp');
+Route::post('/login/check-nik', [LoginController::class, 'checkNik'])->name('login.checkNik');
+Route::post('/login/scan-ktp', [LoginController::class, 'scanKtp'])->name('login.scanKtp');
+Route::view('/registrasi-warga', 'warga.layanan-mandiri.login.registrasi_warga')->name('registrasi-warga');
+Route::post('/registrasi-warga/store', [LoginController::class, 'registerWarga'])->name('warga.register');
+Route::get('/login/pin/{nik}', [LoginController::class, 'showPinForm'])->name('login.showPinForm');
+Route::post('/login/check-pin', [LoginController::class, 'checkPin'])->name('login.checkPin');
+Route::view('/agenda-rawapanjang', 'warga.profil_desa.agenda');
+Route::get('/lapak-warga',  function () {
+    $lapaks = Lapak::all();
+    return view('warga.profil_desa.lapak', [
+        'lapaks' => $lapaks,
+    ]);
+});
 
-    Route::get('/lapak-warga/detail/{id}', function ($id) {
-        $lapak = Lapak::with('warga')->find($id);
+Route::get('/lapak-warga/detail/{id}', function ($id) {
+    $lapak = Lapak::with('warga')->find($id);
 
-        if (!$lapak) {
-            return response()->json(['error' => 'Lapak tidak ditemukan'], 404);
-        }
+    if (!$lapak) {
+        return response()->json(['error' => 'Lapak tidak ditemukan'], 404);
+    }
 
-        return response()->json($lapak);
-    })->name('lapak.detail');
+    return response()->json($lapak);
+})->name('lapak.detail');
 
-    Route::get('/kabar-pembangunan/detail/{id}', function ($id) {
-        $pembangunan = ModelsKabarPembangunan::findOrFail($id);
-        if (!$pembangunan) {
-            return response()->json(['error' => 'Pembangunan tidak ditemukan'], 404);
-        }
-        return response()->json($pembangunan);
-    })->name('kabar-pembangunan.detail');
-    Route::get('/tentang-desa-rawapanjang', function () {
-        $sejarahDesa = SejarahDesa::first();
-        return view('warga.profil_desa.tentang-desa', [
-            'sejarahDesa' => $sejarahDesa,
-        ]);
-    })->name('sejarah-desa');
-    Route::get('/visi-misi', function () {
-        $visiMisi = VisiMisi::all();
-        return view('warga.profil_desa.visi_misi', [
-            'visiMisi' => $visiMisi,
-        ]);
-    })->name('visi-misi');
+Route::get('/kabar-pembangunan/detail/{id}', function ($id) {
+    $pembangunan = ModelsKabarPembangunan::findOrFail($id);
+    if (!$pembangunan) {
+        return response()->json(['error' => 'Pembangunan tidak ditemukan'], 404);
+    }
+    return response()->json($pembangunan);
+})->name('kabar-pembangunan.detail');
+Route::get('/tentang-desa-rawapanjang', function () {
+    $sejarahDesa = SejarahDesa::first();
+    return view('warga.profil_desa.tentang-desa', [
+        'sejarahDesa' => $sejarahDesa,
+    ]);
+})->name('sejarah-desa');
+Route::get('/visi-misi', function () {
+    $visiMisi = VisiMisi::all();
+    return view('warga.profil_desa.visi_misi', [
+        'visiMisi' => $visiMisi,
+    ]);
+})->name('visi-misi');
 
-    Route::prefix('statistik')->group(function () {
-        Route::get('/{kategori}', [StatistikController::class, 'getStatistik'])
-            ->where('kategori', 'jenis_kelamin|rentang_usia|kategori_usia|agama|pekerjaan');
+Route::prefix('statistik')->group(function () {
+    Route::get('/{kategori}', [StatistikController::class, 'getStatistik'])
+        ->where('kategori', 'jenis_kelamin|rentang_usia|kategori_usia|agama|pekerjaan');
 
-        Route::get('/ringkasan/umum', [StatistikController::class, 'getRingkasanStats']);
-    });
-    Route::get('/statistik-desa', [StatistikController::class, 'index'])->name('statistik.index');
-    Route::get('/kabar-pembanguan', function () {
-        $pembangunans = ModelsKabarPembangunan::all();
-        return view('warga.profil_desa.kabar_pembangunan', [
-            'pembangunans' => $pembangunans,
-        ]);
-    })->name('kabar-pembangunan');
+    Route::get('/ringkasan/umum', [StatistikController::class, 'getRingkasanStats']);
+});
+Route::get('/statistik-desa', [StatistikController::class, 'index'])->name('statistik.index');
+Route::get('/kabar-pembanguan', function () {
+    $pembangunans = ModelsKabarPembangunan::all();
+    return view('warga.profil_desa.kabar_pembangunan', [
+        'pembangunans' => $pembangunans,
+    ]);
+})->name('kabar-pembangunan');
 
 // Masuk Menu Layanan Mandiri
 Route::middleware(['isAdmin'])->group(function () {
     Route::get('/dashboard', [LoginController::class, 'showDashboard'])->name('dashboard');
-    Route::get('/ganti-pin' , [LoginController::class , 'gantiPin'])->name('ganti-pin');
-    Route::post('/ganti-pin/', [LoginController::class , 'updatePin'])->name('ganti-pin.update');
+    Route::get('/ganti-pin', [LoginController::class, 'gantiPin'])->name('ganti-pin');
+    Route::post('/ganti-pin/', [LoginController::class, 'updatePin'])->name('ganti-pin.update');
     Route::view('/layanan-umum', 'warga.layanan-mandiri.layanan_umum')->name('layanan-umum');
     Route::view('/layanan-kependudukan', 'warga.layanan-mandiri.layanan_kependudukan')->name('layanan-kependudukan');
     Route::view('/layanan-pernikahan', 'warga.layanan-mandiri.layanan_pernikahan')->name('layanan-pernikahan');
@@ -112,12 +112,9 @@ Route::controller(SuratController::class)->group(function () {
 
 // Layanan Mandiri - Preview Surat
 Route::get('/skd', [PreviewSuratController::class, 'skd'])->name('preview.skd');
+Route::get('/skktp', [PreviewSuratController::class, 'skktp'])->name('preview.skktp');
 Route::get('/skp', [PreviewSuratController::class, 'skp'])->name('preview.skp');
 Route::get('/skwh', [PreviewSuratController::class, 'skwh'])->name('preview.skwh');
-Route::get('/skck', [PreviewSuratController::class, 'skck'])->name('preview.skck');
-Route::get('/skktpdp', [PreviewSuratController::class, 'skktpdp'])->name('preview.skktpdp');
-Route::get('/spkk', [PreviewSuratController::class, 'spkk'])->name('preview.spkk');
-Route::get('/sppkk', [PreviewSuratController::class, 'sppkk'])->name('preview.sppkk');
 Route::get('/skwh', [PreviewSuratController::class, 'skwh'])->name('preview.skwh');
 Route::get('/skk', [PreviewSuratController::class, 'skk'])->name('preview.skk');
 // ----- Ends of Views Warga ----- //

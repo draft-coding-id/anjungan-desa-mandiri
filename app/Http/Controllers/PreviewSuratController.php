@@ -1,83 +1,47 @@
 <?php
-
-// app/Http/Controllers/SuratController.php
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\Models\ProsesSurat;
-use App\Models\Surat;
 
 class PreviewSuratController extends Controller
 {
-    public function skd()
+    protected $proses_surat;
+
+    public function __construct()
     {
-        // Mengambil session surat
-        $proses_surat = session('surat');
-        return view('warga.layanan-mandiri.preview-surat.surat_ket_domisili', ['proses_surat' => $proses_surat]);
+        $this->proses_surat = session('surat');
     }
 
-    public function getDetailSkd($id)
+    public function skd()
     {
-        $surat = Surat::find($id);
-        return view('admin.preview-surat.surat_ket_domisili', ['surat' => $surat]);
+        return view('warga.layanan-mandiri.preview-surat.surat_ket_domisili', [
+            'proses_surat' => $this->proses_surat
+        ]);
+    }
+
+    public function skktp()
+    {
+        return view('warga.layanan-mandiri.preview-surat.surat_ket_ktp_dlm_proses', [
+            'proses_surat' => $this->proses_surat
+        ]);
     }
 
     public function skp()
     {
-        $proses_surat = session('surat');
-
-        return view('warga.layanan-mandiri.preview-surat.surat_ket_pengantar', ['proses_surat' => $proses_surat]);
-    }
-    public function getDetailSkp($id)
-    {
-        $surat = Surat::find($id);
-        return view('admin.preview-surat.surat_ket_pengantar', ['surat' => $surat]);
+        return view('warga.layanan-mandiri.preview-surat.surat_ket_pengantar', [
+            'proses_surat' => $this->proses_surat
+        ]);
     }
 
     public function skwh()
     {
-        $proses_surat = session('surat');
-
-        return view('warga.layanan-mandiri.preview-surat.surat_ket_wali_hakim', ['proses_surat' => $proses_surat]);
-    }
-
-    public function getDetailSkwh($id)
-    {
-        $surat = Surat::find($id);
-        return view('admin.preview-surat.surat_ket_wali_hakim', ['surat' => $surat]);
+        return view('warga.layanan-mandiri.preview-surat.surat_ket_wali_hakim', [
+            'proses_surat' => $this->proses_surat
+        ]);
     }
 
     public function skk()
     {
-        $proses_surat = session('surat');
-        return view('warga.layanan-mandiri.preview-surat.surat_ket_kematian', ['proses_surat' => $proses_surat]);
-    }
-
-    public function skck()
-    {
-        $proses_surat = ProsesSurat::all();
-
-        return view('warga.layanan-mandiri.preview-surat.surat_ket_catatan_kriminal', ['proses_surat' => $proses_surat]);
-    }
-
-    public function skktpdp()
-    {
-        $proses_surat = ProsesSurat::all();
-
-        return view('warga.layanan-mandiri.preview-surat.surat_ket_ktp_dlm_proses', ['proses_surat' => $proses_surat]);
-    }
-
-    public function spkk()
-    {
-        $proses_surat = ProsesSurat::all();
-
-        return view('warga.layanan-mandiri.preview-surat.surat_permohonan_kk', ['proses_surat' => $proses_surat]);
-    }
-
-    public function sppkk()
-    {
-        $proses_surat = ProsesSurat::all();
-
-        return view('warga.layanan-mandiri.preview-surat.surat_permohonan_perubahan_kk', ['proses_surat' => $proses_surat]);
+        return view('warga.layanan-mandiri.preview-surat.surat_ket_kematian', [
+            'proses_surat' => $this->proses_surat
+        ]);
     }
 }

@@ -45,6 +45,7 @@ class LayananSurat extends Controller
         $surat = Surat::find($id);
         $view = match ($jenisSurat) {
             "SKD" => 'admin.preview-surat.surat_ket_domisili',
+            "SKKTP" => 'admin.preview-surat.surat_ket_ktp_dalam_proses',
             "SKP" => 'admin.preview-surat.surat_ket_pengantar',
             "SKWH" => 'admin.preview-surat.surat_ket_wali_hakim',
             "SKK" => 'admin.preview-surat.surat_ket_kematian',

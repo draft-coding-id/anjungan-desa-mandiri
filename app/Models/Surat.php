@@ -51,6 +51,7 @@ class Surat extends Model
         // Tentukan kode jenis surat
         $kodeJenis = [
             'SKD' => 'SKD',
+            'SKKTP' => 'SKKTP',
             'SKP' => 'SKP',
             'SKN' => 'SKN',
             'SKTM' => 'SKTM',

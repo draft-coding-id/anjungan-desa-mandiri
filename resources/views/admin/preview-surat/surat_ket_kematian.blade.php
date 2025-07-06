@@ -1,211 +1,118 @@
-<!DOCTYPE html>
-<html lang="id">
+@extends('layout.admin.preview_surat')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surat Keterangan Kematian</title>
-    <style>
-        body {
-            background: #ffffff;
-            font-family: 'Times New Roman';
-            margin: 0;
-            padding: 20px;
-        }
+@section('title', 'Surat Keterangan Kematian')
 
-        h1 {
-            font-size: 24px;
-            font-weight: normal;
-        }
+@section('surat-title', 'SURAT KETERANGAN KEMATIAN')
 
-        h2 {
-            font-size: 20px;
-            font-weight: normal;
-            text-decoration: underline;
-        }
+@section('content')
+<div>
+    <p>Yang bertanda tangan di bawah ini Kepala Desa Rawapanjang, Kecamatan Bojonggede, Kabupaten Bogor, Provinsi Jawa Barat menerangkan dengan sebenarnya bahwa:</p>
 
-        p {
-            line-height: 1.5;
-            margin: 10px 0;
-        }
+    <div class="section-title">Data Almarhum/Almarhumah:</div>
+    <table class="data-table">
+        <tr>
+            <td>1. Nama Lengkap</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['almarhum_nama'] ?? '[Nama Almarhum]' }}</td>
+        </tr>
+        <tr>
+            <td>2. NIK / No. KTP</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['almarhum_nik'] ?? '[NIK Almarhum]' }}</td>
+        </tr>
+        <tr>
+            <td>3. Tempat / Tanggal Lahir</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['almarhum_tempat_lahir'] ?? '[Tempat Lahir]' }}@if(isset($surat->isi_surat['almarhum_tanggal_lahir'])), {{ date('d-m-Y', strtotime($surat->isi_surat['almarhum_tanggal_lahir'])) }}@endif</td>
+        </tr>
+        <tr>
+            <td>4. Jenis Kelamin</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['almarhum_jenis_kelamin'] ?? '[Jenis Kelamin]' }}</td>
+        </tr>
+        <tr>
+            <td>5. Agama</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['almarhum_agama'] ?? '[Agama]' }}</td>
+        </tr>
+        <tr>
+            <td>6. Pekerjaan</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['almarhum_pekerjaan'] ?? '[Pekerjaan]' }}</td>
+        </tr>
+        <tr>
+            <td>7. Kewarganegaraan</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['almarhum_kewarganegaraan'] ?? '[Kewarganegaraan]' }}</td>
+        </tr>
+        <tr>
+            <td>8. Alamat/Tempat Tinggal</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['almarhum_alamat'] ?? '[Alamat]' }}</td>
+        </tr>
+    </table>
 
-        .header {
-            text-align: center;
-        }
+    <p>Yang telah meninggal dunia pada tanggal {{ isset($surat->isi_surat['tanggal_meninggal']) ? date('d-m-Y', strtotime($surat->isi_surat['tanggal_meninggal'])) : '[Tanggal Meninggal]' }} di {{ $surat->isi_surat['tempat_meninggal'] ?? '[Tempat Meninggal]' }}@if(isset($surat->isi_surat['sebab_kematian']) && $surat->isi_surat['sebab_kematian']) dengan sebab kematian: {{ $surat->isi_surat['sebab_kematian'] }}@endif.</p>
 
-        .content {
-            margin-left: 50px;
-            margin-right: 50px;
-            text-align: justify;
-        }
+    <p>Yang bersangkutan adalah {{ strtolower($surat->isi_surat['hubungan_keluarga'] ?? 'keluarga') }} dari:</p>
 
-        .footer {
-            text-align: right;
-            margin-top: 40px;
-        }
+    <div class="section-title">Data Pemohon:</div>
+    <table class="data-table">
+        <tr>
+            <td>1. Nama Lengkap</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['nama_lengkap'] ?? '[Nama Pemohon]' }}</td>
+        </tr>
+        <tr>
+            <td>2. NIK / No. KTP</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['nik'] ?? '[NIK Pemohon]' }}</td>
+        </tr>
+        <tr>
+            <td>3. Tempat / Tanggal Lahir</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['tempat_lahir'] ?? '[Tempat Lahir]' }}@if(isset($surat->isi_surat['tanggal_lahir'])), {{ date('d-m-Y', strtotime($surat->isi_surat['tanggal_lahir'])) }}@endif</td>
+        </tr>
+        <tr>
+            <td>4. Jenis Kelamin</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['jenis_kelamin'] ?? '[Jenis Kelamin]' }}</td>
+        </tr>
+        <tr>
+            <td>5. Agama</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['agama'] ?? '[Agama]' }}</td>
+        </tr>
+        <tr>
+            <td>6. Pekerjaan</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['pekerjaan'] ?? '[Pekerjaan]' }}</td>
+        </tr>
+        <tr>
+            <td>7. Kewarganegaraan</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['kewarganegaraan'] ?? '[Kewarganegaraan]' }}</td>
+        </tr>
+        <tr>
+            <td>8. Alamat/Tempat Tinggal</td>
+            <td>:</td>
+            <td>{{ $surat->isi_surat['alamat'] ?? '[Alamat]' }} Desa Rawapanjang, Kecamatan Bojonggede, Kabupaten Bogor</td>
+        </tr>
+    </table>
 
-        .data-table {
-            width: 100%;
-            margin: 20px 0;
-        }
+    @if(isset($surat->isi_surat['keperluan']))
+    <p><strong>Keperluan:</strong> {{ $surat->isi_surat['keperluan'] }}@if(isset($surat->isi_surat['keterangan_keperluan']) && $surat->isi_surat['keterangan_keperluan']) - {{ $surat->isi_surat['keterangan_keperluan'] }}@endif</p>
+    @endif
 
-        .data-table td {
-            padding: 3px 0;
-            vertical-align: top;
-        }
+    <p>Demikian surat keterangan ini dibuat dengan sebenarnya, untuk dipergunakan sebagaimana mestinya.</p>
+</div>
+@endsection
 
-        .data-table td:first-child {
-            width: 200px;
-        }
-
-        .data-table td:nth-child(2) {
-            width: 20px;
-            text-align: center;
-        }
-
-        .section-title {
-            font-weight: bold;
-            margin: 20px 0 10px 0;
-        }
-
-        .indent {
-            padding-left: 80px;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="header">
-        <table width="100%">
-            <tr>
-                <td>
-                    <img src="{{asset('assets/logo.png')}}" height="116px" width="116px" alt="Logo Desa" />
-
-                </td>
-                <td width="100%">
-                    <h1>PEMERINTAH KABUPATEN BOGOR
-                        <br>KECAMATAN BOJONGGEDE
-                        <br>DESA RAWAPANJANG
-                    </h1>
-                    <p style="margin-top:-10px; margin-bottom:0px;">Jl. Talang Kp Kelapa RT.02 RW.15 No.02 Kode Pos 16920</p>
-                </td>
-            </tr>
-            <tr>
-                <td colspan='2'>
-                    <hr style="border: 2px solid black;">
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="content">
-        <div class="header">
-            <h2>SURAT KETERANGAN KEMATIAN</h2>
-            <p style="margin-top:-10px;">Nomor: {{$surat->no_surat}}</p>
-                <br>
-        </div>
-
-        <div>
-            <p>Yang bertanda tangan di bawah ini Kepala Desa Rawapanjang, Kecamatan Bojonggede, Kabupaten Bogor,
-                Provinsi Jawa Barat menerangkan dengan sebenarnya bahwa :</p>
-            <table>
-                <tr>
-                    <td class="section-title">1. Nama Lengkap</td>
-                    <td class="indent">: {{ $surat->isi_surat['almarhum_nama'] ?? '[frm_nama]' }}</td>
-                </tr>
-                <tr>
-                    <td class="section-title">2. NIK / No. KTP</td>
-                    <td class="indent">: {{ $surat->isi_surat['almarhum_nik'] ?? '[frm_no_ktp]' }}</td>
-                </tr>
-                <tr>
-                    <td class="section-title">3. Tempat / Tanggal Lahir</td>
-                    <td class="indent">: {{ $surat->isi_surat['almarhum_tempat_lahir'] ?? '[ttl]' }}@if(isset($surat->isi_surat['almarhum_tanggal_lahir'])), {{ date('d-m-Y', strtotime($surat->isi_surat['almarhum_tanggal_lahir'])) }}@endif</td>
-                </tr>
-                <tr>
-                    <td class="section-title">4. Jenis Kelamin</td>
-                    <td class="indent">: {{ $surat->isi_surat['almarhum_jenis_kelamin'] ?? '[frm_sex]' }}</td>
-                </tr>
-                <tr>
-                    <td class="section-title">5. Agama</td>
-                    <td class="indent">: {{ $surat->isi_surat['almarhum_agama'] ?? '[frm_agama]' }}</td>
-                </tr>
-                <tr>
-                    <td class="section-title">6. Pekerjaan</td>
-                    <td class="indent">: {{ $surat->isi_surat['almarhum_pekerjaan'] ?? '[frm_pekerjaan]' }}</td>
-                </tr>
-                <tr>
-                    <td class="section-title">7. Kewarganegaraan</td>
-                    <td class="indent">: {{ $surat->isi_surat['almarhum_kewarganegaraan'] ?? '[warga_negara]' }}</td>
-                </tr>
-                <tr>
-                    <td class="section-title" width="200px">8. Alamat/Tempat Tinggal</td>
-                    <td class="indent">: {{ $surat->isi_surat['almarhum_alamat'] ?? '[frm_alamat]' }}</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <br>
-                        Yang telah meninggal dunia pada tanggal {{ isset($surat->isi_surat['tanggal_meninggal']) ? date('d-m-Y', strtotime($surat->isi_surat['tanggal_meninggal'])) : '[tgl_meninggal]' }}@if(isset($surat->isi_surat['waktu_meninggal'])) pukul {{ $surat->isi_surat['waktu_meninggal'] }}@endif di {{ $surat->isi_surat['tempat_meninggal'] ?? '[tempat_meninggal]' }}@if(isset($surat->isi_surat['sebab_kematian']) && $surat->isi_surat['sebab_kematian']) dengan sebab kematian: {{ $surat->isi_surat['sebab_kematian'] }}@endif.
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <br>
-                        Yang bersangkutan adalah {{ strtolower($surat->isi_surat['hubungan_keluarga'] ?? 'keluarga') }} dari:
-                    </td>
-                </tr>
-                <tr>
-                    <td class="section-title">1. Nama Lengkap</td>
-                    <td class="indent">: {{ $surat->isi_surat['nama_lengkap'] ?? '[nama]' }}</td>
-                </tr>
-                <tr>
-                    <td class="section-title">2. NIK / No. KTP</td>
-                    <td class="indent">: {{ $surat->isi_surat['nik'] ?? '[nik]' }}</td>
-                </tr>
-                <tr>
-                    <td class="section-title">3. Tempat / Tanggal Lahir</td>
-                    <td class="indent">: {{ $surat->isi_surat['tempat_lahir'] ?? '[ttl]' }}@if(isset($surat->isi_surat['tempat_lahir'])), {{ date('d-m-Y', strtotime($surat->isi_surat['tanggal_lahir'])) }}@endif</td>
-                </tr>
-                <tr>
-                    <td class="section-title">4. Jenis Kelamin</td>
-                    <td class="indent">: {{ $surat->isi_surat['jenis_kelamin'] ?? '[sex]' }}</td>
-                </tr>
-                <tr>
-                    <td class="section-title">5. Agama</td>
-                    <td class="indent">: {{ $surat->isi_surat['agama'] ?? '[agama]' }}</td>
-                </tr>
-                <tr>
-                    <td class="section-title">6. Pekerjaan</td>
-                    <td class="indent">: {{ $surat->isi_surat['pekerjaan'] ?? '[pekerjaan]' }}</td>
-                </tr>
-                <tr>
-                    <td class="section-title">7. Kewarganegaraan</td>
-                    <td class="indent">: {{ $surat->isi_surat['kewarganegaraan'] ?? '[kewarganegaraan]' }}</td>
-                </tr>
-                <tr>
-                    <td class="section-title">8. Alamat/Tempat Tinggal</td>
-                    <td class="indent">: {{ $surat->isi_surat['alamat'] ?? '[alamat]' }} Desa Rawapanjang, Kecamatan Bojonggede, Kabupaten Bogor</td>
-                </tr>
-                @if(isset($surat->isi_surat['keperluan']))
-                <tr>
-                    <td class="section-title">Keperluan</td>
-                    <td class="indent">: {{ $surat->isi_surat['keperluan'] }}@if(isset($surat->isi_surat['keterangan_keperluan']) && $surat->isi_surat['keterangan_keperluan']) - {{ $surat->isi_surat['keterangan_keperluan'] }}@endif</td>
-                </tr>
-                @endif
-            </table>
-            <p>Demikian surat keterangan ini dibuat dengan sebenarnya, untuk dipergunakan sebagaimana mestinya.</p>
-            @if(isset($surat->isi_surat['keperluan']))
-            <p><strong>Keperluan:</strong> {{ $surat->isi_surat['keperluan'] }}@if(isset($surat->isi_surat['keterangan_keperluan']) && $surat->isi_surat['keterangan_keperluan']) - {{ $surat->isi_surat['keterangan_keperluan'] }}@endif</p>
-            @endif
-        </div>
-
-        <div class="footer">
-            <p>Rawapanjang, {{ isset($surat->updated_at) ? date('d F Y', strtotime($surat->updated_at)) : date('d F Y') }}</p>
-            <p>Kepala Desa Rawapanjang</p>
-            <br><br><br>
-            <p>____________________</p>
-            <p>[Nama Kepala Desa]</p>
-        </div>
-    </div>
-</body>
-
-</html>
+@section('footer')
+<div class="just-signature-right">
+    <p>Rawapanjang, {{ $surat->updated_at->translatedFormat('d F Y') }}</p>
+    <p>Kepala Desa Rawapanjang</p>
+    <br><br><br>
+    <p>____________________</p>
+</div>
+@endsection
