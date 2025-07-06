@@ -7,7 +7,7 @@
         body {
             font-family: sans-serif;
             /* color: white; */
-            background-image: url('{{asset('assets/BackgroundMockupAnjungan.png') }}');
+            background-image: url('{{asset(' assets/BackgroundMockupAnjungan.png') }}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -119,15 +119,18 @@
         <div class="preview-container">
             @if ($proses_surat['jenis_surat'] == "SKD")
             <iframe src="/skd" width="100%" height="100%"></iframe>
+            @elseif ($proses_surat['jenis_surat'] == "SKKTP")
+            <iframe src="/skktp" width="100%" height="100%"></iframe>
             @elseif ($proses_surat['jenis_surat'] == "SKP")
             <iframe src="/skp" width="100%" height="100%"></iframe>
             @elseif ($proses_surat['jenis_surat'] == "SKTM")
-            <iframe src="/skktpdp" width="100%" height="100%"></iframe>
+            <iframe src="/sktm" width="100%" height="100%"></iframe>
             @elseif ($proses_surat['jenis_surat'] == "SKWH")
             <iframe src="/skwh" width="100%" height="100%"></iframe>
             @elseif ($proses_surat['jenis_surat'] == "SKK")
             <iframe src="/skk" width="100%" height="100%"></iframe>
             @endif
+            <!-- <iframe src="/preview-surat" width="100%" height="100%"></iframe> -->
         </div>
         <form action="#" method="POST">
             @csrf

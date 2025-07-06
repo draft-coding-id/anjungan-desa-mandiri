@@ -113,13 +113,12 @@ Route::controller(SuratController::class)->group(function () {
 // Layanan Mandiri - Preview Surat
 Route::get('/skd', [PreviewSuratController::class, 'skd'])->name('preview.skd');
 Route::get('/skp', [PreviewSuratController::class, 'skp'])->name('preview.skp');
+Route::get('/skktp', [PreviewSuratController::class, 'skktp'])->name('preview.skktp');
 Route::get('/skwh', [PreviewSuratController::class, 'skwh'])->name('preview.skwh');
-Route::get('/skck', [PreviewSuratController::class, 'skck'])->name('preview.skck');
-Route::get('/skktpdp', [PreviewSuratController::class, 'skktpdp'])->name('preview.skktpdp');
-Route::get('/spkk', [PreviewSuratController::class, 'spkk'])->name('preview.spkk');
-Route::get('/sppkk', [PreviewSuratController::class, 'sppkk'])->name('preview.sppkk');
-Route::get('/skwh', [PreviewSuratController::class, 'skwh'])->name('preview.skwh');
+Route::get('/sktm', [PreviewSuratController::class, 'sktm'])->name('preview.sktm');
 Route::get('/skk', [PreviewSuratController::class, 'skk'])->name('preview.skk');
+
+Route::get('/preview-surat' , [PreviewSuratController::class, 'index'])->name('preview.surat');
 // ----- Ends of Views Warga ----- //
 
 // ====================================================================== //

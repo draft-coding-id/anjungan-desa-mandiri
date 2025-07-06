@@ -59,10 +59,10 @@
                         <td><button disabled>{{$data->status}}</button>
                             @endrole
                         <td>{{$data->no_surat}}</td>
-                        <td>{{$data->isi_surat['nik']}}</td>
-                        <td>{{$data->isi_surat['nama_lengkap']}}</td>
+                        <td>{{$data->warga->nik}}</td>
+                        <td>{{$data->warga->nama_lengkap}}</td>
                         <td>{{$data->no_hp}}</td>
-                        <td>{{$data->jenis_surat}}</td>
+                        <td>{{$data->jenisSurat->nama}}</td>
                         <td>{{$data->updated_at->translatedFormat('d F Y')}}</td>
                     </tr>
                     @empty

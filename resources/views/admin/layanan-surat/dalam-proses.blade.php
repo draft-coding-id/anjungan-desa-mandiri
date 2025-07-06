@@ -33,13 +33,13 @@
                     <td>{{$increment++}}</td>
 
                     <!-- <td>12345</td> -->
-                    <td>{{$surat->isi_surat['nik']}}</td>
-                    <td>{{$surat->isi_surat['nama_lengkap']}}</td>
-                    <td>{{$surat->isi_surat['rt']}}</td>
-                    <td>{{$surat->isi_surat['rw']}}</td>
+                    <td>{{ $surat->warga->nik }}</td>
+                    <td>{{ $surat->warga->nama_lengkap}}</td>
+                    <td>{{ $surat->warga->rt}}</td>
+                    <td>{{ $surat->warga->rw}}</td>
                     <td>{{$surat->no_hp}}</td>
-                    <td>{{$surat->jenis_surat}}</td>
-                    <td>{{$surat->isi_surat['keperluan']}}</td>
+                    <td>{{$surat->jenisSurat->nama}}</td>
+                    <td>{{ $surat->isi_surat['keperluan']}}</td>
 
                     <td height="50px" width="250px">
                         <button id="preview-dokumen-{{$surat->id}}" class="button" onclick="previewDokumen({{$surat->id}})">
@@ -96,9 +96,9 @@
                     @endhasanyrole
 
                     <td>{{$surat->warga->nik}}</td>
-                    <td>{{$surat->warga->nik}}</td>
+                    <td>{{$surat->warga->nama_lengkap}}</td>
                     <td>{{$surat->no_hp}}</td>
-                    <td>{{$surat->jenis_surat}}</td>
+                    <td>{{$surat->jenisSurat->nama}}</td>
                     <td>{{date($surat->created_at)}}</td>
                     @empty
                     <td colspan="7" style="text-align: center">Surat Sudah di kirim ke warga</td>

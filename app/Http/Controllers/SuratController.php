@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JenisSurat;
+use App\Models\JenisSuratField;
 use App\Models\KategoriSurat;
 use Illuminate\Http\Request;
 use App\Models\Warga;
@@ -127,7 +128,19 @@ class SuratController extends Controller
                         'rw' => 'required|string',
                     ]);
                     break;
-
+                case 'SKKTP':
+                    $rules = array_merge($baseRules,  [
+                        'nama_lengkap' => 'required|string|max:100',
+                        'tempat_lahir' => 'required|string',
+                        'tanggal_lahir' => 'required|date|before:today',
+                        'jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan',
+                        'alamat' => 'required|string',
+                        'agama' => 'required|string|in:Islam,Kristen,Katolik,Hindu,Buddha,Khonghucu',
+                        'status_kawin' => 'required|string',
+                        'pekerjaan' => 'required|string',
+                        'kewarganegaraan' => 'required|string|in:WNI,WNA',
+                    ]);
+                    break;
                 case 'SKP':
                     $rules = array_merge($baseRules, $pemohonRules, [
                         'no_kk' => 'required|string|size:16',
@@ -231,8 +244,12 @@ class SuratController extends Controller
         $proses_surat = session('surat');
         $jenisSurat = JenisSurat::where('kode', $proses_surat['jenis_surat'])->first();
         $proses_surat['nama_jenis_surat'] = $jenisSurat->nama;
+        $jenisSuratField = JenisSuratField::where('jenis_surat_id', $jenisSurat->id)
+            ->with('formFieldTemplate')
+            ->orderBy('order')
+            ->get();
 
-        return view('warga.layanan-mandiri.verif_surat', ['proses_surat' => $proses_surat]);
+        return view('warga.layanan-mandiri.verif_surat', ['proses_surat' => $proses_surat , 'jenisSuratField' => $jenisSuratField]);
     }
 
     public function berhasil()
@@ -263,13 +280,15 @@ class SuratController extends Controller
             'file_kk' => $data['file_path'] ?? null,
             'no_kk' => $data['no_kk'] ?? null,
         ]);
-        Surat::create([
+        $jenisSuratId = JenisSurat::where('kode', $data['jenis_surat'])->first()->id;
+        $surat = Surat::create([
             'warga_id' => $data['warga_id'],
-            'jenis_surat' => $data['jenis_surat'],
+            'jenis_surat_id' => $jenisSuratId,
             'isi_surat' => $data,
             'file' => $data['file_path'] ?? $warga->file_kk,
             'no_hp' => $noHp
         ]);
+        
    
 
         session()->forget('surat');

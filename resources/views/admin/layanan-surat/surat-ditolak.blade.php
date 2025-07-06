@@ -35,9 +35,9 @@
                     </td>
                     <td>{{$data->status}}</td>
                     <td>{{$data->no_surat}}</td>
-                    <td>{{$data->isi_surat['nama_lengkap']}}</td>
+                    <td>{{$data->warga->nama_lengkap}}</td>
                     <td>{{$data->no_hp}}</td>
-                    <td>{{$data->jenis_surat}}</td>
+                    <td>{{$data->jenisSurat->nama}}</td>
                     <td>{{$data->created_at}}</td>
                 </tr>
                 @empty

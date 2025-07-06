@@ -15,7 +15,7 @@ class Surat extends Model
         'alasan_tolak',
         'no_surat',
         'status',
-        'jenis_surat',
+        'jenis_surat_id',
         'no_hp',
         'is_accepted',
         'is_approve_admin',
@@ -49,20 +49,21 @@ class Surat extends Model
     public function generateNomorSurat()
     {
         // Tentukan kode jenis surat
-        $kodeJenis = $this->jenis_surat;
-
+        
+        $jenisSurat = JenisSurat::where('kode' , $this->jenis_surat_id)->get();
+        // dd($jenisSurat->first()->id);
         // Ambil bulan & tahun saat ini
         $bulan = date('m');
         $tahun = date('Y');
 
         // Hitung jumlah surat bulan ini
-        $count = Surat::where('jenis_surat', $this->jenis_surat)
+        $count = Surat::where('jenis_surat_id',  )
             ->whereMonth('created_at', $bulan)
             ->whereYear('created_at', $tahun)
             ->count() + 1;
 
         // Format nomor surat (003/SKD/03/2025)
-        return str_pad($count, 3, '0', STR_PAD_LEFT) . "/$kodeJenis/$bulan/$tahun";
+        return str_pad($count, 3, '0', STR_PAD_LEFT) . "/$this->jenis_surat_id/$bulan/$tahun";
     }
     public function warga()
     {
