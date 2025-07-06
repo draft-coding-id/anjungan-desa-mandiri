@@ -30,6 +30,12 @@ class PreviewSuratController extends Controller
             'proses_surat' => $this->proses_surat
         ]);
     }
+    public function sik()
+    {
+        return view('warga.layanan-mandiri.preview-surat.surat_izin_keramaian', [
+            'proses_surat' => $this->proses_surat
+        ]);
+    }
 
     public function skwh()
     {

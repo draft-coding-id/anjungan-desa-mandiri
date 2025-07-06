@@ -34,8 +34,8 @@ class LayananSurat extends Controller
     }
     public function previewDokumen($id){
         $surat = Surat::find($id); 
-        $fileUrl = asset('storage/' . $surat->file); // perhatikan perubahan ini
-
+        $fileUrl = asset('/storage/' . $surat->file); // perhatikan perubahan ini
+        
         return response()->json([
             'jenis_surat' => $surat->jenis_surat,
             'file' => $fileUrl,
@@ -47,6 +47,7 @@ class LayananSurat extends Controller
         $view = match ($jenisSurat) {
             "SKD" => 'admin.preview-surat.surat_ket_domisili',
             "SKKTP" => 'admin.preview-surat.surat_ket_ktp_dalam_proses',
+            "SIK" => 'admin.preview-surat.surat_izin_keramaian',
             "SKP" => 'admin.preview-surat.surat_ket_pengantar',
             "SKWH" => 'admin.preview-surat.surat_ket_wali_hakim',
             "SKK" => 'admin.preview-surat.surat_ket_kematian',

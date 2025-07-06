@@ -14,34 +14,55 @@ use Illuminate\Support\Facades\Storage;
 
 class SuratController extends Controller
 {
+    public $warga;
+    public function __construct(){
+        $this->warga = auth()->guard('warga')->user();
+    }
+
     //Menampilkan histori dan progres pengajuan surat
     public function histori_progres_surat()
     {
-        $surats = Surat::where('warga_id', auth()->guard('warga')->user()->id)
+        if (!$this->warga) {
+            return redirect()->route('login-warga');
+        }
+        $surats = Surat::where('warga_id', $this->warga->id)
             ->orderBy('created_at', 'desc')
             ->get();
         return view('warga.layanan-mandiri.histori_progres_surat', compact('surats'));
     }
 
-    public function layananUmum(){
+    public function layananUmum()
+    {
+        if (!$this->warga) {
+            return redirect()->route('login-warga');
+        }
         $jenisSurat = JenisSurat::where('kategori_surat', 'Layanan Umum')->get();
-        return view('warga.layanan-mandiri.layanan_umum' , compact('jenisSurat'));
+        return view('warga.layanan-mandiri.layanan_umum', compact('jenisSurat'));
     }
 
     public function layananKependudukan()
     {
+        if (!$this->warga) {
+            return redirect()->route('login-warga');
+        }
         $jenisSurat = JenisSurat::where('kategori_surat', 'Layanan Kependudukan')->get();
         return view('warga.layanan-mandiri.layanan_kependudukan', compact('jenisSurat'));
     }
 
     public function layananPernikahan()
     {
+        if (!$this->warga) {
+            return redirect()->route('login-warga');
+        }
         $jenisSurat = JenisSurat::where('kategori_surat', 'Layanan Pernikahan')->get();
         return view('warga.layanan-mandiri.layanan_pernikahan', compact('jenisSurat'));
     }
 
     public function layananCatatanSipil()
     {
+        if (!$this->warga) {
+            return redirect()->route('login-warga');
+        }
         $jenisSurat = JenisSurat::where('kategori_surat', 'Layanan Catatan Sipil')->get();
         return view('warga.layanan-mandiri.layanan_catatan_sipil', compact('jenisSurat'));
     }
@@ -49,55 +70,50 @@ class SuratController extends Controller
     // Tampilkan formulir Surat Keterangan Domisili
     public function form_Surat_Keterangan_Domisili(Request $request)
     {
-        // Data warga diambil dari session
-        $warga = auth()->guard('warga')->user();
-        if (!$warga) {
-            return redirect()->route('login');
+        if (!$this->warga) {
+            return redirect()->route('login-warga');
         }
-        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-domisili', ['warga' => $warga]);
+        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-domisili', ['warga' => $this->warga]);
     }
+
     public function form_Surat_Keterangan_KTP_Dalam_Proses(Request $request)
     {
-        // Data warga diambil dari session
-        $warga = auth()->guard('warga')->user();
-
-        if (!$warga) {
-            return redirect()->route('login');
+        if (!$this->warga) {
+            return redirect()->route('login-warga');
         }
-        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-ktp-dalam-proses', ['warga' => $warga]);
+        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-ktp-dalam-proses', ['warga' => $this->warga]);
     }
-    // Tampilkan formulir Surat Keterangan Pengantar
+
     public function form_Surat_Keterangan_Pengantar(Request $request)
     {
-        // Data warga diambil dari session
-        $warga = auth()->guard('warga')->user();
-        if (!$warga) {
-            return redirect()->route('login');
+        if (!$this->warga) {
+            return redirect()->route('login-warga');
         }
-        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-pengantar', ['warga' => $warga]);
+        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-pengantar', ['warga' => $this->warga]);
     }
 
-    // Tampilkan formulir Surat Keterangan KTP Dalam Proses
-
+    public function form_Surat_Izin_Keramaian(Request $request)
+    {
+        if (!$this->warga) {
+            return redirect()->route('login-warga');
+        }
+        return view('warga.layanan-mandiri.form-surat.form-surat-izin-keramaian', ['warga' => $this->warga]);
+    }
 
     public function form_surat_keterangan_wali_hakim(Request $request)
     {
-        // Data warga diambil dari session
-        $warga = auth()->guard('warga')->user();
-        if (!$warga) {
-            return redirect()->route('login');
+        if (!$this->warga) {
+            return redirect()->route('login-warga');
         }
-        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-wali-hakim', ['warga' => $warga]);
+        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-wali-hakim', ['warga' => $this->warga]);
     }
 
     public function form_surat_keterangan_kematian(Request $request)
     {
-        $warga = auth()->guard('warga')->user();
-
-        if (!$warga) {
-            return redirect()->route('login');
+        if (!$this->warga) {
+            return redirect()->route('login-warga');
         }
-        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-kematian', ['warga' => $warga]);
+        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-kematian', ['warga' => $this->warga]);
     }
 
     // Proses pengiriman data
@@ -122,6 +138,9 @@ class SuratController extends Controller
                     break;
                 case 'SKP':
                     $validatedData = $this->validateSkp($request);
+                    break;
+                case 'SIK':
+                    $validatedData = $this->validateSik($request);
                     break;
                 case 'SKWH':
                     $validatedData = $this->validateSkwh($request);
@@ -233,7 +252,7 @@ class SuratController extends Controller
             'tempat_lahir' => 'required|string',
             'tanggal_lahir' => 'required|date|before:today',
             'jenis_kelamin' => 'required|string',
-            'warga_negara' => 'required|string',
+            'kewarganegaraan' => 'required|string',
             'agama' => 'required|string',
             'pekerjaan' => 'required|string',
             'gol_darah' => 'required|string',
@@ -242,6 +261,37 @@ class SuratController extends Controller
             'alamat' => 'required|string',
             'rt' => 'required|numeric',
             'rw' => 'required|numeric',
+            // Field yang harus diinput user
+            'no_hp' => 'required|string',
+            'keperluan' => 'required|string',
+            'file' => 'nullable|file|mimes:pdf|max:2048',
+        ], $this->getValidationMessages());
+    }
+
+    private function validateSik(Request $request){
+        return $request->validate([
+            'jenis_surat' => 'required|string',
+            'warga_id' => 'required',
+            'nik' => 'required|string|min:16|max:16',
+            'no_kk' => 'required|string|min:16|max:16',
+            'nama_lengkap' => 'required|string|min:3|max:255',
+            'status_kawin' => 'required|string',
+            'tempat_lahir' => 'required|string',
+            'tanggal_lahir' => 'required|date|before:today',
+            'jenis_kelamin' => 'required|string',
+            'pendidikan' => 'required|string',
+            'kewarganegaraan' => 'required|string',
+            'agama' => 'required|string',
+            'pekerjaan' => 'required|string',
+            'alamat' => 'required|string',
+            'rt' => 'required|numeric',
+            'rw' => 'required|numeric',
+            'desa' => 'required|string',
+            'kecamatan' => 'required|string',
+            // tambahan 
+            'kepala_keluarga' => 'required|string',
+            'jenis_keramaian' => 'required|string',
+            'tanggal_kegiatan' => 'required|date',
             // Field yang harus diinput user
             'no_hp' => 'required|string',
             'keperluan' => 'required|string',
@@ -382,11 +432,13 @@ class SuratController extends Controller
     public function konfirmasi()
     {
         $proses_surat = session('surat');
+        // dd($proses_surat);
         // Mapping jenis surat
         $jenis_surat_mapping = [
             'SKD' => 'Surat Keterangan Domisili',
             'SKKTP' => 'Surat Keterangan KTP Dalam Proses',
-            'SKP' => 'Surat Keterangan Pengantar',
+            'SKPG' => 'Surat Keterangan Pengantar',
+            'SIK' => 'Surat Izin Keramaian',
             'SKTM' => 'Surat Keterangan KTP Dalam Proses',
             'SKWH' => 'Surat Keterangan Wali Hakim',
             'SKK' => 'Surat Keterangan Kematian',
@@ -422,8 +474,8 @@ class SuratController extends Controller
         // Simpan ke database
         $warga = Warga::find($data['warga_id']);
         $warga->update([
-            'file_kk' => $data['file_path'] ?? null,
-            'no_kk' => $data['no_kk'] ?? null,
+            'file_kk' => $data['file_path'] ?? $warga->file_kk,
+            'no_kk' => $data['no_kk'] ?? $warga->no_kk,
         ]);
         Surat::create([
             'warga_id' => $data['warga_id'],

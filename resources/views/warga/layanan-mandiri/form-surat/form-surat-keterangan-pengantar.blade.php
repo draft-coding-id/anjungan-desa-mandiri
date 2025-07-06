@@ -13,7 +13,7 @@ Surat Keterangan Pengantar
 <form action="{{ route('submitForm') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="warga_id" value="{{ $warga->id }}">
-    <input type="hidden" name="jenis_surat" value="SKP">
+    <input type="hidden" name="jenis_surat" value="SKPG">
 
     <!-- Section: Data Pribadi -->
     <div class="section-title">Data Pribadi</div>
@@ -65,7 +65,7 @@ Surat Keterangan Pengantar
             <td>Warga Negara <span class="required">*</span></td>
             <td>:</td>
             <td>
-                <input type="text" name="warga_negara" value="{{ $warga->kewarganegaraan }}" readonly>
+                <input type="text" name="kewarganegaraan" value="{{ $warga->kewarganegaraan }}" readonly>
             </td>
         </tr>
         <tr>
@@ -138,7 +138,7 @@ Surat Keterangan Pengantar
             <td>Upload Kartu Keluarga <span class="required">*</span></td>
             <td>:</td>
             <td>
-                <input type="file" name="file" accept=".pdf" >
+                <input type="file" name="file" accept=".pdf">
                 <!-- Menampilkan nama file yang telah di-upload -->
                 @if($warga->file_kk)
                 <div>

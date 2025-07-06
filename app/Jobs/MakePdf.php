@@ -55,8 +55,10 @@ class MakePdf implements ShouldQueue
             $pdf = Pdf::loadView('admin.preview-surat.surat_ket_pengantar_spkk', ['surat' => $this->surat]);
         } elseif ($this->surat->jenis_surat == "SPPKK") {
             $pdf = Pdf::loadView('admin.preview-surat.surat_ket_pengantar_sppkk', ['surat' => $this->surat]);
-        } elseif ($this->surat->jenis_surat == "SKP") {
+        } elseif ($this->surat->jenis_surat == "SKPG") {
             $pdf = Pdf::loadView('admin.layanan-surat.surat-keterangan-pengantar-ttd-kades', ['surat' => $this->surat , 'qrCode' => $this->qrCode]);
+        } elseif ($this->surat->jenis_surat == "SIK") {
+            $pdf = Pdf::loadView('admin.layanan-surat.sik_ttd_kades', ['surat' => $this->surat , 'qrCode' => $this->qrCode]);
         } elseif ($this->surat->jenis_surat == "SKWH") {
             $pdf = Pdf::loadView('admin.layanan-surat.surat_ket_wali_hakim-ttd-kades', ['surat' => $this->surat , 'qrCode' => $this->qrCode]);
         } elseif ($this->surat->jenis_surat == "SKK") {

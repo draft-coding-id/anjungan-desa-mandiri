@@ -100,7 +100,9 @@ Route::controller(SuratController::class)->group(function () {
     Route::get('/histori-progres-surat', 'histori_progres_surat')->name('histori_progres_surat');
     Route::get('/SKD', 'form_Surat_Keterangan_Domisili');
     Route::get('/SKKTP' , 'form_Surat_Keterangan_KTP_Dalam_Proses');
-    Route::get('/SKP', 'form_Surat_Keterangan_Pengantar');
+
+    Route::get('/SKPG', 'form_Surat_Keterangan_Pengantar');
+    Route::get('/SIK', 'form_Surat_Izin_Keramaian');
 
     Route::get('/SKWH', 'form_Surat_Keterangan_Wali_Hakim');
     Route::get('/SKK', 'form_Surat_Keterangan_Kematian');
@@ -114,6 +116,7 @@ Route::controller(SuratController::class)->group(function () {
 Route::get('/skd', [PreviewSuratController::class, 'skd'])->name('preview.skd');
 Route::get('/skktp', [PreviewSuratController::class, 'skktp'])->name('preview.skktp');
 Route::get('/skp', [PreviewSuratController::class, 'skp'])->name('preview.skp');
+Route::get('/sik', [PreviewSuratController::class, 'sik'])->name('preview.sik');
 Route::get('/skwh', [PreviewSuratController::class, 'skwh'])->name('preview.skwh');
 Route::get('/skwh', [PreviewSuratController::class, 'skwh'])->name('preview.skwh');
 Route::get('/skk', [PreviewSuratController::class, 'skk'])->name('preview.skk');

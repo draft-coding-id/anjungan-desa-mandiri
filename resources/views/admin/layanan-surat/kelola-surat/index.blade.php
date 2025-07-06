@@ -100,7 +100,7 @@
                         <option value="SPC">(SPC) Surat Permohonan Cerai</option>
                         <option value="SPJD">(SPJD) Surat Pernyataan Janda/Duda</option>
                         <option value="SIK">(SIK) Surat Izin Keramaian</option>
-                        <option value="SKPG">(SKPG) Surat Keterangan Pengantar</option>
+                        <option value="SKP">(SKP) Surat Keterangan Pengantar</option>
                         <option value="SKTM">(SKTM) Surat Keterangan Tidak Mampu</option>
                     </select>
                 </div>

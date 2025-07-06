@@ -5,22 +5,6 @@
 
 @section('surat-title', 'SURAT KETERANGAN PENGANTAR')
 
-@section('additional-styles')
-.footer-table {
-width: 100%;
-margin-top: 40px;
-}
-
-.footer-table td {
-vertical-align: top;
-text-align: center;
-}
-
-.spacer {
-width: 200px;
-}
-@endsection
-
 @section('content')
 <div>
     <p>Yang bertanda tangan di bawah ini Kepala Desa Rawapanjang, Kecamatan Bojonggede, Kabupaten Bogor, Provinsi Jawa
@@ -107,19 +91,18 @@ width: 200px;
 <table class="footer-table">
     <tr>
         <td class="signature-left">
-        <br>
-                <p>Pemegang Surat</p>
-                <br>
-                <br>
-                <br>
-                <p>{{$surat->isi_surat['nama_lengkap']}}</p>
+            <br>
+            <p>Pemegang Surat</p>
+            <br>
+            <br>
+            <br>
+            <p>{{$surat->isi_surat['nama_lengkap']}}</p>
         </td>
         <td class="signature-center"></td>
         <td class="signature-right">
             <p>Rawapanjang, {{ $surat->updated_at->translatedFormat('d F Y') }}</p>
             <p>Kepala Desa Rawapanjang</p>
-            <br><br><br>
-            <p>____________________</p>
+            <img src="data:image/png;base64,{{ base64_encode($qrCode) }}" class="qr-code" alt="QR Code">
         </td>
     </tr>
 </table>

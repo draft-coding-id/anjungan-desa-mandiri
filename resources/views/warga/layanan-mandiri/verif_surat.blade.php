@@ -119,8 +119,10 @@
         <div class="preview-container">
             @if ($proses_surat['jenis_surat'] == "SKD")
             <iframe src="/skd" width="100%" height="100%"></iframe>
-            @elseif ($proses_surat['jenis_surat'] == "SKP")
+            @elseif ($proses_surat['jenis_surat'] == "SKPG")
             <iframe src="/skp" width="100%" height="100%"></iframe>
+            @elseif ($proses_surat['jenis_surat'] == "SIK")
+            <iframe src="/sik" width="100%" height="100%"></iframe>
             @elseif ($proses_surat['jenis_surat'] == "SKKTP")
             <iframe src="/skktp" width="100%" height="100%"></iframe>
             @elseif ($proses_surat['jenis_surat'] == "SKWH")

@@ -48,11 +48,6 @@ class KelolaSurat extends Seeder
             // Layanan Catatan Sipil
             [
                 'kategori_surat' => 'Layanan Catatan Sipil',
-                'nama_surat' => 'Surat Keterangan Kelahiran',
-                'kode_surat' => 'SKK',
-            ],
-            [
-                'kategori_surat' => 'Layanan Catatan Sipil',
                 'nama_surat' => 'Surat Keterangan Kematian',
                 'kode_surat' => 'SKK',
             ],
@@ -77,11 +72,6 @@ class KelolaSurat extends Seeder
                 'kategori_surat' => 'Layanan Pernikahan',
                 'nama_surat' => 'Surat Keterangan Wali Hakim',
                 'kode_surat' => 'SKWH',
-            ],
-            [
-                'kategori_surat' => 'Layanan Pernikahan',
-                'nama_surat' => 'Surat Pengantar Nikah',
-                'kode_surat' => 'SPN',
             ],
             [
                 'kategori_surat' => 'Layanan Pernikahan',
