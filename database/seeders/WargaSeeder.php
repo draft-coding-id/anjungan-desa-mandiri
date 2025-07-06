@@ -18,6 +18,7 @@ class WargaSeeder extends Seeder
         Warga::create(
             [
                 'nik' => '3171042106860001',
+                'no_kk' => '3171042106860001',
                 'pin' => Hash::make('123456'), // Enkripsi PIN untuk keamanan
                 'nama_lengkap' => 'Andi Wid Bwo',
                 'tempat_lahir' => 'Jakarta',
@@ -41,6 +42,7 @@ class WargaSeeder extends Seeder
             Warga::create(
                 [
                     'nik' => $faker->nik,
+                    'no_kk' => $faker->nik, // Menggunakan NIK sebagai No KK untuk contoh
                     'pin' => bcrypt($faker->randomNumber(6, true)), // Enkripsi PIN untuk keamanan
                     'nama_lengkap' => $faker->name,
                     'status_kawin' => $faker->randomElement(['Belum Kawin', 'Kawin', 'Cerai Hidup', 'Cerai Mati']),
