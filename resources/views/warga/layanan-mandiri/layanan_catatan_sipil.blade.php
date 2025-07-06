@@ -6,9 +6,11 @@
 @endsection
 
 @section('surat-button')
-<a href="#" class="button-coffee">Surat Keterangan Kelahiran</a>
-<a href="/surat-keterangan-kematian" class="button-coffee">Surat Keterangan Kematian</a>
-<a href="#" class="button-coffee">Surat Pernyataan Membuat Akta Kelahiran</a>
+@forelse ($jenisSurat as $surat)
+<a href="{{$surat->kode_surat}}" class="button-coffee">{{ $surat->nama_surat }}</a>
+@empty
+<span class="coffee">Tidak ada layanan catatan sipil yang tersedia saat ini.</span>
+@endforelse
 @endsection
 
 @section('nav-button')

@@ -6,12 +6,14 @@
 @endsection
 
 @section('surat-button')
-<a href="#" class="button-green">Surat Izin <br> Keramaian</a>
-<a href="#" class="button-green">Surat <br> Keterangan <br> Tidak Mampu</a>
-<a href="/surat-keterangan-pengantar" class="button-green">Surat <br> Keterangan <br> Pengantar</a>
+@forelse ($jenisSurat as $surat)
+<a href="{{$surat->kode_surat}}" class="button-green">{{ $surat->nama_surat }}</a>
+@empty
+<span class="green">Tidak ada layanan umum yang tersedia saat ini.</span>
+@endforelse
 @endsection
 
-@section('nav-button')
-<a href="{{route('halaman_utama')}}" class="button">Halaman Utama</a>
+  @section('nav-button')
+  <a href="{{route('halaman_utama')}}" class="button">Halaman Utama</a>
 <a href="{{route('layanan-kependudukan')}}" class="button">Selanjutnya</a>
 @endsection

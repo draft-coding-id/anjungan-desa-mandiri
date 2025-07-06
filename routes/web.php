@@ -88,22 +88,22 @@ Route::get('/kabar-pembanguan', function () {
 
 // Masuk Menu Layanan Mandiri
 Route::middleware(['isAdmin'])->group(function () {
-    Route::get('/dashboard', [LoginController::class, 'showDashboard'])->name('dashboard');
     Route::get('/ganti-pin', [LoginController::class, 'gantiPin'])->name('ganti-pin');
-    Route::post('/ganti-pin/', [LoginController::class, 'updatePin'])->name('ganti-pin.update');
-    Route::view('/layanan-umum', 'warga.layanan-mandiri.layanan_umum')->name('layanan-umum');
-    Route::view('/layanan-kependudukan', 'warga.layanan-mandiri.layanan_kependudukan')->name('layanan-kependudukan');
-    Route::view('/layanan-pernikahan', 'warga.layanan-mandiri.layanan_pernikahan')->name('layanan-pernikahan');
-    Route::view('/layanan-catatan-sipil', 'warga.layanan-mandiri.layanan_catatan_sipil')->name('layanan-catatan-sipil');
+    Route::post('/ganti-pin', [LoginController::class, 'updatePin'])->name('ganti-pin.update');
+    Route::get('/layanan-umum', [SuratController::class, 'layananUmum'])->name('layanan-umum');
+    Route::get('/layanan-kependudukan', [SuratController::class, 'layananKependudukan'])->name('layanan-kependudukan');
+    Route::get('/layanan-catatan-sipil', [SuratController::class, 'layananCatatanSipil'])->name('layanan-catatan-sipil');
+    Route::get('/layanan-pernikahan', [SuratController::class, 'layananPernikahan'])->name('layanan-pernikahan');
 });
 
 Route::controller(SuratController::class)->group(function () {
     Route::get('/histori-progres-surat', 'histori_progres_surat')->name('histori_progres_surat');
-    Route::get('/surat-keterangan-domisili', 'form_Surat_Keterangan_Domisili');
-    Route::get('/surat-keterangan-pengantar', 'form_Surat_Keterangan_Pengantar');
-    Route::get('/surat-keterangan-ktp-dalam-proses', 'form_Surat_Keterangan_KTP_Dalam_Proses');
-    Route::get('/surat-keterangan-wali-hakim', 'form_surat_keterangan_wali_hakim');
-    Route::get('/surat-keterangan-kematian', 'form_surat_keterangan_kematian');
+    Route::get('/SKD', 'form_Surat_Keterangan_Domisili');
+    Route::get('/SKKTP' , 'form_Surat_Keterangan_KTP_Dalam_Proses');
+    Route::get('/SKP', 'form_Surat_Keterangan_Pengantar');
+
+    Route::get('/SKWH', 'form_Surat_Keterangan_Wali_Hakim');
+    Route::get('/SKK', 'form_Surat_Keterangan_Kematian');
     Route::post('/submitForm', 'submitForm')->name('submitForm');
     Route::get('/konfirmasi', 'konfirmasi');
     // Route::post('/submitSurat', [SuratController::class, 'submitSurat']);

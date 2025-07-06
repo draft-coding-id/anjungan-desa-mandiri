@@ -6,12 +6,11 @@
 @endsection
 
 @section('surat-button')
-<a href="/surat-keterangan-domisili" class="button-skyblue">Surat <br> Keterangan <br> Domisili</a>
-<a href="/surat-keterangan-ktp-dalam-proses" class="button-skyblue">Surat <br> Keterangan KTP <br> Dalam Proses </a>
-<a href="#" class="button-skyblue">Surat <br> Keterangan Penduduk </a>
-<a href="#" class="button-skyblue">Surat <br> Keterangan <br> Pindah Penduduk </a>
-<a href="#" class="button-skyblue">Surat <br> Permohonan <br> Kartu Keluarga </a>
-<a href="#" class="button-skyblue">Surat <br> Permohonan <br> Perubahan KK </a>
+@forelse ($jenisSurat as $surat)
+<a href="{{$surat->kode_surat}}" class="button-skyblue">{{ $surat->nama_surat }}</a>
+@empty
+<span class="skyblue">Tidak ada layanan kependudukan saat ini.</span>
+@endforelse
 @endsection
 
 @section('nav-button')

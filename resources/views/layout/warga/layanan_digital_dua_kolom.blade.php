@@ -34,6 +34,10 @@
       min-height: 100vh;
     }
 
+    span {
+      text-align: center;
+    }
+
     /* Kolom Kiri - Info Desa */
     .left-col {
       background-color: rgba(217, 217, 217, 0.9);

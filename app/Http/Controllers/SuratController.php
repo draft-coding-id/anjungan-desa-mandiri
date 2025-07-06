@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JenisSurat;
 use Illuminate\Http\Request;
 use App\Models\Warga;
 use App\Models\ProsesSurat;
@@ -22,6 +23,29 @@ class SuratController extends Controller
         return view('warga.layanan-mandiri.histori_progres_surat', compact('surats'));
     }
 
+    public function layananUmum(){
+        $jenisSurat = JenisSurat::where('kategori_surat', 'Layanan Umum')->get();
+        return view('warga.layanan-mandiri.layanan_umum' , compact('jenisSurat'));
+    }
+
+    public function layananKependudukan()
+    {
+        $jenisSurat = JenisSurat::where('kategori_surat', 'Layanan Kependudukan')->get();
+        return view('warga.layanan-mandiri.layanan_kependudukan', compact('jenisSurat'));
+    }
+
+    public function layananPernikahan()
+    {
+        $jenisSurat = JenisSurat::where('kategori_surat', 'Layanan Pernikahan')->get();
+        return view('warga.layanan-mandiri.layanan_pernikahan', compact('jenisSurat'));
+    }
+
+    public function layananCatatanSipil()
+    {
+        $jenisSurat = JenisSurat::where('kategori_surat', 'Layanan Catatan Sipil')->get();
+        return view('warga.layanan-mandiri.layanan_catatan_sipil', compact('jenisSurat'));
+    }
+
     // Tampilkan formulir Surat Keterangan Domisili
     public function form_Surat_Keterangan_Domisili(Request $request)
     {
@@ -32,7 +56,16 @@ class SuratController extends Controller
         }
         return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-domisili', ['warga' => $warga]);
     }
+    public function form_Surat_Keterangan_KTP_Dalam_Proses(Request $request)
+    {
+        // Data warga diambil dari session
+        $warga = auth()->guard('warga')->user();
 
+        if (!$warga) {
+            return redirect()->route('login');
+        }
+        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-ktp-dalam-proses', ['warga' => $warga]);
+    }
     // Tampilkan formulir Surat Keterangan Pengantar
     public function form_Surat_Keterangan_Pengantar(Request $request)
     {
@@ -45,16 +78,7 @@ class SuratController extends Controller
     }
 
     // Tampilkan formulir Surat Keterangan KTP Dalam Proses
-    public function form_Surat_Keterangan_KTP_Dalam_Proses(Request $request)
-    {
-        // Data warga diambil dari session
-        $warga = auth()->guard('warga')->user();
 
-        if (!$warga) {
-            return redirect()->route('login');
-        }
-        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-ktp-dalam-proses', ['warga' => $warga]);
-    }
 
     public function form_surat_keterangan_wali_hakim(Request $request)
     {

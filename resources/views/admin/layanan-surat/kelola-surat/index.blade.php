@@ -25,6 +25,7 @@
                 <tr>
                     <th>No</th>
                     <th>Nama</th>
+                    <th>Kategori</th>
                     <th>Kode Surat</th>
                     <th>Aksi</th>
                 </tr>
@@ -34,6 +35,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $surat->nama_surat }}</td>
+                    <td>{{ $surat->kategori_surat }}</td>
                     <td>{{ $surat->kode_surat }}</td>
                     <td>
                         <a href="javascript:void(0)" onclick="showSurat({{ $surat->id }})" class="btn btn-primary">Show</a>
@@ -71,7 +73,7 @@
                         <option value="Layanan Kependudukan">Layanan Kependudukan</option>
                         <option value="Layanan Catatan Sipil">Layanan Catatan Sipil</option>
                         <option value="Layanan Pernikahan">Layanan Pernikahan</option>
-                        <option value="Layanan Pernikahan">Layanan Pernikahan</option>
+                        <option value="Layanan Umum">Layanan Umum</option>
                     </select>
                 </div>
 
@@ -129,7 +131,7 @@
                         <option value="Layanan Kependudukan">Layanan Kependudukan</option>
                         <option value="Layanan Catatan Sipil">Layanan Catatan Sipil</option>
                         <option value="Layanan Pernikahan">Layanan Pernikahan</option>
-                        <option value="Layanan Pernikahan">Layanan Pernikahan</option>
+                        <option value="Layanan Umum">Layanan Umum</option>
                     </select>
                 </div>
 

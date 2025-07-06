@@ -77,6 +77,7 @@ class DatabaseSeeder extends Seeder
             WargaSeeder::class,
             SejarahDesaSeeder::class,
             VisiMisiSeeder::class,
+            KelolaSurat::class,
         ]);
     }
 }
