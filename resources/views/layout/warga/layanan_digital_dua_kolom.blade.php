@@ -255,7 +255,6 @@
       gap: 20px;
       justify-content: center;
       margin-bottom: 40px;
-      width: 100%;
       max-width: 1000px;
       padding: 0 20px;
     }

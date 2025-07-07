@@ -163,6 +163,25 @@ class SuratController extends Controller
         return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-kematian', ['warga' => $this->warga]);
     }
 
+    public function form_surat_pernyataan_membuat_akta_kelahiran(Request $request)
+    {
+        $warga = auth()->guard('warga')->user();
+
+        if (!$warga) {
+            return redirect()->route('login');
+        }
+        return view('warga.layanan-mandiri.form-surat.form-surat-pernyataan-membuat-akta-kelahiran', ['warga' => $warga]);
+    }
+    public function form_surat_pernyataan_janda_duda(Request $request)
+    {
+        $warga = auth()->guard('warga')->user();
+
+        if (!$warga) {
+            return redirect()->route('login');
+        }
+        return view('warga.layanan-mandiri.form-surat.form-surat-pernyataan-janda-duda', ['warga' => $warga]);
+    }
+
     // Proses pengiriman data
     public function submitForm(Request $request)
     {
@@ -210,6 +229,12 @@ class SuratController extends Controller
                 case 'SKK':
                     $validatedData = $this->validateSkk($request);
                     break;
+                case 'SPMAK':
+                    $validatedData = $this->validateSpmak($request);
+                    break;
+                case 'SPJD':
+                    $validatedData = $this->validateSpjd($request);
+                    break;
                 default:
                     return redirect()->back()->with('error', 'Jenis surat tidak valid');
             }
@@ -224,6 +249,64 @@ class SuratController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
+    }
+
+    // Validasi SPJD
+    private function validateSpjd(Request $request)
+    {
+        return $request->validate([
+            'jenis_surat' => 'required',
+            'warga_id' => 'required',
+            'nama_lengkap' => 'required|string|min:3|max:255',
+            'nik' => 'required|string|min:16|max:16',
+            'tempat_lahir' => 'required|string',
+            'tanggal_lahir' => 'required|date|before:today',
+            'jenis_kelamin' => 'required|string',
+            'agama' => 'required|string',
+            'kewarganegaraan' => 'required|string',
+            'pekerjaan' => 'required|string',
+            'status_kawin' => 'required|string',
+            'rt' => 'required|numeric',
+            'rw' => 'required|numeric',
+            'desa' => 'required|string',
+            'kecamatan' => 'required|string',
+            'alamat' => 'required|string',
+            'no_hp' => 'required|string',
+            // Field yang harus diinput user
+            'nama_pasangan' => 'required|string',
+            'nik_pasangan' => 'required|string|min:16|max:16',
+            'tempat_lahir_pasangan' => 'required|string',
+            'tanggal_lahir_pasangan' => 'required|date|before:today',
+            'jenis_kelamin_pasangan' => 'required|string',
+            'agama_pasangan' => 'required|string',
+            'status_kawin_pasangan' => 'required|string',
+            'alamat_pasangan' => 'required|string',
+            'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'keperluan' => 'required|string',
+        ], $this->getValidationMessages());
+    }
+
+    // Validasi SPMAK
+    private function validateSpmak(Request $request)
+    {
+        return $request->validate([
+            'jenis_surat' => 'required|string',
+            'warga_id' => 'required',
+            'nik' => 'required|string|min:16|max:16',
+            'nama_lengkap' => 'required|string|min:3|max:255',
+            'tempat_lahir' => 'required|string',
+            'tanggal_lahir' => 'required|date|before:today',
+            'alamat' => 'required|string',
+            'pekerjaan' => 'required|string',
+            'agama' => 'required|string',
+            // Field yang harus diinput user
+            'rt' => 'required|numeric',
+            'rw' => 'required|numeric',
+            'nama_anak' => 'required|string',
+            'no_hp' => 'required|string',
+            'keperluan' => 'required|string',
+            'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        ], $this->getValidationMessages());
     }
 
     // Validasi SKD (Surat Keterangan Domisili)
@@ -678,6 +761,8 @@ class SuratController extends Controller
             'SKM' => 'Surat Keterangan Menikah',
             'SKW' => 'Surat Keterangan Wali',
             'SKK' => 'Surat Keterangan Kematian',
+            'SPMAK' => 'Surat Pernyataan Membuat Akta Kelahiran',
+            'SPJD' => 'Surat Pernyataan Janda / Duda',
         ];
 
         $proses_surat['nama_jenis_surat'] = $jenis_surat_mapping[$proses_surat['jenis_surat']] ?? 'Jenis Surat Tidak Dikenal';

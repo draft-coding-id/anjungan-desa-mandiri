@@ -32,7 +32,8 @@ class LayananSurat extends Controller
         $surat = Surat::find($id);
         return $surat;
     }
-    public function previewDokumen($id){
+    public function previewDokumen($id)
+    {
         $surat = Surat::find($id);
         $fileUrl = asset('/storage/' . $surat->file); // perhatikan perubahan ini
 
@@ -49,12 +50,14 @@ class LayananSurat extends Controller
             "SKP" => 'admin.preview-surat.skp',
             "SKPP" => 'admin.preview-surat.skpp',
             "SPKK" => 'admin.preview-surat.spkk',
+            "SPMAK" => 'admin.preview-surat.surat_pernyataan_membuat_akta_kelahiran',
+            "SPJD" => 'admin.preview-surat.surat_pernyataan_janda_duda',
             "SKKTP" => 'admin.preview-surat.surat_ket_ktp_dalam_proses',
             "SIK" => 'admin.preview-surat.surat_izin_keramaian',
             "SKTM" => 'admin.preview-surat.sktm',
             "SKPG" => 'admin.preview-surat.surat_ket_pengantar',
             "SKWH" => 'admin.preview-surat.surat_ket_wali_hakim',
-            "SKW" => 'admin.preview-surat.skw', 
+            "SKW" => 'admin.preview-surat.skw',
             "SKM" => 'admin.preview-surat.skm',
 
             "SKK" => 'admin.preview-surat.surat_ket_kematian',
@@ -441,6 +444,6 @@ class LayananSurat extends Controller
             'fields' => $fields,
         ])->render();
 
-        return response()->json(['html'=> $html]);
+        return response()->json(['html' => $html]);
     }
 }

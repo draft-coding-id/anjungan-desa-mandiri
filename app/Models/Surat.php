@@ -64,6 +64,8 @@ class Surat extends Model
             'SKW' => 'SKW',
             'SKM' => 'SKM',
             'SKK' => 'SKK',
+            'SPMAK' => 'SPMAK',
+            'SPPKK' => 'SPPKK',
         ][$this->jenis_surat] ?? 'UNK';
 
         // Ambil bulan & tahun saat ini
