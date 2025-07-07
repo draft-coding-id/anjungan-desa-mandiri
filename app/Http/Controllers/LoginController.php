@@ -212,7 +212,11 @@ class LoginController extends Controller
     // Halaman Dashboard
     public function showDashboard()
     {
-        return view('warga.layanan-mandiri.pilih-surat');
+        $warga = auth()->guard('warga')->user();
+        if (!$warga) {
+            return redirect()->route('login');
+        }
+        return view('warga.layanan-mandiri.pilih-surat', ['warga' => $warga]);
     }
 
     public function logout(Request $request)

@@ -8,9 +8,11 @@
         <a href='/lapak-warga' class="button">Lapak</a>
         <a target="_blank" href='https://desa-rawapanjang.id/' class="button">Website Desa <br>Rawapanjang</a>
         
+        @auth('warga')
         <a href='/logout-warga' class="button" 
             style="background: red; box-shadow: inset 0 0 12px 0 white, 0 0 25px 3px white;">
             Logout</a>
+        @endauth
     </div>
     <div class="credit">
         <p>&copy;2025 Trisna Wahyu Mukti, Raihan Darmawan Pringgodigdo, Fakultas Ilmu Komputer
