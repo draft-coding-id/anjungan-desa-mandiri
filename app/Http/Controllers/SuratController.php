@@ -109,6 +109,7 @@ class SuratController extends Controller
         }
         return view('warga.layanan-mandiri.form-surat.form-surat-pernyataan-membuat-akta-kelahiran', ['warga' => $warga]);
     }
+    
     public function form_surat_pernyataan_janda_duda(Request $request)
     {
         $warga = auth()->guard('warga')->user();
@@ -117,6 +118,16 @@ class SuratController extends Controller
             return redirect()->route('login');
         }
         return view('warga.layanan-mandiri.form-surat.form-surat-pernyataan-janda-duda', ['warga' => $warga]);
+    }
+
+    public function form_surat_permohonan_perubahan_kk(Request $request)
+    {
+        $warga = auth()->guard('warga')->user();
+
+        if (!$warga) {
+            return redirect()->route('login');
+        }
+        return view('warga.layanan-mandiri.form-surat.form-surat-permohonan-perubahan-kk', ['warga' => $warga]);
     }
 
     // Proses pengiriman data
@@ -154,6 +165,9 @@ class SuratController extends Controller
                 case 'SPJD':
                     $validatedData = $this->validateSpjd($request);
                     break;
+                case 'SPPKK':
+                    $validatedData = $this->validateSppkk($request);
+                    break;
                 default:
                     return redirect()->back()->with('error', 'Jenis surat tidak valid');
             }
@@ -168,6 +182,32 @@ class SuratController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
+    }
+
+    // Validasi SPPKK
+    private function validateSppkk(Request $request)
+    {
+        return $request->validate([
+            'jenis_surat' => 'required|string',
+            'warga_id' => 'required|exists:warga,id',
+            'nik' => 'required|string|min:16|max:16',
+            'no_kk' => 'required|string|min:16|max:16',
+            'nama_lengkap' => 'required|string|min:3|max:255',
+            'jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan',
+            'pekerjaan' => 'required|string|min:3|max:100',
+            'kewarganegaraan' => 'required|string|min:3|max:50',
+            'agama' => 'required|string|min:3|max:50',
+            'tempat_lahir' => 'required|string|min:3|max:100',
+            'tanggal_lahir' => 'required|date|before:today',
+            'rt' => 'required|numeric|min:1|max:20',
+            'rw' => 'required|numeric|min:1|max:20',
+            'kecamatan' => 'required|string|min:3|max:100',
+            'desa' => 'required|string|min:3|max:100',
+            'alamat' => 'required|string|min:10|max:500',
+            'no_hp' => 'required|string|regex:/^08[0-9]{8,12}$/',
+            'keperluan' => 'required|string',
+            'file' => 'nullable|file|mimes:pdf|max:2048',
+        ], $this->getValidationMessages());
     }
 
     // Validasi SPJD
@@ -475,6 +515,7 @@ class SuratController extends Controller
             'SKK' => 'Surat Keterangan Kematian',
             'SPMAK' => 'Surat Pernyataan Membuat Akta Kelahiran',
             'SPJD' => 'Surat Pernyataan Janda / Duda',
+            'SPPKK' => 'Surat Permohonan Perubahan Kartu Keluarga',
         ];
 
         $proses_surat['nama_jenis_surat'] = $jenis_surat_mapping[$proses_surat['jenis_surat']] ?? 'Jenis Surat Tidak Dikenal';

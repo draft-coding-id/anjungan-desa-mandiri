@@ -156,7 +156,7 @@ Surat Pernyataan janda / Duda
 
     <!-- QR Code -->
     <div style="text-align: center; margin-top: 20px;">
-        
+        <img src="data:image/png;base64,{{ base64_encode($qrCode) }}" class="qr-code" alt="QR Code">
     </div>
 </div>
 

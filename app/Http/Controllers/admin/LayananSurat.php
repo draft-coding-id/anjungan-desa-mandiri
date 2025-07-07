@@ -55,7 +55,7 @@ class LayananSurat extends Controller
             "SKCK" => 'surat.preview.skck',
             "SKKTPDP" => 'surat.preview.skktpdp',
             "SPKK" => 'surat.preview.spkk',
-            "SPPKK" => 'surat.preview.sppkk'
+            "SPPKK" => 'admin.preview-surat.surat_permohonan_perubahan_kk'
         };
         return view($view, [
             'surat' => $surat,
