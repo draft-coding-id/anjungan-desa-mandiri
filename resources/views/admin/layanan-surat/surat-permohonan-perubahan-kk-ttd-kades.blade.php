@@ -2,7 +2,7 @@
 
 @section('title', 'Surat Permohonan Perubahan Kartu Keluarga')
 
-@section('surat-title', 'SURAT PERMOHONAN Perubahan KARTU KELUARGA')
+@section('surat-title', 'SURAT PERMOHONAN PERUBAHAN KARTU KELUARGA')
 
 @section('content')
 @php

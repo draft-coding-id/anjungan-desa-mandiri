@@ -71,7 +71,7 @@ use Carbon\Carbon;
       <td>{{ $surat->isi_surat['alamat'] }}, Desa {{ $surat->isi_surat['desa'] }}, Kecamatan {{ $surat->isi_surat['kecamatan'] }}, Kabupaten Bogor</td>
     </tr>
   </table>
-
+</div>
   <p>Hubungan wali adalah sebagai: {{ $surat->isi_surat['hubungan_keluarga'] }}</p>
   <p>Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
   @endsection

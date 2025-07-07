@@ -220,13 +220,13 @@ class SuratController extends Controller
                 case 'SKD':
                     $validatedData = $this->validateSkd($request);
                     break;
-                case "SKP" :
+                case "SKP":
                     $validatedData = $this->validateSkp($request);
                     break;
-                case "SPKK" :
+                case "SPKK":
                     $validatedData = $this->validateSpkk($request);
                     break;
-                case "SKPP" :
+                case "SKPP":
                     $validatedData = $this->validateSkpp($request);
                     break;
                 case 'SKKTP':
@@ -284,9 +284,21 @@ class SuratController extends Controller
         }
     }
 
-    // Validasi SPPKK
+
+    // Validasi SPPKK dengan conditional file validation
     private function validateSppkk(Request $request)
     {
+        // Ambil data warga
+        $warga = Warga::find($request->warga_id);
+
+        // Tentukan aturan validasi untuk file berdasarkan kondisi
+        $fileRule = 'nullable|file|mimes:pdf|max:2048';
+
+        // Jika warga tidak ada file_kk (belum pernah upload), maka file wajib diisi
+        if (!$warga || empty($warga->file_kk)) {
+            $fileRule = 'required|file|mimes:pdf|max:2048';
+        }
+
         return $request->validate([
             'jenis_surat' => 'required|string',
             'warga_id' => 'required|exists:warga,id',
@@ -306,7 +318,7 @@ class SuratController extends Controller
             'alamat' => 'required|string|min:10|max:500',
             'no_hp' => 'required|string|regex:/^08[0-9]{8,12}$/',
             'keperluan' => 'required|string',
-            'file' => 'nullable|file|mimes:pdf|max:2048',
+            'file' => $fileRule,
         ], $this->getValidationMessages());
     }
 
@@ -670,7 +682,6 @@ class SuratController extends Controller
             'nik' => 'required|string|min:16|max:16',
             'tempat_lahir' => 'required|string',
             'tanggal_lahir' => 'required|date|before:today',
-            'jenis_kelamin' => 'required|string',
             'agama' => 'required|string',
             'pekerjaan' => 'required|string',
             'rt' => 'required|numeric',
@@ -678,32 +689,21 @@ class SuratController extends Controller
             'desa' => 'required|string',
             'kecamatan' => 'required|string',
             'alamat' => 'required|string',
+            'status' => 'required|string|in:suami,istri',
 
             // Data Suami
-            'nama_lengkap_suami' => 'required|string|min:3|max:255',
-            'nik_suami' => 'required|string|min:16|max:16',
-            'tempat_lahir_suami' => 'required|string',
-            'tanggal_lahir_suami' => 'required|date|before:today',
-            'pekerjaan_suami' => 'required|string',
-            'agama_suami' => 'required|string',
-            'rt_suami' => 'required|numeric',
-            'rw_suami' => 'required|numeric',
-            'desa_suami' => 'required|string',
-            'kecamatan_suami' => 'required|string',
-            'alamat_suami' => 'required|string',
-
-            // Data Istri
-            'nama_lengkap_istri' => 'required|string|min:3|max:255',
-            'nik_istri' => 'required|string|min:16|max:16',
-            'tempat_lahir_istri' => 'required|string',
-            'tanggal_lahir_istri' => 'required|date|before:today',
-            'pekerjaan_istri' => 'required|string',
-            'agama_istri' => 'required|string',
-            'rt_istri' => 'required|numeric',
-            'rw_istri' => 'required|numeric',
-            'desa_istri' => 'required|string',
-            'kecamatan_istri' => 'required|string',
-            'alamat_istri' => 'required|string',
+            'nama_lengkap_pasangan' => 'required|string|min:3|max:255',
+            'nik_pasangan' => 'required|string|min:16|max:16',
+            'tempat_lahir_pasangan' => 'required|string',
+            'tanggal_lahir_pasangan' => 'required|date|before:today',
+            'pekerjaan_pasangan' => 'required|string',
+            'agama_pasangan' => 'required|string',
+            'rt_pasangan' => 'required|numeric',
+            'rw_pasangan' => 'required|numeric',
+            'desa_pasangan' => 'required|string',
+            'kecamatan_pasangan' => 'required|string',
+            'alamat_pasangan' => 'required|string',
+            'status_pasangan' => 'required|string|in:suami,istri|different:status',
 
             // Field yang harus diinput user
             'no_hp' => 'required|string',
@@ -803,7 +803,10 @@ class SuratController extends Controller
     // Handle file upload
     private function handleFileUpload(Request $request, array $validatedData)
     {
+        $warga = Warga::findOrFail($request->warga_id);
+
         if ($request->hasFile('file')) {
+            // Jika user upload file baru
             $file = $request->file('file');
 
             // Simpan nama dan path ke validatedData
@@ -816,6 +819,10 @@ class SuratController extends Controller
 
             // Hapus objek file agar tidak ikut disimpan di session
             unset($validatedData['file']);
+        } else if (!empty($warga->file_kk)) {
+            // Jika user tidak upload file baru tapi sudah punya file sebelumnya
+            // Gunakan file yang sudah ada
+            $validatedData['file_existing'] = $warga->file_kk;
         }
 
         return $validatedData;
@@ -825,7 +832,9 @@ class SuratController extends Controller
     private function getValidationMessages()
     {
         return [
+            'file.required' => 'File KK harus diupload karena Anda belum memiliki file KK sebelumnya',
             'file.max' => 'Ukuran file maksimal 2MB',
+            'file.mimes' => 'File harus berformat PDF',
             'jenis_surat.required' => 'Jenis surat harus diisi',
             'nik.required' => 'NIK harus diisi',
             'nik.min' => 'NIK harus 16 digit',
@@ -846,7 +855,7 @@ class SuratController extends Controller
             'rw.required' => 'RW harus diisi',
             'no_hp.required' => 'No HP harus diisi',
             'keperluan.required' => 'Keperluan harus diisi',
-
+            'status_pasangan.different' => 'Status dengan pasangan tidak boleh sama',
             // Pesan untuk data almarhum (SKK)
             'almarhum_nama.required' => 'Nama almarhum/almarhumah harus diisi',
             'almarhum_nik.required' => 'NIK almarhum/almarhumah harus diisi',
