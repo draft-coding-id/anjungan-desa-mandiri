@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 class PreviewSuratController extends Controller
@@ -37,7 +38,8 @@ class PreviewSuratController extends Controller
         ]);
     }
 
-    public function sktm(){
+    public function sktm()
+    {
         return view('warga.layanan-mandiri.preview-surat.surat_ket_tidak_mampu', [
             'proses_surat' => $this->proses_surat
         ]);
@@ -46,6 +48,13 @@ class PreviewSuratController extends Controller
     public function skwh()
     {
         return view('warga.layanan-mandiri.preview-surat.surat_ket_wali_hakim', [
+            'proses_surat' => $this->proses_surat
+        ]);
+    }
+
+    public function skm()
+    {
+        return view('warga.layanan-mandiri.preview-surat.skm', [
             'proses_surat' => $this->proses_surat
         ]);
     }

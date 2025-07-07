@@ -44,9 +44,9 @@ class MakePdf implements ShouldQueue
     public function handle(): void
     {
         if ($this->surat->jenis_surat == 'SKD') {
-            $pdf = Pdf::loadView('admin.layanan-surat.surat-domisili-ttd-kades', ['surat' => $this->surat , 'qrCode' => $this->qrCode]);
-        } elseif($this->surat->jenis_surat == 'SKKTP') {
-            $pdf = Pdf::loadView('admin.layanan-surat.skktp_ttd_kades', ['surat' => $this->surat , 'qrCode' => $this->qrCode]);
+            $pdf = Pdf::loadView('admin.layanan-surat.surat-domisili-ttd-kades', ['surat' => $this->surat, 'qrCode' => $this->qrCode]);
+        } elseif ($this->surat->jenis_surat == 'SKKTP') {
+            $pdf = Pdf::loadView('admin.layanan-surat.skktp_ttd_kades', ['surat' => $this->surat, 'qrCode' => $this->qrCode]);
         } elseif ($this->surat->jenis_surat == "SKCK") {
             $pdf = Pdf::loadView('admin.preview-surat.surat_ket_skck', ['surat' => $this->surat]);
         } elseif ($this->surat->jenis_surat == "SPKK") {
@@ -54,15 +54,17 @@ class MakePdf implements ShouldQueue
         } elseif ($this->surat->jenis_surat == "SPPKK") {
             $pdf = Pdf::loadView('admin.preview-surat.surat_ket_pengantar_sppkk', ['surat' => $this->surat]);
         } elseif ($this->surat->jenis_surat == "SKPG") {
-            $pdf = Pdf::loadView('admin.layanan-surat.surat-keterangan-pengantar-ttd-kades', ['surat' => $this->surat , 'qrCode' => $this->qrCode]);
+            $pdf = Pdf::loadView('admin.layanan-surat.surat-keterangan-pengantar-ttd-kades', ['surat' => $this->surat, 'qrCode' => $this->qrCode]);
         } elseif ($this->surat->jenis_surat == "SIK") {
-            $pdf = Pdf::loadView('admin.layanan-surat.sik_ttd_kades', ['surat' => $this->surat , 'qrCode' => $this->qrCode]);
+            $pdf = Pdf::loadView('admin.layanan-surat.sik_ttd_kades', ['surat' => $this->surat, 'qrCode' => $this->qrCode]);
         } elseif ($this->surat->jenis_surat == "SKWH") {
-            $pdf = Pdf::loadView('admin.layanan-surat.surat_ket_wali_hakim-ttd-kades', ['surat' => $this->surat , 'qrCode' => $this->qrCode]);
+            $pdf = Pdf::loadView('admin.layanan-surat.surat_ket_wali_hakim-ttd-kades', ['surat' => $this->surat, 'qrCode' => $this->qrCode]);
         } elseif ($this->surat->jenis_surat == "SKK") {
-            $pdf = Pdf::loadView('admin.layanan-surat.surat_ket_kematian-ttd-kades',['surat' => $this->surat , 'qrCode' => $this->qrCode]);
+            $pdf = Pdf::loadView('admin.layanan-surat.surat_ket_kematian-ttd-kades', ['surat' => $this->surat, 'qrCode' => $this->qrCode]);
         } elseif ($this->surat->jenis_surat == "SKW") {
-            $pdf = Pdf::loadView('admin.layanan-surat.skw-ttd-kades',['surat' => $this->surat , 'qrCode' => $this->qrCode]);
+            $pdf = Pdf::loadView('admin.layanan-surat.skw-ttd-kades', ['surat' => $this->surat, 'qrCode' => $this->qrCode]);
+        } elseif ($this->surat->jenis_surat == "SKM") {
+            $pdf = Pdf::loadView('admin.layanan-surat.skm-ttd-kades', ['surat' => $this->surat, 'qrCode' => $this->qrCode]);
         } elseif ($this->surat->jenis_surat == 'SKN') {
             $pdf = Pdf::loadView('admin.preview-surat.surat_ket_nikah', ['surat' => $this->surat]);
         } elseif ($this->surat->jenis_surat == 'SKTM') {

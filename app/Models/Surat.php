@@ -59,6 +59,7 @@ class Surat extends Model
             'SKTM' => 'SKTM',
             'SKWH' => 'SKWH',
             'SKW' => 'SKW',
+            'SKM' => 'SKM',
             'SKK' => 'SKK',
         ][$this->jenis_surat] ?? 'UNK';
 

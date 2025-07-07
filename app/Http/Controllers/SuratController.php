@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Storage;
 class SuratController extends Controller
 {
     public $warga;
-    public function __construct(){
+    public function __construct()
+    {
         $this->warga = auth()->guard('warga')->user();
     }
 
@@ -92,7 +93,8 @@ class SuratController extends Controller
         return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-pengantar', ['warga' => $this->warga]);
     }
 
-    public function form_sktm(){
+    public function form_sktm()
+    {
         if (!$this->warga) {
             return redirect()->route('login-warga');
         }
@@ -120,6 +122,14 @@ class SuratController extends Controller
             return redirect()->route('login-warga');
         }
         return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-wali', ['warga' => $this->warga]);
+    }
+
+    public function form_skm()
+    {
+        if (!$this->warga) {
+            return redirect()->route('login-warga');
+        }
+        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-menikah', ['warga' => $this->warga]);
     }
 
     public function form_surat_keterangan_kematian()
@@ -156,8 +166,11 @@ class SuratController extends Controller
                 case 'SIK':
                     $validatedData = $this->validateSik($request);
                     break;
-                case 'SKW' :
+                case 'SKW':
                     $validatedData = $this->validateSkw($request);
+                    break;
+                case 'SKM':
+                    $validatedData = $this->validateSkm($request);
                     break;
                 case 'SKWH':
                     $validatedData = $this->validateSkwh($request);
@@ -295,7 +308,8 @@ class SuratController extends Controller
         ], $this->getValidationMessages());
     }
 
-    private function validateSik(Request $request){
+    private function validateSik(Request $request)
+    {
         return $request->validate([
             'jenis_surat' => 'required|string',
             'warga_id' => 'required',
@@ -315,7 +329,7 @@ class SuratController extends Controller
             'rw' => 'required|numeric',
             'desa' => 'required|string',
             'kecamatan' => 'required|string',
-            // tambahan 
+            // tambahan
             'kepala_keluarga' => 'required|string',
             'jenis_keramaian' => 'required|string',
             'tanggal_kegiatan' => 'required|date',
@@ -343,6 +357,44 @@ class SuratController extends Controller
             'kecamatan' => 'required|string',
             'desa' => 'required|string',
             'alamat' => 'required|string',
+            // Field yang harus diinput user
+            'no_hp' => 'required|string',
+            'keperluan' => 'required|string',
+            'file' => 'nullable|file|mimes:pdf|max:2048',
+        ], $this->getValidationMessages());
+    }
+
+    private function validateSkm(Request $request)
+    {
+        return $request->validate([
+            // Data dasar
+            'jenis_surat' => 'required|string',
+            'warga_id' => 'required',
+
+            // Data Pribadi
+            'nama_lengkap' => 'required|string|min:3|max:255',
+            'nik' => 'required|string|min:16|max:16',
+            'tempat_lahir' => 'required|string',
+            'tanggal_lahir' => 'required|date|before:today',
+            'jenis_kelamin' => 'required|string',
+            'agama' => 'required|string',
+            'status_kawin' => 'required|string',
+            'pekerjaan' => 'required|string',
+            'rt' => 'required|numeric',
+            'rw' => 'required|numeric',
+            'desa' => 'required|string',
+            'kecamatan' => 'required|string',
+            'alamat' => 'required|string',
+
+            // Data Pasangan
+            'nama_lengkap_pasangan' => 'required|string|min:3|max:255',
+            'nik_pasangan' => 'required|string|min:16|max:16',
+            'tempat_lahir_pasangan' => 'required|string',
+            'tanggal_lahir_pasangan' => 'required|date|before:today',
+            'agama_pasangan' => 'required|string',
+            'pekerjaan_pasangan' => 'required|string',
+            'alamat_pasangan' => 'required|string',
+
             // Field yang harus diinput user
             'no_hp' => 'required|string',
             'keperluan' => 'required|string',
@@ -506,6 +558,7 @@ class SuratController extends Controller
             'SIK' => 'Surat Izin Keramaian',
             'SKTM' => 'Surat Keterangan Tidak Mampu',
             'SKWH' => 'Surat Keterangan Wali Hakim',
+            'SKM' => 'Surat Keterangan Menikah',
             'SKW' => 'Surat Keterangan Wali',
             'SKK' => 'Surat Keterangan Kematian',
         ];
@@ -550,7 +603,7 @@ class SuratController extends Controller
             'file' => $data['file_path'] ?? $warga->file_kk,
             'no_hp' => $noHp
         ]);
-   
+
 
         session()->forget('surat');
         return view('warga.layanan-mandiri.berhasil');

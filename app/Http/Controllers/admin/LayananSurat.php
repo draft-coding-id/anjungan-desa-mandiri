@@ -33,9 +33,9 @@ class LayananSurat extends Controller
         return $surat;
     }
     public function previewDokumen($id){
-        $surat = Surat::find($id); 
+        $surat = Surat::find($id);
         $fileUrl = asset('/storage/' . $surat->file); // perhatikan perubahan ini
-        
+
         return response()->json([
             'jenis_surat' => $surat->jenis_surat,
             'file' => $fileUrl,
@@ -51,7 +51,9 @@ class LayananSurat extends Controller
             "SKTM" => 'admin.preview-surat.sktm',
             "SKPG" => 'admin.preview-surat.surat_ket_pengantar',
             "SKWH" => 'admin.preview-surat.surat_ket_wali_hakim',
-            "SKW" => 'admin.preview-surat.skw',
+            "SKW" => 'admin.preview-surat.skw', 
+            "SKM" => 'admin.preview-surat.skm',
+
             "SKK" => 'admin.preview-surat.surat_ket_kematian',
             "SKCK" => 'surat.preview.skck',
             "SKKTPDP" => 'surat.preview.skktpdp',
@@ -169,10 +171,10 @@ class LayananSurat extends Controller
             'increment' => $increment
         ]);
     }
-    // Search surat 
+    // Search surat
     public function searchSurat(Request $request)
     {
-        $search = $request->search; 
+        $search = $request->search;
         $surat = Surat::where('no_surat', 'LIKE', '%' . $search . '%')
             ->RiwayatSurat() // jika perlu filter sama seperti getRiwayatSurat
             ->get();
@@ -428,7 +430,7 @@ class LayananSurat extends Controller
                 ['label' => 'Keperluan', 'name' => 'Permohonan Perubahan Kartu Keluarga WNI.'],
                 ['label' => 'Keterangan Lain-lain', 'name' => 'Orang tersebut di atas adalah benar benar penduduk Desa kami.'],
             ];
-        } 
+        }
 
         $html = view('admin.layanan-surat.kelola-surat.show', [
             'jenisSurat' => $jenisSurat,
