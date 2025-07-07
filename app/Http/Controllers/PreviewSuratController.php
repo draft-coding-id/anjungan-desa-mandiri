@@ -44,9 +44,17 @@ class PreviewSuratController extends Controller
             'proses_surat' => $this->proses_surat
         ]);
     }
+    
     public function spmak()
     {
         return view('warga.layanan-mandiri.preview-surat.surat_pernyataan_membuat_akta_kelahiran', [
+            'proses_surat' => $this->proses_surat
+        ]);
+    }
+
+    public function spjd()
+    {
+        return view('warga.layanan-mandiri.preview-surat.surat_pernyataan_janda_duda', [
             'proses_surat' => $this->proses_surat
         ]);
     }

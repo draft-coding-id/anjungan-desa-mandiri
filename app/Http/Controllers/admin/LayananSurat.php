@@ -47,6 +47,7 @@ class LayananSurat extends Controller
         $view = match ($jenisSurat) {
             "SKD" => 'admin.preview-surat.surat_ket_domisili',
             "SPMAK" => 'admin.preview-surat.surat_pernyataan_membuat_akta_kelahiran',
+            "SPJD" => 'admin.preview-surat.surat_pernyataan_janda_duda',
             "SKKTP" => 'admin.preview-surat.surat_ket_ktp_dalam_proses',
             "SKP" => 'admin.preview-surat.surat_ket_pengantar',
             "SKWH" => 'admin.preview-surat.surat_ket_wali_hakim',
