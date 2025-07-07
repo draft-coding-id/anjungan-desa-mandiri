@@ -192,6 +192,11 @@
             bottom: 20px;
         }
 
+        .button-container a {
+            padding: 30px 120px;
+            font-size: 20px;
+        }
+
         .button-container::-webkit-scrollbar {
             height: 6px;
         }
@@ -1069,7 +1074,7 @@
             min-height: clamp(120px, 20vh, 150px);
             color: white;
             text-align: center;
-            padding: clamp(20px, 4vw, 40px) clamp(15px, 3vw, 30px);
+            padding-bottom: 60px;
         }
 
         .footer h3 {
