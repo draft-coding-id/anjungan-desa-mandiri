@@ -59,6 +59,13 @@ class PreviewSuratController extends Controller
         ]);
     }
 
+    public function spc()
+    {
+        return view('warga.layanan-mandiri.preview-surat.surat_permohonan_cerai', [
+            'proses_surat' => $this->proses_surat
+        ]);
+    }
+
     public function skw()
     {
         return view('warga.layanan-mandiri.preview-surat.skw', [

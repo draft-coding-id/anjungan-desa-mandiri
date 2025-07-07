@@ -3,13 +3,13 @@
 
 namespace App\Jobs;
 
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /**
@@ -65,6 +65,8 @@ class MakePdf implements ShouldQueue
             $pdf = Pdf::loadView('admin.layanan-surat.skw-ttd-kades', ['surat' => $this->surat, 'qrCode' => $this->qrCode]);
         } elseif ($this->surat->jenis_surat == "SKM") {
             $pdf = Pdf::loadView('admin.layanan-surat.skm-ttd-kades', ['surat' => $this->surat, 'qrCode' => $this->qrCode]);
+        } elseif ($this->surat->jenis_surat == "SPC") {
+            $pdf = Pdf::loadView('admin.layanan-surat.spc-ttd-kades', ['surat' => $this->surat, 'qrCode' => $this->qrCode]);
         } elseif ($this->surat->jenis_surat == 'SKN') {
             $pdf = Pdf::loadView('admin.preview-surat.surat_ket_nikah', ['surat' => $this->surat]);
         } elseif ($this->surat->jenis_surat == 'SKTM') {

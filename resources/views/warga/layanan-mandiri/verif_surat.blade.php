@@ -131,6 +131,8 @@
                 <iframe src="/skwh" width="100%" height="100%"></iframe>
             @elseif ($proses_surat['jenis_surat'] == 'SKM')
                 <iframe src="/skm" width="100%" height="100%"></iframe>
+            @elseif ($proses_surat['jenis_surat'] == 'SPC')
+                <iframe src="/spc" width="100%" height="100%"></iframe>
             @elseif ($proses_surat['jenis_surat'] == 'SKW')
                 <iframe src="/skw" width="100%" height="100%"></iframe>
             @elseif ($proses_surat['jenis_surat'] == 'SKK')

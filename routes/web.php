@@ -99,14 +99,15 @@ Route::middleware(['isAdmin'])->group(function () {
 Route::controller(SuratController::class)->group(function () {
     Route::get('/histori-progres-surat', 'histori_progres_surat')->name('histori_progres_surat');
     Route::get('/SKD', 'form_Surat_Keterangan_Domisili');
-    Route::get('/SKKTP' , 'form_Surat_Keterangan_KTP_Dalam_Proses');
+    Route::get('/SKKTP', 'form_Surat_Keterangan_KTP_Dalam_Proses');
 
     Route::get('/SKPG', 'form_Surat_Keterangan_Pengantar');
     Route::get('/SIK', 'form_Surat_Izin_Keramaian');
-    Route::get('/SKTM' , 'form_sktm');
+    Route::get('/SKTM', 'form_sktm');
     Route::get('/SKWH', 'form_Surat_Keterangan_Wali_Hakim');
     Route::get('/SKW', 'form_skw');
     Route::get('/SKM', 'form_skm');
+    Route::get('/SPC', 'form_Surat_Permohonan_Cerai');
     Route::get('/SKK', 'form_Surat_Keterangan_Kematian');
     Route::post('/submitForm', 'submitForm')->name('submitForm');
     Route::get('/konfirmasi', 'konfirmasi');
@@ -119,9 +120,10 @@ Route::get('/skd', [PreviewSuratController::class, 'skd'])->name('preview.skd');
 Route::get('/skktp', [PreviewSuratController::class, 'skktp'])->name('preview.skktp');
 Route::get('/skp', [PreviewSuratController::class, 'skp'])->name('preview.skp');
 Route::get('/sik', [PreviewSuratController::class, 'sik'])->name('preview.sik');
-Route::get('/sktm' , [PreviewSuratController::class , 'sktm'])->name('preview.sktm');
+Route::get('/sktm', [PreviewSuratController::class, 'sktm'])->name('preview.sktm');
 Route::get('/skwh', [PreviewSuratController::class, 'skwh'])->name('preview.skwh');
 Route::get('/skm', [PreviewSuratController::class, 'skm'])->name('preview.skm');
+Route::get('/spc', [PreviewSuratController::class, 'spc'])->name('preview.spc');
 Route::get('/skw', [PreviewSuratController::class, 'skw'])->name('preview.skw');
 Route::get('/skk', [PreviewSuratController::class, 'skk'])->name('preview.skk');
 // ----- Ends of Views Warga ----- //
