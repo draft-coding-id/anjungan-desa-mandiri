@@ -429,14 +429,14 @@
         <div class="form-row">
           <div class="form-group">
             <label for="kecamatan">Kecamatan <span style="color: red;">*</span></label>
-            <input type="text" id="kecamatan" name="kecamatan" value="{{ old('kecamatan') }}" required>
+            <input type="text" id="kecamatan" name="kecamatan" value="Bojonggede" readonly>
             @error('kecamatan')
             <div class="error-text">{{ $message }}</div>
             @enderror
           </div>
           <div class="form-group">
             <label for="desa">Desa/Kelurahan <span style="color: red;">*</span></label>
-            <input type="text" id="desa" name="desa" value="{{ old('desa') }}" required>
+            <input type="text" id="desa" name="desa" value="Rawapanjang" readonly>
             @error('desa')
             <div class="error-text">{{ $message }}</div>
             @enderror

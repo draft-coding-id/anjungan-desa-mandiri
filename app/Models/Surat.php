@@ -52,6 +52,7 @@ class Surat extends Model
         $kodeJenis = [
             'SKD' => 'SKD',
             'SKKTP' => 'SKKTP',
+            'SKP' => 'SKP',
             'SKPG' => 'SKPG',
             'SIK' => 'SIK',
             'SKTM' => 'SKTM',

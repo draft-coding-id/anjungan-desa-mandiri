@@ -33,7 +33,7 @@
     }
 
     p {
-      line-height: 1.6;
+      line-height: 1;
       margin: 8px 0;
     }
 
@@ -106,6 +106,12 @@
       border-collapse: collapse;
     }
 
+    .poto {
+      text-align: center;
+      padding: 40px 30px;
+      border: 1px dashed #000;
+    }
+
     .data-table td {
       padding: 4px 0;
       vertical-align: top;
@@ -152,6 +158,20 @@
 
     .indent {
       padding-left: 60px;
+    }
+
+    .camat {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .camat p {
+      line-height: 0.5;
+    }
+
+    .qr-code {
+      width: 70px;
+      height: 70px;
     }
 
     .footer-table {

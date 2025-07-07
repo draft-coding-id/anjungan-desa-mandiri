@@ -32,7 +32,11 @@
       margin: 20px 50px;
       text-align: justify;
     }
-
+    .poto {
+      text-align: center;
+      padding: 45px 30px;
+      border:1px dashed #000;
+    }
     .footer {
       display: flex;
       justify-content: space-between;
@@ -41,6 +45,15 @@
 
     .footer div {
       text-align: center;
+    }
+
+    .camat {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .camat p {
+      line-height: 0.3;
     }
 
     .section-title {
@@ -94,7 +107,7 @@
       height: 100px;
       border: 1px dashed #000;
       overflow: hidden;
-      display : flex;
+      display: flex;
       justify-content: center;
       align-items: center;
     }
