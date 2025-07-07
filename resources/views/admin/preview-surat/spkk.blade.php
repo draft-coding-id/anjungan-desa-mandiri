@@ -1,8 +1,8 @@
 @extends('layout.admin.preview_surat')
 
-@section('title', 'Surat Keterangan Penduduk')
+@section('title', 'Surat Permohonan Kartu Keluarga')
 
-@section('surat-title', 'SURAT KETERANGAN PENDUDUK')
+@section('surat-title', 'SURAT PERMOHONAN KARTU KELUARGA')
 
 @section('content')
 @php
@@ -14,42 +14,31 @@ use Carbon\Carbon;
       <td>1. Nama</td>
       <td>:</td>
       <td>{{ $surat->isi_surat['nama_lengkap'] }}</td>
-      <td rowspan="6">
-        <div class="poto">
-          Foto <br>
-          2x3
-        </div>
-      </td>
     </tr>
     <tr>
       <td>2. Tempat/tanggal lahir</td>
       <td>:</td>
       <td>{{ $surat->isi_surat['tempat_lahir'] }}, {{ Carbon::parse($surat->isi_surat['tanggal_lahir'])->translatedFormat('d F Y') }}</td>
-      <td></td>
     </tr>
     <tr>
       <td>3. Warga negara</td>
       <td>:</td>
       <td>{{ $surat->isi_surat['kewarganegaraan'] }}</td>
-      <td></td>
     </tr>
     <tr>
       <td>4. Agama</td>
       <td>:</td>
       <td>{{ $surat->isi_surat['agama'] }}</td>
-      <td></td>
     </tr>
     <tr>
       <td>5. Jenis Kelamin</td>
       <td>:</td>
       <td>{{ $surat->isi_surat['jenis_kelamin'] }}</td>
-      <td></td>
     </tr>
     <tr>
       <td>6. Pekerjaan</td>
       <td>:</td>
       <td>{{ $surat->isi_surat['pekerjaan'] }}</td>
-      <td></td>
     </tr>
     <tr>
       <td>7. Tempat tinggal</td>
@@ -77,12 +66,7 @@ use Carbon\Carbon;
       <td>Mohon surat yang akan dipergunakan untuk {{ $surat->isi_surat['keperluan'] }}</td>
     </tr>
     <tr>
-      <td>10. Berlaku</td>
-      <td>:</td>
-      <td>{{ Carbon::now()->translatedFormat('d F Y') }} s/d {{ Carbon::now()->addDays(30)->translatedFormat('d F Y') }}</td>
-    </tr>
-    <tr>
-      <td>11. Keterangan lain-lain</td>
+      <td>10. Keterangan lain-lain</td>
       <td>:</td>
       <td>Orang tersebut di atas adalah benar benar penduduk desa kami.</td>
     </tr>

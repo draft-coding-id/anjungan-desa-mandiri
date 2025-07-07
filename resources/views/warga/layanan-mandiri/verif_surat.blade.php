@@ -123,6 +123,8 @@
             <iframe src="/skp" width="100%" height="100%"></iframe>
             @elseif ($proses_surat['jenis_surat'] == "SKPP")
             <iframe src="/skpp" width="100%" height="100%"></iframe>
+            @elseif ($proses_surat['jenis_surat'] == "SPKK")
+            <iframe src="/spkk" width="100%" height="100%"></iframe>
             @elseif ($proses_surat['jenis_surat'] == "SKPG")
             <iframe src="/skpg" width="100%" height="100%"></iframe>
             @elseif ($proses_surat['jenis_surat'] == "SIK")

@@ -101,6 +101,7 @@ Route::controller(SuratController::class)->group(function () {
     Route::get('/SKD', 'form_Surat_Keterangan_Domisili');
     Route::get('/SKKTP' , 'form_Surat_Keterangan_KTP_Dalam_Proses');
     Route::get('/SKP' , 'form_skp');
+    Route::get('/SPKK' , 'form_spkk');
     Route::get('/SKPP' , 'form_skpp');
     Route::get('/SKPG', 'form_Surat_Keterangan_Pengantar');
     Route::get('/SIK', 'form_Surat_Izin_Keramaian');
@@ -118,6 +119,7 @@ Route::controller(SuratController::class)->group(function () {
 Route::get('/skd', [PreviewSuratController::class, 'skd'])->name('preview.skd');
 Route::get('/skktp', [PreviewSuratController::class, 'skktp'])->name('preview.skktp');
 Route::get('/skp' , [PreviewSuratController::class , 'skp'])->name('preview.skp');
+Route::get('/spkk' , [PreviewSuratController::class , 'spkk'])->name('preview.skp');
 Route::get('/skpp' , [PreviewSuratController::class , 'skpp'])->name('preview.skpp');
 Route::get('/skpg', [PreviewSuratController::class, 'skpg'])->name('preview.skp');
 Route::get('/sik', [PreviewSuratController::class, 'sik'])->name('preview.sik');

@@ -98,6 +98,15 @@ class SuratController extends Controller
         return view('warga.layanan-mandiri.form-surat.form-skpp', ['warga' => $this->warga]);
     }
 
+
+    public function form_spkk()
+    {
+        if (!$this->warga) {
+            return redirect()->route('login-warga');
+        }
+        return view('warga.layanan-mandiri.form-surat.form-spkk', ['warga' => $this->warga]);
+    }
+
     public function form_Surat_Keterangan_Pengantar()
     {
         if (!$this->warga) {
@@ -157,6 +166,9 @@ class SuratController extends Controller
                     break;
                 case "SKP" :
                     $validatedData = $this->validateSkp($request);
+                    break;
+                case "SPKK" :
+                    $validatedData = $this->validateSpkk($request);
                     break;
                 case "SKPP" :
                     $validatedData = $this->validateSkpp($request);
@@ -223,6 +235,31 @@ class SuratController extends Controller
 
     // Validasi Surat Keterangan Penduduk
     private function validateSkp(Request $request){
+        return $request->validate([
+            'jenis_surat' => 'required|string',
+            'warga_id' => 'required|exists:warga,id',
+            'nik' => 'required|string|min:16|max:16',
+            'no_kk' => 'required|string|min:16|max:16',
+            'nama_lengkap' => 'required|string|min:3|max:255',
+            'jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan',
+            'pekerjaan' => 'required|string|min:3|max:100',
+            'kewarganegaraan' => 'required|string|min:3|max:50',
+            'agama' => 'required|string|min:3|max:50',
+            'tempat_lahir' => 'required|string|min:3|max:100',
+            'tanggal_lahir' => 'required|date|before:today',
+            'rt' => 'required|numeric|min:1|max:20',
+            'rw' => 'required|numeric|min:1|max:20',
+            'kecamatan' => 'required|string|min:3|max:100',
+            'desa' => 'required|string|min:3|max:100',
+            'alamat' => 'required|string|min:10|max:500',
+            'no_hp' => 'required|string|regex:/^08[0-9]{8,12}$/',
+            'keperluan' => 'required|string',
+            'file' => 'nullable|file|mimes:pdf|max:2048',
+        ], $this->getValidationMessages());
+    }
+
+    private function validateSpkk(Request $request)
+    {
         return $request->validate([
             'jenis_surat' => 'required|string',
             'warga_id' => 'required|exists:warga,id',
@@ -581,6 +618,7 @@ class SuratController extends Controller
             'SKKTP' => 'Surat Keterangan KTP Dalam Proses',
             'SKP' => 'Surat Keterangan Penduduk',
             'SKPP' => 'Surat Keterangan Pindah Penduduk', 
+            'SPKK' => 'Surat Permohonan Kartu Keluarga',
             'SKPG' => 'Surat Keterangan Pengantar',
             'SIK' => 'Surat Izin Keramaian',
             'SKTM' => 'Surat Keterangan Tidak Mampu',

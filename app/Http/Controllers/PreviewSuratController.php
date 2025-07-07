@@ -35,7 +35,12 @@ class PreviewSuratController extends Controller
             'proses_surat' => $this->proses_surat
         ]);
     }
-
+    public function spkk()
+    {
+        return view('warga.layanan-mandiri.preview-surat.spkk', [
+            'proses_surat' => $this->proses_surat
+        ]);
+    }
 
     public function skpg()
     {
