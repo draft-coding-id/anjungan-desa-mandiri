@@ -145,6 +145,8 @@
       <iframe src="/spmak" width="100%" height="100%"></iframe>
       @elseif ($proses_surat['jenis_surat'] == "SPJD")
       <iframe src="/spjd" width="100%" height="100%"></iframe>
+      @elseif ($proses_surat['jenis_surat'] == "SPPKK")
+      <iframe src="/sppkk" width="100%" height="100%"></iframe>
       @endif
     </div>
     <form action="#" method="POST">

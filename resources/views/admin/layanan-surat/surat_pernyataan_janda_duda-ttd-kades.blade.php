@@ -1,10 +1,9 @@
 @extends('layout.admin.preview_surat')
 
-
 @section('title', 'Surat Pernyataan janda / Duda')
 
 @section('surat-title')
-SURAT PERNYATAAN JANDA/DUDA
+Surat Pernyataan janda / Duda
 @endsection
 
 @section('content')
@@ -108,49 +107,52 @@ SURAT PERNYATAAN JANDA/DUDA
     keterangan palsu pasal 242 ayat 1. </p>
 </div>
 
-<div style="width: 100%; margin-top: 50px;">
+<table style="width: 100%; margin-top: 50px; border-collapse: collapse;">
     <!-- Baris 1: Saksi-Saksi dan Yang Menyatakan -->
-    <div style="display: flex; justify-content: space-between;">
-        <div style="width: 70%;">
+    <tr>
+        <td style="width: 70%; vertical-align: top; padding-right: 20px;">
             <p><em>Saksi-Saksi:</em></p>
             <p>1. ............................ <span style="margin-left: 20px;">(....................)</span></p>
             <p>2. ............................ <span style="margin-left: 20px;">(....................)</span></p>
-        </div>
-        <div style="width: 30%; text-align: right;">
-            <div style="text-align: center">
-                <p>{{ $surat->isi_surat['desa'] }}, {{ Carbon\Carbon::now()->translatedFormat('d F Y') }}<br>
-                    Yang Menyatakan</p>
-                <p><em>Materai 10.000</em></p>
-                <br><br><br>
-                <strong>{{ $surat->isi_surat['nama_lengkap'] }}</strong>
-            </div>
-        </div>
-    </div>
+        </td>
+        <td style="width: 30%; text-align: center; vertical-align: top;">
+            <p>{{ $surat->isi_surat['desa'] }}, {{ Carbon\Carbon::now()->translatedFormat('d F Y') }}<br>
+                Yang Menyatakan</p>
+            <p><em>Materai 10.000</em></p>
+            <br><br><br>
+            <p><strong>{{ $surat->isi_surat['nama_lengkap'] }}</strong></p>
+        </td>
+    </tr>
+
+    <!-- Spacing row -->
+    <tr>
+        <td colspan="2" style="height: 40px;"></td>
+    </tr>
 
     <!-- Baris 2: Mengetahui -->
-    <br><br>
-    <div style="display: flex; justify-content: space-between;">
-        <div style="width: 30%; text-align: center;">
-            <p>Ketua RW</p>
-            <br><br>
-            <p>(....................)</p>
-        </div>
-        <div style="width: 30%; text-align: center;">
-            <p>Petugas P4 Desa {{ $surat->isi_surat['desa'] }}</p>
-            <br><br>
-            <p>(....................)</p>
-        </div>
-        <div style="width: 30%; text-align: center;">
-            <p>Ketua RT ..... / .....</p>
-            <br><br>
-            <p>(....................)</p>
-        </div>
-    </div>
+    <tr>
+        <td colspan="2">
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                    <td style="width: 33.33%; text-align: center; vertical-align: top;">
+                        <p>Ketua RW</p>
+                        <br><br>
+                        <p>(....................)</p>
+                    </td>
+                    <td style="width: 33.33%; text-align: center; vertical-align: top;">
+                        <p>Petugas P4 Desa {{ $surat->isi_surat['desa'] }}</p>
+                        <img src="data:image/png;base64,{{ base64_encode($qrCode) }}" class="qr-code" alt="QR Code">
 
-    <!-- QR Code -->
-    <div style="text-align: center; margin-top: 20px;">
-
-    </div>
-</div>
+                    </td>
+                    <td style="width: 33.33%; text-align: center; vertical-align: top;">
+                        <p>Ketua RT ..... / .....</p>
+                        <br><br>
+                        <p>(....................)</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
 
 @endsection
