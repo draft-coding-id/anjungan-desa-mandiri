@@ -36,7 +36,7 @@
         <tr>
             <td>5. Warga Negara</td>
             <td>:</td>
-            <td>{{ $surat->isi_surat['warga_negara'] ?? '[Warga Negara]' }}</td>
+            <td>{{ $surat->isi_surat['kewarganegaraan'] ?? '[Warga Negara]' }}</td>
         </tr>
         <tr>
             <td>6. Agama</td>
@@ -102,7 +102,8 @@
         <td class="signature-right">
             <p>Rawapanjang, {{ $surat->updated_at->translatedFormat('d F Y') }}</p>
             <p>Kepala Desa Rawapanjang</p>
-            <img src="data:image/png;base64,{{ base64_encode($qrCode) }}" class="qr-code" alt="QR Code">
+            <br><br><br>
+            <p>____________________</p>
         </td>
     </tr>
 </table>

@@ -23,7 +23,7 @@ Surat Keterangan Pengantar
             <td>No. KK <span class="required">*</span></td>
             <td>:</td>
             <td>
-                <input type="text" name="no_kk" value="{{ $warga->no_kk }}" required>
+                <input type="text" name="no_kk" value="{{ $warga->no_kk }}" readonly>
             </td>
         </tr>
         <tr>

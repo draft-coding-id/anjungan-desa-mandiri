@@ -1,7 +1,7 @@
 <div class="sidebar-nav">
     <a href='{{route('admin-beranda')}}' class="nav-link {{ request()->routeIs('admin-beranda') ? 'active' : '' }}">Beranda</a>
     <a href='{{route('data-warga')}}' class="nav-link {{ request()->routeIs('data-warga') ? 'active' : '' }}">Data Warga</a>
-    <a href='{{route('layanan-surat-dalam-proses')}}' class="nav-link {{ request()->routeIs('layanan-surat-*') ? 'active' : '' }}">Layanan Surat</a>
+    <a href='{{route('layanan-surat-dalam-proses')}}' class="nav-link {{ request()->routeIs('layanan-surat*') ? 'active' : '' }}">Layanan Surat</a>
     @can('akses daftar akun')
     <a href='{{ route('pengaturan-akses') }}' class="nav-link {{ request()->routeIs('pengaturan-akses') ? 'active' : '' }}">Pengaturan Akses</a>
     @endcan

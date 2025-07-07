@@ -68,7 +68,7 @@ class SuratController extends Controller
     }
 
     // Tampilkan formulir Surat Keterangan Domisili
-    public function form_Surat_Keterangan_Domisili(Request $request)
+    public function form_Surat_Keterangan_Domisili()
     {
         if (!$this->warga) {
             return redirect()->route('login-warga');
@@ -76,7 +76,7 @@ class SuratController extends Controller
         return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-domisili', ['warga' => $this->warga]);
     }
 
-    public function form_Surat_Keterangan_KTP_Dalam_Proses(Request $request)
+    public function form_Surat_Keterangan_KTP_Dalam_Proses()
     {
         if (!$this->warga) {
             return redirect()->route('login-warga');
@@ -84,7 +84,7 @@ class SuratController extends Controller
         return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-ktp-dalam-proses', ['warga' => $this->warga]);
     }
 
-    public function form_Surat_Keterangan_Pengantar(Request $request)
+    public function form_Surat_Keterangan_Pengantar()
     {
         if (!$this->warga) {
             return redirect()->route('login-warga');
@@ -92,7 +92,14 @@ class SuratController extends Controller
         return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-pengantar', ['warga' => $this->warga]);
     }
 
-    public function form_Surat_Izin_Keramaian(Request $request)
+    public function form_sktm(){
+        if (!$this->warga) {
+            return redirect()->route('login-warga');
+        }
+        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-tidak-mampu', ['warga' => $this->warga]);
+    }
+
+    public function form_Surat_Izin_Keramaian()
     {
         if (!$this->warga) {
             return redirect()->route('login-warga');
@@ -100,15 +107,22 @@ class SuratController extends Controller
         return view('warga.layanan-mandiri.form-surat.form-surat-izin-keramaian', ['warga' => $this->warga]);
     }
 
-    public function form_surat_keterangan_wali_hakim(Request $request)
+    public function form_surat_keterangan_wali_hakim()
     {
         if (!$this->warga) {
             return redirect()->route('login-warga');
         }
         return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-wali-hakim', ['warga' => $this->warga]);
     }
+    public function form_skw()
+    {
+        if (!$this->warga) {
+            return redirect()->route('login-warga');
+        }
+        return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-wali', ['warga' => $this->warga]);
+    }
 
-    public function form_surat_keterangan_kematian(Request $request)
+    public function form_surat_keterangan_kematian()
     {
         if (!$this->warga) {
             return redirect()->route('login-warga');
@@ -136,11 +150,14 @@ class SuratController extends Controller
                 case 'SKTM':
                     $validatedData = $this->validateSktm($request);
                     break;
-                case 'SKP':
-                    $validatedData = $this->validateSkp($request);
+                case 'SKPG':
+                    $validatedData = $this->validateSkpg($request);
                     break;
                 case 'SIK':
                     $validatedData = $this->validateSik($request);
+                    break;
+                case 'SKW' :
+                    $validatedData = $this->validateSkw($request);
                     break;
                 case 'SKWH':
                     $validatedData = $this->validateSkwh($request);
@@ -231,9 +248,19 @@ class SuratController extends Controller
         return $request->validate([
             'jenis_surat' => 'required|string',
             'warga_id' => 'required',
+            'nik' => 'required|string|min:16|max:16',
+            'nama_lengkap' => 'required|string|min:3|max:255',
+            'tempat_lahir' => 'required|string',
+            'tanggal_lahir' => 'required|date|before:today',
+            'jenis_kelamin' => 'required|string',
+            'alamat' => 'required|string',
+            'agama' => 'required|string',
+            'pekerjaan' => 'required|string',
+            'kewarganegaraan' => 'required|string',
             // Field yang harus diinput user
             'rt' => 'required|numeric',
             'rw' => 'required|numeric',
+            'desa' => 'required',
             'no_hp' => 'required|string',
             'keperluan' => 'required|string',
             'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
@@ -241,7 +268,7 @@ class SuratController extends Controller
     }
 
     // Validasi SKP (Surat Keterangan Pengantar)
-    private function validateSkp(Request $request)
+    private function validateSkpg(Request $request)
     {
         return $request->validate([
             'jenis_surat' => 'required|string',
@@ -320,6 +347,44 @@ class SuratController extends Controller
             'no_hp' => 'required|string',
             'keperluan' => 'required|string',
             'file' => 'nullable|file|mimes:pdf|max:2048',
+        ], $this->getValidationMessages());
+    }
+
+    private function validateSkw(Request $request)
+    {
+        return $request->validate([
+            // Data dasar
+            'jenis_surat' => 'required|string',
+            'warga_id' => 'required',
+
+            // Data Pemohon
+            'nama_lengkap' => 'required|string|min:3|max:255',
+            'nik' => 'required|string|min:16|max:16',
+            'tempat_lahir' => 'required|string',
+            'tanggal_lahir' => 'required|date|before:today',
+            'jenis_kelamin' => 'required|string',
+            'desa' => 'required|string',
+            'kecamatan' => 'required|string',
+            'alamat' => 'required|string',
+
+            // Data Wali
+            'wali_nama' => 'required|string|min:3|max:255',
+            'wali_nik' => 'required|string|min:16|max:16',
+            'wali_tempat_lahir' => 'required|string',
+            'wali_tanggal_lahir' => 'required|date|before:today',
+            'wali_jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan',
+            'wali_pekerjaan' => 'required|string',
+            'wali_alamat' => 'required|string',
+
+            // Hubungan dengan Wali
+            'hubungan_keluarga' => 'required|string|in:Ayah,Ibu,Suami,Istri,Anak,Saudara,Keponakan,Lainnya',
+
+            // Field yang harus diinput user
+            'rt' => 'required',
+            'rw' => 'required',
+            'no_hp' => 'required|string',
+            'keperluan' => 'required|string',
+            'file' => 'nullable|file|max:2048',
         ], $this->getValidationMessages());
     }
 
@@ -439,8 +504,9 @@ class SuratController extends Controller
             'SKKTP' => 'Surat Keterangan KTP Dalam Proses',
             'SKPG' => 'Surat Keterangan Pengantar',
             'SIK' => 'Surat Izin Keramaian',
-            'SKTM' => 'Surat Keterangan KTP Dalam Proses',
+            'SKTM' => 'Surat Keterangan Tidak Mampu',
             'SKWH' => 'Surat Keterangan Wali Hakim',
+            'SKW' => 'Surat Keterangan Wali',
             'SKK' => 'Surat Keterangan Kematian',
         ];
 

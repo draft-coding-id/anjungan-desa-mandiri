@@ -123,10 +123,14 @@
             <iframe src="/skp" width="100%" height="100%"></iframe>
             @elseif ($proses_surat['jenis_surat'] == "SIK")
             <iframe src="/sik" width="100%" height="100%"></iframe>
+            @elseif ($proses_surat['jenis_surat'] == "SKTM")
+            <iframe src="/sktm" width="100%" height="100%"></iframe>
             @elseif ($proses_surat['jenis_surat'] == "SKKTP")
             <iframe src="/skktp" width="100%" height="100%"></iframe>
             @elseif ($proses_surat['jenis_surat'] == "SKWH")
             <iframe src="/skwh" width="100%" height="100%"></iframe>
+            @elseif ($proses_surat['jenis_surat'] == "SKW")
+            <iframe src="/skw" width="100%" height="100%"></iframe>
             @elseif ($proses_surat['jenis_surat'] == "SKK")
             <iframe src="/skk" width="100%" height="100%"></iframe>
             @endif

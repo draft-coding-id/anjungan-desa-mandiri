@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+
   <title>Registrasi Warga</title>
   <style>
     body {
@@ -17,7 +19,7 @@
       min-height: 100vh;
       width: 100vw;
       font-family: sans-serif;
-      background-image: url('{{asset(' assets/BackgroundMockupAnjungan.png')}}');
+      background-image: url('{{asset("assets/BackgroundMockupAnjungan.png")}}');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -267,7 +269,7 @@
           </div>
         </div>
 
-        <!-- <div class="form-row">
+        <div class="form-row">
           <div class="form-group">
             <label for="no_kk">No. Kartu Keluarga</label>
             <input type="text" id="no_kk" name="no_kk" value="{{ old('no_kk') }}" maxlength="16">
@@ -275,7 +277,7 @@
             <div class="error-text">{{ $message }}</div>
             @enderror
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="file_kk">File Kartu Keluarga</label>
             <div class="file-input-wrapper">
               <input type="file" id="file_kk" name="file_kk" accept=".pdf" class="file-input">
@@ -287,8 +289,8 @@
             @error('file_kk')
             <div class="error-text">{{ $message }}</div>
             @enderror
-          </div>
-        </div> -->
+          </div> -->
+        </div>
 
         <!-- Data Pribadi -->
         <div class="section-title">Data Pribadi</div>

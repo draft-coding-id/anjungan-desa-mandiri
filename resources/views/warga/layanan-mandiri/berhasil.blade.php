@@ -32,8 +32,6 @@
             padding-top: 0px;
             gap: 20px;
             scrollbar-width: none;
-            Sembunyikan scrollbar di Edge,
-            Chrome
         }
 
         .button {
@@ -53,7 +51,7 @@
             line-height: 1.3;
             letter-spacing: 0.5px;
             height: 50px;
-            max-width: 120px;
+            width: 150px;
         }
 
         .button:hover {
@@ -68,7 +66,8 @@
         <p>Kami akan segera menghubungi Anda begitu surat selesai diproses</p>
         <br><br>
         <div class="button-container">
-            <a href="{{route('layanan-umum')}}" class="button">Pilih jenis surat lain</a>
+            <a href="{{route('layanan-umum')}}" class="button">Pilih jenis <br> surat lain</a>
+            <a href="{{route('logout-warga')}}" class="button">Logout</a>
         </div>
     </div>
 </body>

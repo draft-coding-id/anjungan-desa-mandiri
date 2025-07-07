@@ -33,7 +33,7 @@ Surat Keterangan Pengantar
     <tr>
         <td>5. Warga Negara</td>
         <td>:</td>
-        <td>{{ $proses_surat['warga_negara'] }}</td>
+        <td>{{ $proses_surat['kewarganegaraan'] }}</td>
     </tr>
     <tr>
         <td>6. Agama</td>
