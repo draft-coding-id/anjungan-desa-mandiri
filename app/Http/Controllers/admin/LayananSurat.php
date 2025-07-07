@@ -47,6 +47,7 @@ class LayananSurat extends Controller
         $view = match ($jenisSurat) {
             "SKD" => 'admin.preview-surat.surat_ket_domisili',
             "SKP" => 'admin.preview-surat.skp',
+            "SKPP" => 'admin.preview-surat.skpp',
             "SKKTP" => 'admin.preview-surat.surat_ket_ktp_dalam_proses',
             "SIK" => 'admin.preview-surat.surat_izin_keramaian',
             "SKTM" => 'admin.preview-surat.sktm',
@@ -202,7 +203,7 @@ class LayananSurat extends Controller
             'kode_surat' => $request->kode_surat,
         ]);
 
-        return redirect()->route('kelola-surat.index');
+        return redirect()->route('layanan-surat.kelola-surat.index');
     }
 
     public function editKelolaSurat($id)
@@ -221,7 +222,7 @@ class LayananSurat extends Controller
             'kode_surat' => $request->kode_surat,
         ]);
 
-        return redirect()->route('kelola-surat.index')->with('success', 'Data berhasil diperbarui.');
+        return redirect()->route('layanan-surat.kelola-surat.index')->with('success', 'Data berhasil diperbarui.');
     }
 
 
@@ -231,7 +232,7 @@ class LayananSurat extends Controller
 
         $jenisSurat->delete();
 
-        return redirect()->route('kelola-surat.index');
+        return redirect()->route('layanan-surat.kelola-surat.index');
     }
 
     public function showKelolaSurat($id)

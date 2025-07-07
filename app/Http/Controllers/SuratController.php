@@ -91,6 +91,13 @@ class SuratController extends Controller
         return view('warga.layanan-mandiri.form-surat.form-skp', ['warga' => $this->warga]);
     }
 
+    public function form_skpp(){
+        if (!$this->warga) {
+            return redirect()->route('login-warga');
+        }
+        return view('warga.layanan-mandiri.form-surat.form-skpp', ['warga' => $this->warga]);
+    }
+
     public function form_Surat_Keterangan_Pengantar()
     {
         if (!$this->warga) {
@@ -150,6 +157,9 @@ class SuratController extends Controller
                     break;
                 case "SKP" :
                     $validatedData = $this->validateSkp($request);
+                    break;
+                case "SKPP" :
+                    $validatedData = $this->validateSkpp($request);
                     break;
                 case 'SKKTP':
                     $validatedData = $this->validateSkktp($request);
@@ -233,6 +243,36 @@ class SuratController extends Controller
             'no_hp' => 'required|string|regex:/^08[0-9]{8,12}$/',
             'keperluan' => 'required|string',
             'file' => 'nullable|file|mimes:pdf|max:2048',
+        ], $this->getValidationMessages());
+    }
+
+    // Validasi Surat Keterangan Perpindahan Penduduk
+    private function validateSkpp(Request $request){
+        return $request->validate([
+            'jenis_surat' => 'required|string',
+            'warga_id' => 'required',
+            'nik' => 'required|string|min:16|max:16',
+            'no_kk' => 'required',
+            'nama_lengkap' => 'required|string|min:3|max:255',
+            'tempat_lahir' => 'required|string',
+            'tanggal_lahir' => 'required|date|before:today',
+            'jenis_kelamin' => 'required|string',
+            'alamat' => 'required|string',
+            'agama' => 'required|string',
+            'pendidikan' => 'required',
+            'status_kawin' => 'required|string',
+            'pekerjaan' => 'required|string',
+            // Field anggota keluarga
+            'nama_kepala_keluarga' => 'required|string',
+            'jumlah_keluarga_pindah' => 'required|numeric',
+            'alasan_pindah' => 'required|string',
+            // Field yang harus diinput user
+            'desa' => 'required|string',
+            'rt' => 'required|numeric',
+            'rw' => 'required|numeric',
+            'no_hp' => 'required|string',
+            'keperluan' => 'required|string',
+            'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
         ], $this->getValidationMessages());
     }
 
@@ -380,6 +420,8 @@ class SuratController extends Controller
             'alamat' => 'required|string',
             // Field yang harus diinput user
             'no_hp' => 'required|string',
+            'rt' => 'required',
+            'rw' => 'required',
             'keperluan' => 'required|string',
             'file' => 'nullable|file|mimes:pdf|max:2048',
         ], $this->getValidationMessages());
@@ -538,6 +580,7 @@ class SuratController extends Controller
             'SKD' => 'Surat Keterangan Domisili',
             'SKKTP' => 'Surat Keterangan KTP Dalam Proses',
             'SKP' => 'Surat Keterangan Penduduk',
+            'SKPP' => 'Surat Keterangan Pindah Penduduk', 
             'SKPG' => 'Surat Keterangan Pengantar',
             'SIK' => 'Surat Izin Keramaian',
             'SKTM' => 'Surat Keterangan Tidak Mampu',

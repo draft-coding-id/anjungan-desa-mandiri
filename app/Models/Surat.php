@@ -53,6 +53,7 @@ class Surat extends Model
             'SKD' => 'SKD',
             'SKKTP' => 'SKKTP',
             'SKP' => 'SKP',
+            'SKPP' => 'SKPP',
             'SKPG' => 'SKPG',
             'SIK' => 'SIK',
             'SKTM' => 'SKTM',

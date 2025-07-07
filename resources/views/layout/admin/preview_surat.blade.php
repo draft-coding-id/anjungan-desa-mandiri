@@ -33,7 +33,7 @@
     }
 
     p {
-      line-height: 1;
+      line-height: 1.2;
       margin: 8px 0;
     }
 
@@ -103,6 +103,7 @@
     .data-table {
       width: 100%;
       margin: 15px 0;
+      padding-left: 40px;
       border-collapse: collapse;
     }
 
