@@ -158,7 +158,7 @@
         modal.innerHTML = `
         <div class="preview-content">
             <div class="preview-header">
-                <h3>Preview Dokumen</h3>
+                <h3>Preview Dokumen ${data.file}</h3>
                 <button onclick="closePreview(this)" class="close-button">&times;</button>
             </div>
             <div class="preview-body">

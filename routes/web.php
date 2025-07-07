@@ -104,6 +104,7 @@ Route::controller(SuratController::class)->group(function () {
 
     Route::get('/SKWH', 'form_Surat_Keterangan_Wali_Hakim');
     Route::get('/SKK', 'form_Surat_Keterangan_Kematian');
+    Route::get('/SPMAK', 'form_surat_pernyataan_membuat_akta_kelahiran');
     Route::post('/submitForm', 'submitForm')->name('submitForm');
     Route::get('/konfirmasi', 'konfirmasi');
     // Route::post('/submitSurat', [SuratController::class, 'submitSurat']);
@@ -117,6 +118,7 @@ Route::get('/skp', [PreviewSuratController::class, 'skp'])->name('preview.skp');
 Route::get('/skwh', [PreviewSuratController::class, 'skwh'])->name('preview.skwh');
 Route::get('/skwh', [PreviewSuratController::class, 'skwh'])->name('preview.skwh');
 Route::get('/skk', [PreviewSuratController::class, 'skk'])->name('preview.skk');
+Route::get('/spmak', [PreviewSuratController::class, 'spmak'])->name('preview.skk');
 // ----- Ends of Views Warga ----- //
 
 // ====================================================================== //

@@ -686,6 +686,8 @@
                         Surat Keterangan Tidak Mampu
                         @elseif($surat->jenis_surat == "SKWH")
                         Surat Keterangan Wali Hakim
+                        @elseif($surat->jenis_surat == "SPMAK")
+                        Surat Pernyataan Membuat Akta Kelahiran
                         @endif</h3>
                     <h3>{{$surat->warga->nama_lengkap}}</h3>
                     <p>diajukan pada {{$surat->created_at->translatedFormat('d F Y')}}</p>
