@@ -138,7 +138,7 @@ Surat Pernyataan Membuat Akta Kelahiran
   </table>
 
   <div class="button-container">
-    <a href="{{ route('layanan-kependudukan') }}" class="button secondary">Kembali</a>
+    <a href="{{ route('layanan-catatan-sipil') }}" class="button secondary">Kembali</a>
     <button type="submit" class="button">Lanjutkan</button>
   </div>
 </form>

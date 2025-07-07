@@ -215,7 +215,7 @@ Surat Pernyataan Janda / Duda
 
 
     <div class="button-container">
-        <a href="{{ route('layanan-catatan-sipil') }}" class="button secondary">Kembali</a>
+        <a href="{{ route('layanan-pernikahan') }}" class="button secondary">Kembali</a>
         <button type="submit" class="button">Lanjutkan</button>
     </div>
 </form>

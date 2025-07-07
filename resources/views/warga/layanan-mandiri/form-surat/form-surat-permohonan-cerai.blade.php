@@ -20,68 +20,79 @@ Surat Permohonan Cerai
         <tr>
             <td>Nama Lengkap</td>
             <td>:</td>
-            <td><input type="text" name="nama_lengkap" required placeholder="Masukan Nama Lengkap Anda" /></td>
+            <td><input type="text" name="nama_lengkap" value="{{ $warga->nama_lengkap }}" readonly /></td>
         </tr>
         <tr>
             <td>NIK</td>
             <td>:</td>
-            <td><input type="text" name="nik" placeholder="16 digit NIK" maxlength="16" required /></td>
+            <td><input type="text" name="nik" value="{{ $warga->nik }}" readonly /></td>
         </tr>
         <tr>
             <td>Tempat / Tanggal Lahir</td>
             <td>:</td>
             <td>
                 <div class="inline-inputs">
-                    <input type="text" name="tempat_lahir" required placeholder="Masukan Tempat Lahir" />
-                    <input type="date" name="tanggal_lahir" required />
+                    <input type="text" name="tempat_lahir" value="{{ $warga->tempat_lahir }}" readonly />
+                    <input type="date" name="tanggal_lahir" value="{{ $warga->tanggal_lahir }}" readonly />
                 </div>
             </td>
         </tr>
         <tr>
+            <td>Jenis Kelamin</td>
+            <td>:</td>
+            <td><input type="text" name="jenis_kelamin" value="{{ $warga->jenis_kelamin }}" readonly /></td>
+        </tr>
+        <tr>
             <td>Agama</td>
             <td>:</td>
-            <td>
-                <select name="agama" required>
-                    <option value="">Pilih Agama</option>
-                    <option value="Islam">Islam</option>
-                    <option value="Kristen">Kristen</option>
-                    <option value="Katolik">Katolik</option>
-                    <option value="Hindu">Hindu</option>
-                    <option value="Buddha">Buddha</option>
-                    <option value="Konghucu">Konghucu</option>
-                </select>
-            </td>
+            <td><input type="text" name="agama" value="{{ $warga->agama }}" readonly /></td>
         </tr>
         <tr>
             <td>Pekerjaan</td>
             <td>:</td>
-            <td><input type="text" name="pekerjaan" required placeholder="Masukan pekerjaan anda" /></td>
+            <td><input type="text" name="pekerjaan" value="{{ $warga->pekerjaan }}" readonly /></td>
         </tr>
         <tr>
-            <td>RT</td>
-            <td>:</td>
-            <td><input type="text" name="rt" required placeholder="Masukan Nomor RT" /></td>
+            <td>
+                RT
+            </td>
+            <td>
+                :
+            </td>
+            <td><input type="text" name="rt" value="{{ $warga->rt }}" readonly /></td>
         </tr>
         <tr>
-            <td>RW</td>
-            <td>:</td>
-            <td><input type="text" name="rw" required placeholder="Masukan Nomor RW" /></td>
+            <td>
+                RW
+            </td>
+            <td>
+                :
+            </td>
+            <td><input type="text" name="rw" value="{{ $warga->rw }}" readonly /></td>
         </tr>
         <tr>
-            <td>Desa</td>
-            <td>:</td>
-            <td><input type="text" name="desa" required placeholder="Masukan Nama Desa" /></td>
+            <td>
+                Desa
+            </td>
+            <td>
+                :
+            </td>
+            <td><input type="text" name="desa" value="{{ $warga->desa }}" readonly /></td>
         </tr>
         <tr>
-            <td>Kecamatan</td>
-            <td>:</td>
-            <td><input type="text" name="kecamatan" required placeholder="Masukan Nama Kecamatan" /></td>
+            <td>
+                Kecamatan
+            </td>
+            <td>
+                :
+            </td>
+            <td><input type="text" name="kecamatan" value="{{ $warga->kecamatan }}" readonly /></td>
         </tr>
         <tr>
             <td>Alamat/Tempat Tinggal</td>
             <td>:</td>
             <td>
-                <textarea name="alamat" required placeholder="Masukan Alamat Lengkap"></textarea>
+                <textarea name="alamat" readonly>{{ $warga->alamat }}</textarea>
             </td>
         </tr>
         <tr>
@@ -246,7 +257,7 @@ Surat Permohonan Cerai
     </table>
 
     <div class="button-container">
-        <a href="{{ route('layanan-kependudukan') }}" class="button secondary">Kembali</a>
+        <a href="{{ route('layanan-pernikahan') }}" class="button secondary">Kembali</a>
         <button type="submit" class="button">Lanjutkan</button>
     </div>
 </form>

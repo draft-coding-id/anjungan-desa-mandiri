@@ -232,9 +232,6 @@ class SuratController extends Controller
                 case 'SKKTP':
                     $validatedData = $this->validateSkktp($request);
                     break;
-                case 'SKN':
-                    $validatedData = $this->validateSkn($request);
-                    break;
                 case 'SKTM':
                     $validatedData = $this->validateSktm($request);
                     break;
@@ -322,9 +319,19 @@ class SuratController extends Controller
         ], $this->getValidationMessages());
     }
 
-    // Validasi SPJD
     private function validateSpjd(Request $request)
     {
+        // Ambil data warga
+        $warga = Warga::find($request->warga_id);
+
+        // Tentukan aturan validasi untuk file berdasarkan kondisi
+        $fileRule = 'nullable|file|mimes:pdf|max:2048';
+
+        // Jika warga tidak ada file_kk (belum pernah upload), maka file wajib diisi
+        if (!$warga || empty($warga->file_kk)) {
+            $fileRule = 'required|file|mimes:pdf|max:2048';
+        }
+
         return $request->validate([
             'jenis_surat' => 'required',
             'warga_id' => 'required',
@@ -352,7 +359,7 @@ class SuratController extends Controller
             'agama_pasangan' => 'required|string',
             'status_kawin_pasangan' => 'required|string',
             'alamat_pasangan' => 'required|string',
-            'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'file' => $fileRule,
             'keperluan' => 'required|string',
         ], $this->getValidationMessages());
     }
@@ -360,6 +367,17 @@ class SuratController extends Controller
     // Validasi SPMAK
     private function validateSpmak(Request $request)
     {
+        // Ambil data warga
+        $warga = Warga::find($request->warga_id);
+
+        // Tentukan aturan validasi untuk file berdasarkan kondisi
+        $fileRule = 'nullable|file|mimes:pdf|max:2048';
+
+        // Jika warga tidak ada file_kk (belum pernah upload), maka file wajib diisi
+        if (!$warga || empty($warga->file_kk)) {
+            $fileRule = 'required|file|mimes:pdf|max:2048';
+        }
+
         return $request->validate([
             'jenis_surat' => 'required|string',
             'warga_id' => 'required',
@@ -376,13 +394,24 @@ class SuratController extends Controller
             'nama_anak' => 'required|string',
             'no_hp' => 'required|string',
             'keperluan' => 'required|string',
-            'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'file' => $fileRule,
         ], $this->getValidationMessages());
     }
 
     // Validasi SKD (Surat Keterangan Domisili)
     private function validateSkd(Request $request)
     {
+        // Ambil data warga
+        $warga = Warga::find($request->warga_id);
+
+        // Tentukan aturan validasi untuk file berdasarkan kondisi
+        $fileRule = 'nullable|file|mimes:pdf|max:2048';
+
+        // Jika warga tidak ada file_kk (belum pernah upload), maka file wajib diisi
+        if (!$warga || empty($warga->file_kk)) {
+            $fileRule = 'required|file|mimes:pdf|max:2048';
+        }
+
         return $request->validate([
             'jenis_surat' => 'required|string',
             'warga_id' => 'required',
@@ -396,12 +425,18 @@ class SuratController extends Controller
             'rw' => 'required|numeric',
             'no_hp' => 'required|string',
             'keperluan' => 'required|string',
-            'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'file' => $fileRule,
         ], $this->getValidationMessages());
     }
 
-    // Validasi Surat Keterangan Penduduk
-    private function validateSkp(Request $request){
+    private function validateSkp(Request $request)
+    {
+        $warga = Warga::find($request->warga_id);
+        $fileRule = 'nullable|file|mimes:pdf|max:2048';
+        if (!$warga || empty($warga->file_kk)) {
+            $fileRule = 'required|file|mimes:pdf|max:2048';
+        }
+
         return $request->validate([
             'jenis_surat' => 'required|string',
             'warga_id' => 'required|exists:warga,id',
@@ -421,12 +456,18 @@ class SuratController extends Controller
             'alamat' => 'required|string|min:10|max:500',
             'no_hp' => 'required|string|regex:/^08[0-9]{8,12}$/',
             'keperluan' => 'required|string',
-            'file' => 'nullable|file|mimes:pdf|max:2048',
+            'file' => $fileRule,
         ], $this->getValidationMessages());
     }
 
     private function validateSpkk(Request $request)
     {
+        $warga = Warga::find($request->warga_id);
+        $fileRule = 'nullable|file|mimes:pdf|max:2048';
+        if (!$warga || empty($warga->file_kk)) {
+            $fileRule = 'required|file|mimes:pdf|max:2048';
+        }
+
         return $request->validate([
             'jenis_surat' => 'required|string',
             'warga_id' => 'required|exists:warga,id',
@@ -446,12 +487,18 @@ class SuratController extends Controller
             'alamat' => 'required|string|min:10|max:500',
             'no_hp' => 'required|string|regex:/^08[0-9]{8,12}$/',
             'keperluan' => 'required|string',
-            'file' => 'nullable|file|mimes:pdf|max:2048',
+            'file' => $fileRule,
         ], $this->getValidationMessages());
     }
 
-    // Validasi Surat Keterangan Perpindahan Penduduk
-    private function validateSkpp(Request $request){
+    private function validateSkpp(Request $request)
+    {
+        $warga = Warga::find($request->warga_id);
+        $fileRule = 'nullable|file|mimes:pdf|max:2048';
+        if (!$warga || empty($warga->file_kk)) {
+            $fileRule = 'required|file|mimes:pdf|max:2048';
+        }
+
         return $request->validate([
             'jenis_surat' => 'required|string',
             'warga_id' => 'required',
@@ -466,23 +513,26 @@ class SuratController extends Controller
             'pendidikan' => 'required',
             'status_kawin' => 'required|string',
             'pekerjaan' => 'required|string',
-            // Field anggota keluarga
             'nama_kepala_keluarga' => 'required|string',
             'jumlah_keluarga_pindah' => 'required|numeric',
             'alasan_pindah' => 'required|string',
-            // Field yang harus diinput user
             'desa' => 'required|string',
             'rt' => 'required|numeric',
             'rw' => 'required|numeric',
             'no_hp' => 'required|string',
             'keperluan' => 'required|string',
-            'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'file' => $fileRule,
         ], $this->getValidationMessages());
     }
 
-    // Validasi SKKTP (Surat Keterangan KTP Dalam Proses)
     private function validateSkktp(Request $request)
     {
+        $warga = Warga::find($request->warga_id);
+        $fileRule = 'nullable|file|mimes:pdf|max:2048';
+        if (!$warga || empty($warga->file_kk)) {
+            $fileRule = 'required|file|mimes:pdf|max:2048';
+        }
+
         return $request->validate([
             'jenis_surat' => 'required|string',
             'warga_id' => 'required',
@@ -496,34 +546,29 @@ class SuratController extends Controller
             'status_kawin' => 'required|string',
             'pekerjaan' => 'required|string',
             'kewarganegaraan' => 'required|string',
-            // Field yang harus diinput user
             'desa' => 'required|string',
             'rt' => 'required|numeric',
             'rw' => 'required|numeric',
             'no_hp' => 'required|string',
             'keperluan' => 'required|string',
-            'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-        ], $this->getValidationMessages());
-    }
-
-    // Validasi SKN (Surat Keterangan Nikah)
-    private function validateSkn(Request $request)
-    {
-        return $request->validate([
-            'jenis_surat' => 'required|string',
-            'warga_id' => 'required',
-            // Field yang harus diinput user
-            'rt' => 'required|numeric',
-            'rw' => 'required|numeric',
-            'no_hp' => 'required|string',
-            'keperluan' => 'required|string',
-            'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'file' => $fileRule,
         ], $this->getValidationMessages());
     }
 
     // Validasi SKTM (Surat Keterangan Tidak Mampu)
     private function validateSktm(Request $request)
     {
+        // Ambil data warga
+        $warga = Warga::find($request->warga_id);
+
+        // Tentukan aturan validasi untuk file berdasarkan kondisi
+        $fileRule = 'nullable|file|mimes:pdf|max:2048';
+
+        // Jika warga tidak ada file_kk (belum pernah upload), maka file wajib diisi
+        if (!$warga || empty($warga->file_kk)) {
+            $fileRule = 'required|file|mimes:pdf|max:2048';
+        }
+
         return $request->validate([
             'jenis_surat' => 'required|string',
             'warga_id' => 'required',
@@ -542,13 +587,24 @@ class SuratController extends Controller
             'desa' => 'required',
             'no_hp' => 'required|string',
             'keperluan' => 'required|string',
-            'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'file' => $fileRule,
         ], $this->getValidationMessages());
     }
 
     // Validasi SKP (Surat Keterangan Pengantar)
     private function validateSkpg(Request $request)
     {
+        // Ambil data warga
+        $warga = Warga::find($request->warga_id);
+
+        // Tentukan aturan validasi untuk file berdasarkan kondisi
+        $fileRule = 'nullable|file|mimes:pdf|max:2048';
+
+        // Jika warga tidak ada file_kk (belum pernah upload), maka file wajib diisi
+        if (!$warga || empty($warga->file_kk)) {
+            $fileRule = 'required|file|mimes:pdf|max:2048';
+        }
+
         return $request->validate([
             'jenis_surat' => 'required|string',
             'warga_id' => 'required',
@@ -570,12 +626,18 @@ class SuratController extends Controller
             // Field yang harus diinput user
             'no_hp' => 'required|string',
             'keperluan' => 'required|string',
-            'file' => 'nullable|file|mimes:pdf|max:2048',
+            'file' => $fileRule,
         ], $this->getValidationMessages());
     }
 
     private function validateSik(Request $request)
     {
+        $warga = Warga::find($request->warga_id);
+        $fileRule = 'nullable|file|mimes:pdf|max:2048';
+        if (!$warga || empty($warga->file_kk)) {
+            $fileRule = 'required|file|mimes:pdf|max:2048';
+        }
+
         return $request->validate([
             'jenis_surat' => 'required|string',
             'warga_id' => 'required',
@@ -595,20 +657,24 @@ class SuratController extends Controller
             'rw' => 'required|numeric',
             'desa' => 'required|string',
             'kecamatan' => 'required|string',
-            // tambahan
             'kepala_keluarga' => 'required|string',
             'jenis_keramaian' => 'required|string',
             'tanggal_kegiatan' => 'required|date',
-            // Field yang harus diinput user
             'no_hp' => 'required|string',
             'keperluan' => 'required|string',
-            'file' => 'nullable|file|mimes:pdf|max:2048',
+            'file' => $fileRule,
         ], $this->getValidationMessages());
     }
 
     // Validasi SKWH (Surat Keterangan Wali Hakim)
     private function validateSkwh(Request $request)
     {
+        $warga = Warga::find($request->warga_id);
+        $fileRule = 'nullable|file|mimes:pdf|max:2048';
+        if (!$warga || empty($warga->file_kk)) {
+            $fileRule = 'required|file|mimes:pdf|max:2048';
+        }
+
         return $request->validate([
             'jenis_surat' => 'required|string',
             'warga_id' => 'required',
@@ -623,23 +689,25 @@ class SuratController extends Controller
             'kecamatan' => 'required|string',
             'desa' => 'required|string',
             'alamat' => 'required|string',
-            // Field yang harus diinput user
             'no_hp' => 'required|string',
             'rt' => 'required',
             'rw' => 'required',
             'keperluan' => 'required|string',
-            'file' => 'nullable|file|mimes:pdf|max:2048',
+            'file' => $fileRule,
         ], $this->getValidationMessages());
     }
 
     private function validateSkm(Request $request)
     {
+        $warga = Warga::find($request->warga_id);
+        $fileRule = 'nullable|file|mimes:pdf|max:2048';
+        if (!$warga || empty($warga->file_kk)) {
+            $fileRule = 'required|file|mimes:pdf|max:2048';
+        }
+
         return $request->validate([
-            // Data dasar
             'jenis_surat' => 'required|string',
             'warga_id' => 'required',
-
-            // Data Pribadi
             'nama_lengkap' => 'required|string|min:3|max:255',
             'nik' => 'required|string|min:16|max:16',
             'tempat_lahir' => 'required|string',
@@ -653,8 +721,6 @@ class SuratController extends Controller
             'desa' => 'required|string',
             'kecamatan' => 'required|string',
             'alamat' => 'required|string',
-
-            // Data Pasangan
             'nama_lengkap_pasangan' => 'required|string|min:3|max:255',
             'nik_pasangan' => 'required|string|min:16|max:16',
             'tempat_lahir_pasangan' => 'required|string',
@@ -662,22 +728,23 @@ class SuratController extends Controller
             'agama_pasangan' => 'required|string',
             'pekerjaan_pasangan' => 'required|string',
             'alamat_pasangan' => 'required|string',
-
-            // Field yang harus diinput user
             'no_hp' => 'required|string',
             'keperluan' => 'required|string',
-            'file' => 'nullable|file|mimes:pdf|max:2048',
+            'file' => $fileRule,
         ], $this->getValidationMessages());
     }
 
     private function validateSpc(Request $request)
     {
+        $warga = Warga::find($request->warga_id);
+        $fileRule = 'nullable|file|mimes:pdf|max:2048';
+        if (!$warga || empty($warga->file_kk)) {
+            $fileRule = 'required|file|mimes:pdf|max:2048';
+        }
+
         return $request->validate([
-            // Data dasar
             'jenis_surat' => 'required|string',
             'warga_id' => 'required',
-
-            // Data Pribadi
             'nama_lengkap' => 'required|string|min:3|max:255',
             'nik' => 'required|string|min:16|max:16',
             'tempat_lahir' => 'required|string',
@@ -690,8 +757,6 @@ class SuratController extends Controller
             'kecamatan' => 'required|string',
             'alamat' => 'required|string',
             'status' => 'required|string|in:suami,istri',
-
-            // Data Suami
             'nama_lengkap_pasangan' => 'required|string|min:3|max:255',
             'nik_pasangan' => 'required|string|min:16|max:16',
             'tempat_lahir_pasangan' => 'required|string',
@@ -704,17 +769,27 @@ class SuratController extends Controller
             'kecamatan_pasangan' => 'required|string',
             'alamat_pasangan' => 'required|string',
             'status_pasangan' => 'required|string|in:suami,istri|different:status',
-
-            // Field yang harus diinput user
             'no_hp' => 'required|string',
             'keperluan' => 'required|string',
             'alasan' => 'required|string',
-            'file' => 'nullable|file|mimes:pdf|max:2048',
+            'file' => $fileRule,
         ], $this->getValidationMessages());
     }
 
+
     private function validateSkw(Request $request)
     {
+        // Ambil data warga
+        $warga = Warga::find($request->warga_id);
+
+        // Tentukan aturan validasi untuk file berdasarkan kondisi
+        $fileRule = 'nullable|file|max:2048';
+
+        // Jika warga tidak ada file_kk (belum pernah upload), maka file wajib diisi
+        if (!$warga || empty($warga->file_kk)) {
+            $fileRule = 'required|file|max:2048';
+        }
+
         return $request->validate([
             // Data dasar
             'jenis_surat' => 'required|string',
@@ -747,13 +822,24 @@ class SuratController extends Controller
             'rw' => 'required',
             'no_hp' => 'required|string',
             'keperluan' => 'required|string',
-            'file' => 'nullable|file|max:2048',
+            'file' => $fileRule,
         ], $this->getValidationMessages());
     }
 
     // Validasi SKK (Surat Keterangan Kematian)
     private function validateSkk(Request $request)
     {
+        // Ambil data warga
+        $warga = Warga::find($request->warga_id);
+
+        // Tentukan aturan validasi untuk file berdasarkan kondisi
+        $fileRule = 'nullable|file|max:2048';
+
+        // Jika warga tidak ada file_kk (belum pernah upload), maka file wajib diisi
+        if (!$warga || empty($warga->file_kk)) {
+            $fileRule = 'required|file|max:2048';
+        }
+
         return $request->validate([
             // Data dasar
             'jenis_surat' => 'required|string',
@@ -796,9 +882,10 @@ class SuratController extends Controller
             'no_hp' => 'required|string',
             'keperluan' => 'required|string|in:Administrasi Pemakaman,Klaim Asuransi,Pengurusan Warisan,Administrasi Bank,Lainnya',
             'keterangan_keperluan' => 'nullable|string',
-            'file' => 'nullable|file|max:2048',
+            'file' => $fileRule,
         ], $this->getValidationMessages());
     }
+
 
     // Handle file upload
     private function handleFileUpload(Request $request, array $validatedData)
