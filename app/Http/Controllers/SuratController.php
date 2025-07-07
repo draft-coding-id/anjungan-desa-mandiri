@@ -155,6 +155,22 @@ class SuratController extends Controller
         return view('warga.layanan-mandiri.form-surat.form-surat-keterangan-menikah', ['warga' => $this->warga]);
     }
 
+    public function form_spc()
+    {
+        if (!$this->warga) {
+            return redirect()->route('login-warga');
+        }
+        return view('warga.layanan-mandiri.form-surat.form-surat-permohonan-cerai', ['warga' => $this->warga]);
+    }
+
+    public function form_surat_permohonan_cerai()
+    {
+        if (!$this->warga) {
+            return redirect()->route('login-warga');
+        }
+        return view('warga.layanan-mandiri.form-surat.form-surat-permohonan-cerai', ['warga' => $this->warga]);
+    }
+
     public function form_surat_keterangan_kematian()
     {
         if (!$this->warga) {
@@ -233,6 +249,9 @@ class SuratController extends Controller
                     break;
                 case 'SKM':
                     $validatedData = $this->validateSkm($request);
+                    break;
+                case 'SPC':
+                    $validatedData = $this->validateSpc($request);
                     break;
                 case 'SKWH':
                     $validatedData = $this->validateSkwh($request);
@@ -639,6 +658,61 @@ class SuratController extends Controller
         ], $this->getValidationMessages());
     }
 
+    private function validateSpc(Request $request)
+    {
+        return $request->validate([
+            // Data dasar
+            'jenis_surat' => 'required|string',
+            'warga_id' => 'required',
+
+            // Data Pribadi
+            'nama_lengkap' => 'required|string|min:3|max:255',
+            'nik' => 'required|string|min:16|max:16',
+            'tempat_lahir' => 'required|string',
+            'tanggal_lahir' => 'required|date|before:today',
+            'jenis_kelamin' => 'required|string',
+            'agama' => 'required|string',
+            'pekerjaan' => 'required|string',
+            'rt' => 'required|numeric',
+            'rw' => 'required|numeric',
+            'desa' => 'required|string',
+            'kecamatan' => 'required|string',
+            'alamat' => 'required|string',
+
+            // Data Suami
+            'nama_lengkap_suami' => 'required|string|min:3|max:255',
+            'nik_suami' => 'required|string|min:16|max:16',
+            'tempat_lahir_suami' => 'required|string',
+            'tanggal_lahir_suami' => 'required|date|before:today',
+            'pekerjaan_suami' => 'required|string',
+            'agama_suami' => 'required|string',
+            'rt_suami' => 'required|numeric',
+            'rw_suami' => 'required|numeric',
+            'desa_suami' => 'required|string',
+            'kecamatan_suami' => 'required|string',
+            'alamat_suami' => 'required|string',
+
+            // Data Istri
+            'nama_lengkap_istri' => 'required|string|min:3|max:255',
+            'nik_istri' => 'required|string|min:16|max:16',
+            'tempat_lahir_istri' => 'required|string',
+            'tanggal_lahir_istri' => 'required|date|before:today',
+            'pekerjaan_istri' => 'required|string',
+            'agama_istri' => 'required|string',
+            'rt_istri' => 'required|numeric',
+            'rw_istri' => 'required|numeric',
+            'desa_istri' => 'required|string',
+            'kecamatan_istri' => 'required|string',
+            'alamat_istri' => 'required|string',
+
+            // Field yang harus diinput user
+            'no_hp' => 'required|string',
+            'keperluan' => 'required|string',
+            'alasan' => 'required|string',
+            'file' => 'nullable|file|mimes:pdf|max:2048',
+        ], $this->getValidationMessages());
+    }
+
     private function validateSkw(Request $request)
     {
         return $request->validate([
@@ -799,6 +873,7 @@ class SuratController extends Controller
             'SKTM' => 'Surat Keterangan Tidak Mampu',
             'SKWH' => 'Surat Keterangan Wali Hakim',
             'SKM' => 'Surat Keterangan Menikah',
+            'SPC' => 'Surat Permohonan Cerai',
             'SKW' => 'Surat Keterangan Wali',
             'SKK' => 'Surat Keterangan Kematian',
             'SPMAK' => 'Surat Pernyataan Membuat Akta Kelahiran',

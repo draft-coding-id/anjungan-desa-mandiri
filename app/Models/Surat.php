@@ -63,6 +63,7 @@ class Surat extends Model
             'SKWH' => 'SKWH',
             'SKW' => 'SKW',
             'SKM' => 'SKM',
+            'SPC' => 'SPC',
             'SKK' => 'SKK',
             'SPMAK' => 'SPMAK',
             'SPPKK' => 'SPPKK',
@@ -108,11 +109,11 @@ class Surat extends Model
     }
     public function scopeDalamProses($query)
     {
-        return $query->where('is_accepted', true)->where('is_approve_admin' , false)->where('is_send_to_warga', false)->where('is_selesai', false);
+        return $query->where('is_accepted', true)->where('is_approve_admin', false)->where('is_send_to_warga', false)->where('is_selesai', false);
     }
     public function scopeBelumDikirimkanKeWarga($query)
     {
-        return $query->where('is_accepted', true)->where('is_approve_admin' , true)->where('is_diserahkan', false)->where('is_selesai', false);
+        return $query->where('is_accepted', true)->where('is_approve_admin', true)->where('is_diserahkan', false)->where('is_selesai', false);
     }
     public function scopesuratSelesai($query)
     {
