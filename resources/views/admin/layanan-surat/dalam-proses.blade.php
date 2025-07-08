@@ -59,6 +59,9 @@
                 @endforelse
             </tbody>
         </table>
+        <div>
+            {{ $dalamProses->links() }}
+        </div>
     </div>
     @endhasanyrole
 
@@ -106,6 +109,9 @@
                 @endforelse
             </tbody>
         </table>
+        <div>
+            {{ $belumDikirimKeWarga->links() }}
+        </div>
     </div>
     @endhasanyrole
 </div>
