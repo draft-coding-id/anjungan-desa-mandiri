@@ -246,7 +246,7 @@
     }
 
     function openDeleteModal(id) {
-        document.getElementById('deleteForm').action = '/layanan-surat.kelola-surat/delete/' + id;
+        document.getElementById('deleteForm').action = '/kelola-surat/delete/' + id;
         document.getElementById('deleteModal').classList.add('show');
     }
 
@@ -289,7 +289,7 @@
     }
 
     function editSurat(id) {
-        fetch(`/layanan-surat.kelola-surat/edit/${id}`)
+        fetch(`/kelola-surat/edit/${id}`)
             .then(response => response.json())
             .then(data => {
                 document.getElementById('edit_kategori_surat').value = data.kategori_surat;
@@ -297,7 +297,7 @@
                 document.getElementById('edit_kode_surat').value = data.kode_surat;
 
                 const form = document.getElementById('editForm');
-                form.action = `/layanan-surat.kelola-surat/update/${id}`;
+                form.action = `/kelola-surat/update/${id}`;
 
                 document.getElementById('editModal').classList.add('show');
                 document.body.style.overflow = 'hidden';
@@ -313,7 +313,7 @@
 
 <script>
     function showSurat(id) {
-        fetch('/layanan-surat.kelola-surat/show/' + id)
+        fetch('/kelola-surat/show/' + id)
             .then(response => response.json())
             .then(data => {
                 document.getElementById('modalContent').innerHTML = data.html;

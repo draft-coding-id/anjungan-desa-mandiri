@@ -35,7 +35,7 @@
 
                     <!-- <td>12345</td> -->
                     <td>{{$surat->isi_surat['nik']}}</td>
-                    <td>{{$surat->isi_surat['no_kk']}}</td>
+                    <td>{{$surat->warga->no_kk}}</td>
                     <td>{{$surat->isi_surat['nama_lengkap']}}</td>
                     <td>{{$surat->isi_surat['rt']}}</td>
                     <td>{{$surat->isi_surat['rw']}}</td>
