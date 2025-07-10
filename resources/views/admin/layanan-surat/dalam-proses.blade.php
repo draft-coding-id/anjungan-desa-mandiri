@@ -16,6 +16,7 @@
                     <!-- NIK , Nama penduduk , RT , RW , No HP , Jenis Surat , Keperluan / Catata , dokumen verifikasi , aksi , countdown -->
                     <th>No.</th>
                     <th>NIK</th>
+                    <th>Nomor KK</th>
                     <th>Nama Penduduk</th>
                     <th>RT</th>
                     <th>RW</th>
@@ -34,6 +35,7 @@
 
                     <!-- <td>12345</td> -->
                     <td>{{$surat->isi_surat['nik']}}</td>
+                    <td>{{$surat->isi_surat['no_kk']}}</td>
                     <td>{{$surat->isi_surat['nama_lengkap']}}</td>
                     <td>{{$surat->isi_surat['rt']}}</td>
                     <td>{{$surat->isi_surat['rw']}}</td>
